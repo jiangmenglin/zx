@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ModelMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Model" >
+    <id column="tbm_id" property="tbmId" jdbcType="INTEGER" />
+    <result column="tbm_name" property="tbmName" jdbcType="VARCHAR" />
+    <result column="tbm_flag" property="tbmFlag" jdbcType="VARCHAR" />
+    <result column="tbm_type" property="tbmType" jdbcType="TINYINT" />
+    <result column="tbm_file" property="tbmFile" jdbcType="TINYINT" />
+    <result column="tbm_image" property="tbmImage" jdbcType="VARCHAR" />
+    <result column="tbm_pedestal" property="tbmPedestal" jdbcType="INTEGER" />
+    <result column="tbm_alarm" property="tbmAlarm" jdbcType="INTEGER" />
+    <result column="tbm_mileage" property="tbmMileage" jdbcType="INTEGER" />
+    <result column="tbm_update_time" property="tbmUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_add_time" property="tbmAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_status" property="tbmStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbm_id, tbm_name, tbm_flag, tbm_type, tbm_file, tbm_image, tbm_pedestal, tbm_alarm, 
+    tbm_mileage, tbm_update_time, tbm_add_time, tbm_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ModelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_model
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_model
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_model
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Model" >
+    insert into tb_model (tbm_id, tbm_name, tbm_flag, 
+      tbm_type, tbm_file, tbm_image, 
+      tbm_pedestal, tbm_alarm, tbm_mileage, 
+      tbm_update_time, tbm_add_time, tbm_status, 
+      createTime, modifyDate)
+    values (#{tbmId,jdbcType=INTEGER}, #{tbmName,jdbcType=VARCHAR}, #{tbmFlag,jdbcType=VARCHAR}, 
+      #{tbmType,jdbcType=TINYINT}, #{tbmFile,jdbcType=TINYINT}, #{tbmImage,jdbcType=VARCHAR}, 
+      #{tbmPedestal,jdbcType=INTEGER}, #{tbmAlarm,jdbcType=INTEGER}, #{tbmMileage,jdbcType=INTEGER}, 
+      #{tbmUpdateTime,jdbcType=TIMESTAMP}, #{tbmAddTime,jdbcType=TIMESTAMP}, #{tbmStatus,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Model" >
+    insert into tb_model
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbmId != null" >
+        tbm_id,
+      </if>
+      <if test="tbmName != null" >
+        tbm_name,
+      </if>
+      <if test="tbmFlag != null" >
+        tbm_flag,
+      </if>
+      <if test="tbmType != null" >
+        tbm_type,
+      </if>
+      <if test="tbmFile != null" >
+        tbm_file,
+      </if>
+      <if test="tbmImage != null" >
+        tbm_image,
+      </if>
+      <if test="tbmPedestal != null" >
+        tbm_pedestal,
+      </if>
+      <if test="tbmAlarm != null" >
+        tbm_alarm,
+      </if>
+      <if test="tbmMileage != null" >
+        tbm_mileage,
+      </if>
+      <if test="tbmUpdateTime != null" >
+        tbm_update_time,
+      </if>
+      <if test="tbmAddTime != null" >
+        tbm_add_time,
+      </if>
+      <if test="tbmStatus != null" >
+        tbm_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbmId != null" >
+        #{tbmId,jdbcType=INTEGER},
+      </if>
+      <if test="tbmName != null" >
+        #{tbmName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmFlag != null" >
+        #{tbmFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmType != null" >
+        #{tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="tbmFile != null" >
+        #{tbmFile,jdbcType=TINYINT},
+      </if>
+      <if test="tbmImage != null" >
+        #{tbmImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmPedestal != null" >
+        #{tbmPedestal,jdbcType=INTEGER},
+      </if>
+      <if test="tbmAlarm != null" >
+        #{tbmAlarm,jdbcType=INTEGER},
+      </if>
+      <if test="tbmMileage != null" >
+        #{tbmMileage,jdbcType=INTEGER},
+      </if>
+      <if test="tbmUpdateTime != null" >
+        #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmAddTime != null" >
+        #{tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmStatus != null" >
+        #{tbmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ModelExample" resultType="java.lang.Integer" >
+    select count(*) from tb_model
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_model
+    <set >
+      <if test="record.tbmId != null" >
+        tbm_id = #{record.tbmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmName != null" >
+        tbm_name = #{record.tbmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmFlag != null" >
+        tbm_flag = #{record.tbmFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmType != null" >
+        tbm_type = #{record.tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmFile != null" >
+        tbm_file = #{record.tbmFile,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmImage != null" >
+        tbm_image = #{record.tbmImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmPedestal != null" >
+        tbm_pedestal = #{record.tbmPedestal,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmAlarm != null" >
+        tbm_alarm = #{record.tbmAlarm,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmMileage != null" >
+        tbm_mileage = #{record.tbmMileage,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmUpdateTime != null" >
+        tbm_update_time = #{record.tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmAddTime != null" >
+        tbm_add_time = #{record.tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmStatus != null" >
+        tbm_status = #{record.tbmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_model
+    set tbm_id = #{record.tbmId,jdbcType=INTEGER},
+      tbm_name = #{record.tbmName,jdbcType=VARCHAR},
+      tbm_flag = #{record.tbmFlag,jdbcType=VARCHAR},
+      tbm_type = #{record.tbmType,jdbcType=TINYINT},
+      tbm_file = #{record.tbmFile,jdbcType=TINYINT},
+      tbm_image = #{record.tbmImage,jdbcType=VARCHAR},
+      tbm_pedestal = #{record.tbmPedestal,jdbcType=INTEGER},
+      tbm_alarm = #{record.tbmAlarm,jdbcType=INTEGER},
+      tbm_mileage = #{record.tbmMileage,jdbcType=INTEGER},
+      tbm_update_time = #{record.tbmUpdateTime,jdbcType=TIMESTAMP},
+      tbm_add_time = #{record.tbmAddTime,jdbcType=TIMESTAMP},
+      tbm_status = #{record.tbmStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Model" >
+    update tb_model
+    <set >
+      <if test="tbmName != null" >
+        tbm_name = #{tbmName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmFlag != null" >
+        tbm_flag = #{tbmFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmType != null" >
+        tbm_type = #{tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="tbmFile != null" >
+        tbm_file = #{tbmFile,jdbcType=TINYINT},
+      </if>
+      <if test="tbmImage != null" >
+        tbm_image = #{tbmImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmPedestal != null" >
+        tbm_pedestal = #{tbmPedestal,jdbcType=INTEGER},
+      </if>
+      <if test="tbmAlarm != null" >
+        tbm_alarm = #{tbmAlarm,jdbcType=INTEGER},
+      </if>
+      <if test="tbmMileage != null" >
+        tbm_mileage = #{tbmMileage,jdbcType=INTEGER},
+      </if>
+      <if test="tbmUpdateTime != null" >
+        tbm_update_time = #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmAddTime != null" >
+        tbm_add_time = #{tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmStatus != null" >
+        tbm_status = #{tbmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Model" >
+    update tb_model
+    set tbm_name = #{tbmName,jdbcType=VARCHAR},
+      tbm_flag = #{tbmFlag,jdbcType=VARCHAR},
+      tbm_type = #{tbmType,jdbcType=TINYINT},
+      tbm_file = #{tbmFile,jdbcType=TINYINT},
+      tbm_image = #{tbmImage,jdbcType=VARCHAR},
+      tbm_pedestal = #{tbmPedestal,jdbcType=INTEGER},
+      tbm_alarm = #{tbmAlarm,jdbcType=INTEGER},
+      tbm_mileage = #{tbmMileage,jdbcType=INTEGER},
+      tbm_update_time = #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      tbm_add_time = #{tbmAddTime,jdbcType=TIMESTAMP},
+      tbm_status = #{tbmStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByIdIn" resultMap="BaseResultMap">
+    select * from tb_model where 1 = 1
+    <if test="ids != null and ids.size() > 0">
+      and tbm_id in
+      <foreach collection="ids" item="item" open="(" close=")" separator=",">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+</mapper>

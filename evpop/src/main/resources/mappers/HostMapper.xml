@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.HostMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Host" >
+    <id column="sh_id" property="shId" jdbcType="INTEGER" />
+    <result column="sh_name" property="shName" jdbcType="VARCHAR" />
+    <result column="sh_flag" property="shFlag" jdbcType="VARCHAR" />
+    <result column="sh_oper" property="shOper" jdbcType="INTEGER" />
+    <result column="sh_lon" property="shLon" jdbcType="DOUBLE" />
+    <result column="sh_lat" property="shLat" jdbcType="DOUBLE" />
+    <result column="sh_update_time" property="shUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="sh_add_time" property="shAddTime" jdbcType="TIMESTAMP" />
+    <result column="sh_state" property="shState" jdbcType="TINYINT" />
+    <result column="sh_status" property="shStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sh_id, sh_name, sh_flag, sh_oper, sh_lon, sh_lat, sh_update_time, sh_add_time, sh_state, 
+    sh_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.HostExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_host
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from srv_host
+    where sh_id = #{shId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from srv_host
+    where sh_id = #{shId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Host" >
+    insert into srv_host (sh_id, sh_name, sh_flag, 
+      sh_oper, sh_lon, sh_lat, 
+      sh_update_time, sh_add_time, sh_state, 
+      sh_status, createTime, modifyDate
+      )
+    values (#{shId,jdbcType=INTEGER}, #{shName,jdbcType=VARCHAR}, #{shFlag,jdbcType=VARCHAR}, 
+      #{shOper,jdbcType=INTEGER}, #{shLon,jdbcType=DOUBLE}, #{shLat,jdbcType=DOUBLE}, 
+      #{shUpdateTime,jdbcType=TIMESTAMP}, #{shAddTime,jdbcType=TIMESTAMP}, #{shState,jdbcType=TINYINT}, 
+      #{shStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Host" >
+    insert into srv_host
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shId != null" >
+        sh_id,
+      </if>
+      <if test="shName != null" >
+        sh_name,
+      </if>
+      <if test="shFlag != null" >
+        sh_flag,
+      </if>
+      <if test="shOper != null" >
+        sh_oper,
+      </if>
+      <if test="shLon != null" >
+        sh_lon,
+      </if>
+      <if test="shLat != null" >
+        sh_lat,
+      </if>
+      <if test="shUpdateTime != null" >
+        sh_update_time,
+      </if>
+      <if test="shAddTime != null" >
+        sh_add_time,
+      </if>
+      <if test="shState != null" >
+        sh_state,
+      </if>
+      <if test="shStatus != null" >
+        sh_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shId != null" >
+        #{shId,jdbcType=INTEGER},
+      </if>
+      <if test="shName != null" >
+        #{shName,jdbcType=VARCHAR},
+      </if>
+      <if test="shFlag != null" >
+        #{shFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="shOper != null" >
+        #{shOper,jdbcType=INTEGER},
+      </if>
+      <if test="shLon != null" >
+        #{shLon,jdbcType=DOUBLE},
+      </if>
+      <if test="shLat != null" >
+        #{shLat,jdbcType=DOUBLE},
+      </if>
+      <if test="shUpdateTime != null" >
+        #{shUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shAddTime != null" >
+        #{shAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shState != null" >
+        #{shState,jdbcType=TINYINT},
+      </if>
+      <if test="shStatus != null" >
+        #{shStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.HostExample" resultType="java.lang.Integer" >
+    select count(*) from srv_host
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_host
+    <set >
+      <if test="record.shId != null" >
+        sh_id = #{record.shId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shName != null" >
+        sh_name = #{record.shName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shFlag != null" >
+        sh_flag = #{record.shFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shOper != null" >
+        sh_oper = #{record.shOper,jdbcType=INTEGER},
+      </if>
+      <if test="record.shLon != null" >
+        sh_lon = #{record.shLon,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shLat != null" >
+        sh_lat = #{record.shLat,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shUpdateTime != null" >
+        sh_update_time = #{record.shUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shAddTime != null" >
+        sh_add_time = #{record.shAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shState != null" >
+        sh_state = #{record.shState,jdbcType=TINYINT},
+      </if>
+      <if test="record.shStatus != null" >
+        sh_status = #{record.shStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_host
+    set sh_id = #{record.shId,jdbcType=INTEGER},
+      sh_name = #{record.shName,jdbcType=VARCHAR},
+      sh_flag = #{record.shFlag,jdbcType=VARCHAR},
+      sh_oper = #{record.shOper,jdbcType=INTEGER},
+      sh_lon = #{record.shLon,jdbcType=DOUBLE},
+      sh_lat = #{record.shLat,jdbcType=DOUBLE},
+      sh_update_time = #{record.shUpdateTime,jdbcType=TIMESTAMP},
+      sh_add_time = #{record.shAddTime,jdbcType=TIMESTAMP},
+      sh_state = #{record.shState,jdbcType=TINYINT},
+      sh_status = #{record.shStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Host" >
+    update srv_host
+    <set >
+      <if test="shName != null" >
+        sh_name = #{shName,jdbcType=VARCHAR},
+      </if>
+      <if test="shFlag != null" >
+        sh_flag = #{shFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="shOper != null" >
+        sh_oper = #{shOper,jdbcType=INTEGER},
+      </if>
+      <if test="shLon != null" >
+        sh_lon = #{shLon,jdbcType=DOUBLE},
+      </if>
+      <if test="shLat != null" >
+        sh_lat = #{shLat,jdbcType=DOUBLE},
+      </if>
+      <if test="shUpdateTime != null" >
+        sh_update_time = #{shUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shAddTime != null" >
+        sh_add_time = #{shAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shState != null" >
+        sh_state = #{shState,jdbcType=TINYINT},
+      </if>
+      <if test="shStatus != null" >
+        sh_status = #{shStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sh_id = #{shId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Host" >
+    update srv_host
+    set sh_name = #{shName,jdbcType=VARCHAR},
+      sh_flag = #{shFlag,jdbcType=VARCHAR},
+      sh_oper = #{shOper,jdbcType=INTEGER},
+      sh_lon = #{shLon,jdbcType=DOUBLE},
+      sh_lat = #{shLat,jdbcType=DOUBLE},
+      sh_update_time = #{shUpdateTime,jdbcType=TIMESTAMP},
+      sh_add_time = #{shAddTime,jdbcType=TIMESTAMP},
+      sh_state = #{shState,jdbcType=TINYINT},
+      sh_status = #{shStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where sh_id = #{shId,jdbcType=INTEGER}
+  </update>
+</mapper>

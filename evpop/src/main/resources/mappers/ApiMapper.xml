@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ApiMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Api" >
+    <id column="sa_id" property="saId" jdbcType="BIGINT" />
+    <result column="sa_name" property="saName" jdbcType="VARCHAR" />
+    <result column="sa_namespace" property="saNamespace" jdbcType="VARCHAR" />
+    <result column="sa_type" property="saType" jdbcType="BIGINT" />
+    <result column="sa_version" property="saVersion" jdbcType="SMALLINT" />
+    <result column="sa_open" property="saOpen" jdbcType="SMALLINT" />
+    <result column="sa_oauth" property="saOauth" jdbcType="SMALLINT" />
+    <result column="sa_descript" property="saDescript" jdbcType="VARCHAR" />
+    <result column="sa_class" property="saClass" jdbcType="VARCHAR" />
+    <result column="sa_dir" property="saDir" jdbcType="SMALLINT" />
+    <result column="sa_method" property="saMethod" jdbcType="VARCHAR" />
+    <result column="sa_params" property="saParams" jdbcType="VARCHAR" />
+    <result column="sa_return_struct" property="saReturnStruct" jdbcType="VARCHAR" />
+    <result column="sa_error" property="saError" jdbcType="VARCHAR" />
+    <result column="sa_save_log" property="saSaveLog" jdbcType="SMALLINT" />
+    <result column="sa_update_time" property="saUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="sa_add_time" property="saAddTime" jdbcType="TIMESTAMP" />
+    <result column="sa_status" property="saStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sa_id, sa_name, sa_namespace, sa_type, sa_version, sa_open, sa_oauth, sa_descript, 
+    sa_class, sa_dir, sa_method, sa_params, sa_return_struct, sa_error, sa_save_log, 
+    sa_update_time, sa_add_time, sa_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ApiExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_api
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from srv_api
+    where sa_id = #{saId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from srv_api
+    where sa_id = #{saId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Api" >
+    insert into srv_api (sa_id, sa_name, sa_namespace, 
+      sa_type, sa_version, sa_open, 
+      sa_oauth, sa_descript, sa_class, 
+      sa_dir, sa_method, sa_params, 
+      sa_return_struct, sa_error, sa_save_log, 
+      sa_update_time, sa_add_time, sa_status
+      )
+    values (#{saId,jdbcType=BIGINT}, #{saName,jdbcType=VARCHAR}, #{saNamespace,jdbcType=VARCHAR}, 
+      #{saType,jdbcType=BIGINT}, #{saVersion,jdbcType=SMALLINT}, #{saOpen,jdbcType=SMALLINT}, 
+      #{saOauth,jdbcType=SMALLINT}, #{saDescript,jdbcType=VARCHAR}, #{saClass,jdbcType=VARCHAR}, 
+      #{saDir,jdbcType=SMALLINT}, #{saMethod,jdbcType=VARCHAR}, #{saParams,jdbcType=VARCHAR}, 
+      #{saReturnStruct,jdbcType=VARCHAR}, #{saError,jdbcType=VARCHAR}, #{saSaveLog,jdbcType=SMALLINT}, 
+      #{saUpdateTime,jdbcType=TIMESTAMP}, #{saAddTime,jdbcType=TIMESTAMP}, #{saStatus,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Api" >
+    insert into srv_api
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="saId != null" >
+        sa_id,
+      </if>
+      <if test="saName != null" >
+        sa_name,
+      </if>
+      <if test="saNamespace != null" >
+        sa_namespace,
+      </if>
+      <if test="saType != null" >
+        sa_type,
+      </if>
+      <if test="saVersion != null" >
+        sa_version,
+      </if>
+      <if test="saOpen != null" >
+        sa_open,
+      </if>
+      <if test="saOauth != null" >
+        sa_oauth,
+      </if>
+      <if test="saDescript != null" >
+        sa_descript,
+      </if>
+      <if test="saClass != null" >
+        sa_class,
+      </if>
+      <if test="saDir != null" >
+        sa_dir,
+      </if>
+      <if test="saMethod != null" >
+        sa_method,
+      </if>
+      <if test="saParams != null" >
+        sa_params,
+      </if>
+      <if test="saReturnStruct != null" >
+        sa_return_struct,
+      </if>
+      <if test="saError != null" >
+        sa_error,
+      </if>
+      <if test="saSaveLog != null" >
+        sa_save_log,
+      </if>
+      <if test="saUpdateTime != null" >
+        sa_update_time,
+      </if>
+      <if test="saAddTime != null" >
+        sa_add_time,
+      </if>
+      <if test="saStatus != null" >
+        sa_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="saId != null" >
+        #{saId,jdbcType=BIGINT},
+      </if>
+      <if test="saName != null" >
+        #{saName,jdbcType=VARCHAR},
+      </if>
+      <if test="saNamespace != null" >
+        #{saNamespace,jdbcType=VARCHAR},
+      </if>
+      <if test="saType != null" >
+        #{saType,jdbcType=BIGINT},
+      </if>
+      <if test="saVersion != null" >
+        #{saVersion,jdbcType=SMALLINT},
+      </if>
+      <if test="saOpen != null" >
+        #{saOpen,jdbcType=SMALLINT},
+      </if>
+      <if test="saOauth != null" >
+        #{saOauth,jdbcType=SMALLINT},
+      </if>
+      <if test="saDescript != null" >
+        #{saDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="saClass != null" >
+        #{saClass,jdbcType=VARCHAR},
+      </if>
+      <if test="saDir != null" >
+        #{saDir,jdbcType=SMALLINT},
+      </if>
+      <if test="saMethod != null" >
+        #{saMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="saParams != null" >
+        #{saParams,jdbcType=VARCHAR},
+      </if>
+      <if test="saReturnStruct != null" >
+        #{saReturnStruct,jdbcType=VARCHAR},
+      </if>
+      <if test="saError != null" >
+        #{saError,jdbcType=VARCHAR},
+      </if>
+      <if test="saSaveLog != null" >
+        #{saSaveLog,jdbcType=SMALLINT},
+      </if>
+      <if test="saUpdateTime != null" >
+        #{saUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saAddTime != null" >
+        #{saAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saStatus != null" >
+        #{saStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ApiExample" resultType="java.lang.Integer" >
+    select count(*) from srv_api
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_api
+    <set >
+      <if test="record.saId != null" >
+        sa_id = #{record.saId,jdbcType=BIGINT},
+      </if>
+      <if test="record.saName != null" >
+        sa_name = #{record.saName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saNamespace != null" >
+        sa_namespace = #{record.saNamespace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saType != null" >
+        sa_type = #{record.saType,jdbcType=BIGINT},
+      </if>
+      <if test="record.saVersion != null" >
+        sa_version = #{record.saVersion,jdbcType=SMALLINT},
+      </if>
+      <if test="record.saOpen != null" >
+        sa_open = #{record.saOpen,jdbcType=SMALLINT},
+      </if>
+      <if test="record.saOauth != null" >
+        sa_oauth = #{record.saOauth,jdbcType=SMALLINT},
+      </if>
+      <if test="record.saDescript != null" >
+        sa_descript = #{record.saDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saClass != null" >
+        sa_class = #{record.saClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saDir != null" >
+        sa_dir = #{record.saDir,jdbcType=SMALLINT},
+      </if>
+      <if test="record.saMethod != null" >
+        sa_method = #{record.saMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saParams != null" >
+        sa_params = #{record.saParams,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saReturnStruct != null" >
+        sa_return_struct = #{record.saReturnStruct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saError != null" >
+        sa_error = #{record.saError,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saSaveLog != null" >
+        sa_save_log = #{record.saSaveLog,jdbcType=SMALLINT},
+      </if>
+      <if test="record.saUpdateTime != null" >
+        sa_update_time = #{record.saUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.saAddTime != null" >
+        sa_add_time = #{record.saAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.saStatus != null" >
+        sa_status = #{record.saStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_api
+    set sa_id = #{record.saId,jdbcType=BIGINT},
+      sa_name = #{record.saName,jdbcType=VARCHAR},
+      sa_namespace = #{record.saNamespace,jdbcType=VARCHAR},
+      sa_type = #{record.saType,jdbcType=BIGINT},
+      sa_version = #{record.saVersion,jdbcType=SMALLINT},
+      sa_open = #{record.saOpen,jdbcType=SMALLINT},
+      sa_oauth = #{record.saOauth,jdbcType=SMALLINT},
+      sa_descript = #{record.saDescript,jdbcType=VARCHAR},
+      sa_class = #{record.saClass,jdbcType=VARCHAR},
+      sa_dir = #{record.saDir,jdbcType=SMALLINT},
+      sa_method = #{record.saMethod,jdbcType=VARCHAR},
+      sa_params = #{record.saParams,jdbcType=VARCHAR},
+      sa_return_struct = #{record.saReturnStruct,jdbcType=VARCHAR},
+      sa_error = #{record.saError,jdbcType=VARCHAR},
+      sa_save_log = #{record.saSaveLog,jdbcType=SMALLINT},
+      sa_update_time = #{record.saUpdateTime,jdbcType=TIMESTAMP},
+      sa_add_time = #{record.saAddTime,jdbcType=TIMESTAMP},
+      sa_status = #{record.saStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Api" >
+    update srv_api
+    <set >
+      <if test="saName != null" >
+        sa_name = #{saName,jdbcType=VARCHAR},
+      </if>
+      <if test="saNamespace != null" >
+        sa_namespace = #{saNamespace,jdbcType=VARCHAR},
+      </if>
+      <if test="saType != null" >
+        sa_type = #{saType,jdbcType=BIGINT},
+      </if>
+      <if test="saVersion != null" >
+        sa_version = #{saVersion,jdbcType=SMALLINT},
+      </if>
+      <if test="saOpen != null" >
+        sa_open = #{saOpen,jdbcType=SMALLINT},
+      </if>
+      <if test="saOauth != null" >
+        sa_oauth = #{saOauth,jdbcType=SMALLINT},
+      </if>
+      <if test="saDescript != null" >
+        sa_descript = #{saDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="saClass != null" >
+        sa_class = #{saClass,jdbcType=VARCHAR},
+      </if>
+      <if test="saDir != null" >
+        sa_dir = #{saDir,jdbcType=SMALLINT},
+      </if>
+      <if test="saMethod != null" >
+        sa_method = #{saMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="saParams != null" >
+        sa_params = #{saParams,jdbcType=VARCHAR},
+      </if>
+      <if test="saReturnStruct != null" >
+        sa_return_struct = #{saReturnStruct,jdbcType=VARCHAR},
+      </if>
+      <if test="saError != null" >
+        sa_error = #{saError,jdbcType=VARCHAR},
+      </if>
+      <if test="saSaveLog != null" >
+        sa_save_log = #{saSaveLog,jdbcType=SMALLINT},
+      </if>
+      <if test="saUpdateTime != null" >
+        sa_update_time = #{saUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saAddTime != null" >
+        sa_add_time = #{saAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saStatus != null" >
+        sa_status = #{saStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where sa_id = #{saId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Api" >
+    update srv_api
+    set sa_name = #{saName,jdbcType=VARCHAR},
+      sa_namespace = #{saNamespace,jdbcType=VARCHAR},
+      sa_type = #{saType,jdbcType=BIGINT},
+      sa_version = #{saVersion,jdbcType=SMALLINT},
+      sa_open = #{saOpen,jdbcType=SMALLINT},
+      sa_oauth = #{saOauth,jdbcType=SMALLINT},
+      sa_descript = #{saDescript,jdbcType=VARCHAR},
+      sa_class = #{saClass,jdbcType=VARCHAR},
+      sa_dir = #{saDir,jdbcType=SMALLINT},
+      sa_method = #{saMethod,jdbcType=VARCHAR},
+      sa_params = #{saParams,jdbcType=VARCHAR},
+      sa_return_struct = #{saReturnStruct,jdbcType=VARCHAR},
+      sa_error = #{saError,jdbcType=VARCHAR},
+      sa_save_log = #{saSaveLog,jdbcType=SMALLINT},
+      sa_update_time = #{saUpdateTime,jdbcType=TIMESTAMP},
+      sa_add_time = #{saAddTime,jdbcType=TIMESTAMP},
+      sa_status = #{saStatus,jdbcType=SMALLINT}
+    where sa_id = #{saId,jdbcType=BIGINT}
+  </update>
+</mapper>

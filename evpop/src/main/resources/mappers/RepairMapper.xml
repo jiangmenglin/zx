@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.RepairMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Repair" >
+    <id column="tbr_id" property="tbrId" jdbcType="BIGINT" />
+    <result column="tbr_host" property="tbrHost" jdbcType="BIGINT" />
+    <result column="tbr_car" property="tbrCar" jdbcType="BIGINT" />
+    <result column="tbr_insure_type" property="tbrInsureType" jdbcType="TINYINT" />
+    <result column="tbr_repair_type" property="tbrRepairType" jdbcType="TINYINT" />
+    <result column="tbr_adr" property="tbrAdr" jdbcType="BIGINT" />
+    <result column="tbr_order" property="tbrOrder" jdbcType="BIGINT" />
+    <result column="tbr_in_date" property="tbrInDate" jdbcType="DATE" />
+    <result column="tbr_out_date" property="tbrOutDate" jdbcType="DATE" />
+    <result column="tbr_descript" property="tbrDescript" jdbcType="VARCHAR" />
+    <result column="tbr_repair_no" property="tbrRepairNo" jdbcType="VARCHAR" />
+    <result column="tbr_money" property="tbrMoney" jdbcType="DOUBLE" />
+    <result column="tbr_is_settle" property="tbrIsSettle" jdbcType="TINYINT" />
+    <result column="tbr_settle_time" property="tbrSettleTime" jdbcType="DATE" />
+    <result column="tbr_remark" property="tbrRemark" jdbcType="VARCHAR" />
+    <result column="tbr_adder" property="tbrAdder" jdbcType="BIGINT" />
+    <result column="tbr_editor" property="tbrEditor" jdbcType="BIGINT" />
+    <result column="tbr_add_time" property="tbrAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_update_time" property="tbrUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_status" property="tbrStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbr_id, tbr_host, tbr_car, tbr_insure_type, tbr_repair_type, tbr_adr, tbr_order, 
+    tbr_in_date, tbr_out_date, tbr_descript, tbr_repair_no, tbr_money, tbr_is_settle, 
+    tbr_settle_time, tbr_remark, tbr_adder, tbr_editor, tbr_add_time, tbr_update_time, 
+    tbr_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.RepairExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_repair
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_repair
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_repair
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Repair" >
+    insert into tb_repair (tbr_id, tbr_host, tbr_car, 
+      tbr_insure_type, tbr_repair_type, tbr_adr, 
+      tbr_order, tbr_in_date, tbr_out_date, 
+      tbr_descript, tbr_repair_no, tbr_money, 
+      tbr_is_settle, tbr_settle_time, tbr_remark, 
+      tbr_adder, tbr_editor, tbr_add_time, 
+      tbr_update_time, tbr_status)
+    values (#{tbrId,jdbcType=BIGINT}, #{tbrHost,jdbcType=BIGINT}, #{tbrCar,jdbcType=BIGINT}, 
+      #{tbrInsureType,jdbcType=TINYINT}, #{tbrRepairType,jdbcType=TINYINT}, #{tbrAdr,jdbcType=BIGINT}, 
+      #{tbrOrder,jdbcType=BIGINT}, #{tbrInDate,jdbcType=DATE}, #{tbrOutDate,jdbcType=DATE}, 
+      #{tbrDescript,jdbcType=VARCHAR}, #{tbrRepairNo,jdbcType=VARCHAR}, #{tbrMoney,jdbcType=DOUBLE}, 
+      #{tbrIsSettle,jdbcType=TINYINT}, #{tbrSettleTime,jdbcType=DATE}, #{tbrRemark,jdbcType=VARCHAR}, 
+      #{tbrAdder,jdbcType=BIGINT}, #{tbrEditor,jdbcType=BIGINT}, #{tbrAddTime,jdbcType=TIMESTAMP}, 
+      #{tbrUpdateTime,jdbcType=TIMESTAMP}, #{tbrStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Repair" >
+    insert into tb_repair
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        tbr_id,
+      </if>
+      <if test="tbrHost != null" >
+        tbr_host,
+      </if>
+      <if test="tbrCar != null" >
+        tbr_car,
+      </if>
+      <if test="tbrInsureType != null" >
+        tbr_insure_type,
+      </if>
+      <if test="tbrRepairType != null" >
+        tbr_repair_type,
+      </if>
+      <if test="tbrAdr != null" >
+        tbr_adr,
+      </if>
+      <if test="tbrOrder != null" >
+        tbr_order,
+      </if>
+      <if test="tbrInDate != null" >
+        tbr_in_date,
+      </if>
+      <if test="tbrOutDate != null" >
+        tbr_out_date,
+      </if>
+      <if test="tbrDescript != null" >
+        tbr_descript,
+      </if>
+      <if test="tbrRepairNo != null" >
+        tbr_repair_no,
+      </if>
+      <if test="tbrMoney != null" >
+        tbr_money,
+      </if>
+      <if test="tbrIsSettle != null" >
+        tbr_is_settle,
+      </if>
+      <if test="tbrSettleTime != null" >
+        tbr_settle_time,
+      </if>
+      <if test="tbrRemark != null" >
+        tbr_remark,
+      </if>
+      <if test="tbrAdder != null" >
+        tbr_adder,
+      </if>
+      <if test="tbrEditor != null" >
+        tbr_editor,
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time,
+      </if>
+      <if test="tbrUpdateTime != null" >
+        tbr_update_time,
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        #{tbrId,jdbcType=BIGINT},
+      </if>
+      <if test="tbrHost != null" >
+        #{tbrHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbrCar != null" >
+        #{tbrCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbrInsureType != null" >
+        #{tbrInsureType,jdbcType=TINYINT},
+      </if>
+      <if test="tbrRepairType != null" >
+        #{tbrRepairType,jdbcType=TINYINT},
+      </if>
+      <if test="tbrAdr != null" >
+        #{tbrAdr,jdbcType=BIGINT},
+      </if>
+      <if test="tbrOrder != null" >
+        #{tbrOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbrInDate != null" >
+        #{tbrInDate,jdbcType=DATE},
+      </if>
+      <if test="tbrOutDate != null" >
+        #{tbrOutDate,jdbcType=DATE},
+      </if>
+      <if test="tbrDescript != null" >
+        #{tbrDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRepairNo != null" >
+        #{tbrRepairNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrMoney != null" >
+        #{tbrMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbrIsSettle != null" >
+        #{tbrIsSettle,jdbcType=TINYINT},
+      </if>
+      <if test="tbrSettleTime != null" >
+        #{tbrSettleTime,jdbcType=DATE},
+      </if>
+      <if test="tbrRemark != null" >
+        #{tbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrAdder != null" >
+        #{tbrAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbrEditor != null" >
+        #{tbrEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tbrAddTime != null" >
+        #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrUpdateTime != null" >
+        #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrStatus != null" >
+        #{tbrStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.RepairExample" resultType="java.lang.Integer" >
+    select count(*) from tb_repair
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_repair
+    <set >
+      <if test="record.tbrId != null" >
+        tbr_id = #{record.tbrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrHost != null" >
+        tbr_host = #{record.tbrHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrCar != null" >
+        tbr_car = #{record.tbrCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrInsureType != null" >
+        tbr_insure_type = #{record.tbrInsureType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrRepairType != null" >
+        tbr_repair_type = #{record.tbrRepairType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrAdr != null" >
+        tbr_adr = #{record.tbrAdr,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrOrder != null" >
+        tbr_order = #{record.tbrOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrInDate != null" >
+        tbr_in_date = #{record.tbrInDate,jdbcType=DATE},
+      </if>
+      <if test="record.tbrOutDate != null" >
+        tbr_out_date = #{record.tbrOutDate,jdbcType=DATE},
+      </if>
+      <if test="record.tbrDescript != null" >
+        tbr_descript = #{record.tbrDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrRepairNo != null" >
+        tbr_repair_no = #{record.tbrRepairNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrMoney != null" >
+        tbr_money = #{record.tbrMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbrIsSettle != null" >
+        tbr_is_settle = #{record.tbrIsSettle,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrSettleTime != null" >
+        tbr_settle_time = #{record.tbrSettleTime,jdbcType=DATE},
+      </if>
+      <if test="record.tbrRemark != null" >
+        tbr_remark = #{record.tbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrAdder != null" >
+        tbr_adder = #{record.tbrAdder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrEditor != null" >
+        tbr_editor = #{record.tbrEditor,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrAddTime != null" >
+        tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrUpdateTime != null" >
+        tbr_update_time = #{record.tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrStatus != null" >
+        tbr_status = #{record.tbrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_repair
+    set tbr_id = #{record.tbrId,jdbcType=BIGINT},
+      tbr_host = #{record.tbrHost,jdbcType=BIGINT},
+      tbr_car = #{record.tbrCar,jdbcType=BIGINT},
+      tbr_insure_type = #{record.tbrInsureType,jdbcType=TINYINT},
+      tbr_repair_type = #{record.tbrRepairType,jdbcType=TINYINT},
+      tbr_adr = #{record.tbrAdr,jdbcType=BIGINT},
+      tbr_order = #{record.tbrOrder,jdbcType=BIGINT},
+      tbr_in_date = #{record.tbrInDate,jdbcType=DATE},
+      tbr_out_date = #{record.tbrOutDate,jdbcType=DATE},
+      tbr_descript = #{record.tbrDescript,jdbcType=VARCHAR},
+      tbr_repair_no = #{record.tbrRepairNo,jdbcType=VARCHAR},
+      tbr_money = #{record.tbrMoney,jdbcType=DOUBLE},
+      tbr_is_settle = #{record.tbrIsSettle,jdbcType=TINYINT},
+      tbr_settle_time = #{record.tbrSettleTime,jdbcType=DATE},
+      tbr_remark = #{record.tbrRemark,jdbcType=VARCHAR},
+      tbr_adder = #{record.tbrAdder,jdbcType=BIGINT},
+      tbr_editor = #{record.tbrEditor,jdbcType=BIGINT},
+      tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_update_time = #{record.tbrUpdateTime,jdbcType=TIMESTAMP},
+      tbr_status = #{record.tbrStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Repair" >
+    update tb_repair
+    <set >
+      <if test="tbrHost != null" >
+        tbr_host = #{tbrHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbrCar != null" >
+        tbr_car = #{tbrCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbrInsureType != null" >
+        tbr_insure_type = #{tbrInsureType,jdbcType=TINYINT},
+      </if>
+      <if test="tbrRepairType != null" >
+        tbr_repair_type = #{tbrRepairType,jdbcType=TINYINT},
+      </if>
+      <if test="tbrAdr != null" >
+        tbr_adr = #{tbrAdr,jdbcType=BIGINT},
+      </if>
+      <if test="tbrOrder != null" >
+        tbr_order = #{tbrOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbrInDate != null" >
+        tbr_in_date = #{tbrInDate,jdbcType=DATE},
+      </if>
+      <if test="tbrOutDate != null" >
+        tbr_out_date = #{tbrOutDate,jdbcType=DATE},
+      </if>
+      <if test="tbrDescript != null" >
+        tbr_descript = #{tbrDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRepairNo != null" >
+        tbr_repair_no = #{tbrRepairNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrMoney != null" >
+        tbr_money = #{tbrMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbrIsSettle != null" >
+        tbr_is_settle = #{tbrIsSettle,jdbcType=TINYINT},
+      </if>
+      <if test="tbrSettleTime != null" >
+        tbr_settle_time = #{tbrSettleTime,jdbcType=DATE},
+      </if>
+      <if test="tbrRemark != null" >
+        tbr_remark = #{tbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrAdder != null" >
+        tbr_adder = #{tbrAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbrEditor != null" >
+        tbr_editor = #{tbrEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrUpdateTime != null" >
+        tbr_update_time = #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status = #{tbrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Repair" >
+    update tb_repair
+    set tbr_host = #{tbrHost,jdbcType=BIGINT},
+      tbr_car = #{tbrCar,jdbcType=BIGINT},
+      tbr_insure_type = #{tbrInsureType,jdbcType=TINYINT},
+      tbr_repair_type = #{tbrRepairType,jdbcType=TINYINT},
+      tbr_adr = #{tbrAdr,jdbcType=BIGINT},
+      tbr_order = #{tbrOrder,jdbcType=BIGINT},
+      tbr_in_date = #{tbrInDate,jdbcType=DATE},
+      tbr_out_date = #{tbrOutDate,jdbcType=DATE},
+      tbr_descript = #{tbrDescript,jdbcType=VARCHAR},
+      tbr_repair_no = #{tbrRepairNo,jdbcType=VARCHAR},
+      tbr_money = #{tbrMoney,jdbcType=DOUBLE},
+      tbr_is_settle = #{tbrIsSettle,jdbcType=TINYINT},
+      tbr_settle_time = #{tbrSettleTime,jdbcType=DATE},
+      tbr_remark = #{tbrRemark,jdbcType=VARCHAR},
+      tbr_adder = #{tbrAdder,jdbcType=BIGINT},
+      tbr_editor = #{tbrEditor,jdbcType=BIGINT},
+      tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_update_time = #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      tbr_status = #{tbrStatus,jdbcType=SMALLINT}
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </update>
+</mapper>

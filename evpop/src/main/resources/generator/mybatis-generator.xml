@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 配置生成器 -->
+<generatorConfiguration>
+
+    <!--执行generator插件生成文件的命令： call mvn mybatis-generator:generate -e -->
+    <!-- 引入配置文件 -->
+    <properties resource="generator/mybatisGeneratorinit.properties"/>
+    <!--classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 可选 -->
+    <classPathEntry location="/home/jml/.m2/repository/mysql/mysql-connector-java/5.1.46/mysql-connector-java-5.1.46.jar" />
+
+    <!-- 一个数据库一个context -->
+    <!--defaultModelType="flat" 大数据字段，不分表 -->
+    <context id="MysqlTables" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
+        一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖 -->
+        <property name="autoDelimitKeywords" value="true" />
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="utf-8" />
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+        <!-- 注释 -->
+        <commentGenerator >
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${jdbc_driver}" connectionURL="${jdbc_url}" userId="${jdbc_user}" password="${jdbc_password}" />
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.zx.evpop.jdbc.entity" targetProject="src/main/java" >
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources" >
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+        <!-- 生成mapxml对应client，也就是接口dao -->
+        <javaClientGenerator targetPackage="com.zx.evpop.jdbc.dao" targetProject="src/main/java" type="XMLMAPPER" >
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        <!-- table可以有多个,每个数据库中的表都可以写一个table，tableName表示要匹配的数据库表,也可以在tableName属性中通过使用%通配符来匹配所有数据库表,只有匹配的表才会自动生成文件 -->
+        <!--<table tableName="oauth_client_token" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">-->
+        <!--<property name="useActualColumnNames" value="false" />-->
+        <!--</table>-->
+        <table tableName="srv_api" domainObjectName="Api" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_api_client" domainObjectName="ApiClient" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_api_log" domainObjectName="ApiLog" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_api_type" domainObjectName="ApiType" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_argument" domainObjectName="Argument" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_attribute" domainObjectName="Attribute" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_error" domainObjectName="Error" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_group" domainObjectName="Group" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_host" domainObjectName="Host" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_limited" domainObjectName="Limited" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_log" domainObjectName="Log" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_oauth" domainObjectName="Oauth" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_project" domainObjectName="Project" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_property" domainObjectName="Property" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_query" domainObjectName="Query" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_sql" domainObjectName="Sql" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="srv_user" domainObjectName="User" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_account" domainObjectName="Account" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_affair" domainObjectName="Affair" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_annual" domainObjectName="Annual" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_ao_check" domainObjectName="AoCheck" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_app_banner" domainObjectName="AppBanner" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_app_help" domainObjectName="AppHelp" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_app_protocol" domainObjectName="AppProtocol" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_app_start" domainObjectName="AppStart" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_app_update" domainObjectName="AppUpdate" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_area" domainObjectName="Area" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_artif_record" domainObjectName="ArtifRecord" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_bank_type" domainObjectName="BankType" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_car" domainObjectName="Car" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_car_line" domainObjectName="CarLine" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_cash_record" domainObjectName="CashRecord" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_code_scan_config" domainObjectName="CodeScanConfig" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_code_scan_record" domainObjectName="CodeScanRecord" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_color" domainObjectName="Color" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_contact_user_records" domainObjectName="ContactUserRecords" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_content" domainObjectName="Content" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_coupon" domainObjectName="Coupon" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_coupon_code" domainObjectName="CouponCode" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_coupon_type" domainObjectName="CouponType" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_district" domainObjectName="District" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_dope" domainObjectName="Dope" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_dynamic" domainObjectName="Dynamic" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_event_type" domainObjectName="EventType" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_fee_type" domainObjectName="FeeType" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_feedback" domainObjectName="Feedback" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_goods" domainObjectName="Goods" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_holiday" domainObjectName="Holiday" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_integral" domainObjectName="Integral" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_integral_rule" domainObjectName="IntegralRule" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_interface_definition" domainObjectName="InterfaceDefinition" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_interface_request" domainObjectName="InterfaceRequest" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_interface_response" domainObjectName="InterfaceResponse" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_invoice" domainObjectName="Invoice" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_lfee_type" domainObjectName="LfeeType" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_lgoods" domainObjectName="Lgoods" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_long_bespeak" domainObjectName="LongBespeak" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_long_faulttype" domainObjectName="LongFaulttype" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_long_instructions" domainObjectName="LongInstructions" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_long_order" domainObjectName="LongOrder" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_long_order_detail" domainObjectName="LongOrderDetail" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_long_order_fee" domainObjectName="LongOrderFee" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_long_orders" domainObjectName="LongOrders" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_long_questions" domainObjectName="LongQuestions" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_lprice" domainObjectName="Lprice" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_maintain" domainObjectName="Maintain" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_maintain_record" domainObjectName="MaintainRecord" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_manage" domainObjectName="Manage" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_member" domainObjectName="Member" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_message" domainObjectName="Message" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_model" domainObjectName="Model" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_oper" domainObjectName="Oper" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_oper_order" domainObjectName="OperOrder" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_oper_record" domainObjectName="OperRecord" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_order" domainObjectName="Order" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_order_comment" domainObjectName="OrderComment" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_order_detail" domainObjectName="OrderDetail" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_order_indemnify" domainObjectName="OrderIndemnify" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_outlets" domainObjectName="Outlets" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_parklot" domainObjectName="Parklot" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_pay_log" domainObjectName="PayLog" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_pay_record" domainObjectName="PayRecord" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_pay_refund" domainObjectName="PayRefund" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_platform_info" domainObjectName="PlatformInfo" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_platform_module_info" domainObjectName="PlatformModuleInfo" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_power_station" domainObjectName="PowerStation" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_price" domainObjectName="Price" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_problem" domainObjectName="Problem" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_provid" domainObjectName="Provid" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_recharge" domainObjectName="Recharge" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_record" domainObjectName="Record" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_record_subject" domainObjectName="RecordSubject" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_refund" domainObjectName="Refund" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_remote" domainObjectName="Remote" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_repair" domainObjectName="Repair" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_repair_adr" domainObjectName="RepairAdr" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_restriction" domainObjectName="Restriction" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_retroact" domainObjectName="Retroact" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_rule" domainObjectName="Rule" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_secure" domainObjectName="Secure" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_sequence_inf" domainObjectName="SequenceInf" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_servicing" domainObjectName="Servicing" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_sms_mt" domainObjectName="SmsMt" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_sms_template" domainObjectName="SmsTemplate" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_state" domainObjectName="State" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_task" domainObjectName="Task" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_third_account" domainObjectName="ThirdAccount" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_transfer_manager" domainObjectName="TransferManager" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_trouble" domainObjectName="Trouble" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_unit_bill" domainObjectName="UnitBill" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_unit_channel" domainObjectName="UnitChannel" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_unit_group" domainObjectName="UnitGroup" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_unit_info" domainObjectName="UnitInfo" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_unit_order" domainObjectName="UnitOrder" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_unit_partner" domainObjectName="UnitPartner" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_unit_person" domainObjectName="UnitPerson" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_update" domainObjectName="Update" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_upgrade_log" domainObjectName="UpgradeLog" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_user_feedback" domainObjectName="UserFeedback" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_violat" domainObjectName="Violat" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_violat_query" domainObjectName="ViolatQuery" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_voucher" domainObjectName="Voucher" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_warn_type" domainObjectName="WarnType" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_web_banner" domainObjectName="WebBanner" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_web_help" domainObjectName="WebHelp" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_web_news" domainObjectName="WebNews" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+        <table tableName="tb_web_policy" domainObjectName="WebPolicy" enableCountByExample="true" enableSelectByExample="true" enableDeleteByExample="false"></table>
+    </context>
+
+</generatorConfiguration>

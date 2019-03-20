@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.User" >
+    <id column="su_id" property="suId" jdbcType="INTEGER" />
+    <result column="su_host" property="suHost" jdbcType="VARCHAR" />
+    <result column="su_group" property="suGroup" jdbcType="INTEGER" />
+    <result column="su_username" property="suUsername" jdbcType="VARCHAR" />
+    <result column="su_password" property="suPassword" jdbcType="CHAR" />
+    <result column="su_real_name" property="suRealName" jdbcType="VARCHAR" />
+    <result column="su_mobile" property="suMobile" jdbcType="VARCHAR" />
+    <result column="su_email" property="suEmail" jdbcType="VARCHAR" />
+    <result column="su_shortcut" property="suShortcut" jdbcType="VARCHAR" />
+    <result column="su_add_time" property="suAddTime" jdbcType="TIMESTAMP" />
+    <result column="su_last_time" property="suLastTime" jdbcType="TIMESTAMP" />
+    <result column="su_last_ip" property="suLastIp" jdbcType="VARCHAR" />
+    <result column="su_status" property="suStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    su_id, su_host, su_group, su_username, su_password, su_real_name, su_mobile, su_email, 
+    su_shortcut, su_add_time, su_last_time, su_last_ip, su_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from srv_user
+    where su_id = #{suId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from srv_user
+    where su_id = #{suId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.User" >
+    insert into srv_user (su_id, su_host, su_group, 
+      su_username, su_password, su_real_name, 
+      su_mobile, su_email, su_shortcut, 
+      su_add_time, su_last_time, su_last_ip, 
+      su_status, createTime, modifyDate
+      )
+    values (#{suId,jdbcType=INTEGER}, #{suHost,jdbcType=VARCHAR}, #{suGroup,jdbcType=INTEGER}, 
+      #{suUsername,jdbcType=VARCHAR}, #{suPassword,jdbcType=CHAR}, #{suRealName,jdbcType=VARCHAR}, 
+      #{suMobile,jdbcType=VARCHAR}, #{suEmail,jdbcType=VARCHAR}, #{suShortcut,jdbcType=VARCHAR}, 
+      #{suAddTime,jdbcType=TIMESTAMP}, #{suLastTime,jdbcType=TIMESTAMP}, #{suLastIp,jdbcType=VARCHAR}, 
+      #{suStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.User" >
+    insert into srv_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="suId != null" >
+        su_id,
+      </if>
+      <if test="suHost != null" >
+        su_host,
+      </if>
+      <if test="suGroup != null" >
+        su_group,
+      </if>
+      <if test="suUsername != null" >
+        su_username,
+      </if>
+      <if test="suPassword != null" >
+        su_password,
+      </if>
+      <if test="suRealName != null" >
+        su_real_name,
+      </if>
+      <if test="suMobile != null" >
+        su_mobile,
+      </if>
+      <if test="suEmail != null" >
+        su_email,
+      </if>
+      <if test="suShortcut != null" >
+        su_shortcut,
+      </if>
+      <if test="suAddTime != null" >
+        su_add_time,
+      </if>
+      <if test="suLastTime != null" >
+        su_last_time,
+      </if>
+      <if test="suLastIp != null" >
+        su_last_ip,
+      </if>
+      <if test="suStatus != null" >
+        su_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="suId != null" >
+        #{suId,jdbcType=INTEGER},
+      </if>
+      <if test="suHost != null" >
+        #{suHost,jdbcType=VARCHAR},
+      </if>
+      <if test="suGroup != null" >
+        #{suGroup,jdbcType=INTEGER},
+      </if>
+      <if test="suUsername != null" >
+        #{suUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="suPassword != null" >
+        #{suPassword,jdbcType=CHAR},
+      </if>
+      <if test="suRealName != null" >
+        #{suRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="suMobile != null" >
+        #{suMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="suEmail != null" >
+        #{suEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="suShortcut != null" >
+        #{suShortcut,jdbcType=VARCHAR},
+      </if>
+      <if test="suAddTime != null" >
+        #{suAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="suLastTime != null" >
+        #{suLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="suLastIp != null" >
+        #{suLastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="suStatus != null" >
+        #{suStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.UserExample" resultType="java.lang.Integer" >
+    select count(*) from srv_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_user
+    <set >
+      <if test="record.suId != null" >
+        su_id = #{record.suId,jdbcType=INTEGER},
+      </if>
+      <if test="record.suHost != null" >
+        su_host = #{record.suHost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suGroup != null" >
+        su_group = #{record.suGroup,jdbcType=INTEGER},
+      </if>
+      <if test="record.suUsername != null" >
+        su_username = #{record.suUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suPassword != null" >
+        su_password = #{record.suPassword,jdbcType=CHAR},
+      </if>
+      <if test="record.suRealName != null" >
+        su_real_name = #{record.suRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suMobile != null" >
+        su_mobile = #{record.suMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suEmail != null" >
+        su_email = #{record.suEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suShortcut != null" >
+        su_shortcut = #{record.suShortcut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suAddTime != null" >
+        su_add_time = #{record.suAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.suLastTime != null" >
+        su_last_time = #{record.suLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.suLastIp != null" >
+        su_last_ip = #{record.suLastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suStatus != null" >
+        su_status = #{record.suStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_user
+    set su_id = #{record.suId,jdbcType=INTEGER},
+      su_host = #{record.suHost,jdbcType=VARCHAR},
+      su_group = #{record.suGroup,jdbcType=INTEGER},
+      su_username = #{record.suUsername,jdbcType=VARCHAR},
+      su_password = #{record.suPassword,jdbcType=CHAR},
+      su_real_name = #{record.suRealName,jdbcType=VARCHAR},
+      su_mobile = #{record.suMobile,jdbcType=VARCHAR},
+      su_email = #{record.suEmail,jdbcType=VARCHAR},
+      su_shortcut = #{record.suShortcut,jdbcType=VARCHAR},
+      su_add_time = #{record.suAddTime,jdbcType=TIMESTAMP},
+      su_last_time = #{record.suLastTime,jdbcType=TIMESTAMP},
+      su_last_ip = #{record.suLastIp,jdbcType=VARCHAR},
+      su_status = #{record.suStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.User" >
+    update srv_user
+    <set >
+      <if test="suHost != null" >
+        su_host = #{suHost,jdbcType=VARCHAR},
+      </if>
+      <if test="suGroup != null" >
+        su_group = #{suGroup,jdbcType=INTEGER},
+      </if>
+      <if test="suUsername != null" >
+        su_username = #{suUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="suPassword != null" >
+        su_password = #{suPassword,jdbcType=CHAR},
+      </if>
+      <if test="suRealName != null" >
+        su_real_name = #{suRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="suMobile != null" >
+        su_mobile = #{suMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="suEmail != null" >
+        su_email = #{suEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="suShortcut != null" >
+        su_shortcut = #{suShortcut,jdbcType=VARCHAR},
+      </if>
+      <if test="suAddTime != null" >
+        su_add_time = #{suAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="suLastTime != null" >
+        su_last_time = #{suLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="suLastIp != null" >
+        su_last_ip = #{suLastIp,jdbcType=VARCHAR},
+      </if>
+      <if test="suStatus != null" >
+        su_status = #{suStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where su_id = #{suId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.User" >
+    update srv_user
+    set su_host = #{suHost,jdbcType=VARCHAR},
+      su_group = #{suGroup,jdbcType=INTEGER},
+      su_username = #{suUsername,jdbcType=VARCHAR},
+      su_password = #{suPassword,jdbcType=CHAR},
+      su_real_name = #{suRealName,jdbcType=VARCHAR},
+      su_mobile = #{suMobile,jdbcType=VARCHAR},
+      su_email = #{suEmail,jdbcType=VARCHAR},
+      su_shortcut = #{suShortcut,jdbcType=VARCHAR},
+      su_add_time = #{suAddTime,jdbcType=TIMESTAMP},
+      su_last_time = #{suLastTime,jdbcType=TIMESTAMP},
+      su_last_ip = #{suLastIp,jdbcType=VARCHAR},
+      su_status = #{suStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where su_id = #{suId,jdbcType=INTEGER}
+  </update>
+</mapper>

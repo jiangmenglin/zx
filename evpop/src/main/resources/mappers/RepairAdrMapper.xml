@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.RepairAdrMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.RepairAdr" >
+    <id column="tbra_id" property="tbraId" jdbcType="INTEGER" />
+    <result column="tbra_host" property="tbraHost" jdbcType="SMALLINT" />
+    <result column="tbra_name" property="tbraName" jdbcType="VARCHAR" />
+    <result column="tbra_lat" property="tbraLat" jdbcType="DECIMAL" />
+    <result column="tbra_lng" property="tbraLng" jdbcType="DECIMAL" />
+    <result column="tbra_address" property="tbraAddress" jdbcType="VARCHAR" />
+    <result column="tbra_status" property="tbraStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbra_id, tbra_host, tbra_name, tbra_lat, tbra_lng, tbra_address, tbra_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.RepairAdrExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_repair_adr
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_repair_adr
+    where tbra_id = #{tbraId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_repair_adr
+    where tbra_id = #{tbraId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.RepairAdr" >
+    insert into tb_repair_adr (tbra_id, tbra_host, tbra_name, 
+      tbra_lat, tbra_lng, tbra_address, 
+      tbra_status)
+    values (#{tbraId,jdbcType=INTEGER}, #{tbraHost,jdbcType=SMALLINT}, #{tbraName,jdbcType=VARCHAR}, 
+      #{tbraLat,jdbcType=DECIMAL}, #{tbraLng,jdbcType=DECIMAL}, #{tbraAddress,jdbcType=VARCHAR}, 
+      #{tbraStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.RepairAdr" >
+    insert into tb_repair_adr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbraId != null" >
+        tbra_id,
+      </if>
+      <if test="tbraHost != null" >
+        tbra_host,
+      </if>
+      <if test="tbraName != null" >
+        tbra_name,
+      </if>
+      <if test="tbraLat != null" >
+        tbra_lat,
+      </if>
+      <if test="tbraLng != null" >
+        tbra_lng,
+      </if>
+      <if test="tbraAddress != null" >
+        tbra_address,
+      </if>
+      <if test="tbraStatus != null" >
+        tbra_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbraId != null" >
+        #{tbraId,jdbcType=INTEGER},
+      </if>
+      <if test="tbraHost != null" >
+        #{tbraHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbraName != null" >
+        #{tbraName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbraLat != null" >
+        #{tbraLat,jdbcType=DECIMAL},
+      </if>
+      <if test="tbraLng != null" >
+        #{tbraLng,jdbcType=DECIMAL},
+      </if>
+      <if test="tbraAddress != null" >
+        #{tbraAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbraStatus != null" >
+        #{tbraStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.RepairAdrExample" resultType="java.lang.Integer" >
+    select count(*) from tb_repair_adr
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_repair_adr
+    <set >
+      <if test="record.tbraId != null" >
+        tbra_id = #{record.tbraId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbraHost != null" >
+        tbra_host = #{record.tbraHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbraName != null" >
+        tbra_name = #{record.tbraName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbraLat != null" >
+        tbra_lat = #{record.tbraLat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbraLng != null" >
+        tbra_lng = #{record.tbraLng,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbraAddress != null" >
+        tbra_address = #{record.tbraAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbraStatus != null" >
+        tbra_status = #{record.tbraStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_repair_adr
+    set tbra_id = #{record.tbraId,jdbcType=INTEGER},
+      tbra_host = #{record.tbraHost,jdbcType=SMALLINT},
+      tbra_name = #{record.tbraName,jdbcType=VARCHAR},
+      tbra_lat = #{record.tbraLat,jdbcType=DECIMAL},
+      tbra_lng = #{record.tbraLng,jdbcType=DECIMAL},
+      tbra_address = #{record.tbraAddress,jdbcType=VARCHAR},
+      tbra_status = #{record.tbraStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.RepairAdr" >
+    update tb_repair_adr
+    <set >
+      <if test="tbraHost != null" >
+        tbra_host = #{tbraHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbraName != null" >
+        tbra_name = #{tbraName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbraLat != null" >
+        tbra_lat = #{tbraLat,jdbcType=DECIMAL},
+      </if>
+      <if test="tbraLng != null" >
+        tbra_lng = #{tbraLng,jdbcType=DECIMAL},
+      </if>
+      <if test="tbraAddress != null" >
+        tbra_address = #{tbraAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbraStatus != null" >
+        tbra_status = #{tbraStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbra_id = #{tbraId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.RepairAdr" >
+    update tb_repair_adr
+    set tbra_host = #{tbraHost,jdbcType=SMALLINT},
+      tbra_name = #{tbraName,jdbcType=VARCHAR},
+      tbra_lat = #{tbraLat,jdbcType=DECIMAL},
+      tbra_lng = #{tbraLng,jdbcType=DECIMAL},
+      tbra_address = #{tbraAddress,jdbcType=VARCHAR},
+      tbra_status = #{tbraStatus,jdbcType=TINYINT}
+    where tbra_id = #{tbraId,jdbcType=INTEGER}
+  </update>
+</mapper>

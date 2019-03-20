@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.QueryMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Query" >
+    <id column="sq_id" property="sqId" jdbcType="BIGINT" />
+    <result column="sq_name" property="sqName" jdbcType="VARCHAR" />
+    <result column="sq_icon" property="sqIcon" jdbcType="VARCHAR" />
+    <result column="sq_path" property="sqPath" jdbcType="VARCHAR" />
+    <result column="sq_editor" property="sqEditor" jdbcType="BIGINT" />
+    <result column="sq_update_time" property="sqUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="sq_add_time" property="sqAddTime" jdbcType="TIMESTAMP" />
+    <result column="sq_status" property="sqStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.Query" extends="BaseResultMap" >
+    <result column="sq_params" property="sqParams" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sq_id, sq_name, sq_icon, sq_path, sq_editor, sq_update_time, sq_add_time, sq_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    sq_params
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.QueryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from srv_query
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.QueryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_query
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from srv_query
+    where sq_id = #{sqId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from srv_query
+    where sq_id = #{sqId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Query" >
+    insert into srv_query (sq_id, sq_name, sq_icon, 
+      sq_path, sq_editor, sq_update_time, 
+      sq_add_time, sq_status, sq_params
+      )
+    values (#{sqId,jdbcType=BIGINT}, #{sqName,jdbcType=VARCHAR}, #{sqIcon,jdbcType=VARCHAR}, 
+      #{sqPath,jdbcType=VARCHAR}, #{sqEditor,jdbcType=BIGINT}, #{sqUpdateTime,jdbcType=TIMESTAMP}, 
+      #{sqAddTime,jdbcType=TIMESTAMP}, #{sqStatus,jdbcType=SMALLINT}, #{sqParams,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Query" >
+    insert into srv_query
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sqId != null" >
+        sq_id,
+      </if>
+      <if test="sqName != null" >
+        sq_name,
+      </if>
+      <if test="sqIcon != null" >
+        sq_icon,
+      </if>
+      <if test="sqPath != null" >
+        sq_path,
+      </if>
+      <if test="sqEditor != null" >
+        sq_editor,
+      </if>
+      <if test="sqUpdateTime != null" >
+        sq_update_time,
+      </if>
+      <if test="sqAddTime != null" >
+        sq_add_time,
+      </if>
+      <if test="sqStatus != null" >
+        sq_status,
+      </if>
+      <if test="sqParams != null" >
+        sq_params,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sqId != null" >
+        #{sqId,jdbcType=BIGINT},
+      </if>
+      <if test="sqName != null" >
+        #{sqName,jdbcType=VARCHAR},
+      </if>
+      <if test="sqIcon != null" >
+        #{sqIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="sqPath != null" >
+        #{sqPath,jdbcType=VARCHAR},
+      </if>
+      <if test="sqEditor != null" >
+        #{sqEditor,jdbcType=BIGINT},
+      </if>
+      <if test="sqUpdateTime != null" >
+        #{sqUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqAddTime != null" >
+        #{sqAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqStatus != null" >
+        #{sqStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="sqParams != null" >
+        #{sqParams,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.QueryExample" resultType="java.lang.Integer" >
+    select count(*) from srv_query
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_query
+    <set >
+      <if test="record.sqId != null" >
+        sq_id = #{record.sqId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sqName != null" >
+        sq_name = #{record.sqName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqIcon != null" >
+        sq_icon = #{record.sqIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqPath != null" >
+        sq_path = #{record.sqPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sqEditor != null" >
+        sq_editor = #{record.sqEditor,jdbcType=BIGINT},
+      </if>
+      <if test="record.sqUpdateTime != null" >
+        sq_update_time = #{record.sqUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sqAddTime != null" >
+        sq_add_time = #{record.sqAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sqStatus != null" >
+        sq_status = #{record.sqStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.sqParams != null" >
+        sq_params = #{record.sqParams,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update srv_query
+    set sq_id = #{record.sqId,jdbcType=BIGINT},
+      sq_name = #{record.sqName,jdbcType=VARCHAR},
+      sq_icon = #{record.sqIcon,jdbcType=VARCHAR},
+      sq_path = #{record.sqPath,jdbcType=VARCHAR},
+      sq_editor = #{record.sqEditor,jdbcType=BIGINT},
+      sq_update_time = #{record.sqUpdateTime,jdbcType=TIMESTAMP},
+      sq_add_time = #{record.sqAddTime,jdbcType=TIMESTAMP},
+      sq_status = #{record.sqStatus,jdbcType=SMALLINT},
+      sq_params = #{record.sqParams,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_query
+    set sq_id = #{record.sqId,jdbcType=BIGINT},
+      sq_name = #{record.sqName,jdbcType=VARCHAR},
+      sq_icon = #{record.sqIcon,jdbcType=VARCHAR},
+      sq_path = #{record.sqPath,jdbcType=VARCHAR},
+      sq_editor = #{record.sqEditor,jdbcType=BIGINT},
+      sq_update_time = #{record.sqUpdateTime,jdbcType=TIMESTAMP},
+      sq_add_time = #{record.sqAddTime,jdbcType=TIMESTAMP},
+      sq_status = #{record.sqStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Query" >
+    update srv_query
+    <set >
+      <if test="sqName != null" >
+        sq_name = #{sqName,jdbcType=VARCHAR},
+      </if>
+      <if test="sqIcon != null" >
+        sq_icon = #{sqIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="sqPath != null" >
+        sq_path = #{sqPath,jdbcType=VARCHAR},
+      </if>
+      <if test="sqEditor != null" >
+        sq_editor = #{sqEditor,jdbcType=BIGINT},
+      </if>
+      <if test="sqUpdateTime != null" >
+        sq_update_time = #{sqUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqAddTime != null" >
+        sq_add_time = #{sqAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqStatus != null" >
+        sq_status = #{sqStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="sqParams != null" >
+        sq_params = #{sqParams,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sq_id = #{sqId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.Query" >
+    update srv_query
+    set sq_name = #{sqName,jdbcType=VARCHAR},
+      sq_icon = #{sqIcon,jdbcType=VARCHAR},
+      sq_path = #{sqPath,jdbcType=VARCHAR},
+      sq_editor = #{sqEditor,jdbcType=BIGINT},
+      sq_update_time = #{sqUpdateTime,jdbcType=TIMESTAMP},
+      sq_add_time = #{sqAddTime,jdbcType=TIMESTAMP},
+      sq_status = #{sqStatus,jdbcType=SMALLINT},
+      sq_params = #{sqParams,jdbcType=LONGVARCHAR}
+    where sq_id = #{sqId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Query" >
+    update srv_query
+    set sq_name = #{sqName,jdbcType=VARCHAR},
+      sq_icon = #{sqIcon,jdbcType=VARCHAR},
+      sq_path = #{sqPath,jdbcType=VARCHAR},
+      sq_editor = #{sqEditor,jdbcType=BIGINT},
+      sq_update_time = #{sqUpdateTime,jdbcType=TIMESTAMP},
+      sq_add_time = #{sqAddTime,jdbcType=TIMESTAMP},
+      sq_status = #{sqStatus,jdbcType=SMALLINT}
+    where sq_id = #{sqId,jdbcType=BIGINT}
+  </update>
+</mapper>

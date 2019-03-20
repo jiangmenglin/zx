@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.SecureMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Secure" >
+    <id column="tbs_id" property="tbsId" jdbcType="INTEGER" />
+    <result column="tbs_host" property="tbsHost" jdbcType="SMALLINT" />
+    <result column="tbs_car" property="tbsCar" jdbcType="INTEGER" />
+    <result column="tbs_VIN" property="tbsVin" jdbcType="VARCHAR" />
+    <result column="tbs_cipnum" property="tbsCipnum" jdbcType="VARCHAR" />
+    <result column="tbs_cipcompany" property="tbsCipcompany" jdbcType="VARCHAR" />
+    <result column="tbs_ti_unit" property="tbsTiUnit" jdbcType="DATE" />
+    <result column="tbs_cipimage" property="tbsCipimage" jdbcType="VARCHAR" />
+    <result column="tbs_bi_unit" property="tbsBiUnit" jdbcType="DATE" />
+    <result column="tbs_bi_image" property="tbsBiImage" jdbcType="VARCHAR" />
+    <result column="tbs_bi_type" property="tbsBiType" jdbcType="VARCHAR" />
+    <result column="tbs_binum" property="tbsBinum" jdbcType="VARCHAR" />
+    <result column="tbs_bicompany" property="tbsBicompany" jdbcType="VARCHAR" />
+    <result column="tbs_bi_limit" property="tbsBiLimit" jdbcType="DOUBLE" />
+    <result column="tbs_bi_company" property="tbsBiCompany" jdbcType="VARCHAR" />
+    <result column="tbs_editor" property="tbsEditor" jdbcType="INTEGER" />
+    <result column="tbs_update_time" property="tbsUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbs_add_time" property="tbsAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbs_remark" property="tbsRemark" jdbcType="VARCHAR" />
+    <result column="tbs_status" property="tbsStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbs_id, tbs_host, tbs_car, tbs_VIN, tbs_cipnum, tbs_cipcompany, tbs_ti_unit, tbs_cipimage, 
+    tbs_bi_unit, tbs_bi_image, tbs_bi_type, tbs_binum, tbs_bicompany, tbs_bi_limit, tbs_bi_company, 
+    tbs_editor, tbs_update_time, tbs_add_time, tbs_remark, tbs_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.SecureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_secure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_secure
+    where tbs_id = #{tbsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_secure
+    where tbs_id = #{tbsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Secure" >
+    insert into tb_secure (tbs_id, tbs_host, tbs_car, 
+      tbs_VIN, tbs_cipnum, tbs_cipcompany, 
+      tbs_ti_unit, tbs_cipimage, tbs_bi_unit, 
+      tbs_bi_image, tbs_bi_type, tbs_binum, 
+      tbs_bicompany, tbs_bi_limit, tbs_bi_company, 
+      tbs_editor, tbs_update_time, tbs_add_time, 
+      tbs_remark, tbs_status, createTime, 
+      modifyDate)
+    values (#{tbsId,jdbcType=INTEGER}, #{tbsHost,jdbcType=SMALLINT}, #{tbsCar,jdbcType=INTEGER}, 
+      #{tbsVin,jdbcType=VARCHAR}, #{tbsCipnum,jdbcType=VARCHAR}, #{tbsCipcompany,jdbcType=VARCHAR}, 
+      #{tbsTiUnit,jdbcType=DATE}, #{tbsCipimage,jdbcType=VARCHAR}, #{tbsBiUnit,jdbcType=DATE}, 
+      #{tbsBiImage,jdbcType=VARCHAR}, #{tbsBiType,jdbcType=VARCHAR}, #{tbsBinum,jdbcType=VARCHAR}, 
+      #{tbsBicompany,jdbcType=VARCHAR}, #{tbsBiLimit,jdbcType=DOUBLE}, #{tbsBiCompany,jdbcType=VARCHAR}, 
+      #{tbsEditor,jdbcType=INTEGER}, #{tbsUpdateTime,jdbcType=TIMESTAMP}, #{tbsAddTime,jdbcType=TIMESTAMP}, 
+      #{tbsRemark,jdbcType=VARCHAR}, #{tbsStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Secure" >
+    insert into tb_secure
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbsId != null" >
+        tbs_id,
+      </if>
+      <if test="tbsHost != null" >
+        tbs_host,
+      </if>
+      <if test="tbsCar != null" >
+        tbs_car,
+      </if>
+      <if test="tbsVin != null" >
+        tbs_VIN,
+      </if>
+      <if test="tbsCipnum != null" >
+        tbs_cipnum,
+      </if>
+      <if test="tbsCipcompany != null" >
+        tbs_cipcompany,
+      </if>
+      <if test="tbsTiUnit != null" >
+        tbs_ti_unit,
+      </if>
+      <if test="tbsCipimage != null" >
+        tbs_cipimage,
+      </if>
+      <if test="tbsBiUnit != null" >
+        tbs_bi_unit,
+      </if>
+      <if test="tbsBiImage != null" >
+        tbs_bi_image,
+      </if>
+      <if test="tbsBiType != null" >
+        tbs_bi_type,
+      </if>
+      <if test="tbsBinum != null" >
+        tbs_binum,
+      </if>
+      <if test="tbsBicompany != null" >
+        tbs_bicompany,
+      </if>
+      <if test="tbsBiLimit != null" >
+        tbs_bi_limit,
+      </if>
+      <if test="tbsBiCompany != null" >
+        tbs_bi_company,
+      </if>
+      <if test="tbsEditor != null" >
+        tbs_editor,
+      </if>
+      <if test="tbsUpdateTime != null" >
+        tbs_update_time,
+      </if>
+      <if test="tbsAddTime != null" >
+        tbs_add_time,
+      </if>
+      <if test="tbsRemark != null" >
+        tbs_remark,
+      </if>
+      <if test="tbsStatus != null" >
+        tbs_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbsId != null" >
+        #{tbsId,jdbcType=INTEGER},
+      </if>
+      <if test="tbsHost != null" >
+        #{tbsHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsCar != null" >
+        #{tbsCar,jdbcType=INTEGER},
+      </if>
+      <if test="tbsVin != null" >
+        #{tbsVin,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsCipnum != null" >
+        #{tbsCipnum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsCipcompany != null" >
+        #{tbsCipcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsTiUnit != null" >
+        #{tbsTiUnit,jdbcType=DATE},
+      </if>
+      <if test="tbsCipimage != null" >
+        #{tbsCipimage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsBiUnit != null" >
+        #{tbsBiUnit,jdbcType=DATE},
+      </if>
+      <if test="tbsBiImage != null" >
+        #{tbsBiImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsBiType != null" >
+        #{tbsBiType,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsBinum != null" >
+        #{tbsBinum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsBicompany != null" >
+        #{tbsBicompany,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsBiLimit != null" >
+        #{tbsBiLimit,jdbcType=DOUBLE},
+      </if>
+      <if test="tbsBiCompany != null" >
+        #{tbsBiCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsEditor != null" >
+        #{tbsEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbsUpdateTime != null" >
+        #{tbsUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsAddTime != null" >
+        #{tbsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsRemark != null" >
+        #{tbsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsStatus != null" >
+        #{tbsStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.SecureExample" resultType="java.lang.Integer" >
+    select count(*) from tb_secure
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_secure
+    <set >
+      <if test="record.tbsId != null" >
+        tbs_id = #{record.tbsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbsHost != null" >
+        tbs_host = #{record.tbsHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsCar != null" >
+        tbs_car = #{record.tbsCar,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbsVin != null" >
+        tbs_VIN = #{record.tbsVin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsCipnum != null" >
+        tbs_cipnum = #{record.tbsCipnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsCipcompany != null" >
+        tbs_cipcompany = #{record.tbsCipcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsTiUnit != null" >
+        tbs_ti_unit = #{record.tbsTiUnit,jdbcType=DATE},
+      </if>
+      <if test="record.tbsCipimage != null" >
+        tbs_cipimage = #{record.tbsCipimage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsBiUnit != null" >
+        tbs_bi_unit = #{record.tbsBiUnit,jdbcType=DATE},
+      </if>
+      <if test="record.tbsBiImage != null" >
+        tbs_bi_image = #{record.tbsBiImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsBiType != null" >
+        tbs_bi_type = #{record.tbsBiType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsBinum != null" >
+        tbs_binum = #{record.tbsBinum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsBicompany != null" >
+        tbs_bicompany = #{record.tbsBicompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsBiLimit != null" >
+        tbs_bi_limit = #{record.tbsBiLimit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbsBiCompany != null" >
+        tbs_bi_company = #{record.tbsBiCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsEditor != null" >
+        tbs_editor = #{record.tbsEditor,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbsUpdateTime != null" >
+        tbs_update_time = #{record.tbsUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbsAddTime != null" >
+        tbs_add_time = #{record.tbsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbsRemark != null" >
+        tbs_remark = #{record.tbsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsStatus != null" >
+        tbs_status = #{record.tbsStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_secure
+    set tbs_id = #{record.tbsId,jdbcType=INTEGER},
+      tbs_host = #{record.tbsHost,jdbcType=SMALLINT},
+      tbs_car = #{record.tbsCar,jdbcType=INTEGER},
+      tbs_VIN = #{record.tbsVin,jdbcType=VARCHAR},
+      tbs_cipnum = #{record.tbsCipnum,jdbcType=VARCHAR},
+      tbs_cipcompany = #{record.tbsCipcompany,jdbcType=VARCHAR},
+      tbs_ti_unit = #{record.tbsTiUnit,jdbcType=DATE},
+      tbs_cipimage = #{record.tbsCipimage,jdbcType=VARCHAR},
+      tbs_bi_unit = #{record.tbsBiUnit,jdbcType=DATE},
+      tbs_bi_image = #{record.tbsBiImage,jdbcType=VARCHAR},
+      tbs_bi_type = #{record.tbsBiType,jdbcType=VARCHAR},
+      tbs_binum = #{record.tbsBinum,jdbcType=VARCHAR},
+      tbs_bicompany = #{record.tbsBicompany,jdbcType=VARCHAR},
+      tbs_bi_limit = #{record.tbsBiLimit,jdbcType=DOUBLE},
+      tbs_bi_company = #{record.tbsBiCompany,jdbcType=VARCHAR},
+      tbs_editor = #{record.tbsEditor,jdbcType=INTEGER},
+      tbs_update_time = #{record.tbsUpdateTime,jdbcType=TIMESTAMP},
+      tbs_add_time = #{record.tbsAddTime,jdbcType=TIMESTAMP},
+      tbs_remark = #{record.tbsRemark,jdbcType=VARCHAR},
+      tbs_status = #{record.tbsStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Secure" >
+    update tb_secure
+    <set >
+      <if test="tbsHost != null" >
+        tbs_host = #{tbsHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsCar != null" >
+        tbs_car = #{tbsCar,jdbcType=INTEGER},
+      </if>
+      <if test="tbsVin != null" >
+        tbs_VIN = #{tbsVin,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsCipnum != null" >
+        tbs_cipnum = #{tbsCipnum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsCipcompany != null" >
+        tbs_cipcompany = #{tbsCipcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsTiUnit != null" >
+        tbs_ti_unit = #{tbsTiUnit,jdbcType=DATE},
+      </if>
+      <if test="tbsCipimage != null" >
+        tbs_cipimage = #{tbsCipimage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsBiUnit != null" >
+        tbs_bi_unit = #{tbsBiUnit,jdbcType=DATE},
+      </if>
+      <if test="tbsBiImage != null" >
+        tbs_bi_image = #{tbsBiImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsBiType != null" >
+        tbs_bi_type = #{tbsBiType,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsBinum != null" >
+        tbs_binum = #{tbsBinum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsBicompany != null" >
+        tbs_bicompany = #{tbsBicompany,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsBiLimit != null" >
+        tbs_bi_limit = #{tbsBiLimit,jdbcType=DOUBLE},
+      </if>
+      <if test="tbsBiCompany != null" >
+        tbs_bi_company = #{tbsBiCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsEditor != null" >
+        tbs_editor = #{tbsEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbsUpdateTime != null" >
+        tbs_update_time = #{tbsUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsAddTime != null" >
+        tbs_add_time = #{tbsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsRemark != null" >
+        tbs_remark = #{tbsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsStatus != null" >
+        tbs_status = #{tbsStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbs_id = #{tbsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Secure" >
+    update tb_secure
+    set tbs_host = #{tbsHost,jdbcType=SMALLINT},
+      tbs_car = #{tbsCar,jdbcType=INTEGER},
+      tbs_VIN = #{tbsVin,jdbcType=VARCHAR},
+      tbs_cipnum = #{tbsCipnum,jdbcType=VARCHAR},
+      tbs_cipcompany = #{tbsCipcompany,jdbcType=VARCHAR},
+      tbs_ti_unit = #{tbsTiUnit,jdbcType=DATE},
+      tbs_cipimage = #{tbsCipimage,jdbcType=VARCHAR},
+      tbs_bi_unit = #{tbsBiUnit,jdbcType=DATE},
+      tbs_bi_image = #{tbsBiImage,jdbcType=VARCHAR},
+      tbs_bi_type = #{tbsBiType,jdbcType=VARCHAR},
+      tbs_binum = #{tbsBinum,jdbcType=VARCHAR},
+      tbs_bicompany = #{tbsBicompany,jdbcType=VARCHAR},
+      tbs_bi_limit = #{tbsBiLimit,jdbcType=DOUBLE},
+      tbs_bi_company = #{tbsBiCompany,jdbcType=VARCHAR},
+      tbs_editor = #{tbsEditor,jdbcType=INTEGER},
+      tbs_update_time = #{tbsUpdateTime,jdbcType=TIMESTAMP},
+      tbs_add_time = #{tbsAddTime,jdbcType=TIMESTAMP},
+      tbs_remark = #{tbsRemark,jdbcType=VARCHAR},
+      tbs_status = #{tbsStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbs_id = #{tbsId,jdbcType=INTEGER}
+  </update>
+</mapper>

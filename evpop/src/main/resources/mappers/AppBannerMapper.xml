@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.AppBannerMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.AppBanner" >
+    <id column="tbab_id" property="tbabId" jdbcType="BIGINT" />
+    <result column="tbab_title" property="tbabTitle" jdbcType="VARCHAR" />
+    <result column="tbab_order" property="tbabOrder" jdbcType="INTEGER" />
+    <result column="tbab_thum" property="tbabThum" jdbcType="VARCHAR" />
+    <result column="tbab_introduction" property="tbabIntroduction" jdbcType="VARCHAR" />
+    <result column="tbab_link" property="tbabLink" jdbcType="VARCHAR" />
+    <result column="tbab_add_time" property="tbabAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbab_update_time" property="tbabUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbab_status" property="tbabStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.AppBanner" extends="BaseResultMap" >
+    <result column="tbab_content" property="tbabContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbab_id, tbab_title, tbab_order, tbab_thum, tbab_introduction, tbab_link, tbab_add_time, 
+    tbab_update_time, tbab_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbab_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.AppBannerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_app_banner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.AppBannerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_app_banner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_app_banner
+    where tbab_id = #{tbabId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_app_banner
+    where tbab_id = #{tbabId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.AppBanner" >
+    insert into tb_app_banner (tbab_id, tbab_title, tbab_order, 
+      tbab_thum, tbab_introduction, tbab_link, 
+      tbab_add_time, tbab_update_time, tbab_status, 
+      tbab_content)
+    values (#{tbabId,jdbcType=BIGINT}, #{tbabTitle,jdbcType=VARCHAR}, #{tbabOrder,jdbcType=INTEGER}, 
+      #{tbabThum,jdbcType=VARCHAR}, #{tbabIntroduction,jdbcType=VARCHAR}, #{tbabLink,jdbcType=VARCHAR}, 
+      #{tbabAddTime,jdbcType=TIMESTAMP}, #{tbabUpdateTime,jdbcType=TIMESTAMP}, #{tbabStatus,jdbcType=TINYINT}, 
+      #{tbabContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.AppBanner" >
+    insert into tb_app_banner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbabId != null" >
+        tbab_id,
+      </if>
+      <if test="tbabTitle != null" >
+        tbab_title,
+      </if>
+      <if test="tbabOrder != null" >
+        tbab_order,
+      </if>
+      <if test="tbabThum != null" >
+        tbab_thum,
+      </if>
+      <if test="tbabIntroduction != null" >
+        tbab_introduction,
+      </if>
+      <if test="tbabLink != null" >
+        tbab_link,
+      </if>
+      <if test="tbabAddTime != null" >
+        tbab_add_time,
+      </if>
+      <if test="tbabUpdateTime != null" >
+        tbab_update_time,
+      </if>
+      <if test="tbabStatus != null" >
+        tbab_status,
+      </if>
+      <if test="tbabContent != null" >
+        tbab_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbabId != null" >
+        #{tbabId,jdbcType=BIGINT},
+      </if>
+      <if test="tbabTitle != null" >
+        #{tbabTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbabOrder != null" >
+        #{tbabOrder,jdbcType=INTEGER},
+      </if>
+      <if test="tbabThum != null" >
+        #{tbabThum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbabIntroduction != null" >
+        #{tbabIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="tbabLink != null" >
+        #{tbabLink,jdbcType=VARCHAR},
+      </if>
+      <if test="tbabAddTime != null" >
+        #{tbabAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbabUpdateTime != null" >
+        #{tbabUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbabStatus != null" >
+        #{tbabStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbabContent != null" >
+        #{tbabContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.AppBannerExample" resultType="java.lang.Integer" >
+    select count(*) from tb_app_banner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_app_banner
+    <set >
+      <if test="record.tbabId != null" >
+        tbab_id = #{record.tbabId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbabTitle != null" >
+        tbab_title = #{record.tbabTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbabOrder != null" >
+        tbab_order = #{record.tbabOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbabThum != null" >
+        tbab_thum = #{record.tbabThum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbabIntroduction != null" >
+        tbab_introduction = #{record.tbabIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbabLink != null" >
+        tbab_link = #{record.tbabLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbabAddTime != null" >
+        tbab_add_time = #{record.tbabAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbabUpdateTime != null" >
+        tbab_update_time = #{record.tbabUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbabStatus != null" >
+        tbab_status = #{record.tbabStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbabContent != null" >
+        tbab_content = #{record.tbabContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_app_banner
+    set tbab_id = #{record.tbabId,jdbcType=BIGINT},
+      tbab_title = #{record.tbabTitle,jdbcType=VARCHAR},
+      tbab_order = #{record.tbabOrder,jdbcType=INTEGER},
+      tbab_thum = #{record.tbabThum,jdbcType=VARCHAR},
+      tbab_introduction = #{record.tbabIntroduction,jdbcType=VARCHAR},
+      tbab_link = #{record.tbabLink,jdbcType=VARCHAR},
+      tbab_add_time = #{record.tbabAddTime,jdbcType=TIMESTAMP},
+      tbab_update_time = #{record.tbabUpdateTime,jdbcType=TIMESTAMP},
+      tbab_status = #{record.tbabStatus,jdbcType=TINYINT},
+      tbab_content = #{record.tbabContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_app_banner
+    set tbab_id = #{record.tbabId,jdbcType=BIGINT},
+      tbab_title = #{record.tbabTitle,jdbcType=VARCHAR},
+      tbab_order = #{record.tbabOrder,jdbcType=INTEGER},
+      tbab_thum = #{record.tbabThum,jdbcType=VARCHAR},
+      tbab_introduction = #{record.tbabIntroduction,jdbcType=VARCHAR},
+      tbab_link = #{record.tbabLink,jdbcType=VARCHAR},
+      tbab_add_time = #{record.tbabAddTime,jdbcType=TIMESTAMP},
+      tbab_update_time = #{record.tbabUpdateTime,jdbcType=TIMESTAMP},
+      tbab_status = #{record.tbabStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.AppBanner" >
+    update tb_app_banner
+    <set >
+      <if test="tbabTitle != null" >
+        tbab_title = #{tbabTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbabOrder != null" >
+        tbab_order = #{tbabOrder,jdbcType=INTEGER},
+      </if>
+      <if test="tbabThum != null" >
+        tbab_thum = #{tbabThum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbabIntroduction != null" >
+        tbab_introduction = #{tbabIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="tbabLink != null" >
+        tbab_link = #{tbabLink,jdbcType=VARCHAR},
+      </if>
+      <if test="tbabAddTime != null" >
+        tbab_add_time = #{tbabAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbabUpdateTime != null" >
+        tbab_update_time = #{tbabUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbabStatus != null" >
+        tbab_status = #{tbabStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbabContent != null" >
+        tbab_content = #{tbabContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbab_id = #{tbabId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.AppBanner" >
+    update tb_app_banner
+    set tbab_title = #{tbabTitle,jdbcType=VARCHAR},
+      tbab_order = #{tbabOrder,jdbcType=INTEGER},
+      tbab_thum = #{tbabThum,jdbcType=VARCHAR},
+      tbab_introduction = #{tbabIntroduction,jdbcType=VARCHAR},
+      tbab_link = #{tbabLink,jdbcType=VARCHAR},
+      tbab_add_time = #{tbabAddTime,jdbcType=TIMESTAMP},
+      tbab_update_time = #{tbabUpdateTime,jdbcType=TIMESTAMP},
+      tbab_status = #{tbabStatus,jdbcType=TINYINT},
+      tbab_content = #{tbabContent,jdbcType=LONGVARCHAR}
+    where tbab_id = #{tbabId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.AppBanner" >
+    update tb_app_banner
+    set tbab_title = #{tbabTitle,jdbcType=VARCHAR},
+      tbab_order = #{tbabOrder,jdbcType=INTEGER},
+      tbab_thum = #{tbabThum,jdbcType=VARCHAR},
+      tbab_introduction = #{tbabIntroduction,jdbcType=VARCHAR},
+      tbab_link = #{tbabLink,jdbcType=VARCHAR},
+      tbab_add_time = #{tbabAddTime,jdbcType=TIMESTAMP},
+      tbab_update_time = #{tbabUpdateTime,jdbcType=TIMESTAMP},
+      tbab_status = #{tbabStatus,jdbcType=TINYINT}
+    where tbab_id = #{tbabId,jdbcType=BIGINT}
+  </update>
+</mapper>

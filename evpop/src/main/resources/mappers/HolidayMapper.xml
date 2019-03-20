@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.HolidayMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Holiday" >
+    <id column="tbh_id" property="tbhId" jdbcType="BIGINT" />
+    <result column="tbh_host" property="tbhHost" jdbcType="BIGINT" />
+    <result column="tbh_name" property="tbhName" jdbcType="VARCHAR" />
+    <result column="tbh_date" property="tbhDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbh_id, tbh_host, tbh_name, tbh_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.HolidayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_holiday
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_holiday
+    where tbh_id = #{tbhId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_holiday
+    where tbh_id = #{tbhId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Holiday" >
+    insert into tb_holiday (tbh_id, tbh_host, tbh_name, 
+      tbh_date)
+    values (#{tbhId,jdbcType=BIGINT}, #{tbhHost,jdbcType=BIGINT}, #{tbhName,jdbcType=VARCHAR}, 
+      #{tbhDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Holiday" >
+    insert into tb_holiday
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbhId != null" >
+        tbh_id,
+      </if>
+      <if test="tbhHost != null" >
+        tbh_host,
+      </if>
+      <if test="tbhName != null" >
+        tbh_name,
+      </if>
+      <if test="tbhDate != null" >
+        tbh_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbhId != null" >
+        #{tbhId,jdbcType=BIGINT},
+      </if>
+      <if test="tbhHost != null" >
+        #{tbhHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbhName != null" >
+        #{tbhName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbhDate != null" >
+        #{tbhDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.HolidayExample" resultType="java.lang.Integer" >
+    select count(*) from tb_holiday
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_holiday
+    <set >
+      <if test="record.tbhId != null" >
+        tbh_id = #{record.tbhId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbhHost != null" >
+        tbh_host = #{record.tbhHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbhName != null" >
+        tbh_name = #{record.tbhName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbhDate != null" >
+        tbh_date = #{record.tbhDate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_holiday
+    set tbh_id = #{record.tbhId,jdbcType=BIGINT},
+      tbh_host = #{record.tbhHost,jdbcType=BIGINT},
+      tbh_name = #{record.tbhName,jdbcType=VARCHAR},
+      tbh_date = #{record.tbhDate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Holiday" >
+    update tb_holiday
+    <set >
+      <if test="tbhHost != null" >
+        tbh_host = #{tbhHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbhName != null" >
+        tbh_name = #{tbhName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbhDate != null" >
+        tbh_date = #{tbhDate,jdbcType=DATE},
+      </if>
+    </set>
+    where tbh_id = #{tbhId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Holiday" >
+    update tb_holiday
+    set tbh_host = #{tbhHost,jdbcType=BIGINT},
+      tbh_name = #{tbhName,jdbcType=VARCHAR},
+      tbh_date = #{tbhDate,jdbcType=DATE}
+    where tbh_id = #{tbhId,jdbcType=BIGINT}
+  </update>
+</mapper>

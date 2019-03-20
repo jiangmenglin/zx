@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LongBespeakMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.LongBespeak" >
+    <id column="tblb_id" property="tblbId" jdbcType="BIGINT" />
+    <result column="tblb_host" property="tblbHost" jdbcType="BIGINT" />
+    <result column="tblb_member" property="tblbMember" jdbcType="BIGINT" />
+    <result column="tblb_model" property="tblbModel" jdbcType="BIGINT" />
+    <result column="tblb_gettime" property="tblbGettime" jdbcType="TIMESTAMP" />
+    <result column="tblb_packagetime" property="tblbPackagetime" jdbcType="INTEGER" />
+    <result column="tblb_createtime" property="tblbCreatetime" jdbcType="TIMESTAMP" />
+    <result column="tblb_founder" property="tblbFounder" jdbcType="BIGINT" />
+    <result column="tblb_updatetime" property="tblbUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="tblb_modifier" property="tblbModifier" jdbcType="BIGINT" />
+    <result column="tblb_note" property="tblbNote" jdbcType="VARCHAR" />
+    <result column="tblb_status" property="tblbStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tblb_id, tblb_host, tblb_member, tblb_model, tblb_gettime, tblb_packagetime, tblb_createtime, 
+    tblb_founder, tblb_updatetime, tblb_modifier, tblb_note, tblb_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LongBespeakExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_long_bespeak
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_long_bespeak
+    where tblb_id = #{tblbId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_long_bespeak
+    where tblb_id = #{tblbId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.LongBespeak" >
+    insert into tb_long_bespeak (tblb_id, tblb_host, tblb_member, 
+      tblb_model, tblb_gettime, tblb_packagetime, 
+      tblb_createtime, tblb_founder, tblb_updatetime, 
+      tblb_modifier, tblb_note, tblb_status
+      )
+    values (#{tblbId,jdbcType=BIGINT}, #{tblbHost,jdbcType=BIGINT}, #{tblbMember,jdbcType=BIGINT}, 
+      #{tblbModel,jdbcType=BIGINT}, #{tblbGettime,jdbcType=TIMESTAMP}, #{tblbPackagetime,jdbcType=INTEGER}, 
+      #{tblbCreatetime,jdbcType=TIMESTAMP}, #{tblbFounder,jdbcType=BIGINT}, #{tblbUpdatetime,jdbcType=TIMESTAMP}, 
+      #{tblbModifier,jdbcType=BIGINT}, #{tblbNote,jdbcType=VARCHAR}, #{tblbStatus,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.LongBespeak" >
+    insert into tb_long_bespeak
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tblbId != null" >
+        tblb_id,
+      </if>
+      <if test="tblbHost != null" >
+        tblb_host,
+      </if>
+      <if test="tblbMember != null" >
+        tblb_member,
+      </if>
+      <if test="tblbModel != null" >
+        tblb_model,
+      </if>
+      <if test="tblbGettime != null" >
+        tblb_gettime,
+      </if>
+      <if test="tblbPackagetime != null" >
+        tblb_packagetime,
+      </if>
+      <if test="tblbCreatetime != null" >
+        tblb_createtime,
+      </if>
+      <if test="tblbFounder != null" >
+        tblb_founder,
+      </if>
+      <if test="tblbUpdatetime != null" >
+        tblb_updatetime,
+      </if>
+      <if test="tblbModifier != null" >
+        tblb_modifier,
+      </if>
+      <if test="tblbNote != null" >
+        tblb_note,
+      </if>
+      <if test="tblbStatus != null" >
+        tblb_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tblbId != null" >
+        #{tblbId,jdbcType=BIGINT},
+      </if>
+      <if test="tblbHost != null" >
+        #{tblbHost,jdbcType=BIGINT},
+      </if>
+      <if test="tblbMember != null" >
+        #{tblbMember,jdbcType=BIGINT},
+      </if>
+      <if test="tblbModel != null" >
+        #{tblbModel,jdbcType=BIGINT},
+      </if>
+      <if test="tblbGettime != null" >
+        #{tblbGettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblbPackagetime != null" >
+        #{tblbPackagetime,jdbcType=INTEGER},
+      </if>
+      <if test="tblbCreatetime != null" >
+        #{tblbCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblbFounder != null" >
+        #{tblbFounder,jdbcType=BIGINT},
+      </if>
+      <if test="tblbUpdatetime != null" >
+        #{tblbUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblbModifier != null" >
+        #{tblbModifier,jdbcType=BIGINT},
+      </if>
+      <if test="tblbNote != null" >
+        #{tblbNote,jdbcType=VARCHAR},
+      </if>
+      <if test="tblbStatus != null" >
+        #{tblbStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LongBespeakExample" resultType="java.lang.Integer" >
+    select count(*) from tb_long_bespeak
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_long_bespeak
+    <set >
+      <if test="record.tblbId != null" >
+        tblb_id = #{record.tblbId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblbHost != null" >
+        tblb_host = #{record.tblbHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblbMember != null" >
+        tblb_member = #{record.tblbMember,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblbModel != null" >
+        tblb_model = #{record.tblbModel,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblbGettime != null" >
+        tblb_gettime = #{record.tblbGettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblbPackagetime != null" >
+        tblb_packagetime = #{record.tblbPackagetime,jdbcType=INTEGER},
+      </if>
+      <if test="record.tblbCreatetime != null" >
+        tblb_createtime = #{record.tblbCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblbFounder != null" >
+        tblb_founder = #{record.tblbFounder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblbUpdatetime != null" >
+        tblb_updatetime = #{record.tblbUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblbModifier != null" >
+        tblb_modifier = #{record.tblbModifier,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblbNote != null" >
+        tblb_note = #{record.tblbNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblbStatus != null" >
+        tblb_status = #{record.tblbStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_long_bespeak
+    set tblb_id = #{record.tblbId,jdbcType=BIGINT},
+      tblb_host = #{record.tblbHost,jdbcType=BIGINT},
+      tblb_member = #{record.tblbMember,jdbcType=BIGINT},
+      tblb_model = #{record.tblbModel,jdbcType=BIGINT},
+      tblb_gettime = #{record.tblbGettime,jdbcType=TIMESTAMP},
+      tblb_packagetime = #{record.tblbPackagetime,jdbcType=INTEGER},
+      tblb_createtime = #{record.tblbCreatetime,jdbcType=TIMESTAMP},
+      tblb_founder = #{record.tblbFounder,jdbcType=BIGINT},
+      tblb_updatetime = #{record.tblbUpdatetime,jdbcType=TIMESTAMP},
+      tblb_modifier = #{record.tblbModifier,jdbcType=BIGINT},
+      tblb_note = #{record.tblbNote,jdbcType=VARCHAR},
+      tblb_status = #{record.tblbStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.LongBespeak" >
+    update tb_long_bespeak
+    <set >
+      <if test="tblbHost != null" >
+        tblb_host = #{tblbHost,jdbcType=BIGINT},
+      </if>
+      <if test="tblbMember != null" >
+        tblb_member = #{tblbMember,jdbcType=BIGINT},
+      </if>
+      <if test="tblbModel != null" >
+        tblb_model = #{tblbModel,jdbcType=BIGINT},
+      </if>
+      <if test="tblbGettime != null" >
+        tblb_gettime = #{tblbGettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblbPackagetime != null" >
+        tblb_packagetime = #{tblbPackagetime,jdbcType=INTEGER},
+      </if>
+      <if test="tblbCreatetime != null" >
+        tblb_createtime = #{tblbCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblbFounder != null" >
+        tblb_founder = #{tblbFounder,jdbcType=BIGINT},
+      </if>
+      <if test="tblbUpdatetime != null" >
+        tblb_updatetime = #{tblbUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblbModifier != null" >
+        tblb_modifier = #{tblbModifier,jdbcType=BIGINT},
+      </if>
+      <if test="tblbNote != null" >
+        tblb_note = #{tblbNote,jdbcType=VARCHAR},
+      </if>
+      <if test="tblbStatus != null" >
+        tblb_status = #{tblbStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tblb_id = #{tblbId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.LongBespeak" >
+    update tb_long_bespeak
+    set tblb_host = #{tblbHost,jdbcType=BIGINT},
+      tblb_member = #{tblbMember,jdbcType=BIGINT},
+      tblb_model = #{tblbModel,jdbcType=BIGINT},
+      tblb_gettime = #{tblbGettime,jdbcType=TIMESTAMP},
+      tblb_packagetime = #{tblbPackagetime,jdbcType=INTEGER},
+      tblb_createtime = #{tblbCreatetime,jdbcType=TIMESTAMP},
+      tblb_founder = #{tblbFounder,jdbcType=BIGINT},
+      tblb_updatetime = #{tblbUpdatetime,jdbcType=TIMESTAMP},
+      tblb_modifier = #{tblbModifier,jdbcType=BIGINT},
+      tblb_note = #{tblbNote,jdbcType=VARCHAR},
+      tblb_status = #{tblbStatus,jdbcType=SMALLINT}
+    where tblb_id = #{tblbId,jdbcType=BIGINT}
+  </update>
+</mapper>

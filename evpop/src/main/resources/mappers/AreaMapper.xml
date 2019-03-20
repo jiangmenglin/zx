@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.AreaMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Area" >
+    <id column="tba_id" property="tbaId" jdbcType="INTEGER" />
+    <result column="tba_host" property="tbaHost" jdbcType="SMALLINT" />
+    <result column="tba_name" property="tbaName" jdbcType="VARCHAR" />
+    <result column="tba_contact" property="tbaContact" jdbcType="VARCHAR" />
+    <result column="tba_address" property="tbaAddress" jdbcType="VARCHAR" />
+    <result column="tba_pos_count" property="tbaPosCount" jdbcType="INTEGER" />
+    <result column="tba_lon" property="tbaLon" jdbcType="DECIMAL" />
+    <result column="tba_lat" property="tbaLat" jdbcType="DECIMAL" />
+    <result column="tba_range" property="tbaRange" jdbcType="VARCHAR" />
+    <result column="tba_status" property="tbaStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tba_id, tba_host, tba_name, tba_contact, tba_address, tba_pos_count, tba_lon, tba_lat, 
+    tba_range, tba_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.AreaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_area
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_area
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Area" >
+    insert into tb_area (tba_id, tba_host, tba_name, 
+      tba_contact, tba_address, tba_pos_count, 
+      tba_lon, tba_lat, tba_range, 
+      tba_status, createTime, modifyDate
+      )
+    values (#{tbaId,jdbcType=INTEGER}, #{tbaHost,jdbcType=SMALLINT}, #{tbaName,jdbcType=VARCHAR}, 
+      #{tbaContact,jdbcType=VARCHAR}, #{tbaAddress,jdbcType=VARCHAR}, #{tbaPosCount,jdbcType=INTEGER}, 
+      #{tbaLon,jdbcType=DECIMAL}, #{tbaLat,jdbcType=DECIMAL}, #{tbaRange,jdbcType=VARCHAR}, 
+      #{tbaStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Area" >
+    insert into tb_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbaId != null" >
+        tba_id,
+      </if>
+      <if test="tbaHost != null" >
+        tba_host,
+      </if>
+      <if test="tbaName != null" >
+        tba_name,
+      </if>
+      <if test="tbaContact != null" >
+        tba_contact,
+      </if>
+      <if test="tbaAddress != null" >
+        tba_address,
+      </if>
+      <if test="tbaPosCount != null" >
+        tba_pos_count,
+      </if>
+      <if test="tbaLon != null" >
+        tba_lon,
+      </if>
+      <if test="tbaLat != null" >
+        tba_lat,
+      </if>
+      <if test="tbaRange != null" >
+        tba_range,
+      </if>
+      <if test="tbaStatus != null" >
+        tba_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbaId != null" >
+        #{tbaId,jdbcType=INTEGER},
+      </if>
+      <if test="tbaHost != null" >
+        #{tbaHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbaName != null" >
+        #{tbaName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaContact != null" >
+        #{tbaContact,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaAddress != null" >
+        #{tbaAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaPosCount != null" >
+        #{tbaPosCount,jdbcType=INTEGER},
+      </if>
+      <if test="tbaLon != null" >
+        #{tbaLon,jdbcType=DECIMAL},
+      </if>
+      <if test="tbaLat != null" >
+        #{tbaLat,jdbcType=DECIMAL},
+      </if>
+      <if test="tbaRange != null" >
+        #{tbaRange,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaStatus != null" >
+        #{tbaStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.AreaExample" resultType="java.lang.Integer" >
+    select count(*) from tb_area
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_area
+    <set >
+      <if test="record.tbaId != null" >
+        tba_id = #{record.tbaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbaHost != null" >
+        tba_host = #{record.tbaHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbaName != null" >
+        tba_name = #{record.tbaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaContact != null" >
+        tba_contact = #{record.tbaContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaAddress != null" >
+        tba_address = #{record.tbaAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaPosCount != null" >
+        tba_pos_count = #{record.tbaPosCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbaLon != null" >
+        tba_lon = #{record.tbaLon,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbaLat != null" >
+        tba_lat = #{record.tbaLat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbaRange != null" >
+        tba_range = #{record.tbaRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaStatus != null" >
+        tba_status = #{record.tbaStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_area
+    set tba_id = #{record.tbaId,jdbcType=INTEGER},
+      tba_host = #{record.tbaHost,jdbcType=SMALLINT},
+      tba_name = #{record.tbaName,jdbcType=VARCHAR},
+      tba_contact = #{record.tbaContact,jdbcType=VARCHAR},
+      tba_address = #{record.tbaAddress,jdbcType=VARCHAR},
+      tba_pos_count = #{record.tbaPosCount,jdbcType=INTEGER},
+      tba_lon = #{record.tbaLon,jdbcType=DECIMAL},
+      tba_lat = #{record.tbaLat,jdbcType=DECIMAL},
+      tba_range = #{record.tbaRange,jdbcType=VARCHAR},
+      tba_status = #{record.tbaStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Area" >
+    update tb_area
+    <set >
+      <if test="tbaHost != null" >
+        tba_host = #{tbaHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbaName != null" >
+        tba_name = #{tbaName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaContact != null" >
+        tba_contact = #{tbaContact,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaAddress != null" >
+        tba_address = #{tbaAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaPosCount != null" >
+        tba_pos_count = #{tbaPosCount,jdbcType=INTEGER},
+      </if>
+      <if test="tbaLon != null" >
+        tba_lon = #{tbaLon,jdbcType=DECIMAL},
+      </if>
+      <if test="tbaLat != null" >
+        tba_lat = #{tbaLat,jdbcType=DECIMAL},
+      </if>
+      <if test="tbaRange != null" >
+        tba_range = #{tbaRange,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaStatus != null" >
+        tba_status = #{tbaStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Area" >
+    update tb_area
+    set tba_host = #{tbaHost,jdbcType=SMALLINT},
+      tba_name = #{tbaName,jdbcType=VARCHAR},
+      tba_contact = #{tbaContact,jdbcType=VARCHAR},
+      tba_address = #{tbaAddress,jdbcType=VARCHAR},
+      tba_pos_count = #{tbaPosCount,jdbcType=INTEGER},
+      tba_lon = #{tbaLon,jdbcType=DECIMAL},
+      tba_lat = #{tbaLat,jdbcType=DECIMAL},
+      tba_range = #{tbaRange,jdbcType=VARCHAR},
+      tba_status = #{tbaStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </update>
+</mapper>

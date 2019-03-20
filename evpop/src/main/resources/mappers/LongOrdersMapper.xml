@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LongOrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.LongOrders" >
+    <id column="tblo_id" property="tbloId" jdbcType="BIGINT" />
+    <result column="tblo_host" property="tbloHost" jdbcType="BIGINT" />
+    <result column="tblo_no" property="tbloNo" jdbcType="VARCHAR" />
+    <result column="tblo_menber" property="tbloMenber" jdbcType="BIGINT" />
+    <result column="tblo_model" property="tbloModel" jdbcType="BIGINT" />
+    <result column="tblo_car" property="tbloCar" jdbcType="BIGINT" />
+    <result column="tblo_get_time" property="tbloGetTime" jdbcType="TIMESTAMP" />
+    <result column="tblo_return_time" property="tbloReturnTime" jdbcType="TIMESTAMP" />
+    <result column="tblo_ji_time" property="tbloJiTime" jdbcType="TIMESTAMP" />
+    <result column="tblo_menu_time" property="tbloMenuTime" jdbcType="BIGINT" />
+    <result column="tblo_order_rent" property="tbloOrderRent" jdbcType="DOUBLE" />
+    <result column="tblo_get_outlets" property="tbloGetOutlets" jdbcType="BIGINT" />
+    <result column="tblo_return_outlets" property="tbloReturnOutlets" jdbcType="BIGINT" />
+    <result column="tblo_coupon_reduction" property="tbloCouponReduction" jdbcType="DOUBLE" />
+    <result column="tblo_actual_rent" property="tbloActualRent" jdbcType="DOUBLE" />
+    <result column="tblo_over_times" property="tbloOverTimes" jdbcType="VARCHAR" />
+    <result column="tblo_over_rent" property="tbloOverRent" jdbcType="DOUBLE" />
+    <result column="tblo_over_pay" property="tbloOverPay" jdbcType="SMALLINT" />
+    <result column="tblo_over_paytime" property="tbloOverPaytime" jdbcType="TIMESTAMP" />
+    <result column="tblo_imglist" property="tbloImglist" jdbcType="VARCHAR" />
+    <result column="tblo_return_img" property="tbloReturnImg" jdbcType="VARCHAR" />
+    <result column="tblo_pay_type" property="tbloPayType" jdbcType="SMALLINT" />
+    <result column="tblo_pay_time" property="tbloPayTime" jdbcType="TIMESTAMP" />
+    <result column="tblo_TakeLatlng" property="tbloTakelatlng" jdbcType="VARCHAR" />
+    <result column="tblo_ReturnLatlng" property="tbloReturnlatlng" jdbcType="VARCHAR" />
+    <result column="tblo_src" property="tbloSrc" jdbcType="VARCHAR" />
+    <result column="tblo_update_user" property="tbloUpdateUser" jdbcType="BIGINT" />
+    <result column="tblo_update_time" property="tbloUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tblo_create_user" property="tbloCreateUser" jdbcType="BIGINT" />
+    <result column="tblo_add_time" property="tbloAddTime" jdbcType="TIMESTAMP" />
+    <result column="tblo_status" property="tbloStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.LongOrders" extends="BaseResultMap" >
+    <result column="tblo_text" property="tbloText" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tblo_id, tblo_host, tblo_no, tblo_menber, tblo_model, tblo_car, tblo_get_time, tblo_return_time, 
+    tblo_ji_time, tblo_menu_time, tblo_order_rent, tblo_get_outlets, tblo_return_outlets, 
+    tblo_coupon_reduction, tblo_actual_rent, tblo_over_times, tblo_over_rent, tblo_over_pay, 
+    tblo_over_paytime, tblo_imglist, tblo_return_img, tblo_pay_type, tblo_pay_time, tblo_TakeLatlng, 
+    tblo_ReturnLatlng, tblo_src, tblo_update_user, tblo_update_time, tblo_create_user, 
+    tblo_add_time, tblo_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tblo_text
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.LongOrdersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_long_orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LongOrdersExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_long_orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_long_orders
+    where tblo_id = #{tbloId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_long_orders
+    where tblo_id = #{tbloId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.LongOrders" >
+    insert into tb_long_orders (tblo_id, tblo_host, tblo_no, 
+      tblo_menber, tblo_model, tblo_car, 
+      tblo_get_time, tblo_return_time, tblo_ji_time, 
+      tblo_menu_time, tblo_order_rent, tblo_get_outlets, 
+      tblo_return_outlets, tblo_coupon_reduction, tblo_actual_rent, 
+      tblo_over_times, tblo_over_rent, tblo_over_pay, 
+      tblo_over_paytime, tblo_imglist, tblo_return_img, 
+      tblo_pay_type, tblo_pay_time, tblo_TakeLatlng, 
+      tblo_ReturnLatlng, tblo_src, tblo_update_user, 
+      tblo_update_time, tblo_create_user, tblo_add_time, 
+      tblo_status, tblo_text)
+    values (#{tbloId,jdbcType=BIGINT}, #{tbloHost,jdbcType=BIGINT}, #{tbloNo,jdbcType=VARCHAR}, 
+      #{tbloMenber,jdbcType=BIGINT}, #{tbloModel,jdbcType=BIGINT}, #{tbloCar,jdbcType=BIGINT}, 
+      #{tbloGetTime,jdbcType=TIMESTAMP}, #{tbloReturnTime,jdbcType=TIMESTAMP}, #{tbloJiTime,jdbcType=TIMESTAMP}, 
+      #{tbloMenuTime,jdbcType=BIGINT}, #{tbloOrderRent,jdbcType=DOUBLE}, #{tbloGetOutlets,jdbcType=BIGINT}, 
+      #{tbloReturnOutlets,jdbcType=BIGINT}, #{tbloCouponReduction,jdbcType=DOUBLE}, #{tbloActualRent,jdbcType=DOUBLE}, 
+      #{tbloOverTimes,jdbcType=VARCHAR}, #{tbloOverRent,jdbcType=DOUBLE}, #{tbloOverPay,jdbcType=SMALLINT}, 
+      #{tbloOverPaytime,jdbcType=TIMESTAMP}, #{tbloImglist,jdbcType=VARCHAR}, #{tbloReturnImg,jdbcType=VARCHAR}, 
+      #{tbloPayType,jdbcType=SMALLINT}, #{tbloPayTime,jdbcType=TIMESTAMP}, #{tbloTakelatlng,jdbcType=VARCHAR}, 
+      #{tbloReturnlatlng,jdbcType=VARCHAR}, #{tbloSrc,jdbcType=VARCHAR}, #{tbloUpdateUser,jdbcType=BIGINT}, 
+      #{tbloUpdateTime,jdbcType=TIMESTAMP}, #{tbloCreateUser,jdbcType=BIGINT}, #{tbloAddTime,jdbcType=TIMESTAMP}, 
+      #{tbloStatus,jdbcType=SMALLINT}, #{tbloText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.LongOrders" >
+    insert into tb_long_orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbloId != null" >
+        tblo_id,
+      </if>
+      <if test="tbloHost != null" >
+        tblo_host,
+      </if>
+      <if test="tbloNo != null" >
+        tblo_no,
+      </if>
+      <if test="tbloMenber != null" >
+        tblo_menber,
+      </if>
+      <if test="tbloModel != null" >
+        tblo_model,
+      </if>
+      <if test="tbloCar != null" >
+        tblo_car,
+      </if>
+      <if test="tbloGetTime != null" >
+        tblo_get_time,
+      </if>
+      <if test="tbloReturnTime != null" >
+        tblo_return_time,
+      </if>
+      <if test="tbloJiTime != null" >
+        tblo_ji_time,
+      </if>
+      <if test="tbloMenuTime != null" >
+        tblo_menu_time,
+      </if>
+      <if test="tbloOrderRent != null" >
+        tblo_order_rent,
+      </if>
+      <if test="tbloGetOutlets != null" >
+        tblo_get_outlets,
+      </if>
+      <if test="tbloReturnOutlets != null" >
+        tblo_return_outlets,
+      </if>
+      <if test="tbloCouponReduction != null" >
+        tblo_coupon_reduction,
+      </if>
+      <if test="tbloActualRent != null" >
+        tblo_actual_rent,
+      </if>
+      <if test="tbloOverTimes != null" >
+        tblo_over_times,
+      </if>
+      <if test="tbloOverRent != null" >
+        tblo_over_rent,
+      </if>
+      <if test="tbloOverPay != null" >
+        tblo_over_pay,
+      </if>
+      <if test="tbloOverPaytime != null" >
+        tblo_over_paytime,
+      </if>
+      <if test="tbloImglist != null" >
+        tblo_imglist,
+      </if>
+      <if test="tbloReturnImg != null" >
+        tblo_return_img,
+      </if>
+      <if test="tbloPayType != null" >
+        tblo_pay_type,
+      </if>
+      <if test="tbloPayTime != null" >
+        tblo_pay_time,
+      </if>
+      <if test="tbloTakelatlng != null" >
+        tblo_TakeLatlng,
+      </if>
+      <if test="tbloReturnlatlng != null" >
+        tblo_ReturnLatlng,
+      </if>
+      <if test="tbloSrc != null" >
+        tblo_src,
+      </if>
+      <if test="tbloUpdateUser != null" >
+        tblo_update_user,
+      </if>
+      <if test="tbloUpdateTime != null" >
+        tblo_update_time,
+      </if>
+      <if test="tbloCreateUser != null" >
+        tblo_create_user,
+      </if>
+      <if test="tbloAddTime != null" >
+        tblo_add_time,
+      </if>
+      <if test="tbloStatus != null" >
+        tblo_status,
+      </if>
+      <if test="tbloText != null" >
+        tblo_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbloId != null" >
+        #{tbloId,jdbcType=BIGINT},
+      </if>
+      <if test="tbloHost != null" >
+        #{tbloHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbloNo != null" >
+        #{tbloNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloMenber != null" >
+        #{tbloMenber,jdbcType=BIGINT},
+      </if>
+      <if test="tbloModel != null" >
+        #{tbloModel,jdbcType=BIGINT},
+      </if>
+      <if test="tbloCar != null" >
+        #{tbloCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbloGetTime != null" >
+        #{tbloGetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloReturnTime != null" >
+        #{tbloReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloJiTime != null" >
+        #{tbloJiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloMenuTime != null" >
+        #{tbloMenuTime,jdbcType=BIGINT},
+      </if>
+      <if test="tbloOrderRent != null" >
+        #{tbloOrderRent,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloGetOutlets != null" >
+        #{tbloGetOutlets,jdbcType=BIGINT},
+      </if>
+      <if test="tbloReturnOutlets != null" >
+        #{tbloReturnOutlets,jdbcType=BIGINT},
+      </if>
+      <if test="tbloCouponReduction != null" >
+        #{tbloCouponReduction,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloActualRent != null" >
+        #{tbloActualRent,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloOverTimes != null" >
+        #{tbloOverTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloOverRent != null" >
+        #{tbloOverRent,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloOverPay != null" >
+        #{tbloOverPay,jdbcType=SMALLINT},
+      </if>
+      <if test="tbloOverPaytime != null" >
+        #{tbloOverPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloImglist != null" >
+        #{tbloImglist,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloReturnImg != null" >
+        #{tbloReturnImg,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloPayType != null" >
+        #{tbloPayType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbloPayTime != null" >
+        #{tbloPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloTakelatlng != null" >
+        #{tbloTakelatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloReturnlatlng != null" >
+        #{tbloReturnlatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloSrc != null" >
+        #{tbloSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloUpdateUser != null" >
+        #{tbloUpdateUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbloUpdateTime != null" >
+        #{tbloUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloCreateUser != null" >
+        #{tbloCreateUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbloAddTime != null" >
+        #{tbloAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloStatus != null" >
+        #{tbloStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbloText != null" >
+        #{tbloText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LongOrdersExample" resultType="java.lang.Integer" >
+    select count(*) from tb_long_orders
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_long_orders
+    <set >
+      <if test="record.tbloId != null" >
+        tblo_id = #{record.tbloId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloHost != null" >
+        tblo_host = #{record.tbloHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloNo != null" >
+        tblo_no = #{record.tbloNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloMenber != null" >
+        tblo_menber = #{record.tbloMenber,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloModel != null" >
+        tblo_model = #{record.tbloModel,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloCar != null" >
+        tblo_car = #{record.tbloCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloGetTime != null" >
+        tblo_get_time = #{record.tbloGetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloReturnTime != null" >
+        tblo_return_time = #{record.tbloReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloJiTime != null" >
+        tblo_ji_time = #{record.tbloJiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloMenuTime != null" >
+        tblo_menu_time = #{record.tbloMenuTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloOrderRent != null" >
+        tblo_order_rent = #{record.tbloOrderRent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbloGetOutlets != null" >
+        tblo_get_outlets = #{record.tbloGetOutlets,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloReturnOutlets != null" >
+        tblo_return_outlets = #{record.tbloReturnOutlets,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloCouponReduction != null" >
+        tblo_coupon_reduction = #{record.tbloCouponReduction,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbloActualRent != null" >
+        tblo_actual_rent = #{record.tbloActualRent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbloOverTimes != null" >
+        tblo_over_times = #{record.tbloOverTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloOverRent != null" >
+        tblo_over_rent = #{record.tbloOverRent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbloOverPay != null" >
+        tblo_over_pay = #{record.tbloOverPay,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbloOverPaytime != null" >
+        tblo_over_paytime = #{record.tbloOverPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloImglist != null" >
+        tblo_imglist = #{record.tbloImglist,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloReturnImg != null" >
+        tblo_return_img = #{record.tbloReturnImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloPayType != null" >
+        tblo_pay_type = #{record.tbloPayType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbloPayTime != null" >
+        tblo_pay_time = #{record.tbloPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloTakelatlng != null" >
+        tblo_TakeLatlng = #{record.tbloTakelatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloReturnlatlng != null" >
+        tblo_ReturnLatlng = #{record.tbloReturnlatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloSrc != null" >
+        tblo_src = #{record.tbloSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloUpdateUser != null" >
+        tblo_update_user = #{record.tbloUpdateUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloUpdateTime != null" >
+        tblo_update_time = #{record.tbloUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloCreateUser != null" >
+        tblo_create_user = #{record.tbloCreateUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloAddTime != null" >
+        tblo_add_time = #{record.tbloAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloStatus != null" >
+        tblo_status = #{record.tbloStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbloText != null" >
+        tblo_text = #{record.tbloText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_long_orders
+    set tblo_id = #{record.tbloId,jdbcType=BIGINT},
+      tblo_host = #{record.tbloHost,jdbcType=BIGINT},
+      tblo_no = #{record.tbloNo,jdbcType=VARCHAR},
+      tblo_menber = #{record.tbloMenber,jdbcType=BIGINT},
+      tblo_model = #{record.tbloModel,jdbcType=BIGINT},
+      tblo_car = #{record.tbloCar,jdbcType=BIGINT},
+      tblo_get_time = #{record.tbloGetTime,jdbcType=TIMESTAMP},
+      tblo_return_time = #{record.tbloReturnTime,jdbcType=TIMESTAMP},
+      tblo_ji_time = #{record.tbloJiTime,jdbcType=TIMESTAMP},
+      tblo_menu_time = #{record.tbloMenuTime,jdbcType=BIGINT},
+      tblo_order_rent = #{record.tbloOrderRent,jdbcType=DOUBLE},
+      tblo_get_outlets = #{record.tbloGetOutlets,jdbcType=BIGINT},
+      tblo_return_outlets = #{record.tbloReturnOutlets,jdbcType=BIGINT},
+      tblo_coupon_reduction = #{record.tbloCouponReduction,jdbcType=DOUBLE},
+      tblo_actual_rent = #{record.tbloActualRent,jdbcType=DOUBLE},
+      tblo_over_times = #{record.tbloOverTimes,jdbcType=VARCHAR},
+      tblo_over_rent = #{record.tbloOverRent,jdbcType=DOUBLE},
+      tblo_over_pay = #{record.tbloOverPay,jdbcType=SMALLINT},
+      tblo_over_paytime = #{record.tbloOverPaytime,jdbcType=TIMESTAMP},
+      tblo_imglist = #{record.tbloImglist,jdbcType=VARCHAR},
+      tblo_return_img = #{record.tbloReturnImg,jdbcType=VARCHAR},
+      tblo_pay_type = #{record.tbloPayType,jdbcType=SMALLINT},
+      tblo_pay_time = #{record.tbloPayTime,jdbcType=TIMESTAMP},
+      tblo_TakeLatlng = #{record.tbloTakelatlng,jdbcType=VARCHAR},
+      tblo_ReturnLatlng = #{record.tbloReturnlatlng,jdbcType=VARCHAR},
+      tblo_src = #{record.tbloSrc,jdbcType=VARCHAR},
+      tblo_update_user = #{record.tbloUpdateUser,jdbcType=BIGINT},
+      tblo_update_time = #{record.tbloUpdateTime,jdbcType=TIMESTAMP},
+      tblo_create_user = #{record.tbloCreateUser,jdbcType=BIGINT},
+      tblo_add_time = #{record.tbloAddTime,jdbcType=TIMESTAMP},
+      tblo_status = #{record.tbloStatus,jdbcType=SMALLINT},
+      tblo_text = #{record.tbloText,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_long_orders
+    set tblo_id = #{record.tbloId,jdbcType=BIGINT},
+      tblo_host = #{record.tbloHost,jdbcType=BIGINT},
+      tblo_no = #{record.tbloNo,jdbcType=VARCHAR},
+      tblo_menber = #{record.tbloMenber,jdbcType=BIGINT},
+      tblo_model = #{record.tbloModel,jdbcType=BIGINT},
+      tblo_car = #{record.tbloCar,jdbcType=BIGINT},
+      tblo_get_time = #{record.tbloGetTime,jdbcType=TIMESTAMP},
+      tblo_return_time = #{record.tbloReturnTime,jdbcType=TIMESTAMP},
+      tblo_ji_time = #{record.tbloJiTime,jdbcType=TIMESTAMP},
+      tblo_menu_time = #{record.tbloMenuTime,jdbcType=BIGINT},
+      tblo_order_rent = #{record.tbloOrderRent,jdbcType=DOUBLE},
+      tblo_get_outlets = #{record.tbloGetOutlets,jdbcType=BIGINT},
+      tblo_return_outlets = #{record.tbloReturnOutlets,jdbcType=BIGINT},
+      tblo_coupon_reduction = #{record.tbloCouponReduction,jdbcType=DOUBLE},
+      tblo_actual_rent = #{record.tbloActualRent,jdbcType=DOUBLE},
+      tblo_over_times = #{record.tbloOverTimes,jdbcType=VARCHAR},
+      tblo_over_rent = #{record.tbloOverRent,jdbcType=DOUBLE},
+      tblo_over_pay = #{record.tbloOverPay,jdbcType=SMALLINT},
+      tblo_over_paytime = #{record.tbloOverPaytime,jdbcType=TIMESTAMP},
+      tblo_imglist = #{record.tbloImglist,jdbcType=VARCHAR},
+      tblo_return_img = #{record.tbloReturnImg,jdbcType=VARCHAR},
+      tblo_pay_type = #{record.tbloPayType,jdbcType=SMALLINT},
+      tblo_pay_time = #{record.tbloPayTime,jdbcType=TIMESTAMP},
+      tblo_TakeLatlng = #{record.tbloTakelatlng,jdbcType=VARCHAR},
+      tblo_ReturnLatlng = #{record.tbloReturnlatlng,jdbcType=VARCHAR},
+      tblo_src = #{record.tbloSrc,jdbcType=VARCHAR},
+      tblo_update_user = #{record.tbloUpdateUser,jdbcType=BIGINT},
+      tblo_update_time = #{record.tbloUpdateTime,jdbcType=TIMESTAMP},
+      tblo_create_user = #{record.tbloCreateUser,jdbcType=BIGINT},
+      tblo_add_time = #{record.tbloAddTime,jdbcType=TIMESTAMP},
+      tblo_status = #{record.tbloStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.LongOrders" >
+    update tb_long_orders
+    <set >
+      <if test="tbloHost != null" >
+        tblo_host = #{tbloHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbloNo != null" >
+        tblo_no = #{tbloNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloMenber != null" >
+        tblo_menber = #{tbloMenber,jdbcType=BIGINT},
+      </if>
+      <if test="tbloModel != null" >
+        tblo_model = #{tbloModel,jdbcType=BIGINT},
+      </if>
+      <if test="tbloCar != null" >
+        tblo_car = #{tbloCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbloGetTime != null" >
+        tblo_get_time = #{tbloGetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloReturnTime != null" >
+        tblo_return_time = #{tbloReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloJiTime != null" >
+        tblo_ji_time = #{tbloJiTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloMenuTime != null" >
+        tblo_menu_time = #{tbloMenuTime,jdbcType=BIGINT},
+      </if>
+      <if test="tbloOrderRent != null" >
+        tblo_order_rent = #{tbloOrderRent,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloGetOutlets != null" >
+        tblo_get_outlets = #{tbloGetOutlets,jdbcType=BIGINT},
+      </if>
+      <if test="tbloReturnOutlets != null" >
+        tblo_return_outlets = #{tbloReturnOutlets,jdbcType=BIGINT},
+      </if>
+      <if test="tbloCouponReduction != null" >
+        tblo_coupon_reduction = #{tbloCouponReduction,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloActualRent != null" >
+        tblo_actual_rent = #{tbloActualRent,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloOverTimes != null" >
+        tblo_over_times = #{tbloOverTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloOverRent != null" >
+        tblo_over_rent = #{tbloOverRent,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloOverPay != null" >
+        tblo_over_pay = #{tbloOverPay,jdbcType=SMALLINT},
+      </if>
+      <if test="tbloOverPaytime != null" >
+        tblo_over_paytime = #{tbloOverPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloImglist != null" >
+        tblo_imglist = #{tbloImglist,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloReturnImg != null" >
+        tblo_return_img = #{tbloReturnImg,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloPayType != null" >
+        tblo_pay_type = #{tbloPayType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbloPayTime != null" >
+        tblo_pay_time = #{tbloPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloTakelatlng != null" >
+        tblo_TakeLatlng = #{tbloTakelatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloReturnlatlng != null" >
+        tblo_ReturnLatlng = #{tbloReturnlatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloSrc != null" >
+        tblo_src = #{tbloSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloUpdateUser != null" >
+        tblo_update_user = #{tbloUpdateUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbloUpdateTime != null" >
+        tblo_update_time = #{tbloUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloCreateUser != null" >
+        tblo_create_user = #{tbloCreateUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbloAddTime != null" >
+        tblo_add_time = #{tbloAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloStatus != null" >
+        tblo_status = #{tbloStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbloText != null" >
+        tblo_text = #{tbloText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tblo_id = #{tbloId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.LongOrders" >
+    update tb_long_orders
+    set tblo_host = #{tbloHost,jdbcType=BIGINT},
+      tblo_no = #{tbloNo,jdbcType=VARCHAR},
+      tblo_menber = #{tbloMenber,jdbcType=BIGINT},
+      tblo_model = #{tbloModel,jdbcType=BIGINT},
+      tblo_car = #{tbloCar,jdbcType=BIGINT},
+      tblo_get_time = #{tbloGetTime,jdbcType=TIMESTAMP},
+      tblo_return_time = #{tbloReturnTime,jdbcType=TIMESTAMP},
+      tblo_ji_time = #{tbloJiTime,jdbcType=TIMESTAMP},
+      tblo_menu_time = #{tbloMenuTime,jdbcType=BIGINT},
+      tblo_order_rent = #{tbloOrderRent,jdbcType=DOUBLE},
+      tblo_get_outlets = #{tbloGetOutlets,jdbcType=BIGINT},
+      tblo_return_outlets = #{tbloReturnOutlets,jdbcType=BIGINT},
+      tblo_coupon_reduction = #{tbloCouponReduction,jdbcType=DOUBLE},
+      tblo_actual_rent = #{tbloActualRent,jdbcType=DOUBLE},
+      tblo_over_times = #{tbloOverTimes,jdbcType=VARCHAR},
+      tblo_over_rent = #{tbloOverRent,jdbcType=DOUBLE},
+      tblo_over_pay = #{tbloOverPay,jdbcType=SMALLINT},
+      tblo_over_paytime = #{tbloOverPaytime,jdbcType=TIMESTAMP},
+      tblo_imglist = #{tbloImglist,jdbcType=VARCHAR},
+      tblo_return_img = #{tbloReturnImg,jdbcType=VARCHAR},
+      tblo_pay_type = #{tbloPayType,jdbcType=SMALLINT},
+      tblo_pay_time = #{tbloPayTime,jdbcType=TIMESTAMP},
+      tblo_TakeLatlng = #{tbloTakelatlng,jdbcType=VARCHAR},
+      tblo_ReturnLatlng = #{tbloReturnlatlng,jdbcType=VARCHAR},
+      tblo_src = #{tbloSrc,jdbcType=VARCHAR},
+      tblo_update_user = #{tbloUpdateUser,jdbcType=BIGINT},
+      tblo_update_time = #{tbloUpdateTime,jdbcType=TIMESTAMP},
+      tblo_create_user = #{tbloCreateUser,jdbcType=BIGINT},
+      tblo_add_time = #{tbloAddTime,jdbcType=TIMESTAMP},
+      tblo_status = #{tbloStatus,jdbcType=SMALLINT},
+      tblo_text = #{tbloText,jdbcType=LONGVARCHAR}
+    where tblo_id = #{tbloId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.LongOrders" >
+    update tb_long_orders
+    set tblo_host = #{tbloHost,jdbcType=BIGINT},
+      tblo_no = #{tbloNo,jdbcType=VARCHAR},
+      tblo_menber = #{tbloMenber,jdbcType=BIGINT},
+      tblo_model = #{tbloModel,jdbcType=BIGINT},
+      tblo_car = #{tbloCar,jdbcType=BIGINT},
+      tblo_get_time = #{tbloGetTime,jdbcType=TIMESTAMP},
+      tblo_return_time = #{tbloReturnTime,jdbcType=TIMESTAMP},
+      tblo_ji_time = #{tbloJiTime,jdbcType=TIMESTAMP},
+      tblo_menu_time = #{tbloMenuTime,jdbcType=BIGINT},
+      tblo_order_rent = #{tbloOrderRent,jdbcType=DOUBLE},
+      tblo_get_outlets = #{tbloGetOutlets,jdbcType=BIGINT},
+      tblo_return_outlets = #{tbloReturnOutlets,jdbcType=BIGINT},
+      tblo_coupon_reduction = #{tbloCouponReduction,jdbcType=DOUBLE},
+      tblo_actual_rent = #{tbloActualRent,jdbcType=DOUBLE},
+      tblo_over_times = #{tbloOverTimes,jdbcType=VARCHAR},
+      tblo_over_rent = #{tbloOverRent,jdbcType=DOUBLE},
+      tblo_over_pay = #{tbloOverPay,jdbcType=SMALLINT},
+      tblo_over_paytime = #{tbloOverPaytime,jdbcType=TIMESTAMP},
+      tblo_imglist = #{tbloImglist,jdbcType=VARCHAR},
+      tblo_return_img = #{tbloReturnImg,jdbcType=VARCHAR},
+      tblo_pay_type = #{tbloPayType,jdbcType=SMALLINT},
+      tblo_pay_time = #{tbloPayTime,jdbcType=TIMESTAMP},
+      tblo_TakeLatlng = #{tbloTakelatlng,jdbcType=VARCHAR},
+      tblo_ReturnLatlng = #{tbloReturnlatlng,jdbcType=VARCHAR},
+      tblo_src = #{tbloSrc,jdbcType=VARCHAR},
+      tblo_update_user = #{tbloUpdateUser,jdbcType=BIGINT},
+      tblo_update_time = #{tbloUpdateTime,jdbcType=TIMESTAMP},
+      tblo_create_user = #{tbloCreateUser,jdbcType=BIGINT},
+      tblo_add_time = #{tbloAddTime,jdbcType=TIMESTAMP},
+      tblo_status = #{tbloStatus,jdbcType=SMALLINT}
+    where tblo_id = #{tbloId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LongOrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.LongOrderDetail" >
+    <id column="tblod_id" property="tblodId" jdbcType="BIGINT" />
+    <result column="tblod_host" property="tblodHost" jdbcType="BIGINT" />
+    <result column="tblod_long_order" property="tblodLongOrder" jdbcType="BIGINT" />
+    <result column="tblod_car" property="tblodCar" jdbcType="BIGINT" />
+    <result column="tblod_price" property="tblodPrice" jdbcType="DOUBLE" />
+    <result column="tblod_set_kilo" property="tblodSetKilo" jdbcType="BIGINT" />
+    <result column="tblod_ret_kilo" property="tblodRetKilo" jdbcType="BIGINT" />
+    <result column="tblod_set_time" property="tblodSetTime" jdbcType="DATE" />
+    <result column="tblod_ret_time" property="tblodRetTime" jdbcType="DATE" />
+    <result column="tblod_update_time" property="tblodUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tblod_add_time" property="tblodAddTime" jdbcType="TIMESTAMP" />
+    <result column="tblod_editor" property="tblodEditor" jdbcType="BIGINT" />
+    <result column="tblod_remark" property="tblodRemark" jdbcType="VARCHAR" />
+    <result column="tblod_status" property="tblodStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tblod_id, tblod_host, tblod_long_order, tblod_car, tblod_price, tblod_set_kilo, tblod_ret_kilo, 
+    tblod_set_time, tblod_ret_time, tblod_update_time, tblod_add_time, tblod_editor, 
+    tblod_remark, tblod_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LongOrderDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_long_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_long_order_detail
+    where tblod_id = #{tblodId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_long_order_detail
+    where tblod_id = #{tblodId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.LongOrderDetail" >
+    insert into tb_long_order_detail (tblod_id, tblod_host, tblod_long_order, 
+      tblod_car, tblod_price, tblod_set_kilo, 
+      tblod_ret_kilo, tblod_set_time, tblod_ret_time, 
+      tblod_update_time, tblod_add_time, tblod_editor, 
+      tblod_remark, tblod_status)
+    values (#{tblodId,jdbcType=BIGINT}, #{tblodHost,jdbcType=BIGINT}, #{tblodLongOrder,jdbcType=BIGINT}, 
+      #{tblodCar,jdbcType=BIGINT}, #{tblodPrice,jdbcType=DOUBLE}, #{tblodSetKilo,jdbcType=BIGINT}, 
+      #{tblodRetKilo,jdbcType=BIGINT}, #{tblodSetTime,jdbcType=DATE}, #{tblodRetTime,jdbcType=DATE}, 
+      #{tblodUpdateTime,jdbcType=TIMESTAMP}, #{tblodAddTime,jdbcType=TIMESTAMP}, #{tblodEditor,jdbcType=BIGINT}, 
+      #{tblodRemark,jdbcType=VARCHAR}, #{tblodStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.LongOrderDetail" >
+    insert into tb_long_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tblodId != null" >
+        tblod_id,
+      </if>
+      <if test="tblodHost != null" >
+        tblod_host,
+      </if>
+      <if test="tblodLongOrder != null" >
+        tblod_long_order,
+      </if>
+      <if test="tblodCar != null" >
+        tblod_car,
+      </if>
+      <if test="tblodPrice != null" >
+        tblod_price,
+      </if>
+      <if test="tblodSetKilo != null" >
+        tblod_set_kilo,
+      </if>
+      <if test="tblodRetKilo != null" >
+        tblod_ret_kilo,
+      </if>
+      <if test="tblodSetTime != null" >
+        tblod_set_time,
+      </if>
+      <if test="tblodRetTime != null" >
+        tblod_ret_time,
+      </if>
+      <if test="tblodUpdateTime != null" >
+        tblod_update_time,
+      </if>
+      <if test="tblodAddTime != null" >
+        tblod_add_time,
+      </if>
+      <if test="tblodEditor != null" >
+        tblod_editor,
+      </if>
+      <if test="tblodRemark != null" >
+        tblod_remark,
+      </if>
+      <if test="tblodStatus != null" >
+        tblod_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tblodId != null" >
+        #{tblodId,jdbcType=BIGINT},
+      </if>
+      <if test="tblodHost != null" >
+        #{tblodHost,jdbcType=BIGINT},
+      </if>
+      <if test="tblodLongOrder != null" >
+        #{tblodLongOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tblodCar != null" >
+        #{tblodCar,jdbcType=BIGINT},
+      </if>
+      <if test="tblodPrice != null" >
+        #{tblodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="tblodSetKilo != null" >
+        #{tblodSetKilo,jdbcType=BIGINT},
+      </if>
+      <if test="tblodRetKilo != null" >
+        #{tblodRetKilo,jdbcType=BIGINT},
+      </if>
+      <if test="tblodSetTime != null" >
+        #{tblodSetTime,jdbcType=DATE},
+      </if>
+      <if test="tblodRetTime != null" >
+        #{tblodRetTime,jdbcType=DATE},
+      </if>
+      <if test="tblodUpdateTime != null" >
+        #{tblodUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblodAddTime != null" >
+        #{tblodAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblodEditor != null" >
+        #{tblodEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tblodRemark != null" >
+        #{tblodRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tblodStatus != null" >
+        #{tblodStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LongOrderDetailExample" resultType="java.lang.Integer" >
+    select count(*) from tb_long_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_long_order_detail
+    <set >
+      <if test="record.tblodId != null" >
+        tblod_id = #{record.tblodId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblodHost != null" >
+        tblod_host = #{record.tblodHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblodLongOrder != null" >
+        tblod_long_order = #{record.tblodLongOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblodCar != null" >
+        tblod_car = #{record.tblodCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblodPrice != null" >
+        tblod_price = #{record.tblodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tblodSetKilo != null" >
+        tblod_set_kilo = #{record.tblodSetKilo,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblodRetKilo != null" >
+        tblod_ret_kilo = #{record.tblodRetKilo,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblodSetTime != null" >
+        tblod_set_time = #{record.tblodSetTime,jdbcType=DATE},
+      </if>
+      <if test="record.tblodRetTime != null" >
+        tblod_ret_time = #{record.tblodRetTime,jdbcType=DATE},
+      </if>
+      <if test="record.tblodUpdateTime != null" >
+        tblod_update_time = #{record.tblodUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblodAddTime != null" >
+        tblod_add_time = #{record.tblodAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblodEditor != null" >
+        tblod_editor = #{record.tblodEditor,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblodRemark != null" >
+        tblod_remark = #{record.tblodRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblodStatus != null" >
+        tblod_status = #{record.tblodStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_long_order_detail
+    set tblod_id = #{record.tblodId,jdbcType=BIGINT},
+      tblod_host = #{record.tblodHost,jdbcType=BIGINT},
+      tblod_long_order = #{record.tblodLongOrder,jdbcType=BIGINT},
+      tblod_car = #{record.tblodCar,jdbcType=BIGINT},
+      tblod_price = #{record.tblodPrice,jdbcType=DOUBLE},
+      tblod_set_kilo = #{record.tblodSetKilo,jdbcType=BIGINT},
+      tblod_ret_kilo = #{record.tblodRetKilo,jdbcType=BIGINT},
+      tblod_set_time = #{record.tblodSetTime,jdbcType=DATE},
+      tblod_ret_time = #{record.tblodRetTime,jdbcType=DATE},
+      tblod_update_time = #{record.tblodUpdateTime,jdbcType=TIMESTAMP},
+      tblod_add_time = #{record.tblodAddTime,jdbcType=TIMESTAMP},
+      tblod_editor = #{record.tblodEditor,jdbcType=BIGINT},
+      tblod_remark = #{record.tblodRemark,jdbcType=VARCHAR},
+      tblod_status = #{record.tblodStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.LongOrderDetail" >
+    update tb_long_order_detail
+    <set >
+      <if test="tblodHost != null" >
+        tblod_host = #{tblodHost,jdbcType=BIGINT},
+      </if>
+      <if test="tblodLongOrder != null" >
+        tblod_long_order = #{tblodLongOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tblodCar != null" >
+        tblod_car = #{tblodCar,jdbcType=BIGINT},
+      </if>
+      <if test="tblodPrice != null" >
+        tblod_price = #{tblodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="tblodSetKilo != null" >
+        tblod_set_kilo = #{tblodSetKilo,jdbcType=BIGINT},
+      </if>
+      <if test="tblodRetKilo != null" >
+        tblod_ret_kilo = #{tblodRetKilo,jdbcType=BIGINT},
+      </if>
+      <if test="tblodSetTime != null" >
+        tblod_set_time = #{tblodSetTime,jdbcType=DATE},
+      </if>
+      <if test="tblodRetTime != null" >
+        tblod_ret_time = #{tblodRetTime,jdbcType=DATE},
+      </if>
+      <if test="tblodUpdateTime != null" >
+        tblod_update_time = #{tblodUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblodAddTime != null" >
+        tblod_add_time = #{tblodAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblodEditor != null" >
+        tblod_editor = #{tblodEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tblodRemark != null" >
+        tblod_remark = #{tblodRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tblodStatus != null" >
+        tblod_status = #{tblodStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tblod_id = #{tblodId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.LongOrderDetail" >
+    update tb_long_order_detail
+    set tblod_host = #{tblodHost,jdbcType=BIGINT},
+      tblod_long_order = #{tblodLongOrder,jdbcType=BIGINT},
+      tblod_car = #{tblodCar,jdbcType=BIGINT},
+      tblod_price = #{tblodPrice,jdbcType=DOUBLE},
+      tblod_set_kilo = #{tblodSetKilo,jdbcType=BIGINT},
+      tblod_ret_kilo = #{tblodRetKilo,jdbcType=BIGINT},
+      tblod_set_time = #{tblodSetTime,jdbcType=DATE},
+      tblod_ret_time = #{tblodRetTime,jdbcType=DATE},
+      tblod_update_time = #{tblodUpdateTime,jdbcType=TIMESTAMP},
+      tblod_add_time = #{tblodAddTime,jdbcType=TIMESTAMP},
+      tblod_editor = #{tblodEditor,jdbcType=BIGINT},
+      tblod_remark = #{tblodRemark,jdbcType=VARCHAR},
+      tblod_status = #{tblodStatus,jdbcType=SMALLINT}
+    where tblod_id = #{tblodId,jdbcType=BIGINT}
+  </update>
+</mapper>

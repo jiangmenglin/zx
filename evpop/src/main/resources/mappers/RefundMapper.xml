@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.RefundMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Refund" >
+    <id column="tbr_id" property="tbrId" jdbcType="INTEGER" />
+    <result column="tbr_host" property="tbrHost" jdbcType="SMALLINT" />
+    <result column="tbr_member" property="tbrMember" jdbcType="INTEGER" />
+    <result column="tbr_trade_no" property="tbrTradeNo" jdbcType="VARCHAR" />
+    <result column="tbr_deposit_type" property="tbrDepositType" jdbcType="TINYINT" />
+    <result column="tbr_deposit_time" property="tbrDepositTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_last_use" property="tbrLastUse" jdbcType="TIMESTAMP" />
+    <result column="tbr_refunded" property="tbrRefunded" jdbcType="DOUBLE" />
+    <result column="tbr_return_type" property="tbrReturnType" jdbcType="TINYINT" />
+    <result column="tbr_bank_type" property="tbrBankType" jdbcType="BIGINT" />
+    <result column="tbr_bank_branch" property="tbrBankBranch" jdbcType="VARCHAR" />
+    <result column="tbr_account_no" property="tbrAccountNo" jdbcType="VARCHAR" />
+    <result column="tbr_account_name" property="tbrAccountName" jdbcType="VARCHAR" />
+    <result column="tbr_mobile" property="tbrMobile" jdbcType="VARCHAR" />
+    <result column="tbr_record" property="tbrRecord" jdbcType="INTEGER" />
+    <result column="tbr_checker" property="tbrChecker" jdbcType="INTEGER" />
+    <result column="tbr_backer" property="tbrBacker" jdbcType="INTEGER" />
+    <result column="tbr_postil" property="tbrPostil" jdbcType="VARCHAR" />
+    <result column="tbr_add_time" property="tbrAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_check_time" property="tbrCheckTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_back_time" property="tbrBackTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_end_time" property="tbrEndTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_remark" property="tbrRemark" jdbcType="VARCHAR" />
+    <result column="tbr_long_type" property="tbrLongType" jdbcType="SMALLINT" />
+    <result column="tbr_status" property="tbrStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+    <result column="tbr_tbr_no" property="tbrTbrNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbr_id, tbr_host, tbr_member, tbr_trade_no, tbr_deposit_type, tbr_deposit_time, tbr_last_use, 
+    tbr_refunded, tbr_return_type, tbr_bank_type, tbr_bank_branch, tbr_account_no, tbr_account_name, 
+    tbr_mobile, tbr_record, tbr_checker, tbr_backer, tbr_postil, tbr_add_time, tbr_check_time, 
+    tbr_back_time, tbr_end_time, tbr_remark, tbr_long_type, tbr_status, createTime, modifyDate, 
+    tbr_tbr_no
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.RefundExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_refund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_refund
+    where tbr_id = #{tbrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_refund
+    where tbr_id = #{tbrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Refund" >
+    insert into tb_refund (tbr_id, tbr_host, tbr_member, 
+      tbr_trade_no, tbr_deposit_type, tbr_deposit_time, 
+      tbr_last_use, tbr_refunded, tbr_return_type, 
+      tbr_bank_type, tbr_bank_branch, tbr_account_no, 
+      tbr_account_name, tbr_mobile, tbr_record, 
+      tbr_checker, tbr_backer, tbr_postil, 
+      tbr_add_time, tbr_check_time, tbr_back_time, 
+      tbr_end_time, tbr_remark, tbr_long_type, 
+      tbr_status, createTime, modifyDate, 
+      tbr_tbr_no)
+    values (#{tbrId,jdbcType=INTEGER}, #{tbrHost,jdbcType=SMALLINT}, #{tbrMember,jdbcType=INTEGER}, 
+      #{tbrTradeNo,jdbcType=VARCHAR}, #{tbrDepositType,jdbcType=TINYINT}, #{tbrDepositTime,jdbcType=TIMESTAMP}, 
+      #{tbrLastUse,jdbcType=TIMESTAMP}, #{tbrRefunded,jdbcType=DOUBLE}, #{tbrReturnType,jdbcType=TINYINT}, 
+      #{tbrBankType,jdbcType=BIGINT}, #{tbrBankBranch,jdbcType=VARCHAR}, #{tbrAccountNo,jdbcType=VARCHAR}, 
+      #{tbrAccountName,jdbcType=VARCHAR}, #{tbrMobile,jdbcType=VARCHAR}, #{tbrRecord,jdbcType=INTEGER}, 
+      #{tbrChecker,jdbcType=INTEGER}, #{tbrBacker,jdbcType=INTEGER}, #{tbrPostil,jdbcType=VARCHAR}, 
+      #{tbrAddTime,jdbcType=TIMESTAMP}, #{tbrCheckTime,jdbcType=TIMESTAMP}, #{tbrBackTime,jdbcType=TIMESTAMP}, 
+      #{tbrEndTime,jdbcType=TIMESTAMP}, #{tbrRemark,jdbcType=VARCHAR}, #{tbrLongType,jdbcType=SMALLINT}, 
+      #{tbrStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}, 
+      #{tbrTbrNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Refund" >
+    insert into tb_refund
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        tbr_id,
+      </if>
+      <if test="tbrHost != null" >
+        tbr_host,
+      </if>
+      <if test="tbrMember != null" >
+        tbr_member,
+      </if>
+      <if test="tbrTradeNo != null" >
+        tbr_trade_no,
+      </if>
+      <if test="tbrDepositType != null" >
+        tbr_deposit_type,
+      </if>
+      <if test="tbrDepositTime != null" >
+        tbr_deposit_time,
+      </if>
+      <if test="tbrLastUse != null" >
+        tbr_last_use,
+      </if>
+      <if test="tbrRefunded != null" >
+        tbr_refunded,
+      </if>
+      <if test="tbrReturnType != null" >
+        tbr_return_type,
+      </if>
+      <if test="tbrBankType != null" >
+        tbr_bank_type,
+      </if>
+      <if test="tbrBankBranch != null" >
+        tbr_bank_branch,
+      </if>
+      <if test="tbrAccountNo != null" >
+        tbr_account_no,
+      </if>
+      <if test="tbrAccountName != null" >
+        tbr_account_name,
+      </if>
+      <if test="tbrMobile != null" >
+        tbr_mobile,
+      </if>
+      <if test="tbrRecord != null" >
+        tbr_record,
+      </if>
+      <if test="tbrChecker != null" >
+        tbr_checker,
+      </if>
+      <if test="tbrBacker != null" >
+        tbr_backer,
+      </if>
+      <if test="tbrPostil != null" >
+        tbr_postil,
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time,
+      </if>
+      <if test="tbrCheckTime != null" >
+        tbr_check_time,
+      </if>
+      <if test="tbrBackTime != null" >
+        tbr_back_time,
+      </if>
+      <if test="tbrEndTime != null" >
+        tbr_end_time,
+      </if>
+      <if test="tbrRemark != null" >
+        tbr_remark,
+      </if>
+      <if test="tbrLongType != null" >
+        tbr_long_type,
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+      <if test="tbrTbrNo != null" >
+        tbr_tbr_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        #{tbrId,jdbcType=INTEGER},
+      </if>
+      <if test="tbrHost != null" >
+        #{tbrHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbrMember != null" >
+        #{tbrMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbrTradeNo != null" >
+        #{tbrTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrDepositType != null" >
+        #{tbrDepositType,jdbcType=TINYINT},
+      </if>
+      <if test="tbrDepositTime != null" >
+        #{tbrDepositTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrLastUse != null" >
+        #{tbrLastUse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrRefunded != null" >
+        #{tbrRefunded,jdbcType=DOUBLE},
+      </if>
+      <if test="tbrReturnType != null" >
+        #{tbrReturnType,jdbcType=TINYINT},
+      </if>
+      <if test="tbrBankType != null" >
+        #{tbrBankType,jdbcType=BIGINT},
+      </if>
+      <if test="tbrBankBranch != null" >
+        #{tbrBankBranch,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrAccountNo != null" >
+        #{tbrAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrAccountName != null" >
+        #{tbrAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrMobile != null" >
+        #{tbrMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRecord != null" >
+        #{tbrRecord,jdbcType=INTEGER},
+      </if>
+      <if test="tbrChecker != null" >
+        #{tbrChecker,jdbcType=INTEGER},
+      </if>
+      <if test="tbrBacker != null" >
+        #{tbrBacker,jdbcType=INTEGER},
+      </if>
+      <if test="tbrPostil != null" >
+        #{tbrPostil,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrAddTime != null" >
+        #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrCheckTime != null" >
+        #{tbrCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrBackTime != null" >
+        #{tbrBackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrEndTime != null" >
+        #{tbrEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrRemark != null" >
+        #{tbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrLongType != null" >
+        #{tbrLongType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbrStatus != null" >
+        #{tbrStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrTbrNo != null" >
+        #{tbrTbrNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.RefundExample" resultType="java.lang.Integer" >
+    select count(*) from tb_refund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_refund
+    <set >
+      <if test="record.tbrId != null" >
+        tbr_id = #{record.tbrId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbrHost != null" >
+        tbr_host = #{record.tbrHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbrMember != null" >
+        tbr_member = #{record.tbrMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbrTradeNo != null" >
+        tbr_trade_no = #{record.tbrTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrDepositType != null" >
+        tbr_deposit_type = #{record.tbrDepositType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrDepositTime != null" >
+        tbr_deposit_time = #{record.tbrDepositTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrLastUse != null" >
+        tbr_last_use = #{record.tbrLastUse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrRefunded != null" >
+        tbr_refunded = #{record.tbrRefunded,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbrReturnType != null" >
+        tbr_return_type = #{record.tbrReturnType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrBankType != null" >
+        tbr_bank_type = #{record.tbrBankType,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrBankBranch != null" >
+        tbr_bank_branch = #{record.tbrBankBranch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrAccountNo != null" >
+        tbr_account_no = #{record.tbrAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrAccountName != null" >
+        tbr_account_name = #{record.tbrAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrMobile != null" >
+        tbr_mobile = #{record.tbrMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrRecord != null" >
+        tbr_record = #{record.tbrRecord,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbrChecker != null" >
+        tbr_checker = #{record.tbrChecker,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbrBacker != null" >
+        tbr_backer = #{record.tbrBacker,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbrPostil != null" >
+        tbr_postil = #{record.tbrPostil,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrAddTime != null" >
+        tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrCheckTime != null" >
+        tbr_check_time = #{record.tbrCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrBackTime != null" >
+        tbr_back_time = #{record.tbrBackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrEndTime != null" >
+        tbr_end_time = #{record.tbrEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrRemark != null" >
+        tbr_remark = #{record.tbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrLongType != null" >
+        tbr_long_type = #{record.tbrLongType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbrStatus != null" >
+        tbr_status = #{record.tbrStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrTbrNo != null" >
+        tbr_tbr_no = #{record.tbrTbrNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_refund
+    set tbr_id = #{record.tbrId,jdbcType=INTEGER},
+      tbr_host = #{record.tbrHost,jdbcType=SMALLINT},
+      tbr_member = #{record.tbrMember,jdbcType=INTEGER},
+      tbr_trade_no = #{record.tbrTradeNo,jdbcType=VARCHAR},
+      tbr_deposit_type = #{record.tbrDepositType,jdbcType=TINYINT},
+      tbr_deposit_time = #{record.tbrDepositTime,jdbcType=TIMESTAMP},
+      tbr_last_use = #{record.tbrLastUse,jdbcType=TIMESTAMP},
+      tbr_refunded = #{record.tbrRefunded,jdbcType=DOUBLE},
+      tbr_return_type = #{record.tbrReturnType,jdbcType=TINYINT},
+      tbr_bank_type = #{record.tbrBankType,jdbcType=BIGINT},
+      tbr_bank_branch = #{record.tbrBankBranch,jdbcType=VARCHAR},
+      tbr_account_no = #{record.tbrAccountNo,jdbcType=VARCHAR},
+      tbr_account_name = #{record.tbrAccountName,jdbcType=VARCHAR},
+      tbr_mobile = #{record.tbrMobile,jdbcType=VARCHAR},
+      tbr_record = #{record.tbrRecord,jdbcType=INTEGER},
+      tbr_checker = #{record.tbrChecker,jdbcType=INTEGER},
+      tbr_backer = #{record.tbrBacker,jdbcType=INTEGER},
+      tbr_postil = #{record.tbrPostil,jdbcType=VARCHAR},
+      tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_check_time = #{record.tbrCheckTime,jdbcType=TIMESTAMP},
+      tbr_back_time = #{record.tbrBackTime,jdbcType=TIMESTAMP},
+      tbr_end_time = #{record.tbrEndTime,jdbcType=TIMESTAMP},
+      tbr_remark = #{record.tbrRemark,jdbcType=VARCHAR},
+      tbr_long_type = #{record.tbrLongType,jdbcType=SMALLINT},
+      tbr_status = #{record.tbrStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      tbr_tbr_no = #{record.tbrTbrNo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Refund" >
+    update tb_refund
+    <set >
+      <if test="tbrHost != null" >
+        tbr_host = #{tbrHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbrMember != null" >
+        tbr_member = #{tbrMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbrTradeNo != null" >
+        tbr_trade_no = #{tbrTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrDepositType != null" >
+        tbr_deposit_type = #{tbrDepositType,jdbcType=TINYINT},
+      </if>
+      <if test="tbrDepositTime != null" >
+        tbr_deposit_time = #{tbrDepositTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrLastUse != null" >
+        tbr_last_use = #{tbrLastUse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrRefunded != null" >
+        tbr_refunded = #{tbrRefunded,jdbcType=DOUBLE},
+      </if>
+      <if test="tbrReturnType != null" >
+        tbr_return_type = #{tbrReturnType,jdbcType=TINYINT},
+      </if>
+      <if test="tbrBankType != null" >
+        tbr_bank_type = #{tbrBankType,jdbcType=BIGINT},
+      </if>
+      <if test="tbrBankBranch != null" >
+        tbr_bank_branch = #{tbrBankBranch,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrAccountNo != null" >
+        tbr_account_no = #{tbrAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrAccountName != null" >
+        tbr_account_name = #{tbrAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrMobile != null" >
+        tbr_mobile = #{tbrMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRecord != null" >
+        tbr_record = #{tbrRecord,jdbcType=INTEGER},
+      </if>
+      <if test="tbrChecker != null" >
+        tbr_checker = #{tbrChecker,jdbcType=INTEGER},
+      </if>
+      <if test="tbrBacker != null" >
+        tbr_backer = #{tbrBacker,jdbcType=INTEGER},
+      </if>
+      <if test="tbrPostil != null" >
+        tbr_postil = #{tbrPostil,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrCheckTime != null" >
+        tbr_check_time = #{tbrCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrBackTime != null" >
+        tbr_back_time = #{tbrBackTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrEndTime != null" >
+        tbr_end_time = #{tbrEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrRemark != null" >
+        tbr_remark = #{tbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrLongType != null" >
+        tbr_long_type = #{tbrLongType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status = #{tbrStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrTbrNo != null" >
+        tbr_tbr_no = #{tbrTbrNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tbr_id = #{tbrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Refund" >
+    update tb_refund
+    set tbr_host = #{tbrHost,jdbcType=SMALLINT},
+      tbr_member = #{tbrMember,jdbcType=INTEGER},
+      tbr_trade_no = #{tbrTradeNo,jdbcType=VARCHAR},
+      tbr_deposit_type = #{tbrDepositType,jdbcType=TINYINT},
+      tbr_deposit_time = #{tbrDepositTime,jdbcType=TIMESTAMP},
+      tbr_last_use = #{tbrLastUse,jdbcType=TIMESTAMP},
+      tbr_refunded = #{tbrRefunded,jdbcType=DOUBLE},
+      tbr_return_type = #{tbrReturnType,jdbcType=TINYINT},
+      tbr_bank_type = #{tbrBankType,jdbcType=BIGINT},
+      tbr_bank_branch = #{tbrBankBranch,jdbcType=VARCHAR},
+      tbr_account_no = #{tbrAccountNo,jdbcType=VARCHAR},
+      tbr_account_name = #{tbrAccountName,jdbcType=VARCHAR},
+      tbr_mobile = #{tbrMobile,jdbcType=VARCHAR},
+      tbr_record = #{tbrRecord,jdbcType=INTEGER},
+      tbr_checker = #{tbrChecker,jdbcType=INTEGER},
+      tbr_backer = #{tbrBacker,jdbcType=INTEGER},
+      tbr_postil = #{tbrPostil,jdbcType=VARCHAR},
+      tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_check_time = #{tbrCheckTime,jdbcType=TIMESTAMP},
+      tbr_back_time = #{tbrBackTime,jdbcType=TIMESTAMP},
+      tbr_end_time = #{tbrEndTime,jdbcType=TIMESTAMP},
+      tbr_remark = #{tbrRemark,jdbcType=VARCHAR},
+      tbr_long_type = #{tbrLongType,jdbcType=SMALLINT},
+      tbr_status = #{tbrStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      tbr_tbr_no = #{tbrTbrNo,jdbcType=VARCHAR}
+    where tbr_id = #{tbrId,jdbcType=INTEGER}
+  </update>
+</mapper>

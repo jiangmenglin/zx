@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.TroubleMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Trouble" >
+    <id column="tbt_id" property="tbtId" jdbcType="BIGINT" />
+    <result column="tbt_host" property="tbtHost" jdbcType="BIGINT" />
+    <result column="tbt_order" property="tbtOrder" jdbcType="BIGINT" />
+    <result column="tbt_member" property="tbtMember" jdbcType="BIGINT" />
+    <result column="tbt_driver_info" property="tbtDriverInfo" jdbcType="VARCHAR" />
+    <result column="tbt_car" property="tbtCar" jdbcType="BIGINT" />
+    <result column="tbt_type" property="tbtType" jdbcType="TINYINT" />
+    <result column="tbt_repair_type" property="tbtRepairType" jdbcType="TINYINT" />
+    <result column="tbt_repair_adr" property="tbtRepairAdr" jdbcType="BIGINT" />
+    <result column="tbt_repair_time" property="tbtRepairTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_area" property="tbtArea" jdbcType="BIGINT" />
+    <result column="tbt_repair" property="tbtRepair" jdbcType="BIGINT" />
+    <result column="tbt_report_num" property="tbtReportNum" jdbcType="VARCHAR" />
+    <result column="tbt_insure_type" property="tbtInsureType" jdbcType="TINYINT" />
+    <result column="tbt_happen_time" property="tbtHappenTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_adder" property="tbtAdder" jdbcType="BIGINT" />
+    <result column="tbt_editer" property="tbtEditer" jdbcType="BIGINT" />
+    <result column="tbt_caser" property="tbtCaser" jdbcType="BIGINT" />
+    <result column="tbt_finish_time" property="tbtFinishTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_update_time" property="tbtUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_add_time" property="tbtAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_status" property="tbtStatus" jdbcType="SMALLINT" />
+    <result column="tbt_trailer" property="tbtTrailer" jdbcType="TINYINT" />
+    <result column="tbt_trailer_fee" property="tbtTrailerFee" jdbcType="DOUBLE" />
+    <result column="tbt_auditor" property="tbtAuditor" jdbcType="VARCHAR" />
+    <result column="tbt_auditor_fee" property="tbtAuditorFee" jdbcType="DOUBLE" />
+    <result column="tbt_auditor_other" property="tbtAuditorOther" jdbcType="DOUBLE" />
+    <result column="tbt_advance_fee" property="tbtAdvanceFee" jdbcType="DOUBLE" />
+    <result column="tbt_damage_fee" property="tbtDamageFee" jdbcType="DOUBLE" />
+    <result column="tbt_insure_up" property="tbtInsureUp" jdbcType="DOUBLE" />
+    <result column="tbt_fee_other" property="tbtFeeOther" jdbcType="DOUBLE" />
+    <result column="tbt_charge_time" property="tbtChargeTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_pay_type" property="tbtPayType" jdbcType="TINYINT" />
+    <result column="tbt_track_people" property="tbtTrackPeople" jdbcType="VARCHAR" />
+    <result column="tbt_third_carno" property="tbtThirdCarno" jdbcType="VARCHAR" />
+    <result column="tbt_third_loss" property="tbtThirdLoss" jdbcType="DOUBLE" />
+    <result column="tbt_third_info" property="tbtThirdInfo" jdbcType="VARCHAR" />
+    <result column="tbt_third_insure" property="tbtThirdInsure" jdbcType="VARCHAR" />
+    <result column="tbt_remark" property="tbtRemark" jdbcType="VARCHAR" />
+    <result column="tbt_repair_bill" property="tbtRepairBill" jdbcType="VARCHAR" />
+    <result column="tbt_settle_time" property="tbtSettleTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_claim_fee" property="tbtClaimFee" jdbcType="DOUBLE" />
+    <result column="tbt_repair_fee" property="tbtRepairFee" jdbcType="DOUBLE" />
+    <result column="tbt_need_fee" property="tbtNeedFee" jdbcType="DOUBLE" />
+    <result column="tbt_real_fee" property="tbtRealFee" jdbcType="DOUBLE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.Trouble" extends="BaseResultMap" >
+    <result column="tbt_decipt" property="tbtDecipt" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbt_id, tbt_host, tbt_order, tbt_member, tbt_driver_info, tbt_car, tbt_type, tbt_repair_type, 
+    tbt_repair_adr, tbt_repair_time, tbt_area, tbt_repair, tbt_report_num, tbt_insure_type, 
+    tbt_happen_time, tbt_adder, tbt_editer, tbt_caser, tbt_finish_time, tbt_update_time, 
+    tbt_add_time, tbt_status, tbt_trailer, tbt_trailer_fee, tbt_auditor, tbt_auditor_fee, 
+    tbt_auditor_other, tbt_advance_fee, tbt_damage_fee, tbt_insure_up, tbt_fee_other, 
+    tbt_charge_time, tbt_pay_type, tbt_track_people, tbt_third_carno, tbt_third_loss, 
+    tbt_third_info, tbt_third_insure, tbt_remark, tbt_repair_bill, tbt_settle_time, tbt_claim_fee, 
+    tbt_repair_fee, tbt_need_fee, tbt_real_fee
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbt_decipt
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.TroubleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_trouble
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.TroubleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_trouble
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_trouble
+    where tbt_id = #{tbtId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_trouble
+    where tbt_id = #{tbtId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Trouble" >
+    insert into tb_trouble (tbt_id, tbt_host, tbt_order, 
+      tbt_member, tbt_driver_info, tbt_car, 
+      tbt_type, tbt_repair_type, tbt_repair_adr, 
+      tbt_repair_time, tbt_area, tbt_repair, 
+      tbt_report_num, tbt_insure_type, tbt_happen_time, 
+      tbt_adder, tbt_editer, tbt_caser, 
+      tbt_finish_time, tbt_update_time, tbt_add_time, 
+      tbt_status, tbt_trailer, tbt_trailer_fee, 
+      tbt_auditor, tbt_auditor_fee, tbt_auditor_other, 
+      tbt_advance_fee, tbt_damage_fee, tbt_insure_up, 
+      tbt_fee_other, tbt_charge_time, tbt_pay_type, 
+      tbt_track_people, tbt_third_carno, tbt_third_loss, 
+      tbt_third_info, tbt_third_insure, tbt_remark, 
+      tbt_repair_bill, tbt_settle_time, tbt_claim_fee, 
+      tbt_repair_fee, tbt_need_fee, tbt_real_fee, 
+      tbt_decipt)
+    values (#{tbtId,jdbcType=BIGINT}, #{tbtHost,jdbcType=BIGINT}, #{tbtOrder,jdbcType=BIGINT}, 
+      #{tbtMember,jdbcType=BIGINT}, #{tbtDriverInfo,jdbcType=VARCHAR}, #{tbtCar,jdbcType=BIGINT}, 
+      #{tbtType,jdbcType=TINYINT}, #{tbtRepairType,jdbcType=TINYINT}, #{tbtRepairAdr,jdbcType=BIGINT}, 
+      #{tbtRepairTime,jdbcType=TIMESTAMP}, #{tbtArea,jdbcType=BIGINT}, #{tbtRepair,jdbcType=BIGINT}, 
+      #{tbtReportNum,jdbcType=VARCHAR}, #{tbtInsureType,jdbcType=TINYINT}, #{tbtHappenTime,jdbcType=TIMESTAMP}, 
+      #{tbtAdder,jdbcType=BIGINT}, #{tbtEditer,jdbcType=BIGINT}, #{tbtCaser,jdbcType=BIGINT}, 
+      #{tbtFinishTime,jdbcType=TIMESTAMP}, #{tbtUpdateTime,jdbcType=TIMESTAMP}, #{tbtAddTime,jdbcType=TIMESTAMP}, 
+      #{tbtStatus,jdbcType=SMALLINT}, #{tbtTrailer,jdbcType=TINYINT}, #{tbtTrailerFee,jdbcType=DOUBLE}, 
+      #{tbtAuditor,jdbcType=VARCHAR}, #{tbtAuditorFee,jdbcType=DOUBLE}, #{tbtAuditorOther,jdbcType=DOUBLE}, 
+      #{tbtAdvanceFee,jdbcType=DOUBLE}, #{tbtDamageFee,jdbcType=DOUBLE}, #{tbtInsureUp,jdbcType=DOUBLE}, 
+      #{tbtFeeOther,jdbcType=DOUBLE}, #{tbtChargeTime,jdbcType=TIMESTAMP}, #{tbtPayType,jdbcType=TINYINT}, 
+      #{tbtTrackPeople,jdbcType=VARCHAR}, #{tbtThirdCarno,jdbcType=VARCHAR}, #{tbtThirdLoss,jdbcType=DOUBLE}, 
+      #{tbtThirdInfo,jdbcType=VARCHAR}, #{tbtThirdInsure,jdbcType=VARCHAR}, #{tbtRemark,jdbcType=VARCHAR}, 
+      #{tbtRepairBill,jdbcType=VARCHAR}, #{tbtSettleTime,jdbcType=TIMESTAMP}, #{tbtClaimFee,jdbcType=DOUBLE}, 
+      #{tbtRepairFee,jdbcType=DOUBLE}, #{tbtNeedFee,jdbcType=DOUBLE}, #{tbtRealFee,jdbcType=DOUBLE}, 
+      #{tbtDecipt,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Trouble" >
+    insert into tb_trouble
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbtId != null" >
+        tbt_id,
+      </if>
+      <if test="tbtHost != null" >
+        tbt_host,
+      </if>
+      <if test="tbtOrder != null" >
+        tbt_order,
+      </if>
+      <if test="tbtMember != null" >
+        tbt_member,
+      </if>
+      <if test="tbtDriverInfo != null" >
+        tbt_driver_info,
+      </if>
+      <if test="tbtCar != null" >
+        tbt_car,
+      </if>
+      <if test="tbtType != null" >
+        tbt_type,
+      </if>
+      <if test="tbtRepairType != null" >
+        tbt_repair_type,
+      </if>
+      <if test="tbtRepairAdr != null" >
+        tbt_repair_adr,
+      </if>
+      <if test="tbtRepairTime != null" >
+        tbt_repair_time,
+      </if>
+      <if test="tbtArea != null" >
+        tbt_area,
+      </if>
+      <if test="tbtRepair != null" >
+        tbt_repair,
+      </if>
+      <if test="tbtReportNum != null" >
+        tbt_report_num,
+      </if>
+      <if test="tbtInsureType != null" >
+        tbt_insure_type,
+      </if>
+      <if test="tbtHappenTime != null" >
+        tbt_happen_time,
+      </if>
+      <if test="tbtAdder != null" >
+        tbt_adder,
+      </if>
+      <if test="tbtEditer != null" >
+        tbt_editer,
+      </if>
+      <if test="tbtCaser != null" >
+        tbt_caser,
+      </if>
+      <if test="tbtFinishTime != null" >
+        tbt_finish_time,
+      </if>
+      <if test="tbtUpdateTime != null" >
+        tbt_update_time,
+      </if>
+      <if test="tbtAddTime != null" >
+        tbt_add_time,
+      </if>
+      <if test="tbtStatus != null" >
+        tbt_status,
+      </if>
+      <if test="tbtTrailer != null" >
+        tbt_trailer,
+      </if>
+      <if test="tbtTrailerFee != null" >
+        tbt_trailer_fee,
+      </if>
+      <if test="tbtAuditor != null" >
+        tbt_auditor,
+      </if>
+      <if test="tbtAuditorFee != null" >
+        tbt_auditor_fee,
+      </if>
+      <if test="tbtAuditorOther != null" >
+        tbt_auditor_other,
+      </if>
+      <if test="tbtAdvanceFee != null" >
+        tbt_advance_fee,
+      </if>
+      <if test="tbtDamageFee != null" >
+        tbt_damage_fee,
+      </if>
+      <if test="tbtInsureUp != null" >
+        tbt_insure_up,
+      </if>
+      <if test="tbtFeeOther != null" >
+        tbt_fee_other,
+      </if>
+      <if test="tbtChargeTime != null" >
+        tbt_charge_time,
+      </if>
+      <if test="tbtPayType != null" >
+        tbt_pay_type,
+      </if>
+      <if test="tbtTrackPeople != null" >
+        tbt_track_people,
+      </if>
+      <if test="tbtThirdCarno != null" >
+        tbt_third_carno,
+      </if>
+      <if test="tbtThirdLoss != null" >
+        tbt_third_loss,
+      </if>
+      <if test="tbtThirdInfo != null" >
+        tbt_third_info,
+      </if>
+      <if test="tbtThirdInsure != null" >
+        tbt_third_insure,
+      </if>
+      <if test="tbtRemark != null" >
+        tbt_remark,
+      </if>
+      <if test="tbtRepairBill != null" >
+        tbt_repair_bill,
+      </if>
+      <if test="tbtSettleTime != null" >
+        tbt_settle_time,
+      </if>
+      <if test="tbtClaimFee != null" >
+        tbt_claim_fee,
+      </if>
+      <if test="tbtRepairFee != null" >
+        tbt_repair_fee,
+      </if>
+      <if test="tbtNeedFee != null" >
+        tbt_need_fee,
+      </if>
+      <if test="tbtRealFee != null" >
+        tbt_real_fee,
+      </if>
+      <if test="tbtDecipt != null" >
+        tbt_decipt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbtId != null" >
+        #{tbtId,jdbcType=BIGINT},
+      </if>
+      <if test="tbtHost != null" >
+        #{tbtHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbtOrder != null" >
+        #{tbtOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbtMember != null" >
+        #{tbtMember,jdbcType=BIGINT},
+      </if>
+      <if test="tbtDriverInfo != null" >
+        #{tbtDriverInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtCar != null" >
+        #{tbtCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbtType != null" >
+        #{tbtType,jdbcType=TINYINT},
+      </if>
+      <if test="tbtRepairType != null" >
+        #{tbtRepairType,jdbcType=TINYINT},
+      </if>
+      <if test="tbtRepairAdr != null" >
+        #{tbtRepairAdr,jdbcType=BIGINT},
+      </if>
+      <if test="tbtRepairTime != null" >
+        #{tbtRepairTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtArea != null" >
+        #{tbtArea,jdbcType=BIGINT},
+      </if>
+      <if test="tbtRepair != null" >
+        #{tbtRepair,jdbcType=BIGINT},
+      </if>
+      <if test="tbtReportNum != null" >
+        #{tbtReportNum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtInsureType != null" >
+        #{tbtInsureType,jdbcType=TINYINT},
+      </if>
+      <if test="tbtHappenTime != null" >
+        #{tbtHappenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtAdder != null" >
+        #{tbtAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbtEditer != null" >
+        #{tbtEditer,jdbcType=BIGINT},
+      </if>
+      <if test="tbtCaser != null" >
+        #{tbtCaser,jdbcType=BIGINT},
+      </if>
+      <if test="tbtFinishTime != null" >
+        #{tbtFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtUpdateTime != null" >
+        #{tbtUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtAddTime != null" >
+        #{tbtAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtStatus != null" >
+        #{tbtStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbtTrailer != null" >
+        #{tbtTrailer,jdbcType=TINYINT},
+      </if>
+      <if test="tbtTrailerFee != null" >
+        #{tbtTrailerFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtAuditor != null" >
+        #{tbtAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtAuditorFee != null" >
+        #{tbtAuditorFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtAuditorOther != null" >
+        #{tbtAuditorOther,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtAdvanceFee != null" >
+        #{tbtAdvanceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtDamageFee != null" >
+        #{tbtDamageFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtInsureUp != null" >
+        #{tbtInsureUp,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtFeeOther != null" >
+        #{tbtFeeOther,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtChargeTime != null" >
+        #{tbtChargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtPayType != null" >
+        #{tbtPayType,jdbcType=TINYINT},
+      </if>
+      <if test="tbtTrackPeople != null" >
+        #{tbtTrackPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtThirdCarno != null" >
+        #{tbtThirdCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtThirdLoss != null" >
+        #{tbtThirdLoss,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtThirdInfo != null" >
+        #{tbtThirdInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtThirdInsure != null" >
+        #{tbtThirdInsure,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtRemark != null" >
+        #{tbtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtRepairBill != null" >
+        #{tbtRepairBill,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtSettleTime != null" >
+        #{tbtSettleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtClaimFee != null" >
+        #{tbtClaimFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtRepairFee != null" >
+        #{tbtRepairFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtNeedFee != null" >
+        #{tbtNeedFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtRealFee != null" >
+        #{tbtRealFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtDecipt != null" >
+        #{tbtDecipt,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.TroubleExample" resultType="java.lang.Integer" >
+    select count(*) from tb_trouble
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_trouble
+    <set >
+      <if test="record.tbtId != null" >
+        tbt_id = #{record.tbtId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtHost != null" >
+        tbt_host = #{record.tbtHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtOrder != null" >
+        tbt_order = #{record.tbtOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtMember != null" >
+        tbt_member = #{record.tbtMember,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtDriverInfo != null" >
+        tbt_driver_info = #{record.tbtDriverInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtCar != null" >
+        tbt_car = #{record.tbtCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtType != null" >
+        tbt_type = #{record.tbtType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbtRepairType != null" >
+        tbt_repair_type = #{record.tbtRepairType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbtRepairAdr != null" >
+        tbt_repair_adr = #{record.tbtRepairAdr,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtRepairTime != null" >
+        tbt_repair_time = #{record.tbtRepairTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtArea != null" >
+        tbt_area = #{record.tbtArea,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtRepair != null" >
+        tbt_repair = #{record.tbtRepair,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtReportNum != null" >
+        tbt_report_num = #{record.tbtReportNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtInsureType != null" >
+        tbt_insure_type = #{record.tbtInsureType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbtHappenTime != null" >
+        tbt_happen_time = #{record.tbtHappenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtAdder != null" >
+        tbt_adder = #{record.tbtAdder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtEditer != null" >
+        tbt_editer = #{record.tbtEditer,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtCaser != null" >
+        tbt_caser = #{record.tbtCaser,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtFinishTime != null" >
+        tbt_finish_time = #{record.tbtFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtUpdateTime != null" >
+        tbt_update_time = #{record.tbtUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtAddTime != null" >
+        tbt_add_time = #{record.tbtAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtStatus != null" >
+        tbt_status = #{record.tbtStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbtTrailer != null" >
+        tbt_trailer = #{record.tbtTrailer,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbtTrailerFee != null" >
+        tbt_trailer_fee = #{record.tbtTrailerFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtAuditor != null" >
+        tbt_auditor = #{record.tbtAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtAuditorFee != null" >
+        tbt_auditor_fee = #{record.tbtAuditorFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtAuditorOther != null" >
+        tbt_auditor_other = #{record.tbtAuditorOther,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtAdvanceFee != null" >
+        tbt_advance_fee = #{record.tbtAdvanceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtDamageFee != null" >
+        tbt_damage_fee = #{record.tbtDamageFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtInsureUp != null" >
+        tbt_insure_up = #{record.tbtInsureUp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtFeeOther != null" >
+        tbt_fee_other = #{record.tbtFeeOther,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtChargeTime != null" >
+        tbt_charge_time = #{record.tbtChargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtPayType != null" >
+        tbt_pay_type = #{record.tbtPayType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbtTrackPeople != null" >
+        tbt_track_people = #{record.tbtTrackPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtThirdCarno != null" >
+        tbt_third_carno = #{record.tbtThirdCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtThirdLoss != null" >
+        tbt_third_loss = #{record.tbtThirdLoss,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtThirdInfo != null" >
+        tbt_third_info = #{record.tbtThirdInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtThirdInsure != null" >
+        tbt_third_insure = #{record.tbtThirdInsure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtRemark != null" >
+        tbt_remark = #{record.tbtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtRepairBill != null" >
+        tbt_repair_bill = #{record.tbtRepairBill,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtSettleTime != null" >
+        tbt_settle_time = #{record.tbtSettleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtClaimFee != null" >
+        tbt_claim_fee = #{record.tbtClaimFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtRepairFee != null" >
+        tbt_repair_fee = #{record.tbtRepairFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtNeedFee != null" >
+        tbt_need_fee = #{record.tbtNeedFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtRealFee != null" >
+        tbt_real_fee = #{record.tbtRealFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbtDecipt != null" >
+        tbt_decipt = #{record.tbtDecipt,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_trouble
+    set tbt_id = #{record.tbtId,jdbcType=BIGINT},
+      tbt_host = #{record.tbtHost,jdbcType=BIGINT},
+      tbt_order = #{record.tbtOrder,jdbcType=BIGINT},
+      tbt_member = #{record.tbtMember,jdbcType=BIGINT},
+      tbt_driver_info = #{record.tbtDriverInfo,jdbcType=VARCHAR},
+      tbt_car = #{record.tbtCar,jdbcType=BIGINT},
+      tbt_type = #{record.tbtType,jdbcType=TINYINT},
+      tbt_repair_type = #{record.tbtRepairType,jdbcType=TINYINT},
+      tbt_repair_adr = #{record.tbtRepairAdr,jdbcType=BIGINT},
+      tbt_repair_time = #{record.tbtRepairTime,jdbcType=TIMESTAMP},
+      tbt_area = #{record.tbtArea,jdbcType=BIGINT},
+      tbt_repair = #{record.tbtRepair,jdbcType=BIGINT},
+      tbt_report_num = #{record.tbtReportNum,jdbcType=VARCHAR},
+      tbt_insure_type = #{record.tbtInsureType,jdbcType=TINYINT},
+      tbt_happen_time = #{record.tbtHappenTime,jdbcType=TIMESTAMP},
+      tbt_adder = #{record.tbtAdder,jdbcType=BIGINT},
+      tbt_editer = #{record.tbtEditer,jdbcType=BIGINT},
+      tbt_caser = #{record.tbtCaser,jdbcType=BIGINT},
+      tbt_finish_time = #{record.tbtFinishTime,jdbcType=TIMESTAMP},
+      tbt_update_time = #{record.tbtUpdateTime,jdbcType=TIMESTAMP},
+      tbt_add_time = #{record.tbtAddTime,jdbcType=TIMESTAMP},
+      tbt_status = #{record.tbtStatus,jdbcType=SMALLINT},
+      tbt_trailer = #{record.tbtTrailer,jdbcType=TINYINT},
+      tbt_trailer_fee = #{record.tbtTrailerFee,jdbcType=DOUBLE},
+      tbt_auditor = #{record.tbtAuditor,jdbcType=VARCHAR},
+      tbt_auditor_fee = #{record.tbtAuditorFee,jdbcType=DOUBLE},
+      tbt_auditor_other = #{record.tbtAuditorOther,jdbcType=DOUBLE},
+      tbt_advance_fee = #{record.tbtAdvanceFee,jdbcType=DOUBLE},
+      tbt_damage_fee = #{record.tbtDamageFee,jdbcType=DOUBLE},
+      tbt_insure_up = #{record.tbtInsureUp,jdbcType=DOUBLE},
+      tbt_fee_other = #{record.tbtFeeOther,jdbcType=DOUBLE},
+      tbt_charge_time = #{record.tbtChargeTime,jdbcType=TIMESTAMP},
+      tbt_pay_type = #{record.tbtPayType,jdbcType=TINYINT},
+      tbt_track_people = #{record.tbtTrackPeople,jdbcType=VARCHAR},
+      tbt_third_carno = #{record.tbtThirdCarno,jdbcType=VARCHAR},
+      tbt_third_loss = #{record.tbtThirdLoss,jdbcType=DOUBLE},
+      tbt_third_info = #{record.tbtThirdInfo,jdbcType=VARCHAR},
+      tbt_third_insure = #{record.tbtThirdInsure,jdbcType=VARCHAR},
+      tbt_remark = #{record.tbtRemark,jdbcType=VARCHAR},
+      tbt_repair_bill = #{record.tbtRepairBill,jdbcType=VARCHAR},
+      tbt_settle_time = #{record.tbtSettleTime,jdbcType=TIMESTAMP},
+      tbt_claim_fee = #{record.tbtClaimFee,jdbcType=DOUBLE},
+      tbt_repair_fee = #{record.tbtRepairFee,jdbcType=DOUBLE},
+      tbt_need_fee = #{record.tbtNeedFee,jdbcType=DOUBLE},
+      tbt_real_fee = #{record.tbtRealFee,jdbcType=DOUBLE},
+      tbt_decipt = #{record.tbtDecipt,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_trouble
+    set tbt_id = #{record.tbtId,jdbcType=BIGINT},
+      tbt_host = #{record.tbtHost,jdbcType=BIGINT},
+      tbt_order = #{record.tbtOrder,jdbcType=BIGINT},
+      tbt_member = #{record.tbtMember,jdbcType=BIGINT},
+      tbt_driver_info = #{record.tbtDriverInfo,jdbcType=VARCHAR},
+      tbt_car = #{record.tbtCar,jdbcType=BIGINT},
+      tbt_type = #{record.tbtType,jdbcType=TINYINT},
+      tbt_repair_type = #{record.tbtRepairType,jdbcType=TINYINT},
+      tbt_repair_adr = #{record.tbtRepairAdr,jdbcType=BIGINT},
+      tbt_repair_time = #{record.tbtRepairTime,jdbcType=TIMESTAMP},
+      tbt_area = #{record.tbtArea,jdbcType=BIGINT},
+      tbt_repair = #{record.tbtRepair,jdbcType=BIGINT},
+      tbt_report_num = #{record.tbtReportNum,jdbcType=VARCHAR},
+      tbt_insure_type = #{record.tbtInsureType,jdbcType=TINYINT},
+      tbt_happen_time = #{record.tbtHappenTime,jdbcType=TIMESTAMP},
+      tbt_adder = #{record.tbtAdder,jdbcType=BIGINT},
+      tbt_editer = #{record.tbtEditer,jdbcType=BIGINT},
+      tbt_caser = #{record.tbtCaser,jdbcType=BIGINT},
+      tbt_finish_time = #{record.tbtFinishTime,jdbcType=TIMESTAMP},
+      tbt_update_time = #{record.tbtUpdateTime,jdbcType=TIMESTAMP},
+      tbt_add_time = #{record.tbtAddTime,jdbcType=TIMESTAMP},
+      tbt_status = #{record.tbtStatus,jdbcType=SMALLINT},
+      tbt_trailer = #{record.tbtTrailer,jdbcType=TINYINT},
+      tbt_trailer_fee = #{record.tbtTrailerFee,jdbcType=DOUBLE},
+      tbt_auditor = #{record.tbtAuditor,jdbcType=VARCHAR},
+      tbt_auditor_fee = #{record.tbtAuditorFee,jdbcType=DOUBLE},
+      tbt_auditor_other = #{record.tbtAuditorOther,jdbcType=DOUBLE},
+      tbt_advance_fee = #{record.tbtAdvanceFee,jdbcType=DOUBLE},
+      tbt_damage_fee = #{record.tbtDamageFee,jdbcType=DOUBLE},
+      tbt_insure_up = #{record.tbtInsureUp,jdbcType=DOUBLE},
+      tbt_fee_other = #{record.tbtFeeOther,jdbcType=DOUBLE},
+      tbt_charge_time = #{record.tbtChargeTime,jdbcType=TIMESTAMP},
+      tbt_pay_type = #{record.tbtPayType,jdbcType=TINYINT},
+      tbt_track_people = #{record.tbtTrackPeople,jdbcType=VARCHAR},
+      tbt_third_carno = #{record.tbtThirdCarno,jdbcType=VARCHAR},
+      tbt_third_loss = #{record.tbtThirdLoss,jdbcType=DOUBLE},
+      tbt_third_info = #{record.tbtThirdInfo,jdbcType=VARCHAR},
+      tbt_third_insure = #{record.tbtThirdInsure,jdbcType=VARCHAR},
+      tbt_remark = #{record.tbtRemark,jdbcType=VARCHAR},
+      tbt_repair_bill = #{record.tbtRepairBill,jdbcType=VARCHAR},
+      tbt_settle_time = #{record.tbtSettleTime,jdbcType=TIMESTAMP},
+      tbt_claim_fee = #{record.tbtClaimFee,jdbcType=DOUBLE},
+      tbt_repair_fee = #{record.tbtRepairFee,jdbcType=DOUBLE},
+      tbt_need_fee = #{record.tbtNeedFee,jdbcType=DOUBLE},
+      tbt_real_fee = #{record.tbtRealFee,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Trouble" >
+    update tb_trouble
+    <set >
+      <if test="tbtHost != null" >
+        tbt_host = #{tbtHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbtOrder != null" >
+        tbt_order = #{tbtOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbtMember != null" >
+        tbt_member = #{tbtMember,jdbcType=BIGINT},
+      </if>
+      <if test="tbtDriverInfo != null" >
+        tbt_driver_info = #{tbtDriverInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtCar != null" >
+        tbt_car = #{tbtCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbtType != null" >
+        tbt_type = #{tbtType,jdbcType=TINYINT},
+      </if>
+      <if test="tbtRepairType != null" >
+        tbt_repair_type = #{tbtRepairType,jdbcType=TINYINT},
+      </if>
+      <if test="tbtRepairAdr != null" >
+        tbt_repair_adr = #{tbtRepairAdr,jdbcType=BIGINT},
+      </if>
+      <if test="tbtRepairTime != null" >
+        tbt_repair_time = #{tbtRepairTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtArea != null" >
+        tbt_area = #{tbtArea,jdbcType=BIGINT},
+      </if>
+      <if test="tbtRepair != null" >
+        tbt_repair = #{tbtRepair,jdbcType=BIGINT},
+      </if>
+      <if test="tbtReportNum != null" >
+        tbt_report_num = #{tbtReportNum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtInsureType != null" >
+        tbt_insure_type = #{tbtInsureType,jdbcType=TINYINT},
+      </if>
+      <if test="tbtHappenTime != null" >
+        tbt_happen_time = #{tbtHappenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtAdder != null" >
+        tbt_adder = #{tbtAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbtEditer != null" >
+        tbt_editer = #{tbtEditer,jdbcType=BIGINT},
+      </if>
+      <if test="tbtCaser != null" >
+        tbt_caser = #{tbtCaser,jdbcType=BIGINT},
+      </if>
+      <if test="tbtFinishTime != null" >
+        tbt_finish_time = #{tbtFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtUpdateTime != null" >
+        tbt_update_time = #{tbtUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtAddTime != null" >
+        tbt_add_time = #{tbtAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtStatus != null" >
+        tbt_status = #{tbtStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbtTrailer != null" >
+        tbt_trailer = #{tbtTrailer,jdbcType=TINYINT},
+      </if>
+      <if test="tbtTrailerFee != null" >
+        tbt_trailer_fee = #{tbtTrailerFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtAuditor != null" >
+        tbt_auditor = #{tbtAuditor,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtAuditorFee != null" >
+        tbt_auditor_fee = #{tbtAuditorFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtAuditorOther != null" >
+        tbt_auditor_other = #{tbtAuditorOther,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtAdvanceFee != null" >
+        tbt_advance_fee = #{tbtAdvanceFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtDamageFee != null" >
+        tbt_damage_fee = #{tbtDamageFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtInsureUp != null" >
+        tbt_insure_up = #{tbtInsureUp,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtFeeOther != null" >
+        tbt_fee_other = #{tbtFeeOther,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtChargeTime != null" >
+        tbt_charge_time = #{tbtChargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtPayType != null" >
+        tbt_pay_type = #{tbtPayType,jdbcType=TINYINT},
+      </if>
+      <if test="tbtTrackPeople != null" >
+        tbt_track_people = #{tbtTrackPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtThirdCarno != null" >
+        tbt_third_carno = #{tbtThirdCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtThirdLoss != null" >
+        tbt_third_loss = #{tbtThirdLoss,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtThirdInfo != null" >
+        tbt_third_info = #{tbtThirdInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtThirdInsure != null" >
+        tbt_third_insure = #{tbtThirdInsure,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtRemark != null" >
+        tbt_remark = #{tbtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtRepairBill != null" >
+        tbt_repair_bill = #{tbtRepairBill,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtSettleTime != null" >
+        tbt_settle_time = #{tbtSettleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtClaimFee != null" >
+        tbt_claim_fee = #{tbtClaimFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtRepairFee != null" >
+        tbt_repair_fee = #{tbtRepairFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtNeedFee != null" >
+        tbt_need_fee = #{tbtNeedFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtRealFee != null" >
+        tbt_real_fee = #{tbtRealFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbtDecipt != null" >
+        tbt_decipt = #{tbtDecipt,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbt_id = #{tbtId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.Trouble" >
+    update tb_trouble
+    set tbt_host = #{tbtHost,jdbcType=BIGINT},
+      tbt_order = #{tbtOrder,jdbcType=BIGINT},
+      tbt_member = #{tbtMember,jdbcType=BIGINT},
+      tbt_driver_info = #{tbtDriverInfo,jdbcType=VARCHAR},
+      tbt_car = #{tbtCar,jdbcType=BIGINT},
+      tbt_type = #{tbtType,jdbcType=TINYINT},
+      tbt_repair_type = #{tbtRepairType,jdbcType=TINYINT},
+      tbt_repair_adr = #{tbtRepairAdr,jdbcType=BIGINT},
+      tbt_repair_time = #{tbtRepairTime,jdbcType=TIMESTAMP},
+      tbt_area = #{tbtArea,jdbcType=BIGINT},
+      tbt_repair = #{tbtRepair,jdbcType=BIGINT},
+      tbt_report_num = #{tbtReportNum,jdbcType=VARCHAR},
+      tbt_insure_type = #{tbtInsureType,jdbcType=TINYINT},
+      tbt_happen_time = #{tbtHappenTime,jdbcType=TIMESTAMP},
+      tbt_adder = #{tbtAdder,jdbcType=BIGINT},
+      tbt_editer = #{tbtEditer,jdbcType=BIGINT},
+      tbt_caser = #{tbtCaser,jdbcType=BIGINT},
+      tbt_finish_time = #{tbtFinishTime,jdbcType=TIMESTAMP},
+      tbt_update_time = #{tbtUpdateTime,jdbcType=TIMESTAMP},
+      tbt_add_time = #{tbtAddTime,jdbcType=TIMESTAMP},
+      tbt_status = #{tbtStatus,jdbcType=SMALLINT},
+      tbt_trailer = #{tbtTrailer,jdbcType=TINYINT},
+      tbt_trailer_fee = #{tbtTrailerFee,jdbcType=DOUBLE},
+      tbt_auditor = #{tbtAuditor,jdbcType=VARCHAR},
+      tbt_auditor_fee = #{tbtAuditorFee,jdbcType=DOUBLE},
+      tbt_auditor_other = #{tbtAuditorOther,jdbcType=DOUBLE},
+      tbt_advance_fee = #{tbtAdvanceFee,jdbcType=DOUBLE},
+      tbt_damage_fee = #{tbtDamageFee,jdbcType=DOUBLE},
+      tbt_insure_up = #{tbtInsureUp,jdbcType=DOUBLE},
+      tbt_fee_other = #{tbtFeeOther,jdbcType=DOUBLE},
+      tbt_charge_time = #{tbtChargeTime,jdbcType=TIMESTAMP},
+      tbt_pay_type = #{tbtPayType,jdbcType=TINYINT},
+      tbt_track_people = #{tbtTrackPeople,jdbcType=VARCHAR},
+      tbt_third_carno = #{tbtThirdCarno,jdbcType=VARCHAR},
+      tbt_third_loss = #{tbtThirdLoss,jdbcType=DOUBLE},
+      tbt_third_info = #{tbtThirdInfo,jdbcType=VARCHAR},
+      tbt_third_insure = #{tbtThirdInsure,jdbcType=VARCHAR},
+      tbt_remark = #{tbtRemark,jdbcType=VARCHAR},
+      tbt_repair_bill = #{tbtRepairBill,jdbcType=VARCHAR},
+      tbt_settle_time = #{tbtSettleTime,jdbcType=TIMESTAMP},
+      tbt_claim_fee = #{tbtClaimFee,jdbcType=DOUBLE},
+      tbt_repair_fee = #{tbtRepairFee,jdbcType=DOUBLE},
+      tbt_need_fee = #{tbtNeedFee,jdbcType=DOUBLE},
+      tbt_real_fee = #{tbtRealFee,jdbcType=DOUBLE},
+      tbt_decipt = #{tbtDecipt,jdbcType=LONGVARCHAR}
+    where tbt_id = #{tbtId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Trouble" >
+    update tb_trouble
+    set tbt_host = #{tbtHost,jdbcType=BIGINT},
+      tbt_order = #{tbtOrder,jdbcType=BIGINT},
+      tbt_member = #{tbtMember,jdbcType=BIGINT},
+      tbt_driver_info = #{tbtDriverInfo,jdbcType=VARCHAR},
+      tbt_car = #{tbtCar,jdbcType=BIGINT},
+      tbt_type = #{tbtType,jdbcType=TINYINT},
+      tbt_repair_type = #{tbtRepairType,jdbcType=TINYINT},
+      tbt_repair_adr = #{tbtRepairAdr,jdbcType=BIGINT},
+      tbt_repair_time = #{tbtRepairTime,jdbcType=TIMESTAMP},
+      tbt_area = #{tbtArea,jdbcType=BIGINT},
+      tbt_repair = #{tbtRepair,jdbcType=BIGINT},
+      tbt_report_num = #{tbtReportNum,jdbcType=VARCHAR},
+      tbt_insure_type = #{tbtInsureType,jdbcType=TINYINT},
+      tbt_happen_time = #{tbtHappenTime,jdbcType=TIMESTAMP},
+      tbt_adder = #{tbtAdder,jdbcType=BIGINT},
+      tbt_editer = #{tbtEditer,jdbcType=BIGINT},
+      tbt_caser = #{tbtCaser,jdbcType=BIGINT},
+      tbt_finish_time = #{tbtFinishTime,jdbcType=TIMESTAMP},
+      tbt_update_time = #{tbtUpdateTime,jdbcType=TIMESTAMP},
+      tbt_add_time = #{tbtAddTime,jdbcType=TIMESTAMP},
+      tbt_status = #{tbtStatus,jdbcType=SMALLINT},
+      tbt_trailer = #{tbtTrailer,jdbcType=TINYINT},
+      tbt_trailer_fee = #{tbtTrailerFee,jdbcType=DOUBLE},
+      tbt_auditor = #{tbtAuditor,jdbcType=VARCHAR},
+      tbt_auditor_fee = #{tbtAuditorFee,jdbcType=DOUBLE},
+      tbt_auditor_other = #{tbtAuditorOther,jdbcType=DOUBLE},
+      tbt_advance_fee = #{tbtAdvanceFee,jdbcType=DOUBLE},
+      tbt_damage_fee = #{tbtDamageFee,jdbcType=DOUBLE},
+      tbt_insure_up = #{tbtInsureUp,jdbcType=DOUBLE},
+      tbt_fee_other = #{tbtFeeOther,jdbcType=DOUBLE},
+      tbt_charge_time = #{tbtChargeTime,jdbcType=TIMESTAMP},
+      tbt_pay_type = #{tbtPayType,jdbcType=TINYINT},
+      tbt_track_people = #{tbtTrackPeople,jdbcType=VARCHAR},
+      tbt_third_carno = #{tbtThirdCarno,jdbcType=VARCHAR},
+      tbt_third_loss = #{tbtThirdLoss,jdbcType=DOUBLE},
+      tbt_third_info = #{tbtThirdInfo,jdbcType=VARCHAR},
+      tbt_third_insure = #{tbtThirdInsure,jdbcType=VARCHAR},
+      tbt_remark = #{tbtRemark,jdbcType=VARCHAR},
+      tbt_repair_bill = #{tbtRepairBill,jdbcType=VARCHAR},
+      tbt_settle_time = #{tbtSettleTime,jdbcType=TIMESTAMP},
+      tbt_claim_fee = #{tbtClaimFee,jdbcType=DOUBLE},
+      tbt_repair_fee = #{tbtRepairFee,jdbcType=DOUBLE},
+      tbt_need_fee = #{tbtNeedFee,jdbcType=DOUBLE},
+      tbt_real_fee = #{tbtRealFee,jdbcType=DOUBLE}
+    where tbt_id = #{tbtId,jdbcType=BIGINT}
+  </update>
+</mapper>

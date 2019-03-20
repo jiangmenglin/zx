@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.AnnualMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Annual" >
+    <id column="tbai_id" property="tbaiId" jdbcType="INTEGER" />
+    <result column="tbai_host" property="tbaiHost" jdbcType="SMALLINT" />
+    <result column="tba_car" property="tbaCar" jdbcType="INTEGER" />
+    <result column="tbai_annual_date" property="tbaiAnnualDate" jdbcType="DATE" />
+    <result column="tbai_annual_real" property="tbaiAnnualReal" jdbcType="DATE" />
+    <result column="tbai_editor" property="tbaiEditor" jdbcType="INTEGER" />
+    <result column="tbai_update_time" property="tbaiUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbai_add_time" property="tbaiAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbai_remark" property="tbaiRemark" jdbcType="VARCHAR" />
+    <result column="tbai_status" property="tbaiStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbai_id, tbai_host, tba_car, tbai_annual_date, tbai_annual_real, tbai_editor, tbai_update_time, 
+    tbai_add_time, tbai_remark, tbai_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.AnnualExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_annual
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_annual
+    where tbai_id = #{tbaiId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_annual
+    where tbai_id = #{tbaiId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Annual" >
+    insert into tb_annual (tbai_id, tbai_host, tba_car, 
+      tbai_annual_date, tbai_annual_real, tbai_editor, 
+      tbai_update_time, tbai_add_time, tbai_remark, 
+      tbai_status, createTime, modifyDate
+      )
+    values (#{tbaiId,jdbcType=INTEGER}, #{tbaiHost,jdbcType=SMALLINT}, #{tbaCar,jdbcType=INTEGER}, 
+      #{tbaiAnnualDate,jdbcType=DATE}, #{tbaiAnnualReal,jdbcType=DATE}, #{tbaiEditor,jdbcType=INTEGER}, 
+      #{tbaiUpdateTime,jdbcType=TIMESTAMP}, #{tbaiAddTime,jdbcType=TIMESTAMP}, #{tbaiRemark,jdbcType=VARCHAR}, 
+      #{tbaiStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Annual" >
+    insert into tb_annual
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbaiId != null" >
+        tbai_id,
+      </if>
+      <if test="tbaiHost != null" >
+        tbai_host,
+      </if>
+      <if test="tbaCar != null" >
+        tba_car,
+      </if>
+      <if test="tbaiAnnualDate != null" >
+        tbai_annual_date,
+      </if>
+      <if test="tbaiAnnualReal != null" >
+        tbai_annual_real,
+      </if>
+      <if test="tbaiEditor != null" >
+        tbai_editor,
+      </if>
+      <if test="tbaiUpdateTime != null" >
+        tbai_update_time,
+      </if>
+      <if test="tbaiAddTime != null" >
+        tbai_add_time,
+      </if>
+      <if test="tbaiRemark != null" >
+        tbai_remark,
+      </if>
+      <if test="tbaiStatus != null" >
+        tbai_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbaiId != null" >
+        #{tbaiId,jdbcType=INTEGER},
+      </if>
+      <if test="tbaiHost != null" >
+        #{tbaiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbaCar != null" >
+        #{tbaCar,jdbcType=INTEGER},
+      </if>
+      <if test="tbaiAnnualDate != null" >
+        #{tbaiAnnualDate,jdbcType=DATE},
+      </if>
+      <if test="tbaiAnnualReal != null" >
+        #{tbaiAnnualReal,jdbcType=DATE},
+      </if>
+      <if test="tbaiEditor != null" >
+        #{tbaiEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbaiUpdateTime != null" >
+        #{tbaiUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbaiAddTime != null" >
+        #{tbaiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbaiRemark != null" >
+        #{tbaiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaiStatus != null" >
+        #{tbaiStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.AnnualExample" resultType="java.lang.Integer" >
+    select count(*) from tb_annual
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_annual
+    <set >
+      <if test="record.tbaiId != null" >
+        tbai_id = #{record.tbaiId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbaiHost != null" >
+        tbai_host = #{record.tbaiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbaCar != null" >
+        tba_car = #{record.tbaCar,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbaiAnnualDate != null" >
+        tbai_annual_date = #{record.tbaiAnnualDate,jdbcType=DATE},
+      </if>
+      <if test="record.tbaiAnnualReal != null" >
+        tbai_annual_real = #{record.tbaiAnnualReal,jdbcType=DATE},
+      </if>
+      <if test="record.tbaiEditor != null" >
+        tbai_editor = #{record.tbaiEditor,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbaiUpdateTime != null" >
+        tbai_update_time = #{record.tbaiUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbaiAddTime != null" >
+        tbai_add_time = #{record.tbaiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbaiRemark != null" >
+        tbai_remark = #{record.tbaiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaiStatus != null" >
+        tbai_status = #{record.tbaiStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_annual
+    set tbai_id = #{record.tbaiId,jdbcType=INTEGER},
+      tbai_host = #{record.tbaiHost,jdbcType=SMALLINT},
+      tba_car = #{record.tbaCar,jdbcType=INTEGER},
+      tbai_annual_date = #{record.tbaiAnnualDate,jdbcType=DATE},
+      tbai_annual_real = #{record.tbaiAnnualReal,jdbcType=DATE},
+      tbai_editor = #{record.tbaiEditor,jdbcType=INTEGER},
+      tbai_update_time = #{record.tbaiUpdateTime,jdbcType=TIMESTAMP},
+      tbai_add_time = #{record.tbaiAddTime,jdbcType=TIMESTAMP},
+      tbai_remark = #{record.tbaiRemark,jdbcType=VARCHAR},
+      tbai_status = #{record.tbaiStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Annual" >
+    update tb_annual
+    <set >
+      <if test="tbaiHost != null" >
+        tbai_host = #{tbaiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbaCar != null" >
+        tba_car = #{tbaCar,jdbcType=INTEGER},
+      </if>
+      <if test="tbaiAnnualDate != null" >
+        tbai_annual_date = #{tbaiAnnualDate,jdbcType=DATE},
+      </if>
+      <if test="tbaiAnnualReal != null" >
+        tbai_annual_real = #{tbaiAnnualReal,jdbcType=DATE},
+      </if>
+      <if test="tbaiEditor != null" >
+        tbai_editor = #{tbaiEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbaiUpdateTime != null" >
+        tbai_update_time = #{tbaiUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbaiAddTime != null" >
+        tbai_add_time = #{tbaiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbaiRemark != null" >
+        tbai_remark = #{tbaiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaiStatus != null" >
+        tbai_status = #{tbaiStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbai_id = #{tbaiId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Annual" >
+    update tb_annual
+    set tbai_host = #{tbaiHost,jdbcType=SMALLINT},
+      tba_car = #{tbaCar,jdbcType=INTEGER},
+      tbai_annual_date = #{tbaiAnnualDate,jdbcType=DATE},
+      tbai_annual_real = #{tbaiAnnualReal,jdbcType=DATE},
+      tbai_editor = #{tbaiEditor,jdbcType=INTEGER},
+      tbai_update_time = #{tbaiUpdateTime,jdbcType=TIMESTAMP},
+      tbai_add_time = #{tbaiAddTime,jdbcType=TIMESTAMP},
+      tbai_remark = #{tbaiRemark,jdbcType=VARCHAR},
+      tbai_status = #{tbaiStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbai_id = #{tbaiId,jdbcType=INTEGER}
+  </update>
+</mapper>

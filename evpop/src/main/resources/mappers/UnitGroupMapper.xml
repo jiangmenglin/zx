@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.UnitGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.UnitGroup" >
+    <id column="tbug_id" property="tbugId" jdbcType="INTEGER" />
+    <result column="tbug_host" property="tbugHost" jdbcType="SMALLINT" />
+    <result column="tbug_info" property="tbugInfo" jdbcType="INTEGER" />
+    <result column="tbug_person" property="tbugPerson" jdbcType="INTEGER" />
+    <result column="tbug_name" property="tbugName" jdbcType="VARCHAR" />
+    <result column="tbug_quota" property="tbugQuota" jdbcType="DECIMAL" />
+    <result column="tbug_remark" property="tbugRemark" jdbcType="VARCHAR" />
+    <result column="tbug_memo" property="tbugMemo" jdbcType="VARCHAR" />
+    <result column="tbug_update_time" property="tbugUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbug_add_time" property="tbugAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbug_status" property="tbugStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.UnitGroup" extends="BaseResultMap" >
+    <result column="tbug_data" property="tbugData" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbug_id, tbug_host, tbug_info, tbug_person, tbug_name, tbug_quota, tbug_remark, tbug_memo, 
+    tbug_update_time, tbug_add_time, tbug_status, createTime, modifyDate
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbug_data
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.UnitGroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_unit_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.UnitGroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_unit_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_unit_group
+    where tbug_id = #{tbugId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_unit_group
+    where tbug_id = #{tbugId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.UnitGroup" >
+    insert into tb_unit_group (tbug_id, tbug_host, tbug_info, 
+      tbug_person, tbug_name, tbug_quota, 
+      tbug_remark, tbug_memo, tbug_update_time, 
+      tbug_add_time, tbug_status, createTime, 
+      modifyDate, tbug_data)
+    values (#{tbugId,jdbcType=INTEGER}, #{tbugHost,jdbcType=SMALLINT}, #{tbugInfo,jdbcType=INTEGER}, 
+      #{tbugPerson,jdbcType=INTEGER}, #{tbugName,jdbcType=VARCHAR}, #{tbugQuota,jdbcType=DECIMAL}, 
+      #{tbugRemark,jdbcType=VARCHAR}, #{tbugMemo,jdbcType=VARCHAR}, #{tbugUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbugAddTime,jdbcType=TIMESTAMP}, #{tbugStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifydate,jdbcType=TIMESTAMP}, #{tbugData,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.UnitGroup" >
+    insert into tb_unit_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbugId != null" >
+        tbug_id,
+      </if>
+      <if test="tbugHost != null" >
+        tbug_host,
+      </if>
+      <if test="tbugInfo != null" >
+        tbug_info,
+      </if>
+      <if test="tbugPerson != null" >
+        tbug_person,
+      </if>
+      <if test="tbugName != null" >
+        tbug_name,
+      </if>
+      <if test="tbugQuota != null" >
+        tbug_quota,
+      </if>
+      <if test="tbugRemark != null" >
+        tbug_remark,
+      </if>
+      <if test="tbugMemo != null" >
+        tbug_memo,
+      </if>
+      <if test="tbugUpdateTime != null" >
+        tbug_update_time,
+      </if>
+      <if test="tbugAddTime != null" >
+        tbug_add_time,
+      </if>
+      <if test="tbugStatus != null" >
+        tbug_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+      <if test="tbugData != null" >
+        tbug_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbugId != null" >
+        #{tbugId,jdbcType=INTEGER},
+      </if>
+      <if test="tbugHost != null" >
+        #{tbugHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbugInfo != null" >
+        #{tbugInfo,jdbcType=INTEGER},
+      </if>
+      <if test="tbugPerson != null" >
+        #{tbugPerson,jdbcType=INTEGER},
+      </if>
+      <if test="tbugName != null" >
+        #{tbugName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbugQuota != null" >
+        #{tbugQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="tbugRemark != null" >
+        #{tbugRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbugMemo != null" >
+        #{tbugMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbugUpdateTime != null" >
+        #{tbugUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbugAddTime != null" >
+        #{tbugAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbugStatus != null" >
+        #{tbugStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbugData != null" >
+        #{tbugData,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.UnitGroupExample" resultType="java.lang.Integer" >
+    select count(*) from tb_unit_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_unit_group
+    <set >
+      <if test="record.tbugId != null" >
+        tbug_id = #{record.tbugId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbugHost != null" >
+        tbug_host = #{record.tbugHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbugInfo != null" >
+        tbug_info = #{record.tbugInfo,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbugPerson != null" >
+        tbug_person = #{record.tbugPerson,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbugName != null" >
+        tbug_name = #{record.tbugName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbugQuota != null" >
+        tbug_quota = #{record.tbugQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbugRemark != null" >
+        tbug_remark = #{record.tbugRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbugMemo != null" >
+        tbug_memo = #{record.tbugMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbugUpdateTime != null" >
+        tbug_update_time = #{record.tbugUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbugAddTime != null" >
+        tbug_add_time = #{record.tbugAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbugStatus != null" >
+        tbug_status = #{record.tbugStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbugData != null" >
+        tbug_data = #{record.tbugData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_unit_group
+    set tbug_id = #{record.tbugId,jdbcType=INTEGER},
+      tbug_host = #{record.tbugHost,jdbcType=SMALLINT},
+      tbug_info = #{record.tbugInfo,jdbcType=INTEGER},
+      tbug_person = #{record.tbugPerson,jdbcType=INTEGER},
+      tbug_name = #{record.tbugName,jdbcType=VARCHAR},
+      tbug_quota = #{record.tbugQuota,jdbcType=DECIMAL},
+      tbug_remark = #{record.tbugRemark,jdbcType=VARCHAR},
+      tbug_memo = #{record.tbugMemo,jdbcType=VARCHAR},
+      tbug_update_time = #{record.tbugUpdateTime,jdbcType=TIMESTAMP},
+      tbug_add_time = #{record.tbugAddTime,jdbcType=TIMESTAMP},
+      tbug_status = #{record.tbugStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      tbug_data = #{record.tbugData,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_unit_group
+    set tbug_id = #{record.tbugId,jdbcType=INTEGER},
+      tbug_host = #{record.tbugHost,jdbcType=SMALLINT},
+      tbug_info = #{record.tbugInfo,jdbcType=INTEGER},
+      tbug_person = #{record.tbugPerson,jdbcType=INTEGER},
+      tbug_name = #{record.tbugName,jdbcType=VARCHAR},
+      tbug_quota = #{record.tbugQuota,jdbcType=DECIMAL},
+      tbug_remark = #{record.tbugRemark,jdbcType=VARCHAR},
+      tbug_memo = #{record.tbugMemo,jdbcType=VARCHAR},
+      tbug_update_time = #{record.tbugUpdateTime,jdbcType=TIMESTAMP},
+      tbug_add_time = #{record.tbugAddTime,jdbcType=TIMESTAMP},
+      tbug_status = #{record.tbugStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.UnitGroup" >
+    update tb_unit_group
+    <set >
+      <if test="tbugHost != null" >
+        tbug_host = #{tbugHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbugInfo != null" >
+        tbug_info = #{tbugInfo,jdbcType=INTEGER},
+      </if>
+      <if test="tbugPerson != null" >
+        tbug_person = #{tbugPerson,jdbcType=INTEGER},
+      </if>
+      <if test="tbugName != null" >
+        tbug_name = #{tbugName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbugQuota != null" >
+        tbug_quota = #{tbugQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="tbugRemark != null" >
+        tbug_remark = #{tbugRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbugMemo != null" >
+        tbug_memo = #{tbugMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbugUpdateTime != null" >
+        tbug_update_time = #{tbugUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbugAddTime != null" >
+        tbug_add_time = #{tbugAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbugStatus != null" >
+        tbug_status = #{tbugStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbugData != null" >
+        tbug_data = #{tbugData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbug_id = #{tbugId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.UnitGroup" >
+    update tb_unit_group
+    set tbug_host = #{tbugHost,jdbcType=SMALLINT},
+      tbug_info = #{tbugInfo,jdbcType=INTEGER},
+      tbug_person = #{tbugPerson,jdbcType=INTEGER},
+      tbug_name = #{tbugName,jdbcType=VARCHAR},
+      tbug_quota = #{tbugQuota,jdbcType=DECIMAL},
+      tbug_remark = #{tbugRemark,jdbcType=VARCHAR},
+      tbug_memo = #{tbugMemo,jdbcType=VARCHAR},
+      tbug_update_time = #{tbugUpdateTime,jdbcType=TIMESTAMP},
+      tbug_add_time = #{tbugAddTime,jdbcType=TIMESTAMP},
+      tbug_status = #{tbugStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      tbug_data = #{tbugData,jdbcType=LONGVARCHAR}
+    where tbug_id = #{tbugId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.UnitGroup" >
+    update tb_unit_group
+    set tbug_host = #{tbugHost,jdbcType=SMALLINT},
+      tbug_info = #{tbugInfo,jdbcType=INTEGER},
+      tbug_person = #{tbugPerson,jdbcType=INTEGER},
+      tbug_name = #{tbugName,jdbcType=VARCHAR},
+      tbug_quota = #{tbugQuota,jdbcType=DECIMAL},
+      tbug_remark = #{tbugRemark,jdbcType=VARCHAR},
+      tbug_memo = #{tbugMemo,jdbcType=VARCHAR},
+      tbug_update_time = #{tbugUpdateTime,jdbcType=TIMESTAMP},
+      tbug_add_time = #{tbugAddTime,jdbcType=TIMESTAMP},
+      tbug_status = #{tbugStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbug_id = #{tbugId,jdbcType=INTEGER}
+  </update>
+</mapper>

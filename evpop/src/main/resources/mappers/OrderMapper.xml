@@ -1,0 +1,1077 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Order" >
+    <id column="tbo_id" property="tboId" jdbcType="BIGINT" />
+    <result column="tbo_host" property="tboHost" jdbcType="INTEGER" />
+    <result column="tbo_pay_member" property="tboPayMember" jdbcType="INTEGER" />
+    <result column="tbo_use_member" property="tboUseMember" jdbcType="INTEGER" />
+    <result column="tbo_user_type" property="tboUserType" jdbcType="INTEGER" />
+    <result column="tbo_company" property="tboCompany" jdbcType="INTEGER" />
+    <result column="tbo_fee_type" property="tboFeeType" jdbcType="INTEGER" />
+    <result column="tbo_area" property="tboArea" jdbcType="INTEGER" />
+    <result column="tbo_outlets" property="tboOutlets" jdbcType="INTEGER" />
+    <result column="tbo_ret_area" property="tboRetArea" jdbcType="INTEGER" />
+    <result column="tbo_outlets_ret" property="tboOutletsRet" jdbcType="INTEGER" />
+    <result column="tbo_car" property="tboCar" jdbcType="INTEGER" />
+    <result column="tbo_model" property="tboModel" jdbcType="INTEGER" />
+    <result column="tbo_start_time" property="tboStartTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_finish_time" property="tboFinishTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_use_type" property="tboUseType" jdbcType="TINYINT" />
+    <result column="tbo_take_time" property="tboTakeTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_ret_time" property="tboRetTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_duration" property="tboDuration" jdbcType="DOUBLE" />
+    <result column="tbo_km" property="tboKm" jdbcType="DOUBLE" />
+    <result column="tbo_credit_card" property="tboCreditCard" jdbcType="BIGINT" />
+    <result column="tbo_credit_bill" property="tboCreditBill" jdbcType="BIGINT" />
+    <result column="tbo_rebate" property="tboRebate" jdbcType="DOUBLE" />
+    <result column="tbo_pay_need" property="tboPayNeed" jdbcType="DOUBLE" />
+    <result column="tbo_discount" property="tboDiscount" jdbcType="DOUBLE" />
+    <result column="tbo_discount_desc" property="tboDiscountDesc" jdbcType="VARCHAR" />
+    <result column="tbo_pay_real" property="tboPayReal" jdbcType="DOUBLE" />
+    <result column="tbo_pay_money" property="tboPayMoney" jdbcType="DOUBLE" />
+    <result column="tbo_pay_coupon" property="tboPayCoupon" jdbcType="DOUBLE" />
+    <result column="tbo_pay_kilom" property="tboPayKilom" jdbcType="DOUBLE" />
+    <result column="tbo_pay_rent" property="tboPayRent" jdbcType="DOUBLE" />
+    <result column="tbo_pay_insure" property="tboPayInsure" jdbcType="DOUBLE" />
+    <result column="tbo_pay_timeout" property="tboPayTimeout" jdbcType="DOUBLE" />
+    <result column="tbo_refund" property="tboRefund" jdbcType="DOUBLE" />
+    <result column="tbo_refund_desc" property="tboRefundDesc" jdbcType="VARCHAR" />
+    <result column="tbo_income" property="tboIncome" jdbcType="TINYINT" />
+    <result column="tbo_use_index" property="tboUseIndex" jdbcType="INTEGER" />
+    <result column="tbo_no" property="tboNo" jdbcType="VARCHAR" />
+    <result column="tbo_flag" property="tboFlag" jdbcType="BIGINT" />
+    <result column="tbo_tag" property="tboTag" jdbcType="VARCHAR" />
+    <result column="tbo_src" property="tboSrc" jdbcType="VARCHAR" />
+    <result column="tbo_update_time" property="tboUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_add_time" property="tboAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_pay_time" property="tboPayTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_pay_type" property="tboPayType" jdbcType="TINYINT" />
+    <result column="tbo_take_km" property="tboTakeKm" jdbcType="INTEGER" />
+    <result column="tbo_ret_km" property="tboRetKm" jdbcType="INTEGER" />
+    <result column="tbo_take_battery" property="tboTakeBattery" jdbcType="INTEGER" />
+    <result column="tbo_ret_battery" property="tboRetBattery" jdbcType="INTEGER" />
+    <result column="tbo_take_latlng" property="tboTakeLatlng" jdbcType="VARCHAR" />
+    <result column="tbo_ret_latlng" property="tboRetLatlng" jdbcType="VARCHAR" />
+    <result column="tbo_serial" property="tboSerial" jdbcType="VARCHAR" />
+    <result column="tbo_code" property="tboCode" jdbcType="VARCHAR" />
+    <result column="tbo_remark" property="tboRemark" jdbcType="VARCHAR" />
+    <result column="tbo_editor" property="tboEditor" jdbcType="INTEGER" />
+    <result column="tbo_state" property="tboState" jdbcType="TINYINT" />
+    <result column="tbo_settle" property="tboSettle" jdbcType="TINYINT" />
+    <result column="tbo_status" property="tboStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbo_id, tbo_host, tbo_pay_member, tbo_use_member, tbo_user_type, tbo_company, tbo_fee_type, 
+    tbo_area, tbo_outlets, tbo_ret_area, tbo_outlets_ret, tbo_car, tbo_model, tbo_start_time, 
+    tbo_finish_time, tbo_use_type, tbo_take_time, tbo_ret_time, tbo_duration, tbo_km, 
+    tbo_credit_card, tbo_credit_bill, tbo_rebate, tbo_pay_need, tbo_discount, tbo_discount_desc, 
+    tbo_pay_real, tbo_pay_money, tbo_pay_coupon, tbo_pay_kilom, tbo_pay_rent, tbo_pay_insure, 
+    tbo_pay_timeout, tbo_refund, tbo_refund_desc, tbo_income, tbo_use_index, tbo_no, 
+    tbo_flag, tbo_tag, tbo_src, tbo_update_time, tbo_add_time, tbo_pay_time, tbo_pay_type, 
+    tbo_take_km, tbo_ret_km, tbo_take_battery, tbo_ret_battery, tbo_take_latlng, tbo_ret_latlng, 
+    tbo_serial, tbo_code, tbo_remark, tbo_editor, tbo_state, tbo_settle, tbo_status, 
+    createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order
+    where tbo_id = #{tboId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_order
+    where tbo_id = #{tboId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Order" >
+    insert into tb_order (tbo_id, tbo_host, tbo_pay_member, 
+      tbo_use_member, tbo_user_type, tbo_company, 
+      tbo_fee_type, tbo_area, tbo_outlets, 
+      tbo_ret_area, tbo_outlets_ret, tbo_car, 
+      tbo_model, tbo_start_time, tbo_finish_time, 
+      tbo_use_type, tbo_take_time, tbo_ret_time, 
+      tbo_duration, tbo_km, tbo_credit_card, 
+      tbo_credit_bill, tbo_rebate, tbo_pay_need, 
+      tbo_discount, tbo_discount_desc, tbo_pay_real, 
+      tbo_pay_money, tbo_pay_coupon, tbo_pay_kilom, 
+      tbo_pay_rent, tbo_pay_insure, tbo_pay_timeout, 
+      tbo_refund, tbo_refund_desc, tbo_income, 
+      tbo_use_index, tbo_no, tbo_flag, 
+      tbo_tag, tbo_src, tbo_update_time, 
+      tbo_add_time, tbo_pay_time, tbo_pay_type, 
+      tbo_take_km, tbo_ret_km, tbo_take_battery, 
+      tbo_ret_battery, tbo_take_latlng, tbo_ret_latlng, 
+      tbo_serial, tbo_code, tbo_remark, 
+      tbo_editor, tbo_state, tbo_settle, 
+      tbo_status, createTime, modifyDate
+      )
+    values (#{tboId,jdbcType=BIGINT}, #{tboHost,jdbcType=INTEGER}, #{tboPayMember,jdbcType=INTEGER}, 
+      #{tboUseMember,jdbcType=INTEGER}, #{tboUserType,jdbcType=INTEGER}, #{tboCompany,jdbcType=INTEGER}, 
+      #{tboFeeType,jdbcType=INTEGER}, #{tboArea,jdbcType=INTEGER}, #{tboOutlets,jdbcType=INTEGER}, 
+      #{tboRetArea,jdbcType=INTEGER}, #{tboOutletsRet,jdbcType=INTEGER}, #{tboCar,jdbcType=INTEGER}, 
+      #{tboModel,jdbcType=INTEGER}, #{tboStartTime,jdbcType=TIMESTAMP}, #{tboFinishTime,jdbcType=TIMESTAMP}, 
+      #{tboUseType,jdbcType=TINYINT}, #{tboTakeTime,jdbcType=TIMESTAMP}, #{tboRetTime,jdbcType=TIMESTAMP}, 
+      #{tboDuration,jdbcType=DOUBLE}, #{tboKm,jdbcType=DOUBLE}, #{tboCreditCard,jdbcType=BIGINT}, 
+      #{tboCreditBill,jdbcType=BIGINT}, #{tboRebate,jdbcType=DOUBLE}, #{tboPayNeed,jdbcType=DOUBLE}, 
+      #{tboDiscount,jdbcType=DOUBLE}, #{tboDiscountDesc,jdbcType=VARCHAR}, #{tboPayReal,jdbcType=DOUBLE}, 
+      #{tboPayMoney,jdbcType=DOUBLE}, #{tboPayCoupon,jdbcType=DOUBLE}, #{tboPayKilom,jdbcType=DOUBLE}, 
+      #{tboPayRent,jdbcType=DOUBLE}, #{tboPayInsure,jdbcType=DOUBLE}, #{tboPayTimeout,jdbcType=DOUBLE}, 
+      #{tboRefund,jdbcType=DOUBLE}, #{tboRefundDesc,jdbcType=VARCHAR}, #{tboIncome,jdbcType=TINYINT}, 
+      #{tboUseIndex,jdbcType=INTEGER}, #{tboNo,jdbcType=VARCHAR}, #{tboFlag,jdbcType=BIGINT}, 
+      #{tboTag,jdbcType=VARCHAR}, #{tboSrc,jdbcType=VARCHAR}, #{tboUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tboAddTime,jdbcType=TIMESTAMP}, #{tboPayTime,jdbcType=TIMESTAMP}, #{tboPayType,jdbcType=TINYINT}, 
+      #{tboTakeKm,jdbcType=INTEGER}, #{tboRetKm,jdbcType=INTEGER}, #{tboTakeBattery,jdbcType=INTEGER}, 
+      #{tboRetBattery,jdbcType=INTEGER}, #{tboTakeLatlng,jdbcType=VARCHAR}, #{tboRetLatlng,jdbcType=VARCHAR}, 
+      #{tboSerial,jdbcType=VARCHAR}, #{tboCode,jdbcType=VARCHAR}, #{tboRemark,jdbcType=VARCHAR}, 
+      #{tboEditor,jdbcType=INTEGER}, #{tboState,jdbcType=TINYINT}, #{tboSettle,jdbcType=TINYINT}, 
+      #{tboStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Order" >
+    insert into tb_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tboId != null" >
+        tbo_id,
+      </if>
+      <if test="tboHost != null" >
+        tbo_host,
+      </if>
+      <if test="tboPayMember != null" >
+        tbo_pay_member,
+      </if>
+      <if test="tboUseMember != null" >
+        tbo_use_member,
+      </if>
+      <if test="tboUserType != null" >
+        tbo_user_type,
+      </if>
+      <if test="tboCompany != null" >
+        tbo_company,
+      </if>
+      <if test="tboFeeType != null" >
+        tbo_fee_type,
+      </if>
+      <if test="tboArea != null" >
+        tbo_area,
+      </if>
+      <if test="tboOutlets != null" >
+        tbo_outlets,
+      </if>
+      <if test="tboRetArea != null" >
+        tbo_ret_area,
+      </if>
+      <if test="tboOutletsRet != null" >
+        tbo_outlets_ret,
+      </if>
+      <if test="tboCar != null" >
+        tbo_car,
+      </if>
+      <if test="tboModel != null" >
+        tbo_model,
+      </if>
+      <if test="tboStartTime != null" >
+        tbo_start_time,
+      </if>
+      <if test="tboFinishTime != null" >
+        tbo_finish_time,
+      </if>
+      <if test="tboUseType != null" >
+        tbo_use_type,
+      </if>
+      <if test="tboTakeTime != null" >
+        tbo_take_time,
+      </if>
+      <if test="tboRetTime != null" >
+        tbo_ret_time,
+      </if>
+      <if test="tboDuration != null" >
+        tbo_duration,
+      </if>
+      <if test="tboKm != null" >
+        tbo_km,
+      </if>
+      <if test="tboCreditCard != null" >
+        tbo_credit_card,
+      </if>
+      <if test="tboCreditBill != null" >
+        tbo_credit_bill,
+      </if>
+      <if test="tboRebate != null" >
+        tbo_rebate,
+      </if>
+      <if test="tboPayNeed != null" >
+        tbo_pay_need,
+      </if>
+      <if test="tboDiscount != null" >
+        tbo_discount,
+      </if>
+      <if test="tboDiscountDesc != null" >
+        tbo_discount_desc,
+      </if>
+      <if test="tboPayReal != null" >
+        tbo_pay_real,
+      </if>
+      <if test="tboPayMoney != null" >
+        tbo_pay_money,
+      </if>
+      <if test="tboPayCoupon != null" >
+        tbo_pay_coupon,
+      </if>
+      <if test="tboPayKilom != null" >
+        tbo_pay_kilom,
+      </if>
+      <if test="tboPayRent != null" >
+        tbo_pay_rent,
+      </if>
+      <if test="tboPayInsure != null" >
+        tbo_pay_insure,
+      </if>
+      <if test="tboPayTimeout != null" >
+        tbo_pay_timeout,
+      </if>
+      <if test="tboRefund != null" >
+        tbo_refund,
+      </if>
+      <if test="tboRefundDesc != null" >
+        tbo_refund_desc,
+      </if>
+      <if test="tboIncome != null" >
+        tbo_income,
+      </if>
+      <if test="tboUseIndex != null" >
+        tbo_use_index,
+      </if>
+      <if test="tboNo != null" >
+        tbo_no,
+      </if>
+      <if test="tboFlag != null" >
+        tbo_flag,
+      </if>
+      <if test="tboTag != null" >
+        tbo_tag,
+      </if>
+      <if test="tboSrc != null" >
+        tbo_src,
+      </if>
+      <if test="tboUpdateTime != null" >
+        tbo_update_time,
+      </if>
+      <if test="tboAddTime != null" >
+        tbo_add_time,
+      </if>
+      <if test="tboPayTime != null" >
+        tbo_pay_time,
+      </if>
+      <if test="tboPayType != null" >
+        tbo_pay_type,
+      </if>
+      <if test="tboTakeKm != null" >
+        tbo_take_km,
+      </if>
+      <if test="tboRetKm != null" >
+        tbo_ret_km,
+      </if>
+      <if test="tboTakeBattery != null" >
+        tbo_take_battery,
+      </if>
+      <if test="tboRetBattery != null" >
+        tbo_ret_battery,
+      </if>
+      <if test="tboTakeLatlng != null" >
+        tbo_take_latlng,
+      </if>
+      <if test="tboRetLatlng != null" >
+        tbo_ret_latlng,
+      </if>
+      <if test="tboSerial != null" >
+        tbo_serial,
+      </if>
+      <if test="tboCode != null" >
+        tbo_code,
+      </if>
+      <if test="tboRemark != null" >
+        tbo_remark,
+      </if>
+      <if test="tboEditor != null" >
+        tbo_editor,
+      </if>
+      <if test="tboState != null" >
+        tbo_state,
+      </if>
+      <if test="tboSettle != null" >
+        tbo_settle,
+      </if>
+      <if test="tboStatus != null" >
+        tbo_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tboId != null" >
+        #{tboId,jdbcType=BIGINT},
+      </if>
+      <if test="tboHost != null" >
+        #{tboHost,jdbcType=INTEGER},
+      </if>
+      <if test="tboPayMember != null" >
+        #{tboPayMember,jdbcType=INTEGER},
+      </if>
+      <if test="tboUseMember != null" >
+        #{tboUseMember,jdbcType=INTEGER},
+      </if>
+      <if test="tboUserType != null" >
+        #{tboUserType,jdbcType=INTEGER},
+      </if>
+      <if test="tboCompany != null" >
+        #{tboCompany,jdbcType=INTEGER},
+      </if>
+      <if test="tboFeeType != null" >
+        #{tboFeeType,jdbcType=INTEGER},
+      </if>
+      <if test="tboArea != null" >
+        #{tboArea,jdbcType=INTEGER},
+      </if>
+      <if test="tboOutlets != null" >
+        #{tboOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="tboRetArea != null" >
+        #{tboRetArea,jdbcType=INTEGER},
+      </if>
+      <if test="tboOutletsRet != null" >
+        #{tboOutletsRet,jdbcType=INTEGER},
+      </if>
+      <if test="tboCar != null" >
+        #{tboCar,jdbcType=INTEGER},
+      </if>
+      <if test="tboModel != null" >
+        #{tboModel,jdbcType=INTEGER},
+      </if>
+      <if test="tboStartTime != null" >
+        #{tboStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboFinishTime != null" >
+        #{tboFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboUseType != null" >
+        #{tboUseType,jdbcType=TINYINT},
+      </if>
+      <if test="tboTakeTime != null" >
+        #{tboTakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboRetTime != null" >
+        #{tboRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboDuration != null" >
+        #{tboDuration,jdbcType=DOUBLE},
+      </if>
+      <if test="tboKm != null" >
+        #{tboKm,jdbcType=DOUBLE},
+      </if>
+      <if test="tboCreditCard != null" >
+        #{tboCreditCard,jdbcType=BIGINT},
+      </if>
+      <if test="tboCreditBill != null" >
+        #{tboCreditBill,jdbcType=BIGINT},
+      </if>
+      <if test="tboRebate != null" >
+        #{tboRebate,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayNeed != null" >
+        #{tboPayNeed,jdbcType=DOUBLE},
+      </if>
+      <if test="tboDiscount != null" >
+        #{tboDiscount,jdbcType=DOUBLE},
+      </if>
+      <if test="tboDiscountDesc != null" >
+        #{tboDiscountDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tboPayReal != null" >
+        #{tboPayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayMoney != null" >
+        #{tboPayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayCoupon != null" >
+        #{tboPayCoupon,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayKilom != null" >
+        #{tboPayKilom,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayRent != null" >
+        #{tboPayRent,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayInsure != null" >
+        #{tboPayInsure,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayTimeout != null" >
+        #{tboPayTimeout,jdbcType=DOUBLE},
+      </if>
+      <if test="tboRefund != null" >
+        #{tboRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="tboRefundDesc != null" >
+        #{tboRefundDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tboIncome != null" >
+        #{tboIncome,jdbcType=TINYINT},
+      </if>
+      <if test="tboUseIndex != null" >
+        #{tboUseIndex,jdbcType=INTEGER},
+      </if>
+      <if test="tboNo != null" >
+        #{tboNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tboFlag != null" >
+        #{tboFlag,jdbcType=BIGINT},
+      </if>
+      <if test="tboTag != null" >
+        #{tboTag,jdbcType=VARCHAR},
+      </if>
+      <if test="tboSrc != null" >
+        #{tboSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="tboUpdateTime != null" >
+        #{tboUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboAddTime != null" >
+        #{tboAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboPayTime != null" >
+        #{tboPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboPayType != null" >
+        #{tboPayType,jdbcType=TINYINT},
+      </if>
+      <if test="tboTakeKm != null" >
+        #{tboTakeKm,jdbcType=INTEGER},
+      </if>
+      <if test="tboRetKm != null" >
+        #{tboRetKm,jdbcType=INTEGER},
+      </if>
+      <if test="tboTakeBattery != null" >
+        #{tboTakeBattery,jdbcType=INTEGER},
+      </if>
+      <if test="tboRetBattery != null" >
+        #{tboRetBattery,jdbcType=INTEGER},
+      </if>
+      <if test="tboTakeLatlng != null" >
+        #{tboTakeLatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="tboRetLatlng != null" >
+        #{tboRetLatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="tboSerial != null" >
+        #{tboSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="tboCode != null" >
+        #{tboCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tboRemark != null" >
+        #{tboRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tboEditor != null" >
+        #{tboEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tboState != null" >
+        #{tboState,jdbcType=TINYINT},
+      </if>
+      <if test="tboSettle != null" >
+        #{tboSettle,jdbcType=TINYINT},
+      </if>
+      <if test="tboStatus != null" >
+        #{tboStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from tb_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_order
+    <set >
+      <if test="record.tboId != null" >
+        tbo_id = #{record.tboId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tboHost != null" >
+        tbo_host = #{record.tboHost,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboPayMember != null" >
+        tbo_pay_member = #{record.tboPayMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboUseMember != null" >
+        tbo_use_member = #{record.tboUseMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboUserType != null" >
+        tbo_user_type = #{record.tboUserType,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboCompany != null" >
+        tbo_company = #{record.tboCompany,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboFeeType != null" >
+        tbo_fee_type = #{record.tboFeeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboArea != null" >
+        tbo_area = #{record.tboArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboOutlets != null" >
+        tbo_outlets = #{record.tboOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboRetArea != null" >
+        tbo_ret_area = #{record.tboRetArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboOutletsRet != null" >
+        tbo_outlets_ret = #{record.tboOutletsRet,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboCar != null" >
+        tbo_car = #{record.tboCar,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboModel != null" >
+        tbo_model = #{record.tboModel,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboStartTime != null" >
+        tbo_start_time = #{record.tboStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboFinishTime != null" >
+        tbo_finish_time = #{record.tboFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboUseType != null" >
+        tbo_use_type = #{record.tboUseType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tboTakeTime != null" >
+        tbo_take_time = #{record.tboTakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboRetTime != null" >
+        tbo_ret_time = #{record.tboRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboDuration != null" >
+        tbo_duration = #{record.tboDuration,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboKm != null" >
+        tbo_km = #{record.tboKm,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboCreditCard != null" >
+        tbo_credit_card = #{record.tboCreditCard,jdbcType=BIGINT},
+      </if>
+      <if test="record.tboCreditBill != null" >
+        tbo_credit_bill = #{record.tboCreditBill,jdbcType=BIGINT},
+      </if>
+      <if test="record.tboRebate != null" >
+        tbo_rebate = #{record.tboRebate,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboPayNeed != null" >
+        tbo_pay_need = #{record.tboPayNeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboDiscount != null" >
+        tbo_discount = #{record.tboDiscount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboDiscountDesc != null" >
+        tbo_discount_desc = #{record.tboDiscountDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboPayReal != null" >
+        tbo_pay_real = #{record.tboPayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboPayMoney != null" >
+        tbo_pay_money = #{record.tboPayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboPayCoupon != null" >
+        tbo_pay_coupon = #{record.tboPayCoupon,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboPayKilom != null" >
+        tbo_pay_kilom = #{record.tboPayKilom,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboPayRent != null" >
+        tbo_pay_rent = #{record.tboPayRent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboPayInsure != null" >
+        tbo_pay_insure = #{record.tboPayInsure,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboPayTimeout != null" >
+        tbo_pay_timeout = #{record.tboPayTimeout,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboRefund != null" >
+        tbo_refund = #{record.tboRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboRefundDesc != null" >
+        tbo_refund_desc = #{record.tboRefundDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboIncome != null" >
+        tbo_income = #{record.tboIncome,jdbcType=TINYINT},
+      </if>
+      <if test="record.tboUseIndex != null" >
+        tbo_use_index = #{record.tboUseIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboNo != null" >
+        tbo_no = #{record.tboNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboFlag != null" >
+        tbo_flag = #{record.tboFlag,jdbcType=BIGINT},
+      </if>
+      <if test="record.tboTag != null" >
+        tbo_tag = #{record.tboTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboSrc != null" >
+        tbo_src = #{record.tboSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboUpdateTime != null" >
+        tbo_update_time = #{record.tboUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboAddTime != null" >
+        tbo_add_time = #{record.tboAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboPayTime != null" >
+        tbo_pay_time = #{record.tboPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboPayType != null" >
+        tbo_pay_type = #{record.tboPayType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tboTakeKm != null" >
+        tbo_take_km = #{record.tboTakeKm,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboRetKm != null" >
+        tbo_ret_km = #{record.tboRetKm,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboTakeBattery != null" >
+        tbo_take_battery = #{record.tboTakeBattery,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboRetBattery != null" >
+        tbo_ret_battery = #{record.tboRetBattery,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboTakeLatlng != null" >
+        tbo_take_latlng = #{record.tboTakeLatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboRetLatlng != null" >
+        tbo_ret_latlng = #{record.tboRetLatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboSerial != null" >
+        tbo_serial = #{record.tboSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboCode != null" >
+        tbo_code = #{record.tboCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboRemark != null" >
+        tbo_remark = #{record.tboRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboEditor != null" >
+        tbo_editor = #{record.tboEditor,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboState != null" >
+        tbo_state = #{record.tboState,jdbcType=TINYINT},
+      </if>
+      <if test="record.tboSettle != null" >
+        tbo_settle = #{record.tboSettle,jdbcType=TINYINT},
+      </if>
+      <if test="record.tboStatus != null" >
+        tbo_status = #{record.tboStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_order
+    set tbo_id = #{record.tboId,jdbcType=BIGINT},
+      tbo_host = #{record.tboHost,jdbcType=INTEGER},
+      tbo_pay_member = #{record.tboPayMember,jdbcType=INTEGER},
+      tbo_use_member = #{record.tboUseMember,jdbcType=INTEGER},
+      tbo_user_type = #{record.tboUserType,jdbcType=INTEGER},
+      tbo_company = #{record.tboCompany,jdbcType=INTEGER},
+      tbo_fee_type = #{record.tboFeeType,jdbcType=INTEGER},
+      tbo_area = #{record.tboArea,jdbcType=INTEGER},
+      tbo_outlets = #{record.tboOutlets,jdbcType=INTEGER},
+      tbo_ret_area = #{record.tboRetArea,jdbcType=INTEGER},
+      tbo_outlets_ret = #{record.tboOutletsRet,jdbcType=INTEGER},
+      tbo_car = #{record.tboCar,jdbcType=INTEGER},
+      tbo_model = #{record.tboModel,jdbcType=INTEGER},
+      tbo_start_time = #{record.tboStartTime,jdbcType=TIMESTAMP},
+      tbo_finish_time = #{record.tboFinishTime,jdbcType=TIMESTAMP},
+      tbo_use_type = #{record.tboUseType,jdbcType=TINYINT},
+      tbo_take_time = #{record.tboTakeTime,jdbcType=TIMESTAMP},
+      tbo_ret_time = #{record.tboRetTime,jdbcType=TIMESTAMP},
+      tbo_duration = #{record.tboDuration,jdbcType=DOUBLE},
+      tbo_km = #{record.tboKm,jdbcType=DOUBLE},
+      tbo_credit_card = #{record.tboCreditCard,jdbcType=BIGINT},
+      tbo_credit_bill = #{record.tboCreditBill,jdbcType=BIGINT},
+      tbo_rebate = #{record.tboRebate,jdbcType=DOUBLE},
+      tbo_pay_need = #{record.tboPayNeed,jdbcType=DOUBLE},
+      tbo_discount = #{record.tboDiscount,jdbcType=DOUBLE},
+      tbo_discount_desc = #{record.tboDiscountDesc,jdbcType=VARCHAR},
+      tbo_pay_real = #{record.tboPayReal,jdbcType=DOUBLE},
+      tbo_pay_money = #{record.tboPayMoney,jdbcType=DOUBLE},
+      tbo_pay_coupon = #{record.tboPayCoupon,jdbcType=DOUBLE},
+      tbo_pay_kilom = #{record.tboPayKilom,jdbcType=DOUBLE},
+      tbo_pay_rent = #{record.tboPayRent,jdbcType=DOUBLE},
+      tbo_pay_insure = #{record.tboPayInsure,jdbcType=DOUBLE},
+      tbo_pay_timeout = #{record.tboPayTimeout,jdbcType=DOUBLE},
+      tbo_refund = #{record.tboRefund,jdbcType=DOUBLE},
+      tbo_refund_desc = #{record.tboRefundDesc,jdbcType=VARCHAR},
+      tbo_income = #{record.tboIncome,jdbcType=TINYINT},
+      tbo_use_index = #{record.tboUseIndex,jdbcType=INTEGER},
+      tbo_no = #{record.tboNo,jdbcType=VARCHAR},
+      tbo_flag = #{record.tboFlag,jdbcType=BIGINT},
+      tbo_tag = #{record.tboTag,jdbcType=VARCHAR},
+      tbo_src = #{record.tboSrc,jdbcType=VARCHAR},
+      tbo_update_time = #{record.tboUpdateTime,jdbcType=TIMESTAMP},
+      tbo_add_time = #{record.tboAddTime,jdbcType=TIMESTAMP},
+      tbo_pay_time = #{record.tboPayTime,jdbcType=TIMESTAMP},
+      tbo_pay_type = #{record.tboPayType,jdbcType=TINYINT},
+      tbo_take_km = #{record.tboTakeKm,jdbcType=INTEGER},
+      tbo_ret_km = #{record.tboRetKm,jdbcType=INTEGER},
+      tbo_take_battery = #{record.tboTakeBattery,jdbcType=INTEGER},
+      tbo_ret_battery = #{record.tboRetBattery,jdbcType=INTEGER},
+      tbo_take_latlng = #{record.tboTakeLatlng,jdbcType=VARCHAR},
+      tbo_ret_latlng = #{record.tboRetLatlng,jdbcType=VARCHAR},
+      tbo_serial = #{record.tboSerial,jdbcType=VARCHAR},
+      tbo_code = #{record.tboCode,jdbcType=VARCHAR},
+      tbo_remark = #{record.tboRemark,jdbcType=VARCHAR},
+      tbo_editor = #{record.tboEditor,jdbcType=INTEGER},
+      tbo_state = #{record.tboState,jdbcType=TINYINT},
+      tbo_settle = #{record.tboSettle,jdbcType=TINYINT},
+      tbo_status = #{record.tboStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Order" >
+    update tb_order
+    <set >
+      <if test="tboHost != null" >
+        tbo_host = #{tboHost,jdbcType=INTEGER},
+      </if>
+      <if test="tboPayMember != null" >
+        tbo_pay_member = #{tboPayMember,jdbcType=INTEGER},
+      </if>
+      <if test="tboUseMember != null" >
+        tbo_use_member = #{tboUseMember,jdbcType=INTEGER},
+      </if>
+      <if test="tboUserType != null" >
+        tbo_user_type = #{tboUserType,jdbcType=INTEGER},
+      </if>
+      <if test="tboCompany != null" >
+        tbo_company = #{tboCompany,jdbcType=INTEGER},
+      </if>
+      <if test="tboFeeType != null" >
+        tbo_fee_type = #{tboFeeType,jdbcType=INTEGER},
+      </if>
+      <if test="tboArea != null" >
+        tbo_area = #{tboArea,jdbcType=INTEGER},
+      </if>
+      <if test="tboOutlets != null" >
+        tbo_outlets = #{tboOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="tboRetArea != null" >
+        tbo_ret_area = #{tboRetArea,jdbcType=INTEGER},
+      </if>
+      <if test="tboOutletsRet != null" >
+        tbo_outlets_ret = #{tboOutletsRet,jdbcType=INTEGER},
+      </if>
+      <if test="tboCar != null" >
+        tbo_car = #{tboCar,jdbcType=INTEGER},
+      </if>
+      <if test="tboModel != null" >
+        tbo_model = #{tboModel,jdbcType=INTEGER},
+      </if>
+      <if test="tboStartTime != null" >
+        tbo_start_time = #{tboStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboFinishTime != null" >
+        tbo_finish_time = #{tboFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboUseType != null" >
+        tbo_use_type = #{tboUseType,jdbcType=TINYINT},
+      </if>
+      <if test="tboTakeTime != null" >
+        tbo_take_time = #{tboTakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboRetTime != null" >
+        tbo_ret_time = #{tboRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboDuration != null" >
+        tbo_duration = #{tboDuration,jdbcType=DOUBLE},
+      </if>
+      <if test="tboKm != null" >
+        tbo_km = #{tboKm,jdbcType=DOUBLE},
+      </if>
+      <if test="tboCreditCard != null" >
+        tbo_credit_card = #{tboCreditCard,jdbcType=BIGINT},
+      </if>
+      <if test="tboCreditBill != null" >
+        tbo_credit_bill = #{tboCreditBill,jdbcType=BIGINT},
+      </if>
+      <if test="tboRebate != null" >
+        tbo_rebate = #{tboRebate,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayNeed != null" >
+        tbo_pay_need = #{tboPayNeed,jdbcType=DOUBLE},
+      </if>
+      <if test="tboDiscount != null" >
+        tbo_discount = #{tboDiscount,jdbcType=DOUBLE},
+      </if>
+      <if test="tboDiscountDesc != null" >
+        tbo_discount_desc = #{tboDiscountDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tboPayReal != null" >
+        tbo_pay_real = #{tboPayReal,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayMoney != null" >
+        tbo_pay_money = #{tboPayMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayCoupon != null" >
+        tbo_pay_coupon = #{tboPayCoupon,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayKilom != null" >
+        tbo_pay_kilom = #{tboPayKilom,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayRent != null" >
+        tbo_pay_rent = #{tboPayRent,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayInsure != null" >
+        tbo_pay_insure = #{tboPayInsure,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPayTimeout != null" >
+        tbo_pay_timeout = #{tboPayTimeout,jdbcType=DOUBLE},
+      </if>
+      <if test="tboRefund != null" >
+        tbo_refund = #{tboRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="tboRefundDesc != null" >
+        tbo_refund_desc = #{tboRefundDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tboIncome != null" >
+        tbo_income = #{tboIncome,jdbcType=TINYINT},
+      </if>
+      <if test="tboUseIndex != null" >
+        tbo_use_index = #{tboUseIndex,jdbcType=INTEGER},
+      </if>
+      <if test="tboNo != null" >
+        tbo_no = #{tboNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tboFlag != null" >
+        tbo_flag = #{tboFlag,jdbcType=BIGINT},
+      </if>
+      <if test="tboTag != null" >
+        tbo_tag = #{tboTag,jdbcType=VARCHAR},
+      </if>
+      <if test="tboSrc != null" >
+        tbo_src = #{tboSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="tboUpdateTime != null" >
+        tbo_update_time = #{tboUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboAddTime != null" >
+        tbo_add_time = #{tboAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboPayTime != null" >
+        tbo_pay_time = #{tboPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboPayType != null" >
+        tbo_pay_type = #{tboPayType,jdbcType=TINYINT},
+      </if>
+      <if test="tboTakeKm != null" >
+        tbo_take_km = #{tboTakeKm,jdbcType=INTEGER},
+      </if>
+      <if test="tboRetKm != null" >
+        tbo_ret_km = #{tboRetKm,jdbcType=INTEGER},
+      </if>
+      <if test="tboTakeBattery != null" >
+        tbo_take_battery = #{tboTakeBattery,jdbcType=INTEGER},
+      </if>
+      <if test="tboRetBattery != null" >
+        tbo_ret_battery = #{tboRetBattery,jdbcType=INTEGER},
+      </if>
+      <if test="tboTakeLatlng != null" >
+        tbo_take_latlng = #{tboTakeLatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="tboRetLatlng != null" >
+        tbo_ret_latlng = #{tboRetLatlng,jdbcType=VARCHAR},
+      </if>
+      <if test="tboSerial != null" >
+        tbo_serial = #{tboSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="tboCode != null" >
+        tbo_code = #{tboCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tboRemark != null" >
+        tbo_remark = #{tboRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tboEditor != null" >
+        tbo_editor = #{tboEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tboState != null" >
+        tbo_state = #{tboState,jdbcType=TINYINT},
+      </if>
+      <if test="tboSettle != null" >
+        tbo_settle = #{tboSettle,jdbcType=TINYINT},
+      </if>
+      <if test="tboStatus != null" >
+        tbo_status = #{tboStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbo_id = #{tboId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Order" >
+    update tb_order
+    set tbo_host = #{tboHost,jdbcType=INTEGER},
+      tbo_pay_member = #{tboPayMember,jdbcType=INTEGER},
+      tbo_use_member = #{tboUseMember,jdbcType=INTEGER},
+      tbo_user_type = #{tboUserType,jdbcType=INTEGER},
+      tbo_company = #{tboCompany,jdbcType=INTEGER},
+      tbo_fee_type = #{tboFeeType,jdbcType=INTEGER},
+      tbo_area = #{tboArea,jdbcType=INTEGER},
+      tbo_outlets = #{tboOutlets,jdbcType=INTEGER},
+      tbo_ret_area = #{tboRetArea,jdbcType=INTEGER},
+      tbo_outlets_ret = #{tboOutletsRet,jdbcType=INTEGER},
+      tbo_car = #{tboCar,jdbcType=INTEGER},
+      tbo_model = #{tboModel,jdbcType=INTEGER},
+      tbo_start_time = #{tboStartTime,jdbcType=TIMESTAMP},
+      tbo_finish_time = #{tboFinishTime,jdbcType=TIMESTAMP},
+      tbo_use_type = #{tboUseType,jdbcType=TINYINT},
+      tbo_take_time = #{tboTakeTime,jdbcType=TIMESTAMP},
+      tbo_ret_time = #{tboRetTime,jdbcType=TIMESTAMP},
+      tbo_duration = #{tboDuration,jdbcType=DOUBLE},
+      tbo_km = #{tboKm,jdbcType=DOUBLE},
+      tbo_credit_card = #{tboCreditCard,jdbcType=BIGINT},
+      tbo_credit_bill = #{tboCreditBill,jdbcType=BIGINT},
+      tbo_rebate = #{tboRebate,jdbcType=DOUBLE},
+      tbo_pay_need = #{tboPayNeed,jdbcType=DOUBLE},
+      tbo_discount = #{tboDiscount,jdbcType=DOUBLE},
+      tbo_discount_desc = #{tboDiscountDesc,jdbcType=VARCHAR},
+      tbo_pay_real = #{tboPayReal,jdbcType=DOUBLE},
+      tbo_pay_money = #{tboPayMoney,jdbcType=DOUBLE},
+      tbo_pay_coupon = #{tboPayCoupon,jdbcType=DOUBLE},
+      tbo_pay_kilom = #{tboPayKilom,jdbcType=DOUBLE},
+      tbo_pay_rent = #{tboPayRent,jdbcType=DOUBLE},
+      tbo_pay_insure = #{tboPayInsure,jdbcType=DOUBLE},
+      tbo_pay_timeout = #{tboPayTimeout,jdbcType=DOUBLE},
+      tbo_refund = #{tboRefund,jdbcType=DOUBLE},
+      tbo_refund_desc = #{tboRefundDesc,jdbcType=VARCHAR},
+      tbo_income = #{tboIncome,jdbcType=TINYINT},
+      tbo_use_index = #{tboUseIndex,jdbcType=INTEGER},
+      tbo_no = #{tboNo,jdbcType=VARCHAR},
+      tbo_flag = #{tboFlag,jdbcType=BIGINT},
+      tbo_tag = #{tboTag,jdbcType=VARCHAR},
+      tbo_src = #{tboSrc,jdbcType=VARCHAR},
+      tbo_update_time = #{tboUpdateTime,jdbcType=TIMESTAMP},
+      tbo_add_time = #{tboAddTime,jdbcType=TIMESTAMP},
+      tbo_pay_time = #{tboPayTime,jdbcType=TIMESTAMP},
+      tbo_pay_type = #{tboPayType,jdbcType=TINYINT},
+      tbo_take_km = #{tboTakeKm,jdbcType=INTEGER},
+      tbo_ret_km = #{tboRetKm,jdbcType=INTEGER},
+      tbo_take_battery = #{tboTakeBattery,jdbcType=INTEGER},
+      tbo_ret_battery = #{tboRetBattery,jdbcType=INTEGER},
+      tbo_take_latlng = #{tboTakeLatlng,jdbcType=VARCHAR},
+      tbo_ret_latlng = #{tboRetLatlng,jdbcType=VARCHAR},
+      tbo_serial = #{tboSerial,jdbcType=VARCHAR},
+      tbo_code = #{tboCode,jdbcType=VARCHAR},
+      tbo_remark = #{tboRemark,jdbcType=VARCHAR},
+      tbo_editor = #{tboEditor,jdbcType=INTEGER},
+      tbo_state = #{tboState,jdbcType=TINYINT},
+      tbo_settle = #{tboSettle,jdbcType=TINYINT},
+      tbo_status = #{tboStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbo_id = #{tboId,jdbcType=BIGINT}
+  </update>
+</mapper>

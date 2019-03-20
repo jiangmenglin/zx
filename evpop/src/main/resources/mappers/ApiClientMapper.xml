@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ApiClientMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.ApiClient" >
+    <id column="sac_id" property="sacId" jdbcType="BIGINT" />
+    <result column="sac_client" property="sacClient" jdbcType="VARCHAR" />
+    <result column="sac_secret" property="sacSecret" jdbcType="VARCHAR" />
+    <result column="sac_type" property="sacType" jdbcType="SMALLINT" />
+    <result column="sac_url" property="sacUrl" jdbcType="VARCHAR" />
+    <result column="sac_desc" property="sacDesc" jdbcType="VARCHAR" />
+    <result column="sac_restful" property="sacRestful" jdbcType="VARCHAR" />
+    <result column="sac_update_time" property="sacUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="sac_add_time" property="sacAddTime" jdbcType="TIMESTAMP" />
+    <result column="sac_status" property="sacStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sac_id, sac_client, sac_secret, sac_type, sac_url, sac_desc, sac_restful, sac_update_time, 
+    sac_add_time, sac_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ApiClientExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_api_client
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from srv_api_client
+    where sac_id = #{sacId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from srv_api_client
+    where sac_id = #{sacId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.ApiClient" >
+    insert into srv_api_client (sac_id, sac_client, sac_secret, 
+      sac_type, sac_url, sac_desc, 
+      sac_restful, sac_update_time, sac_add_time, 
+      sac_status)
+    values (#{sacId,jdbcType=BIGINT}, #{sacClient,jdbcType=VARCHAR}, #{sacSecret,jdbcType=VARCHAR}, 
+      #{sacType,jdbcType=SMALLINT}, #{sacUrl,jdbcType=VARCHAR}, #{sacDesc,jdbcType=VARCHAR}, 
+      #{sacRestful,jdbcType=VARCHAR}, #{sacUpdateTime,jdbcType=TIMESTAMP}, #{sacAddTime,jdbcType=TIMESTAMP}, 
+      #{sacStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.ApiClient" >
+    insert into srv_api_client
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sacId != null" >
+        sac_id,
+      </if>
+      <if test="sacClient != null" >
+        sac_client,
+      </if>
+      <if test="sacSecret != null" >
+        sac_secret,
+      </if>
+      <if test="sacType != null" >
+        sac_type,
+      </if>
+      <if test="sacUrl != null" >
+        sac_url,
+      </if>
+      <if test="sacDesc != null" >
+        sac_desc,
+      </if>
+      <if test="sacRestful != null" >
+        sac_restful,
+      </if>
+      <if test="sacUpdateTime != null" >
+        sac_update_time,
+      </if>
+      <if test="sacAddTime != null" >
+        sac_add_time,
+      </if>
+      <if test="sacStatus != null" >
+        sac_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sacId != null" >
+        #{sacId,jdbcType=BIGINT},
+      </if>
+      <if test="sacClient != null" >
+        #{sacClient,jdbcType=VARCHAR},
+      </if>
+      <if test="sacSecret != null" >
+        #{sacSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="sacType != null" >
+        #{sacType,jdbcType=SMALLINT},
+      </if>
+      <if test="sacUrl != null" >
+        #{sacUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sacDesc != null" >
+        #{sacDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sacRestful != null" >
+        #{sacRestful,jdbcType=VARCHAR},
+      </if>
+      <if test="sacUpdateTime != null" >
+        #{sacUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sacAddTime != null" >
+        #{sacAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sacStatus != null" >
+        #{sacStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ApiClientExample" resultType="java.lang.Integer" >
+    select count(*) from srv_api_client
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_api_client
+    <set >
+      <if test="record.sacId != null" >
+        sac_id = #{record.sacId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sacClient != null" >
+        sac_client = #{record.sacClient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sacSecret != null" >
+        sac_secret = #{record.sacSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sacType != null" >
+        sac_type = #{record.sacType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.sacUrl != null" >
+        sac_url = #{record.sacUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sacDesc != null" >
+        sac_desc = #{record.sacDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sacRestful != null" >
+        sac_restful = #{record.sacRestful,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sacUpdateTime != null" >
+        sac_update_time = #{record.sacUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sacAddTime != null" >
+        sac_add_time = #{record.sacAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sacStatus != null" >
+        sac_status = #{record.sacStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_api_client
+    set sac_id = #{record.sacId,jdbcType=BIGINT},
+      sac_client = #{record.sacClient,jdbcType=VARCHAR},
+      sac_secret = #{record.sacSecret,jdbcType=VARCHAR},
+      sac_type = #{record.sacType,jdbcType=SMALLINT},
+      sac_url = #{record.sacUrl,jdbcType=VARCHAR},
+      sac_desc = #{record.sacDesc,jdbcType=VARCHAR},
+      sac_restful = #{record.sacRestful,jdbcType=VARCHAR},
+      sac_update_time = #{record.sacUpdateTime,jdbcType=TIMESTAMP},
+      sac_add_time = #{record.sacAddTime,jdbcType=TIMESTAMP},
+      sac_status = #{record.sacStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.ApiClient" >
+    update srv_api_client
+    <set >
+      <if test="sacClient != null" >
+        sac_client = #{sacClient,jdbcType=VARCHAR},
+      </if>
+      <if test="sacSecret != null" >
+        sac_secret = #{sacSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="sacType != null" >
+        sac_type = #{sacType,jdbcType=SMALLINT},
+      </if>
+      <if test="sacUrl != null" >
+        sac_url = #{sacUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sacDesc != null" >
+        sac_desc = #{sacDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sacRestful != null" >
+        sac_restful = #{sacRestful,jdbcType=VARCHAR},
+      </if>
+      <if test="sacUpdateTime != null" >
+        sac_update_time = #{sacUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sacAddTime != null" >
+        sac_add_time = #{sacAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sacStatus != null" >
+        sac_status = #{sacStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where sac_id = #{sacId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.ApiClient" >
+    update srv_api_client
+    set sac_client = #{sacClient,jdbcType=VARCHAR},
+      sac_secret = #{sacSecret,jdbcType=VARCHAR},
+      sac_type = #{sacType,jdbcType=SMALLINT},
+      sac_url = #{sacUrl,jdbcType=VARCHAR},
+      sac_desc = #{sacDesc,jdbcType=VARCHAR},
+      sac_restful = #{sacRestful,jdbcType=VARCHAR},
+      sac_update_time = #{sacUpdateTime,jdbcType=TIMESTAMP},
+      sac_add_time = #{sacAddTime,jdbcType=TIMESTAMP},
+      sac_status = #{sacStatus,jdbcType=SMALLINT}
+    where sac_id = #{sacId,jdbcType=BIGINT}
+  </update>
+</mapper>

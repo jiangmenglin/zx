@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.InterfaceDefinitionMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.InterfaceDefinition" >
+    <id column="serial_no" property="serialNo" jdbcType="VARCHAR" />
+    <result column="tx_no" property="txNo" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="interface_type" property="interfaceType" jdbcType="VARCHAR" />
+    <result column="interface_direction" property="interfaceDirection" jdbcType="VARCHAR" />
+    <result column="gateway_url" property="gatewayUrl" jdbcType="VARCHAR" />
+    <result column="http_timeout_second" property="httpTimeoutSecond" jdbcType="INTEGER" />
+    <result column="service_class_name" property="serviceClassName" jdbcType="VARCHAR" />
+    <result column="method_name" property="methodName" jdbcType="VARCHAR" />
+    <result column="encrypt_algorithm" property="encryptAlgorithm" jdbcType="VARCHAR" />
+    <result column="decrypt_algorithm" property="decryptAlgorithm" jdbcType="VARCHAR" />
+    <result column="sign_algorithm" property="signAlgorithm" jdbcType="VARCHAR" />
+    <result column="verify_algorithm" property="verifyAlgorithm" jdbcType="VARCHAR" />
+    <result column="use_token_as_password" property="useTokenAsPassword" jdbcType="TINYINT" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="first_sign_second_encrypt" property="firstSignSecondEncrypt" jdbcType="TINYINT" />
+    <result column="first_verify_second_decrypt" property="firstVerifySecondDecrypt" jdbcType="TINYINT" />
+    <result column="validate_token" property="validateToken" jdbcType="TINYINT" />
+    <result column="idempotent_redo" property="idempotentRedo" jdbcType="TINYINT" />
+    <result column="write_message" property="writeMessage" jdbcType="TINYINT" />
+    <result column="write_mode" property="writeMode" jdbcType="VARCHAR" />
+    <result column="key_vector" property="keyVector" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.InterfaceDefinition" extends="BaseResultMap" >
+    <result column="interface_desc" property="interfaceDesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    serial_no, tx_no, version, channel, interface_type, interface_direction, gateway_url, 
+    http_timeout_second, service_class_name, method_name, encrypt_algorithm, decrypt_algorithm, 
+    sign_algorithm, verify_algorithm, use_token_as_password, `password`, first_sign_second_encrypt, 
+    first_verify_second_decrypt, validate_token, idempotent_redo, write_message, write_mode, 
+    key_vector, create_date, last_update_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    interface_desc
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.InterfaceDefinitionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_interface_definition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.InterfaceDefinitionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_interface_definition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_interface_definition
+    where serial_no = #{serialNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_interface_definition
+    where serial_no = #{serialNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.InterfaceDefinition" >
+    insert into tb_interface_definition (serial_no, tx_no, version, 
+      channel, interface_type, interface_direction, 
+      gateway_url, http_timeout_second, service_class_name, 
+      method_name, encrypt_algorithm, decrypt_algorithm, 
+      sign_algorithm, verify_algorithm, use_token_as_password, 
+      `password`, first_sign_second_encrypt, first_verify_second_decrypt, 
+      validate_token, idempotent_redo, write_message, 
+      write_mode, key_vector, create_date, 
+      last_update_date, interface_desc)
+    values (#{serialNo,jdbcType=VARCHAR}, #{txNo,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=VARCHAR}, #{interfaceType,jdbcType=VARCHAR}, #{interfaceDirection,jdbcType=VARCHAR}, 
+      #{gatewayUrl,jdbcType=VARCHAR}, #{httpTimeoutSecond,jdbcType=INTEGER}, #{serviceClassName,jdbcType=VARCHAR}, 
+      #{methodName,jdbcType=VARCHAR}, #{encryptAlgorithm,jdbcType=VARCHAR}, #{decryptAlgorithm,jdbcType=VARCHAR}, 
+      #{signAlgorithm,jdbcType=VARCHAR}, #{verifyAlgorithm,jdbcType=VARCHAR}, #{useTokenAsPassword,jdbcType=TINYINT}, 
+      #{password,jdbcType=VARCHAR}, #{firstSignSecondEncrypt,jdbcType=TINYINT}, #{firstVerifySecondDecrypt,jdbcType=TINYINT}, 
+      #{validateToken,jdbcType=TINYINT}, #{idempotentRedo,jdbcType=TINYINT}, #{writeMessage,jdbcType=TINYINT}, 
+      #{writeMode,jdbcType=VARCHAR}, #{keyVector,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastUpdateDate,jdbcType=TIMESTAMP}, #{interfaceDesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.InterfaceDefinition" >
+    insert into tb_interface_definition
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialNo != null" >
+        serial_no,
+      </if>
+      <if test="txNo != null" >
+        tx_no,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="interfaceType != null" >
+        interface_type,
+      </if>
+      <if test="interfaceDirection != null" >
+        interface_direction,
+      </if>
+      <if test="gatewayUrl != null" >
+        gateway_url,
+      </if>
+      <if test="httpTimeoutSecond != null" >
+        http_timeout_second,
+      </if>
+      <if test="serviceClassName != null" >
+        service_class_name,
+      </if>
+      <if test="methodName != null" >
+        method_name,
+      </if>
+      <if test="encryptAlgorithm != null" >
+        encrypt_algorithm,
+      </if>
+      <if test="decryptAlgorithm != null" >
+        decrypt_algorithm,
+      </if>
+      <if test="signAlgorithm != null" >
+        sign_algorithm,
+      </if>
+      <if test="verifyAlgorithm != null" >
+        verify_algorithm,
+      </if>
+      <if test="useTokenAsPassword != null" >
+        use_token_as_password,
+      </if>
+      <if test="password != null" >
+        `password`,
+      </if>
+      <if test="firstSignSecondEncrypt != null" >
+        first_sign_second_encrypt,
+      </if>
+      <if test="firstVerifySecondDecrypt != null" >
+        first_verify_second_decrypt,
+      </if>
+      <if test="validateToken != null" >
+        validate_token,
+      </if>
+      <if test="idempotentRedo != null" >
+        idempotent_redo,
+      </if>
+      <if test="writeMessage != null" >
+        write_message,
+      </if>
+      <if test="writeMode != null" >
+        write_mode,
+      </if>
+      <if test="keyVector != null" >
+        key_vector,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date,
+      </if>
+      <if test="interfaceDesc != null" >
+        interface_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialNo != null" >
+        #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="txNo != null" >
+        #{txNo,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceType != null" >
+        #{interfaceType,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceDirection != null" >
+        #{interfaceDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayUrl != null" >
+        #{gatewayUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="httpTimeoutSecond != null" >
+        #{httpTimeoutSecond,jdbcType=INTEGER},
+      </if>
+      <if test="serviceClassName != null" >
+        #{serviceClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null" >
+        #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptAlgorithm != null" >
+        #{encryptAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="decryptAlgorithm != null" >
+        #{decryptAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="signAlgorithm != null" >
+        #{signAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyAlgorithm != null" >
+        #{verifyAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="useTokenAsPassword != null" >
+        #{useTokenAsPassword,jdbcType=TINYINT},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="firstSignSecondEncrypt != null" >
+        #{firstSignSecondEncrypt,jdbcType=TINYINT},
+      </if>
+      <if test="firstVerifySecondDecrypt != null" >
+        #{firstVerifySecondDecrypt,jdbcType=TINYINT},
+      </if>
+      <if test="validateToken != null" >
+        #{validateToken,jdbcType=TINYINT},
+      </if>
+      <if test="idempotentRedo != null" >
+        #{idempotentRedo,jdbcType=TINYINT},
+      </if>
+      <if test="writeMessage != null" >
+        #{writeMessage,jdbcType=TINYINT},
+      </if>
+      <if test="writeMode != null" >
+        #{writeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyVector != null" >
+        #{keyVector,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interfaceDesc != null" >
+        #{interfaceDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.InterfaceDefinitionExample" resultType="java.lang.Integer" >
+    select count(*) from tb_interface_definition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_interface_definition
+    <set >
+      <if test="record.serialNo != null" >
+        serial_no = #{record.serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txNo != null" >
+        tx_no = #{record.txNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null" >
+        channel = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfaceType != null" >
+        interface_type = #{record.interfaceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interfaceDirection != null" >
+        interface_direction = #{record.interfaceDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gatewayUrl != null" >
+        gateway_url = #{record.gatewayUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.httpTimeoutSecond != null" >
+        http_timeout_second = #{record.httpTimeoutSecond,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceClassName != null" >
+        service_class_name = #{record.serviceClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.methodName != null" >
+        method_name = #{record.methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.encryptAlgorithm != null" >
+        encrypt_algorithm = #{record.encryptAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.decryptAlgorithm != null" >
+        decrypt_algorithm = #{record.decryptAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signAlgorithm != null" >
+        sign_algorithm = #{record.signAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.verifyAlgorithm != null" >
+        verify_algorithm = #{record.verifyAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.useTokenAsPassword != null" >
+        use_token_as_password = #{record.useTokenAsPassword,jdbcType=TINYINT},
+      </if>
+      <if test="record.password != null" >
+        `password` = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstSignSecondEncrypt != null" >
+        first_sign_second_encrypt = #{record.firstSignSecondEncrypt,jdbcType=TINYINT},
+      </if>
+      <if test="record.firstVerifySecondDecrypt != null" >
+        first_verify_second_decrypt = #{record.firstVerifySecondDecrypt,jdbcType=TINYINT},
+      </if>
+      <if test="record.validateToken != null" >
+        validate_token = #{record.validateToken,jdbcType=TINYINT},
+      </if>
+      <if test="record.idempotentRedo != null" >
+        idempotent_redo = #{record.idempotentRedo,jdbcType=TINYINT},
+      </if>
+      <if test="record.writeMessage != null" >
+        write_message = #{record.writeMessage,jdbcType=TINYINT},
+      </if>
+      <if test="record.writeMode != null" >
+        write_mode = #{record.writeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyVector != null" >
+        key_vector = #{record.keyVector,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateDate != null" >
+        last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.interfaceDesc != null" >
+        interface_desc = #{record.interfaceDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_interface_definition
+    set serial_no = #{record.serialNo,jdbcType=VARCHAR},
+      tx_no = #{record.txNo,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      interface_type = #{record.interfaceType,jdbcType=VARCHAR},
+      interface_direction = #{record.interfaceDirection,jdbcType=VARCHAR},
+      gateway_url = #{record.gatewayUrl,jdbcType=VARCHAR},
+      http_timeout_second = #{record.httpTimeoutSecond,jdbcType=INTEGER},
+      service_class_name = #{record.serviceClassName,jdbcType=VARCHAR},
+      method_name = #{record.methodName,jdbcType=VARCHAR},
+      encrypt_algorithm = #{record.encryptAlgorithm,jdbcType=VARCHAR},
+      decrypt_algorithm = #{record.decryptAlgorithm,jdbcType=VARCHAR},
+      sign_algorithm = #{record.signAlgorithm,jdbcType=VARCHAR},
+      verify_algorithm = #{record.verifyAlgorithm,jdbcType=VARCHAR},
+      use_token_as_password = #{record.useTokenAsPassword,jdbcType=TINYINT},
+      `password` = #{record.password,jdbcType=VARCHAR},
+      first_sign_second_encrypt = #{record.firstSignSecondEncrypt,jdbcType=TINYINT},
+      first_verify_second_decrypt = #{record.firstVerifySecondDecrypt,jdbcType=TINYINT},
+      validate_token = #{record.validateToken,jdbcType=TINYINT},
+      idempotent_redo = #{record.idempotentRedo,jdbcType=TINYINT},
+      write_message = #{record.writeMessage,jdbcType=TINYINT},
+      write_mode = #{record.writeMode,jdbcType=VARCHAR},
+      key_vector = #{record.keyVector,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      interface_desc = #{record.interfaceDesc,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_interface_definition
+    set serial_no = #{record.serialNo,jdbcType=VARCHAR},
+      tx_no = #{record.txNo,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      interface_type = #{record.interfaceType,jdbcType=VARCHAR},
+      interface_direction = #{record.interfaceDirection,jdbcType=VARCHAR},
+      gateway_url = #{record.gatewayUrl,jdbcType=VARCHAR},
+      http_timeout_second = #{record.httpTimeoutSecond,jdbcType=INTEGER},
+      service_class_name = #{record.serviceClassName,jdbcType=VARCHAR},
+      method_name = #{record.methodName,jdbcType=VARCHAR},
+      encrypt_algorithm = #{record.encryptAlgorithm,jdbcType=VARCHAR},
+      decrypt_algorithm = #{record.decryptAlgorithm,jdbcType=VARCHAR},
+      sign_algorithm = #{record.signAlgorithm,jdbcType=VARCHAR},
+      verify_algorithm = #{record.verifyAlgorithm,jdbcType=VARCHAR},
+      use_token_as_password = #{record.useTokenAsPassword,jdbcType=TINYINT},
+      `password` = #{record.password,jdbcType=VARCHAR},
+      first_sign_second_encrypt = #{record.firstSignSecondEncrypt,jdbcType=TINYINT},
+      first_verify_second_decrypt = #{record.firstVerifySecondDecrypt,jdbcType=TINYINT},
+      validate_token = #{record.validateToken,jdbcType=TINYINT},
+      idempotent_redo = #{record.idempotentRedo,jdbcType=TINYINT},
+      write_message = #{record.writeMessage,jdbcType=TINYINT},
+      write_mode = #{record.writeMode,jdbcType=VARCHAR},
+      key_vector = #{record.keyVector,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.InterfaceDefinition" >
+    update tb_interface_definition
+    <set >
+      <if test="txNo != null" >
+        tx_no = #{txNo,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceType != null" >
+        interface_type = #{interfaceType,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceDirection != null" >
+        interface_direction = #{interfaceDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="gatewayUrl != null" >
+        gateway_url = #{gatewayUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="httpTimeoutSecond != null" >
+        http_timeout_second = #{httpTimeoutSecond,jdbcType=INTEGER},
+      </if>
+      <if test="serviceClassName != null" >
+        service_class_name = #{serviceClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null" >
+        method_name = #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptAlgorithm != null" >
+        encrypt_algorithm = #{encryptAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="decryptAlgorithm != null" >
+        decrypt_algorithm = #{decryptAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="signAlgorithm != null" >
+        sign_algorithm = #{signAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyAlgorithm != null" >
+        verify_algorithm = #{verifyAlgorithm,jdbcType=VARCHAR},
+      </if>
+      <if test="useTokenAsPassword != null" >
+        use_token_as_password = #{useTokenAsPassword,jdbcType=TINYINT},
+      </if>
+      <if test="password != null" >
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="firstSignSecondEncrypt != null" >
+        first_sign_second_encrypt = #{firstSignSecondEncrypt,jdbcType=TINYINT},
+      </if>
+      <if test="firstVerifySecondDecrypt != null" >
+        first_verify_second_decrypt = #{firstVerifySecondDecrypt,jdbcType=TINYINT},
+      </if>
+      <if test="validateToken != null" >
+        validate_token = #{validateToken,jdbcType=TINYINT},
+      </if>
+      <if test="idempotentRedo != null" >
+        idempotent_redo = #{idempotentRedo,jdbcType=TINYINT},
+      </if>
+      <if test="writeMessage != null" >
+        write_message = #{writeMessage,jdbcType=TINYINT},
+      </if>
+      <if test="writeMode != null" >
+        write_mode = #{writeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyVector != null" >
+        key_vector = #{keyVector,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interfaceDesc != null" >
+        interface_desc = #{interfaceDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where serial_no = #{serialNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.InterfaceDefinition" >
+    update tb_interface_definition
+    set tx_no = #{txNo,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      interface_type = #{interfaceType,jdbcType=VARCHAR},
+      interface_direction = #{interfaceDirection,jdbcType=VARCHAR},
+      gateway_url = #{gatewayUrl,jdbcType=VARCHAR},
+      http_timeout_second = #{httpTimeoutSecond,jdbcType=INTEGER},
+      service_class_name = #{serviceClassName,jdbcType=VARCHAR},
+      method_name = #{methodName,jdbcType=VARCHAR},
+      encrypt_algorithm = #{encryptAlgorithm,jdbcType=VARCHAR},
+      decrypt_algorithm = #{decryptAlgorithm,jdbcType=VARCHAR},
+      sign_algorithm = #{signAlgorithm,jdbcType=VARCHAR},
+      verify_algorithm = #{verifyAlgorithm,jdbcType=VARCHAR},
+      use_token_as_password = #{useTokenAsPassword,jdbcType=TINYINT},
+      `password` = #{password,jdbcType=VARCHAR},
+      first_sign_second_encrypt = #{firstSignSecondEncrypt,jdbcType=TINYINT},
+      first_verify_second_decrypt = #{firstVerifySecondDecrypt,jdbcType=TINYINT},
+      validate_token = #{validateToken,jdbcType=TINYINT},
+      idempotent_redo = #{idempotentRedo,jdbcType=TINYINT},
+      write_message = #{writeMessage,jdbcType=TINYINT},
+      write_mode = #{writeMode,jdbcType=VARCHAR},
+      key_vector = #{keyVector,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      interface_desc = #{interfaceDesc,jdbcType=LONGVARCHAR}
+    where serial_no = #{serialNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.InterfaceDefinition" >
+    update tb_interface_definition
+    set tx_no = #{txNo,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      interface_type = #{interfaceType,jdbcType=VARCHAR},
+      interface_direction = #{interfaceDirection,jdbcType=VARCHAR},
+      gateway_url = #{gatewayUrl,jdbcType=VARCHAR},
+      http_timeout_second = #{httpTimeoutSecond,jdbcType=INTEGER},
+      service_class_name = #{serviceClassName,jdbcType=VARCHAR},
+      method_name = #{methodName,jdbcType=VARCHAR},
+      encrypt_algorithm = #{encryptAlgorithm,jdbcType=VARCHAR},
+      decrypt_algorithm = #{decryptAlgorithm,jdbcType=VARCHAR},
+      sign_algorithm = #{signAlgorithm,jdbcType=VARCHAR},
+      verify_algorithm = #{verifyAlgorithm,jdbcType=VARCHAR},
+      use_token_as_password = #{useTokenAsPassword,jdbcType=TINYINT},
+      `password` = #{password,jdbcType=VARCHAR},
+      first_sign_second_encrypt = #{firstSignSecondEncrypt,jdbcType=TINYINT},
+      first_verify_second_decrypt = #{firstVerifySecondDecrypt,jdbcType=TINYINT},
+      validate_token = #{validateToken,jdbcType=TINYINT},
+      idempotent_redo = #{idempotentRedo,jdbcType=TINYINT},
+      write_message = #{writeMessage,jdbcType=TINYINT},
+      write_mode = #{writeMode,jdbcType=VARCHAR},
+      key_vector = #{keyVector,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
+    where serial_no = #{serialNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.OutletsMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Outlets" >
+    <id column="tbo_id" property="tboId" jdbcType="INTEGER" />
+    <result column="tbo_host" property="tboHost" jdbcType="SMALLINT" />
+    <result column="tbo_district" property="tboDistrict" jdbcType="BIGINT" />
+    <result column="tbo_area" property="tboArea" jdbcType="INTEGER" />
+    <result column="tbo_name" property="tboName" jdbcType="VARCHAR" />
+    <result column="tbo_longitude" property="tboLongitude" jdbcType="DECIMAL" />
+    <result column="tbo_latitude" property="tboLatitude" jdbcType="DECIMAL" />
+    <result column="tbo_range" property="tboRange" jdbcType="VARCHAR" />
+    <result column="tbo_address" property="tboAddress" jdbcType="VARCHAR" />
+    <result column="tbo_space" property="tboSpace" jdbcType="VARCHAR" />
+    <result column="tbo_details" property="tboDetails" jdbcType="VARCHAR" />
+    <result column="tbo_door_time" property="tboDoorTime" jdbcType="VARCHAR" />
+    <result column="tbo_cost" property="tboCost" jdbcType="DOUBLE" />
+    <result column="tbo_person" property="tboPerson" jdbcType="VARCHAR" />
+    <result column="tbo_contact" property="tboContact" jdbcType="VARCHAR" />
+    <result column="tbo_until" property="tboUntil" jdbcType="DATE" />
+    <result column="tbo_expire" property="tboExpire" jdbcType="DATE" />
+    <result column="tbo_car_s" property="tboCarS" jdbcType="INTEGER" />
+    <result column="tbo_position_s" property="tboPositionS" jdbcType="INTEGER" />
+    <result column="tbo_image" property="tboImage" jdbcType="VARCHAR" />
+    <result column="tbo_can_a" property="tboCanA" jdbcType="TINYINT" />
+    <result column="tbo_can_b" property="tboCanB" jdbcType="TINYINT" />
+    <result column="tbo_priority" property="tboPriority" jdbcType="INTEGER" />
+    <result column="tbo_outlets_type" property="tboOutletsType" jdbcType="SMALLINT" />
+    <result column="tbo_vote_s" property="tboVoteS" jdbcType="INTEGER" />
+    <result column="tbo_profile" property="tboProfile" jdbcType="VARCHAR" />
+    <result column="tbo_update_time" property="tboUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_add_time" property="tboAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_status" property="tboStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbo_id, tbo_host, tbo_district, tbo_area, tbo_name, tbo_longitude, tbo_latitude, 
+    tbo_range, tbo_address, tbo_space, tbo_details, tbo_door_time, tbo_cost, tbo_person, 
+    tbo_contact, tbo_until, tbo_expire, tbo_car_s, tbo_position_s, tbo_image, tbo_can_a, 
+    tbo_can_b, tbo_priority, tbo_outlets_type, tbo_vote_s, tbo_profile, tbo_update_time, 
+    tbo_add_time, tbo_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.OutletsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_outlets
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_outlets
+    where tbo_id = #{tboId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_outlets
+    where tbo_id = #{tboId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Outlets" >
+    insert into tb_outlets (tbo_id, tbo_host, tbo_district, 
+      tbo_area, tbo_name, tbo_longitude, 
+      tbo_latitude, tbo_range, tbo_address, 
+      tbo_space, tbo_details, tbo_door_time, 
+      tbo_cost, tbo_person, tbo_contact, 
+      tbo_until, tbo_expire, tbo_car_s, 
+      tbo_position_s, tbo_image, tbo_can_a, 
+      tbo_can_b, tbo_priority, tbo_outlets_type, 
+      tbo_vote_s, tbo_profile, tbo_update_time, 
+      tbo_add_time, tbo_status, createTime, 
+      modifyDate)
+    values (#{tboId,jdbcType=INTEGER}, #{tboHost,jdbcType=SMALLINT}, #{tboDistrict,jdbcType=BIGINT}, 
+      #{tboArea,jdbcType=INTEGER}, #{tboName,jdbcType=VARCHAR}, #{tboLongitude,jdbcType=DECIMAL}, 
+      #{tboLatitude,jdbcType=DECIMAL}, #{tboRange,jdbcType=VARCHAR}, #{tboAddress,jdbcType=VARCHAR}, 
+      #{tboSpace,jdbcType=VARCHAR}, #{tboDetails,jdbcType=VARCHAR}, #{tboDoorTime,jdbcType=VARCHAR}, 
+      #{tboCost,jdbcType=DOUBLE}, #{tboPerson,jdbcType=VARCHAR}, #{tboContact,jdbcType=VARCHAR}, 
+      #{tboUntil,jdbcType=DATE}, #{tboExpire,jdbcType=DATE}, #{tboCarS,jdbcType=INTEGER}, 
+      #{tboPositionS,jdbcType=INTEGER}, #{tboImage,jdbcType=VARCHAR}, #{tboCanA,jdbcType=TINYINT}, 
+      #{tboCanB,jdbcType=TINYINT}, #{tboPriority,jdbcType=INTEGER}, #{tboOutletsType,jdbcType=SMALLINT}, 
+      #{tboVoteS,jdbcType=INTEGER}, #{tboProfile,jdbcType=VARCHAR}, #{tboUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tboAddTime,jdbcType=TIMESTAMP}, #{tboStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Outlets" >
+    insert into tb_outlets
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tboId != null" >
+        tbo_id,
+      </if>
+      <if test="tboHost != null" >
+        tbo_host,
+      </if>
+      <if test="tboDistrict != null" >
+        tbo_district,
+      </if>
+      <if test="tboArea != null" >
+        tbo_area,
+      </if>
+      <if test="tboName != null" >
+        tbo_name,
+      </if>
+      <if test="tboLongitude != null" >
+        tbo_longitude,
+      </if>
+      <if test="tboLatitude != null" >
+        tbo_latitude,
+      </if>
+      <if test="tboRange != null" >
+        tbo_range,
+      </if>
+      <if test="tboAddress != null" >
+        tbo_address,
+      </if>
+      <if test="tboSpace != null" >
+        tbo_space,
+      </if>
+      <if test="tboDetails != null" >
+        tbo_details,
+      </if>
+      <if test="tboDoorTime != null" >
+        tbo_door_time,
+      </if>
+      <if test="tboCost != null" >
+        tbo_cost,
+      </if>
+      <if test="tboPerson != null" >
+        tbo_person,
+      </if>
+      <if test="tboContact != null" >
+        tbo_contact,
+      </if>
+      <if test="tboUntil != null" >
+        tbo_until,
+      </if>
+      <if test="tboExpire != null" >
+        tbo_expire,
+      </if>
+      <if test="tboCarS != null" >
+        tbo_car_s,
+      </if>
+      <if test="tboPositionS != null" >
+        tbo_position_s,
+      </if>
+      <if test="tboImage != null" >
+        tbo_image,
+      </if>
+      <if test="tboCanA != null" >
+        tbo_can_a,
+      </if>
+      <if test="tboCanB != null" >
+        tbo_can_b,
+      </if>
+      <if test="tboPriority != null" >
+        tbo_priority,
+      </if>
+      <if test="tboOutletsType != null" >
+        tbo_outlets_type,
+      </if>
+      <if test="tboVoteS != null" >
+        tbo_vote_s,
+      </if>
+      <if test="tboProfile != null" >
+        tbo_profile,
+      </if>
+      <if test="tboUpdateTime != null" >
+        tbo_update_time,
+      </if>
+      <if test="tboAddTime != null" >
+        tbo_add_time,
+      </if>
+      <if test="tboStatus != null" >
+        tbo_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tboId != null" >
+        #{tboId,jdbcType=INTEGER},
+      </if>
+      <if test="tboHost != null" >
+        #{tboHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tboDistrict != null" >
+        #{tboDistrict,jdbcType=BIGINT},
+      </if>
+      <if test="tboArea != null" >
+        #{tboArea,jdbcType=INTEGER},
+      </if>
+      <if test="tboName != null" >
+        #{tboName,jdbcType=VARCHAR},
+      </if>
+      <if test="tboLongitude != null" >
+        #{tboLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="tboLatitude != null" >
+        #{tboLatitude,jdbcType=DECIMAL},
+      </if>
+      <if test="tboRange != null" >
+        #{tboRange,jdbcType=VARCHAR},
+      </if>
+      <if test="tboAddress != null" >
+        #{tboAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tboSpace != null" >
+        #{tboSpace,jdbcType=VARCHAR},
+      </if>
+      <if test="tboDetails != null" >
+        #{tboDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="tboDoorTime != null" >
+        #{tboDoorTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tboCost != null" >
+        #{tboCost,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPerson != null" >
+        #{tboPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tboContact != null" >
+        #{tboContact,jdbcType=VARCHAR},
+      </if>
+      <if test="tboUntil != null" >
+        #{tboUntil,jdbcType=DATE},
+      </if>
+      <if test="tboExpire != null" >
+        #{tboExpire,jdbcType=DATE},
+      </if>
+      <if test="tboCarS != null" >
+        #{tboCarS,jdbcType=INTEGER},
+      </if>
+      <if test="tboPositionS != null" >
+        #{tboPositionS,jdbcType=INTEGER},
+      </if>
+      <if test="tboImage != null" >
+        #{tboImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tboCanA != null" >
+        #{tboCanA,jdbcType=TINYINT},
+      </if>
+      <if test="tboCanB != null" >
+        #{tboCanB,jdbcType=TINYINT},
+      </if>
+      <if test="tboPriority != null" >
+        #{tboPriority,jdbcType=INTEGER},
+      </if>
+      <if test="tboOutletsType != null" >
+        #{tboOutletsType,jdbcType=SMALLINT},
+      </if>
+      <if test="tboVoteS != null" >
+        #{tboVoteS,jdbcType=INTEGER},
+      </if>
+      <if test="tboProfile != null" >
+        #{tboProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tboUpdateTime != null" >
+        #{tboUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboAddTime != null" >
+        #{tboAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboStatus != null" >
+        #{tboStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.OutletsExample" resultType="java.lang.Integer" >
+    select count(*) from tb_outlets
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_outlets
+    <set >
+      <if test="record.tboId != null" >
+        tbo_id = #{record.tboId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboHost != null" >
+        tbo_host = #{record.tboHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tboDistrict != null" >
+        tbo_district = #{record.tboDistrict,jdbcType=BIGINT},
+      </if>
+      <if test="record.tboArea != null" >
+        tbo_area = #{record.tboArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboName != null" >
+        tbo_name = #{record.tboName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboLongitude != null" >
+        tbo_longitude = #{record.tboLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tboLatitude != null" >
+        tbo_latitude = #{record.tboLatitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tboRange != null" >
+        tbo_range = #{record.tboRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboAddress != null" >
+        tbo_address = #{record.tboAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboSpace != null" >
+        tbo_space = #{record.tboSpace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboDetails != null" >
+        tbo_details = #{record.tboDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboDoorTime != null" >
+        tbo_door_time = #{record.tboDoorTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboCost != null" >
+        tbo_cost = #{record.tboCost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboPerson != null" >
+        tbo_person = #{record.tboPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboContact != null" >
+        tbo_contact = #{record.tboContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboUntil != null" >
+        tbo_until = #{record.tboUntil,jdbcType=DATE},
+      </if>
+      <if test="record.tboExpire != null" >
+        tbo_expire = #{record.tboExpire,jdbcType=DATE},
+      </if>
+      <if test="record.tboCarS != null" >
+        tbo_car_s = #{record.tboCarS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboPositionS != null" >
+        tbo_position_s = #{record.tboPositionS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboImage != null" >
+        tbo_image = #{record.tboImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboCanA != null" >
+        tbo_can_a = #{record.tboCanA,jdbcType=TINYINT},
+      </if>
+      <if test="record.tboCanB != null" >
+        tbo_can_b = #{record.tboCanB,jdbcType=TINYINT},
+      </if>
+      <if test="record.tboPriority != null" >
+        tbo_priority = #{record.tboPriority,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboOutletsType != null" >
+        tbo_outlets_type = #{record.tboOutletsType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tboVoteS != null" >
+        tbo_vote_s = #{record.tboVoteS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tboProfile != null" >
+        tbo_profile = #{record.tboProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboUpdateTime != null" >
+        tbo_update_time = #{record.tboUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboAddTime != null" >
+        tbo_add_time = #{record.tboAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboStatus != null" >
+        tbo_status = #{record.tboStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_outlets
+    set tbo_id = #{record.tboId,jdbcType=INTEGER},
+      tbo_host = #{record.tboHost,jdbcType=SMALLINT},
+      tbo_district = #{record.tboDistrict,jdbcType=BIGINT},
+      tbo_area = #{record.tboArea,jdbcType=INTEGER},
+      tbo_name = #{record.tboName,jdbcType=VARCHAR},
+      tbo_longitude = #{record.tboLongitude,jdbcType=DECIMAL},
+      tbo_latitude = #{record.tboLatitude,jdbcType=DECIMAL},
+      tbo_range = #{record.tboRange,jdbcType=VARCHAR},
+      tbo_address = #{record.tboAddress,jdbcType=VARCHAR},
+      tbo_space = #{record.tboSpace,jdbcType=VARCHAR},
+      tbo_details = #{record.tboDetails,jdbcType=VARCHAR},
+      tbo_door_time = #{record.tboDoorTime,jdbcType=VARCHAR},
+      tbo_cost = #{record.tboCost,jdbcType=DOUBLE},
+      tbo_person = #{record.tboPerson,jdbcType=VARCHAR},
+      tbo_contact = #{record.tboContact,jdbcType=VARCHAR},
+      tbo_until = #{record.tboUntil,jdbcType=DATE},
+      tbo_expire = #{record.tboExpire,jdbcType=DATE},
+      tbo_car_s = #{record.tboCarS,jdbcType=INTEGER},
+      tbo_position_s = #{record.tboPositionS,jdbcType=INTEGER},
+      tbo_image = #{record.tboImage,jdbcType=VARCHAR},
+      tbo_can_a = #{record.tboCanA,jdbcType=TINYINT},
+      tbo_can_b = #{record.tboCanB,jdbcType=TINYINT},
+      tbo_priority = #{record.tboPriority,jdbcType=INTEGER},
+      tbo_outlets_type = #{record.tboOutletsType,jdbcType=SMALLINT},
+      tbo_vote_s = #{record.tboVoteS,jdbcType=INTEGER},
+      tbo_profile = #{record.tboProfile,jdbcType=VARCHAR},
+      tbo_update_time = #{record.tboUpdateTime,jdbcType=TIMESTAMP},
+      tbo_add_time = #{record.tboAddTime,jdbcType=TIMESTAMP},
+      tbo_status = #{record.tboStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Outlets" >
+    update tb_outlets
+    <set >
+      <if test="tboHost != null" >
+        tbo_host = #{tboHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tboDistrict != null" >
+        tbo_district = #{tboDistrict,jdbcType=BIGINT},
+      </if>
+      <if test="tboArea != null" >
+        tbo_area = #{tboArea,jdbcType=INTEGER},
+      </if>
+      <if test="tboName != null" >
+        tbo_name = #{tboName,jdbcType=VARCHAR},
+      </if>
+      <if test="tboLongitude != null" >
+        tbo_longitude = #{tboLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="tboLatitude != null" >
+        tbo_latitude = #{tboLatitude,jdbcType=DECIMAL},
+      </if>
+      <if test="tboRange != null" >
+        tbo_range = #{tboRange,jdbcType=VARCHAR},
+      </if>
+      <if test="tboAddress != null" >
+        tbo_address = #{tboAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tboSpace != null" >
+        tbo_space = #{tboSpace,jdbcType=VARCHAR},
+      </if>
+      <if test="tboDetails != null" >
+        tbo_details = #{tboDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="tboDoorTime != null" >
+        tbo_door_time = #{tboDoorTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tboCost != null" >
+        tbo_cost = #{tboCost,jdbcType=DOUBLE},
+      </if>
+      <if test="tboPerson != null" >
+        tbo_person = #{tboPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tboContact != null" >
+        tbo_contact = #{tboContact,jdbcType=VARCHAR},
+      </if>
+      <if test="tboUntil != null" >
+        tbo_until = #{tboUntil,jdbcType=DATE},
+      </if>
+      <if test="tboExpire != null" >
+        tbo_expire = #{tboExpire,jdbcType=DATE},
+      </if>
+      <if test="tboCarS != null" >
+        tbo_car_s = #{tboCarS,jdbcType=INTEGER},
+      </if>
+      <if test="tboPositionS != null" >
+        tbo_position_s = #{tboPositionS,jdbcType=INTEGER},
+      </if>
+      <if test="tboImage != null" >
+        tbo_image = #{tboImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tboCanA != null" >
+        tbo_can_a = #{tboCanA,jdbcType=TINYINT},
+      </if>
+      <if test="tboCanB != null" >
+        tbo_can_b = #{tboCanB,jdbcType=TINYINT},
+      </if>
+      <if test="tboPriority != null" >
+        tbo_priority = #{tboPriority,jdbcType=INTEGER},
+      </if>
+      <if test="tboOutletsType != null" >
+        tbo_outlets_type = #{tboOutletsType,jdbcType=SMALLINT},
+      </if>
+      <if test="tboVoteS != null" >
+        tbo_vote_s = #{tboVoteS,jdbcType=INTEGER},
+      </if>
+      <if test="tboProfile != null" >
+        tbo_profile = #{tboProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tboUpdateTime != null" >
+        tbo_update_time = #{tboUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboAddTime != null" >
+        tbo_add_time = #{tboAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboStatus != null" >
+        tbo_status = #{tboStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbo_id = #{tboId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Outlets" >
+    update tb_outlets
+    set tbo_host = #{tboHost,jdbcType=SMALLINT},
+      tbo_district = #{tboDistrict,jdbcType=BIGINT},
+      tbo_area = #{tboArea,jdbcType=INTEGER},
+      tbo_name = #{tboName,jdbcType=VARCHAR},
+      tbo_longitude = #{tboLongitude,jdbcType=DECIMAL},
+      tbo_latitude = #{tboLatitude,jdbcType=DECIMAL},
+      tbo_range = #{tboRange,jdbcType=VARCHAR},
+      tbo_address = #{tboAddress,jdbcType=VARCHAR},
+      tbo_space = #{tboSpace,jdbcType=VARCHAR},
+      tbo_details = #{tboDetails,jdbcType=VARCHAR},
+      tbo_door_time = #{tboDoorTime,jdbcType=VARCHAR},
+      tbo_cost = #{tboCost,jdbcType=DOUBLE},
+      tbo_person = #{tboPerson,jdbcType=VARCHAR},
+      tbo_contact = #{tboContact,jdbcType=VARCHAR},
+      tbo_until = #{tboUntil,jdbcType=DATE},
+      tbo_expire = #{tboExpire,jdbcType=DATE},
+      tbo_car_s = #{tboCarS,jdbcType=INTEGER},
+      tbo_position_s = #{tboPositionS,jdbcType=INTEGER},
+      tbo_image = #{tboImage,jdbcType=VARCHAR},
+      tbo_can_a = #{tboCanA,jdbcType=TINYINT},
+      tbo_can_b = #{tboCanB,jdbcType=TINYINT},
+      tbo_priority = #{tboPriority,jdbcType=INTEGER},
+      tbo_outlets_type = #{tboOutletsType,jdbcType=SMALLINT},
+      tbo_vote_s = #{tboVoteS,jdbcType=INTEGER},
+      tbo_profile = #{tboProfile,jdbcType=VARCHAR},
+      tbo_update_time = #{tboUpdateTime,jdbcType=TIMESTAMP},
+      tbo_add_time = #{tboAddTime,jdbcType=TIMESTAMP},
+      tbo_status = #{tboStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbo_id = #{tboId,jdbcType=INTEGER}
+  </update>
+</mapper>

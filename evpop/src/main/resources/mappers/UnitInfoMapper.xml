@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.UnitInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.UnitInfo" >
+    <id column="tbui_id" property="tbuiId" jdbcType="INTEGER" />
+    <result column="tbui_host" property="tbuiHost" jdbcType="SMALLINT" />
+    <result column="tbui_username" property="tbuiUsername" jdbcType="VARCHAR" />
+    <result column="tbui_password" property="tbuiPassword" jdbcType="VARCHAR" />
+    <result column="tbui_name" property="tbuiName" jdbcType="VARCHAR" />
+    <result column="tbui_person" property="tbuiPerson" jdbcType="VARCHAR" />
+    <result column="tbui_type" property="tbuiType" jdbcType="TINYINT" />
+    <result column="tbui_level" property="tbuiLevel" jdbcType="SMALLINT" />
+    <result column="tbui_address" property="tbuiAddress" jdbcType="VARCHAR" />
+    <result column="tbui_contact" property="tbuiContact" jdbcType="VARCHAR" />
+    <result column="tbui_images" property="tbuiImages" jdbcType="VARCHAR" />
+    <result column="tbui_member" property="tbuiMember" jdbcType="INTEGER" />
+    <result column="tbui_credit" property="tbuiCredit" jdbcType="DOUBLE" />
+    <result column="tbui_outlets" property="tbuiOutlets" jdbcType="INTEGER" />
+    <result column="tbui_fee_type" property="tbuiFeeType" jdbcType="INTEGER" />
+    <result column="tbui_use_type" property="tbuiUseType" jdbcType="TINYINT" />
+    <result column="tbui_update_time" property="tbuiUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbui_add_time" property="tbuiAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbui_remark" property="tbuiRemark" jdbcType="VARCHAR" />
+    <result column="tbui_status" property="tbuiStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+    <result column="tbui_need_deposit" property="tbuiNeedDeposit" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbui_id, tbui_host, tbui_username, tbui_password, tbui_name, tbui_person, tbui_type, 
+    tbui_level, tbui_address, tbui_contact, tbui_images, tbui_member, tbui_credit, tbui_outlets, 
+    tbui_fee_type, tbui_use_type, tbui_update_time, tbui_add_time, tbui_remark, tbui_status, 
+    createTime, modifyDate, tbui_need_deposit
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.UnitInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_unit_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_unit_info
+    where tbui_id = #{tbuiId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_unit_info
+    where tbui_id = #{tbuiId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.UnitInfo" >
+    insert into tb_unit_info (tbui_id, tbui_host, tbui_username, 
+      tbui_password, tbui_name, tbui_person, 
+      tbui_type, tbui_level, tbui_address, 
+      tbui_contact, tbui_images, tbui_member, 
+      tbui_credit, tbui_outlets, tbui_fee_type, 
+      tbui_use_type, tbui_update_time, tbui_add_time, 
+      tbui_remark, tbui_status, createTime, 
+      modifyDate, tbui_need_deposit)
+    values (#{tbuiId,jdbcType=INTEGER}, #{tbuiHost,jdbcType=SMALLINT}, #{tbuiUsername,jdbcType=VARCHAR}, 
+      #{tbuiPassword,jdbcType=VARCHAR}, #{tbuiName,jdbcType=VARCHAR}, #{tbuiPerson,jdbcType=VARCHAR}, 
+      #{tbuiType,jdbcType=TINYINT}, #{tbuiLevel,jdbcType=SMALLINT}, #{tbuiAddress,jdbcType=VARCHAR}, 
+      #{tbuiContact,jdbcType=VARCHAR}, #{tbuiImages,jdbcType=VARCHAR}, #{tbuiMember,jdbcType=INTEGER}, 
+      #{tbuiCredit,jdbcType=DOUBLE}, #{tbuiOutlets,jdbcType=INTEGER}, #{tbuiFeeType,jdbcType=INTEGER}, 
+      #{tbuiUseType,jdbcType=TINYINT}, #{tbuiUpdateTime,jdbcType=TIMESTAMP}, #{tbuiAddTime,jdbcType=TIMESTAMP}, 
+      #{tbuiRemark,jdbcType=VARCHAR}, #{tbuiStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifydate,jdbcType=TIMESTAMP}, #{tbuiNeedDeposit,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.UnitInfo" >
+    insert into tb_unit_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbuiId != null" >
+        tbui_id,
+      </if>
+      <if test="tbuiHost != null" >
+        tbui_host,
+      </if>
+      <if test="tbuiUsername != null" >
+        tbui_username,
+      </if>
+      <if test="tbuiPassword != null" >
+        tbui_password,
+      </if>
+      <if test="tbuiName != null" >
+        tbui_name,
+      </if>
+      <if test="tbuiPerson != null" >
+        tbui_person,
+      </if>
+      <if test="tbuiType != null" >
+        tbui_type,
+      </if>
+      <if test="tbuiLevel != null" >
+        tbui_level,
+      </if>
+      <if test="tbuiAddress != null" >
+        tbui_address,
+      </if>
+      <if test="tbuiContact != null" >
+        tbui_contact,
+      </if>
+      <if test="tbuiImages != null" >
+        tbui_images,
+      </if>
+      <if test="tbuiMember != null" >
+        tbui_member,
+      </if>
+      <if test="tbuiCredit != null" >
+        tbui_credit,
+      </if>
+      <if test="tbuiOutlets != null" >
+        tbui_outlets,
+      </if>
+      <if test="tbuiFeeType != null" >
+        tbui_fee_type,
+      </if>
+      <if test="tbuiUseType != null" >
+        tbui_use_type,
+      </if>
+      <if test="tbuiUpdateTime != null" >
+        tbui_update_time,
+      </if>
+      <if test="tbuiAddTime != null" >
+        tbui_add_time,
+      </if>
+      <if test="tbuiRemark != null" >
+        tbui_remark,
+      </if>
+      <if test="tbuiStatus != null" >
+        tbui_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+      <if test="tbuiNeedDeposit != null" >
+        tbui_need_deposit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbuiId != null" >
+        #{tbuiId,jdbcType=INTEGER},
+      </if>
+      <if test="tbuiHost != null" >
+        #{tbuiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbuiUsername != null" >
+        #{tbuiUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiPassword != null" >
+        #{tbuiPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiName != null" >
+        #{tbuiName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiPerson != null" >
+        #{tbuiPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiType != null" >
+        #{tbuiType,jdbcType=TINYINT},
+      </if>
+      <if test="tbuiLevel != null" >
+        #{tbuiLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="tbuiAddress != null" >
+        #{tbuiAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiContact != null" >
+        #{tbuiContact,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiImages != null" >
+        #{tbuiImages,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiMember != null" >
+        #{tbuiMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbuiCredit != null" >
+        #{tbuiCredit,jdbcType=DOUBLE},
+      </if>
+      <if test="tbuiOutlets != null" >
+        #{tbuiOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="tbuiFeeType != null" >
+        #{tbuiFeeType,jdbcType=INTEGER},
+      </if>
+      <if test="tbuiUseType != null" >
+        #{tbuiUseType,jdbcType=TINYINT},
+      </if>
+      <if test="tbuiUpdateTime != null" >
+        #{tbuiUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuiAddTime != null" >
+        #{tbuiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuiRemark != null" >
+        #{tbuiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiStatus != null" >
+        #{tbuiStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuiNeedDeposit != null" >
+        #{tbuiNeedDeposit,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.UnitInfoExample" resultType="java.lang.Integer" >
+    select count(*) from tb_unit_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_unit_info
+    <set >
+      <if test="record.tbuiId != null" >
+        tbui_id = #{record.tbuiId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbuiHost != null" >
+        tbui_host = #{record.tbuiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbuiUsername != null" >
+        tbui_username = #{record.tbuiUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuiPassword != null" >
+        tbui_password = #{record.tbuiPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuiName != null" >
+        tbui_name = #{record.tbuiName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuiPerson != null" >
+        tbui_person = #{record.tbuiPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuiType != null" >
+        tbui_type = #{record.tbuiType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbuiLevel != null" >
+        tbui_level = #{record.tbuiLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbuiAddress != null" >
+        tbui_address = #{record.tbuiAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuiContact != null" >
+        tbui_contact = #{record.tbuiContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuiImages != null" >
+        tbui_images = #{record.tbuiImages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuiMember != null" >
+        tbui_member = #{record.tbuiMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbuiCredit != null" >
+        tbui_credit = #{record.tbuiCredit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbuiOutlets != null" >
+        tbui_outlets = #{record.tbuiOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbuiFeeType != null" >
+        tbui_fee_type = #{record.tbuiFeeType,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbuiUseType != null" >
+        tbui_use_type = #{record.tbuiUseType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbuiUpdateTime != null" >
+        tbui_update_time = #{record.tbuiUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuiAddTime != null" >
+        tbui_add_time = #{record.tbuiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuiRemark != null" >
+        tbui_remark = #{record.tbuiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuiStatus != null" >
+        tbui_status = #{record.tbuiStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuiNeedDeposit != null" >
+        tbui_need_deposit = #{record.tbuiNeedDeposit,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_unit_info
+    set tbui_id = #{record.tbuiId,jdbcType=INTEGER},
+      tbui_host = #{record.tbuiHost,jdbcType=SMALLINT},
+      tbui_username = #{record.tbuiUsername,jdbcType=VARCHAR},
+      tbui_password = #{record.tbuiPassword,jdbcType=VARCHAR},
+      tbui_name = #{record.tbuiName,jdbcType=VARCHAR},
+      tbui_person = #{record.tbuiPerson,jdbcType=VARCHAR},
+      tbui_type = #{record.tbuiType,jdbcType=TINYINT},
+      tbui_level = #{record.tbuiLevel,jdbcType=SMALLINT},
+      tbui_address = #{record.tbuiAddress,jdbcType=VARCHAR},
+      tbui_contact = #{record.tbuiContact,jdbcType=VARCHAR},
+      tbui_images = #{record.tbuiImages,jdbcType=VARCHAR},
+      tbui_member = #{record.tbuiMember,jdbcType=INTEGER},
+      tbui_credit = #{record.tbuiCredit,jdbcType=DOUBLE},
+      tbui_outlets = #{record.tbuiOutlets,jdbcType=INTEGER},
+      tbui_fee_type = #{record.tbuiFeeType,jdbcType=INTEGER},
+      tbui_use_type = #{record.tbuiUseType,jdbcType=TINYINT},
+      tbui_update_time = #{record.tbuiUpdateTime,jdbcType=TIMESTAMP},
+      tbui_add_time = #{record.tbuiAddTime,jdbcType=TIMESTAMP},
+      tbui_remark = #{record.tbuiRemark,jdbcType=VARCHAR},
+      tbui_status = #{record.tbuiStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      tbui_need_deposit = #{record.tbuiNeedDeposit,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.UnitInfo" >
+    update tb_unit_info
+    <set >
+      <if test="tbuiHost != null" >
+        tbui_host = #{tbuiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbuiUsername != null" >
+        tbui_username = #{tbuiUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiPassword != null" >
+        tbui_password = #{tbuiPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiName != null" >
+        tbui_name = #{tbuiName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiPerson != null" >
+        tbui_person = #{tbuiPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiType != null" >
+        tbui_type = #{tbuiType,jdbcType=TINYINT},
+      </if>
+      <if test="tbuiLevel != null" >
+        tbui_level = #{tbuiLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="tbuiAddress != null" >
+        tbui_address = #{tbuiAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiContact != null" >
+        tbui_contact = #{tbuiContact,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiImages != null" >
+        tbui_images = #{tbuiImages,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiMember != null" >
+        tbui_member = #{tbuiMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbuiCredit != null" >
+        tbui_credit = #{tbuiCredit,jdbcType=DOUBLE},
+      </if>
+      <if test="tbuiOutlets != null" >
+        tbui_outlets = #{tbuiOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="tbuiFeeType != null" >
+        tbui_fee_type = #{tbuiFeeType,jdbcType=INTEGER},
+      </if>
+      <if test="tbuiUseType != null" >
+        tbui_use_type = #{tbuiUseType,jdbcType=TINYINT},
+      </if>
+      <if test="tbuiUpdateTime != null" >
+        tbui_update_time = #{tbuiUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuiAddTime != null" >
+        tbui_add_time = #{tbuiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuiRemark != null" >
+        tbui_remark = #{tbuiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuiStatus != null" >
+        tbui_status = #{tbuiStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuiNeedDeposit != null" >
+        tbui_need_deposit = #{tbuiNeedDeposit,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbui_id = #{tbuiId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.UnitInfo" >
+    update tb_unit_info
+    set tbui_host = #{tbuiHost,jdbcType=SMALLINT},
+      tbui_username = #{tbuiUsername,jdbcType=VARCHAR},
+      tbui_password = #{tbuiPassword,jdbcType=VARCHAR},
+      tbui_name = #{tbuiName,jdbcType=VARCHAR},
+      tbui_person = #{tbuiPerson,jdbcType=VARCHAR},
+      tbui_type = #{tbuiType,jdbcType=TINYINT},
+      tbui_level = #{tbuiLevel,jdbcType=SMALLINT},
+      tbui_address = #{tbuiAddress,jdbcType=VARCHAR},
+      tbui_contact = #{tbuiContact,jdbcType=VARCHAR},
+      tbui_images = #{tbuiImages,jdbcType=VARCHAR},
+      tbui_member = #{tbuiMember,jdbcType=INTEGER},
+      tbui_credit = #{tbuiCredit,jdbcType=DOUBLE},
+      tbui_outlets = #{tbuiOutlets,jdbcType=INTEGER},
+      tbui_fee_type = #{tbuiFeeType,jdbcType=INTEGER},
+      tbui_use_type = #{tbuiUseType,jdbcType=TINYINT},
+      tbui_update_time = #{tbuiUpdateTime,jdbcType=TIMESTAMP},
+      tbui_add_time = #{tbuiAddTime,jdbcType=TIMESTAMP},
+      tbui_remark = #{tbuiRemark,jdbcType=VARCHAR},
+      tbui_status = #{tbuiStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      tbui_need_deposit = #{tbuiNeedDeposit,jdbcType=TINYINT}
+    where tbui_id = #{tbuiId,jdbcType=INTEGER}
+  </update>
+</mapper>

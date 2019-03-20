@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.RechargeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Recharge" >
+    <id column="tbr_id" property="tbrId" jdbcType="BIGINT" />
+    <result column="tbr_name" property="tbrName" jdbcType="VARCHAR" />
+    <result column="tbr_flg" property="tbrFlg" jdbcType="TINYINT" />
+    <result column="tbr_content" property="tbrContent" jdbcType="VARCHAR" />
+    <result column="tbr_list" property="tbrList" jdbcType="VARCHAR" />
+    <result column="tbr_ratio" property="tbrRatio" jdbcType="DOUBLE" />
+    <result column="tbr_update_user" property="tbrUpdateUser" jdbcType="BIGINT" />
+    <result column="tbr_update_time" property="tbrUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_add_user" property="tbrAddUser" jdbcType="BIGINT" />
+    <result column="tbr_add_time" property="tbrAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_status" property="tbrStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbr_id, tbr_name, tbr_flg, tbr_content, tbr_list, tbr_ratio, tbr_update_user, tbr_update_time, 
+    tbr_add_user, tbr_add_time, tbr_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.RechargeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_recharge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_recharge
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_recharge
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Recharge" >
+    insert into tb_recharge (tbr_id, tbr_name, tbr_flg, 
+      tbr_content, tbr_list, tbr_ratio, 
+      tbr_update_user, tbr_update_time, tbr_add_user, 
+      tbr_add_time, tbr_status)
+    values (#{tbrId,jdbcType=BIGINT}, #{tbrName,jdbcType=VARCHAR}, #{tbrFlg,jdbcType=TINYINT}, 
+      #{tbrContent,jdbcType=VARCHAR}, #{tbrList,jdbcType=VARCHAR}, #{tbrRatio,jdbcType=DOUBLE}, 
+      #{tbrUpdateUser,jdbcType=BIGINT}, #{tbrUpdateTime,jdbcType=TIMESTAMP}, #{tbrAddUser,jdbcType=BIGINT}, 
+      #{tbrAddTime,jdbcType=TIMESTAMP}, #{tbrStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Recharge" >
+    insert into tb_recharge
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        tbr_id,
+      </if>
+      <if test="tbrName != null" >
+        tbr_name,
+      </if>
+      <if test="tbrFlg != null" >
+        tbr_flg,
+      </if>
+      <if test="tbrContent != null" >
+        tbr_content,
+      </if>
+      <if test="tbrList != null" >
+        tbr_list,
+      </if>
+      <if test="tbrRatio != null" >
+        tbr_ratio,
+      </if>
+      <if test="tbrUpdateUser != null" >
+        tbr_update_user,
+      </if>
+      <if test="tbrUpdateTime != null" >
+        tbr_update_time,
+      </if>
+      <if test="tbrAddUser != null" >
+        tbr_add_user,
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time,
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        #{tbrId,jdbcType=BIGINT},
+      </if>
+      <if test="tbrName != null" >
+        #{tbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrFlg != null" >
+        #{tbrFlg,jdbcType=TINYINT},
+      </if>
+      <if test="tbrContent != null" >
+        #{tbrContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrList != null" >
+        #{tbrList,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRatio != null" >
+        #{tbrRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="tbrUpdateUser != null" >
+        #{tbrUpdateUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbrUpdateTime != null" >
+        #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrAddUser != null" >
+        #{tbrAddUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbrAddTime != null" >
+        #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrStatus != null" >
+        #{tbrStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.RechargeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_recharge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_recharge
+    <set >
+      <if test="record.tbrId != null" >
+        tbr_id = #{record.tbrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrName != null" >
+        tbr_name = #{record.tbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrFlg != null" >
+        tbr_flg = #{record.tbrFlg,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrContent != null" >
+        tbr_content = #{record.tbrContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrList != null" >
+        tbr_list = #{record.tbrList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrRatio != null" >
+        tbr_ratio = #{record.tbrRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbrUpdateUser != null" >
+        tbr_update_user = #{record.tbrUpdateUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrUpdateTime != null" >
+        tbr_update_time = #{record.tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrAddUser != null" >
+        tbr_add_user = #{record.tbrAddUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrAddTime != null" >
+        tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrStatus != null" >
+        tbr_status = #{record.tbrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_recharge
+    set tbr_id = #{record.tbrId,jdbcType=BIGINT},
+      tbr_name = #{record.tbrName,jdbcType=VARCHAR},
+      tbr_flg = #{record.tbrFlg,jdbcType=TINYINT},
+      tbr_content = #{record.tbrContent,jdbcType=VARCHAR},
+      tbr_list = #{record.tbrList,jdbcType=VARCHAR},
+      tbr_ratio = #{record.tbrRatio,jdbcType=DOUBLE},
+      tbr_update_user = #{record.tbrUpdateUser,jdbcType=BIGINT},
+      tbr_update_time = #{record.tbrUpdateTime,jdbcType=TIMESTAMP},
+      tbr_add_user = #{record.tbrAddUser,jdbcType=BIGINT},
+      tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_status = #{record.tbrStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Recharge" >
+    update tb_recharge
+    <set >
+      <if test="tbrName != null" >
+        tbr_name = #{tbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrFlg != null" >
+        tbr_flg = #{tbrFlg,jdbcType=TINYINT},
+      </if>
+      <if test="tbrContent != null" >
+        tbr_content = #{tbrContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrList != null" >
+        tbr_list = #{tbrList,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRatio != null" >
+        tbr_ratio = #{tbrRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="tbrUpdateUser != null" >
+        tbr_update_user = #{tbrUpdateUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbrUpdateTime != null" >
+        tbr_update_time = #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrAddUser != null" >
+        tbr_add_user = #{tbrAddUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status = #{tbrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Recharge" >
+    update tb_recharge
+    set tbr_name = #{tbrName,jdbcType=VARCHAR},
+      tbr_flg = #{tbrFlg,jdbcType=TINYINT},
+      tbr_content = #{tbrContent,jdbcType=VARCHAR},
+      tbr_list = #{tbrList,jdbcType=VARCHAR},
+      tbr_ratio = #{tbrRatio,jdbcType=DOUBLE},
+      tbr_update_user = #{tbrUpdateUser,jdbcType=BIGINT},
+      tbr_update_time = #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      tbr_add_user = #{tbrAddUser,jdbcType=BIGINT},
+      tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_status = #{tbrStatus,jdbcType=SMALLINT}
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </update>
+</mapper>

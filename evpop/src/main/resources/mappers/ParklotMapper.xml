@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ParklotMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Parklot" >
+    <id column="tbp_id" property="tbpId" jdbcType="INTEGER" />
+    <result column="tbp_host" property="tbpHost" jdbcType="SMALLINT" />
+    <result column="tbp_code" property="tbpCode" jdbcType="VARCHAR" />
+    <result column="tbp_outlets" property="tbpOutlets" jdbcType="INTEGER" />
+    <result column="tbp_update_time" property="tbpUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbp_add_time" property="tbpAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbp_status" property="tbpStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbp_id, tbp_host, tbp_code, tbp_outlets, tbp_update_time, tbp_add_time, tbp_status, 
+    createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ParklotExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_parklot
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_parklot
+    where tbp_id = #{tbpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_parklot
+    where tbp_id = #{tbpId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Parklot" >
+    insert into tb_parklot (tbp_id, tbp_host, tbp_code, 
+      tbp_outlets, tbp_update_time, tbp_add_time, 
+      tbp_status, createTime, modifyDate
+      )
+    values (#{tbpId,jdbcType=INTEGER}, #{tbpHost,jdbcType=SMALLINT}, #{tbpCode,jdbcType=VARCHAR}, 
+      #{tbpOutlets,jdbcType=INTEGER}, #{tbpUpdateTime,jdbcType=TIMESTAMP}, #{tbpAddTime,jdbcType=TIMESTAMP}, 
+      #{tbpStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Parklot" >
+    insert into tb_parklot
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbpId != null" >
+        tbp_id,
+      </if>
+      <if test="tbpHost != null" >
+        tbp_host,
+      </if>
+      <if test="tbpCode != null" >
+        tbp_code,
+      </if>
+      <if test="tbpOutlets != null" >
+        tbp_outlets,
+      </if>
+      <if test="tbpUpdateTime != null" >
+        tbp_update_time,
+      </if>
+      <if test="tbpAddTime != null" >
+        tbp_add_time,
+      </if>
+      <if test="tbpStatus != null" >
+        tbp_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbpId != null" >
+        #{tbpId,jdbcType=INTEGER},
+      </if>
+      <if test="tbpHost != null" >
+        #{tbpHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbpCode != null" >
+        #{tbpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpOutlets != null" >
+        #{tbpOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="tbpUpdateTime != null" >
+        #{tbpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpAddTime != null" >
+        #{tbpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpStatus != null" >
+        #{tbpStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ParklotExample" resultType="java.lang.Integer" >
+    select count(*) from tb_parklot
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_parklot
+    <set >
+      <if test="record.tbpId != null" >
+        tbp_id = #{record.tbpId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbpHost != null" >
+        tbp_host = #{record.tbpHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbpCode != null" >
+        tbp_code = #{record.tbpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpOutlets != null" >
+        tbp_outlets = #{record.tbpOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbpUpdateTime != null" >
+        tbp_update_time = #{record.tbpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbpAddTime != null" >
+        tbp_add_time = #{record.tbpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbpStatus != null" >
+        tbp_status = #{record.tbpStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_parklot
+    set tbp_id = #{record.tbpId,jdbcType=INTEGER},
+      tbp_host = #{record.tbpHost,jdbcType=SMALLINT},
+      tbp_code = #{record.tbpCode,jdbcType=VARCHAR},
+      tbp_outlets = #{record.tbpOutlets,jdbcType=INTEGER},
+      tbp_update_time = #{record.tbpUpdateTime,jdbcType=TIMESTAMP},
+      tbp_add_time = #{record.tbpAddTime,jdbcType=TIMESTAMP},
+      tbp_status = #{record.tbpStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Parklot" >
+    update tb_parklot
+    <set >
+      <if test="tbpHost != null" >
+        tbp_host = #{tbpHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbpCode != null" >
+        tbp_code = #{tbpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpOutlets != null" >
+        tbp_outlets = #{tbpOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="tbpUpdateTime != null" >
+        tbp_update_time = #{tbpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpAddTime != null" >
+        tbp_add_time = #{tbpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpStatus != null" >
+        tbp_status = #{tbpStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbp_id = #{tbpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Parklot" >
+    update tb_parklot
+    set tbp_host = #{tbpHost,jdbcType=SMALLINT},
+      tbp_code = #{tbpCode,jdbcType=VARCHAR},
+      tbp_outlets = #{tbpOutlets,jdbcType=INTEGER},
+      tbp_update_time = #{tbpUpdateTime,jdbcType=TIMESTAMP},
+      tbp_add_time = #{tbpAddTime,jdbcType=TIMESTAMP},
+      tbp_status = #{tbpStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbp_id = #{tbpId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Goods" >
+    <id column="tbg_id" property="tbgId" jdbcType="BIGINT" />
+    <result column="tbg_name" property="tbgName" jdbcType="VARCHAR" />
+    <result column="tbg_product" property="tbgProduct" jdbcType="SMALLINT" />
+    <result column="tbg_flag" property="tbgFlag" jdbcType="VARCHAR" />
+    <result column="tbg_priority" property="tbgPriority" jdbcType="VARCHAR" />
+    <result column="tbg_expre" property="tbgExpre" jdbcType="VARCHAR" />
+    <result column="tbg_meas" property="tbgMeas" jdbcType="VARCHAR" />
+    <result column="tbg_profile" property="tbgProfile" jdbcType="VARCHAR" />
+    <result column="tbg_update_time" property="tbgUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbg_add_time" property="tbgAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbg_status" property="tbgStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbg_id, tbg_name, tbg_product, tbg_flag, tbg_priority, tbg_expre, tbg_meas, tbg_profile, 
+    tbg_update_time, tbg_add_time, tbg_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.GoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_goods
+    where tbg_id = #{tbgId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_goods
+    where tbg_id = #{tbgId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Goods" >
+    insert into tb_goods (tbg_id, tbg_name, tbg_product, 
+      tbg_flag, tbg_priority, tbg_expre, 
+      tbg_meas, tbg_profile, tbg_update_time, 
+      tbg_add_time, tbg_status)
+    values (#{tbgId,jdbcType=BIGINT}, #{tbgName,jdbcType=VARCHAR}, #{tbgProduct,jdbcType=SMALLINT}, 
+      #{tbgFlag,jdbcType=VARCHAR}, #{tbgPriority,jdbcType=VARCHAR}, #{tbgExpre,jdbcType=VARCHAR}, 
+      #{tbgMeas,jdbcType=VARCHAR}, #{tbgProfile,jdbcType=VARCHAR}, #{tbgUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbgAddTime,jdbcType=TIMESTAMP}, #{tbgStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Goods" >
+    insert into tb_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbgId != null" >
+        tbg_id,
+      </if>
+      <if test="tbgName != null" >
+        tbg_name,
+      </if>
+      <if test="tbgProduct != null" >
+        tbg_product,
+      </if>
+      <if test="tbgFlag != null" >
+        tbg_flag,
+      </if>
+      <if test="tbgPriority != null" >
+        tbg_priority,
+      </if>
+      <if test="tbgExpre != null" >
+        tbg_expre,
+      </if>
+      <if test="tbgMeas != null" >
+        tbg_meas,
+      </if>
+      <if test="tbgProfile != null" >
+        tbg_profile,
+      </if>
+      <if test="tbgUpdateTime != null" >
+        tbg_update_time,
+      </if>
+      <if test="tbgAddTime != null" >
+        tbg_add_time,
+      </if>
+      <if test="tbgStatus != null" >
+        tbg_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbgId != null" >
+        #{tbgId,jdbcType=BIGINT},
+      </if>
+      <if test="tbgName != null" >
+        #{tbgName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgProduct != null" >
+        #{tbgProduct,jdbcType=SMALLINT},
+      </if>
+      <if test="tbgFlag != null" >
+        #{tbgFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgPriority != null" >
+        #{tbgPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgExpre != null" >
+        #{tbgExpre,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgMeas != null" >
+        #{tbgMeas,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgProfile != null" >
+        #{tbgProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgUpdateTime != null" >
+        #{tbgUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbgAddTime != null" >
+        #{tbgAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbgStatus != null" >
+        #{tbgStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.GoodsExample" resultType="java.lang.Integer" >
+    select count(*) from tb_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_goods
+    <set >
+      <if test="record.tbgId != null" >
+        tbg_id = #{record.tbgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbgName != null" >
+        tbg_name = #{record.tbgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbgProduct != null" >
+        tbg_product = #{record.tbgProduct,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbgFlag != null" >
+        tbg_flag = #{record.tbgFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbgPriority != null" >
+        tbg_priority = #{record.tbgPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbgExpre != null" >
+        tbg_expre = #{record.tbgExpre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbgMeas != null" >
+        tbg_meas = #{record.tbgMeas,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbgProfile != null" >
+        tbg_profile = #{record.tbgProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbgUpdateTime != null" >
+        tbg_update_time = #{record.tbgUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbgAddTime != null" >
+        tbg_add_time = #{record.tbgAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbgStatus != null" >
+        tbg_status = #{record.tbgStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_goods
+    set tbg_id = #{record.tbgId,jdbcType=BIGINT},
+      tbg_name = #{record.tbgName,jdbcType=VARCHAR},
+      tbg_product = #{record.tbgProduct,jdbcType=SMALLINT},
+      tbg_flag = #{record.tbgFlag,jdbcType=VARCHAR},
+      tbg_priority = #{record.tbgPriority,jdbcType=VARCHAR},
+      tbg_expre = #{record.tbgExpre,jdbcType=VARCHAR},
+      tbg_meas = #{record.tbgMeas,jdbcType=VARCHAR},
+      tbg_profile = #{record.tbgProfile,jdbcType=VARCHAR},
+      tbg_update_time = #{record.tbgUpdateTime,jdbcType=TIMESTAMP},
+      tbg_add_time = #{record.tbgAddTime,jdbcType=TIMESTAMP},
+      tbg_status = #{record.tbgStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Goods" >
+    update tb_goods
+    <set >
+      <if test="tbgName != null" >
+        tbg_name = #{tbgName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgProduct != null" >
+        tbg_product = #{tbgProduct,jdbcType=SMALLINT},
+      </if>
+      <if test="tbgFlag != null" >
+        tbg_flag = #{tbgFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgPriority != null" >
+        tbg_priority = #{tbgPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgExpre != null" >
+        tbg_expre = #{tbgExpre,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgMeas != null" >
+        tbg_meas = #{tbgMeas,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgProfile != null" >
+        tbg_profile = #{tbgProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbgUpdateTime != null" >
+        tbg_update_time = #{tbgUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbgAddTime != null" >
+        tbg_add_time = #{tbgAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbgStatus != null" >
+        tbg_status = #{tbgStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbg_id = #{tbgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Goods" >
+    update tb_goods
+    set tbg_name = #{tbgName,jdbcType=VARCHAR},
+      tbg_product = #{tbgProduct,jdbcType=SMALLINT},
+      tbg_flag = #{tbgFlag,jdbcType=VARCHAR},
+      tbg_priority = #{tbgPriority,jdbcType=VARCHAR},
+      tbg_expre = #{tbgExpre,jdbcType=VARCHAR},
+      tbg_meas = #{tbgMeas,jdbcType=VARCHAR},
+      tbg_profile = #{tbgProfile,jdbcType=VARCHAR},
+      tbg_update_time = #{tbgUpdateTime,jdbcType=TIMESTAMP},
+      tbg_add_time = #{tbgAddTime,jdbcType=TIMESTAMP},
+      tbg_status = #{tbgStatus,jdbcType=SMALLINT}
+    where tbg_id = #{tbgId,jdbcType=BIGINT}
+  </update>
+</mapper>

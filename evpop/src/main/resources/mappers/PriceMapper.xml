@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.PriceMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Price" >
+    <id column="tbp_id" property="tbpId" jdbcType="BIGINT" />
+    <result column="tbp_host" property="tbpHost" jdbcType="BIGINT" />
+    <result column="tbp_fee_type" property="tbpFeeType" jdbcType="BIGINT" />
+    <result column="tbp_goods" property="tbpGoods" jdbcType="BIGINT" />
+    <result column="tbp_model" property="tbpModel" jdbcType="BIGINT" />
+    <result column="tbp_price" property="tbpPrice" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbp_id, tbp_host, tbp_fee_type, tbp_goods, tbp_model, tbp_price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.PriceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_price
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_price
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_price
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Price" >
+    insert into tb_price (tbp_id, tbp_host, tbp_fee_type, 
+      tbp_goods, tbp_model, tbp_price
+      )
+    values (#{tbpId,jdbcType=BIGINT}, #{tbpHost,jdbcType=BIGINT}, #{tbpFeeType,jdbcType=BIGINT}, 
+      #{tbpGoods,jdbcType=BIGINT}, #{tbpModel,jdbcType=BIGINT}, #{tbpPrice,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Price" >
+    insert into tb_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbpId != null" >
+        tbp_id,
+      </if>
+      <if test="tbpHost != null" >
+        tbp_host,
+      </if>
+      <if test="tbpFeeType != null" >
+        tbp_fee_type,
+      </if>
+      <if test="tbpGoods != null" >
+        tbp_goods,
+      </if>
+      <if test="tbpModel != null" >
+        tbp_model,
+      </if>
+      <if test="tbpPrice != null" >
+        tbp_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbpId != null" >
+        #{tbpId,jdbcType=BIGINT},
+      </if>
+      <if test="tbpHost != null" >
+        #{tbpHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbpFeeType != null" >
+        #{tbpFeeType,jdbcType=BIGINT},
+      </if>
+      <if test="tbpGoods != null" >
+        #{tbpGoods,jdbcType=BIGINT},
+      </if>
+      <if test="tbpModel != null" >
+        #{tbpModel,jdbcType=BIGINT},
+      </if>
+      <if test="tbpPrice != null" >
+        #{tbpPrice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.PriceExample" resultType="java.lang.Integer" >
+    select count(*) from tb_price
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_price
+    <set >
+      <if test="record.tbpId != null" >
+        tbp_id = #{record.tbpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpHost != null" >
+        tbp_host = #{record.tbpHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpFeeType != null" >
+        tbp_fee_type = #{record.tbpFeeType,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpGoods != null" >
+        tbp_goods = #{record.tbpGoods,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpModel != null" >
+        tbp_model = #{record.tbpModel,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpPrice != null" >
+        tbp_price = #{record.tbpPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_price
+    set tbp_id = #{record.tbpId,jdbcType=BIGINT},
+      tbp_host = #{record.tbpHost,jdbcType=BIGINT},
+      tbp_fee_type = #{record.tbpFeeType,jdbcType=BIGINT},
+      tbp_goods = #{record.tbpGoods,jdbcType=BIGINT},
+      tbp_model = #{record.tbpModel,jdbcType=BIGINT},
+      tbp_price = #{record.tbpPrice,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Price" >
+    update tb_price
+    <set >
+      <if test="tbpHost != null" >
+        tbp_host = #{tbpHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbpFeeType != null" >
+        tbp_fee_type = #{tbpFeeType,jdbcType=BIGINT},
+      </if>
+      <if test="tbpGoods != null" >
+        tbp_goods = #{tbpGoods,jdbcType=BIGINT},
+      </if>
+      <if test="tbpModel != null" >
+        tbp_model = #{tbpModel,jdbcType=BIGINT},
+      </if>
+      <if test="tbpPrice != null" >
+        tbp_price = #{tbpPrice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Price" >
+    update tb_price
+    set tbp_host = #{tbpHost,jdbcType=BIGINT},
+      tbp_fee_type = #{tbpFeeType,jdbcType=BIGINT},
+      tbp_goods = #{tbpGoods,jdbcType=BIGINT},
+      tbp_model = #{tbpModel,jdbcType=BIGINT},
+      tbp_price = #{tbpPrice,jdbcType=DOUBLE}
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </update>
+</mapper>

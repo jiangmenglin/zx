@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.UpgradeLogMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.UpgradeLog" >
+    <id column="tbul_id" property="tbulId" jdbcType="INTEGER" />
+    <result column="tbul_title" property="tbulTitle" jdbcType="VARCHAR" />
+    <result column="tbul_type" property="tbulType" jdbcType="TINYINT" />
+    <result column="tbul_version" property="tbulVersion" jdbcType="VARCHAR" />
+    <result column="tbul_describe" property="tbulDescribe" jdbcType="VARCHAR" />
+    <result column="tbul_on_time" property="tbulOnTime" jdbcType="DATE" />
+    <result column="tbul_adder" property="tbulAdder" jdbcType="INTEGER" />
+    <result column="tbul_update_time" property="tbulUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbul_add_time" property="tbulAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbul_status" property="tbulStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbul_id, tbul_title, tbul_type, tbul_version, tbul_describe, tbul_on_time, tbul_adder, 
+    tbul_update_time, tbul_add_time, tbul_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.UpgradeLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_upgrade_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_upgrade_log
+    where tbul_id = #{tbulId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_upgrade_log
+    where tbul_id = #{tbulId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.UpgradeLog" >
+    insert into tb_upgrade_log (tbul_id, tbul_title, tbul_type, 
+      tbul_version, tbul_describe, tbul_on_time, 
+      tbul_adder, tbul_update_time, tbul_add_time, 
+      tbul_status)
+    values (#{tbulId,jdbcType=INTEGER}, #{tbulTitle,jdbcType=VARCHAR}, #{tbulType,jdbcType=TINYINT}, 
+      #{tbulVersion,jdbcType=VARCHAR}, #{tbulDescribe,jdbcType=VARCHAR}, #{tbulOnTime,jdbcType=DATE}, 
+      #{tbulAdder,jdbcType=INTEGER}, #{tbulUpdateTime,jdbcType=TIMESTAMP}, #{tbulAddTime,jdbcType=TIMESTAMP}, 
+      #{tbulStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.UpgradeLog" >
+    insert into tb_upgrade_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbulId != null" >
+        tbul_id,
+      </if>
+      <if test="tbulTitle != null" >
+        tbul_title,
+      </if>
+      <if test="tbulType != null" >
+        tbul_type,
+      </if>
+      <if test="tbulVersion != null" >
+        tbul_version,
+      </if>
+      <if test="tbulDescribe != null" >
+        tbul_describe,
+      </if>
+      <if test="tbulOnTime != null" >
+        tbul_on_time,
+      </if>
+      <if test="tbulAdder != null" >
+        tbul_adder,
+      </if>
+      <if test="tbulUpdateTime != null" >
+        tbul_update_time,
+      </if>
+      <if test="tbulAddTime != null" >
+        tbul_add_time,
+      </if>
+      <if test="tbulStatus != null" >
+        tbul_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbulId != null" >
+        #{tbulId,jdbcType=INTEGER},
+      </if>
+      <if test="tbulTitle != null" >
+        #{tbulTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbulType != null" >
+        #{tbulType,jdbcType=TINYINT},
+      </if>
+      <if test="tbulVersion != null" >
+        #{tbulVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbulDescribe != null" >
+        #{tbulDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="tbulOnTime != null" >
+        #{tbulOnTime,jdbcType=DATE},
+      </if>
+      <if test="tbulAdder != null" >
+        #{tbulAdder,jdbcType=INTEGER},
+      </if>
+      <if test="tbulUpdateTime != null" >
+        #{tbulUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbulAddTime != null" >
+        #{tbulAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbulStatus != null" >
+        #{tbulStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.UpgradeLogExample" resultType="java.lang.Integer" >
+    select count(*) from tb_upgrade_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_upgrade_log
+    <set >
+      <if test="record.tbulId != null" >
+        tbul_id = #{record.tbulId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbulTitle != null" >
+        tbul_title = #{record.tbulTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbulType != null" >
+        tbul_type = #{record.tbulType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbulVersion != null" >
+        tbul_version = #{record.tbulVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbulDescribe != null" >
+        tbul_describe = #{record.tbulDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbulOnTime != null" >
+        tbul_on_time = #{record.tbulOnTime,jdbcType=DATE},
+      </if>
+      <if test="record.tbulAdder != null" >
+        tbul_adder = #{record.tbulAdder,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbulUpdateTime != null" >
+        tbul_update_time = #{record.tbulUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbulAddTime != null" >
+        tbul_add_time = #{record.tbulAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbulStatus != null" >
+        tbul_status = #{record.tbulStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_upgrade_log
+    set tbul_id = #{record.tbulId,jdbcType=INTEGER},
+      tbul_title = #{record.tbulTitle,jdbcType=VARCHAR},
+      tbul_type = #{record.tbulType,jdbcType=TINYINT},
+      tbul_version = #{record.tbulVersion,jdbcType=VARCHAR},
+      tbul_describe = #{record.tbulDescribe,jdbcType=VARCHAR},
+      tbul_on_time = #{record.tbulOnTime,jdbcType=DATE},
+      tbul_adder = #{record.tbulAdder,jdbcType=INTEGER},
+      tbul_update_time = #{record.tbulUpdateTime,jdbcType=TIMESTAMP},
+      tbul_add_time = #{record.tbulAddTime,jdbcType=TIMESTAMP},
+      tbul_status = #{record.tbulStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.UpgradeLog" >
+    update tb_upgrade_log
+    <set >
+      <if test="tbulTitle != null" >
+        tbul_title = #{tbulTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbulType != null" >
+        tbul_type = #{tbulType,jdbcType=TINYINT},
+      </if>
+      <if test="tbulVersion != null" >
+        tbul_version = #{tbulVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbulDescribe != null" >
+        tbul_describe = #{tbulDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="tbulOnTime != null" >
+        tbul_on_time = #{tbulOnTime,jdbcType=DATE},
+      </if>
+      <if test="tbulAdder != null" >
+        tbul_adder = #{tbulAdder,jdbcType=INTEGER},
+      </if>
+      <if test="tbulUpdateTime != null" >
+        tbul_update_time = #{tbulUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbulAddTime != null" >
+        tbul_add_time = #{tbulAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbulStatus != null" >
+        tbul_status = #{tbulStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbul_id = #{tbulId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.UpgradeLog" >
+    update tb_upgrade_log
+    set tbul_title = #{tbulTitle,jdbcType=VARCHAR},
+      tbul_type = #{tbulType,jdbcType=TINYINT},
+      tbul_version = #{tbulVersion,jdbcType=VARCHAR},
+      tbul_describe = #{tbulDescribe,jdbcType=VARCHAR},
+      tbul_on_time = #{tbulOnTime,jdbcType=DATE},
+      tbul_adder = #{tbulAdder,jdbcType=INTEGER},
+      tbul_update_time = #{tbulUpdateTime,jdbcType=TIMESTAMP},
+      tbul_add_time = #{tbulAddTime,jdbcType=TIMESTAMP},
+      tbul_status = #{tbulStatus,jdbcType=TINYINT}
+    where tbul_id = #{tbulId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,1172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.MemberMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Member" >
+    <id column="tbm_id" property="tbmId" jdbcType="INTEGER" />
+    <result column="tbm_host" property="tbmHost" jdbcType="SMALLINT" />
+    <result column="tbm_mobile" property="tbmMobile" jdbcType="VARCHAR" />
+    <result column="tbm_name" property="tbmName" jdbcType="VARCHAR" />
+    <result column="tbm_type" property="tbmType" jdbcType="TINYINT" />
+    <result column="tbm_user_type" property="tbmUserType" jdbcType="SMALLINT" />
+    <result column="tbm_income" property="tbmIncome" jdbcType="TINYINT" />
+    <result column="tbm_header" property="tbmHeader" jdbcType="VARCHAR" />
+    <result column="tbm_email" property="tbmEmail" jdbcType="VARCHAR" />
+    <result column="tbm_invite_code" property="tbmInviteCode" jdbcType="VARCHAR" />
+    <result column="tbm_invite_user" property="tbmInviteUser" jdbcType="INTEGER" />
+    <result column="tbm_update_time" property="tbmUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_add_time" property="tbmAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_deposit_addtime" property="tbmDepositAddtime" jdbcType="TIMESTAMP" />
+    <result column="tbm_ldeposit_addtime" property="tbmLdepositAddtime" jdbcType="TIMESTAMP" />
+    <result column="tbm_check_time" property="tbmCheckTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_last_time" property="tbmLastTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_login_s" property="tbmLoginS" jdbcType="INTEGER" />
+    <result column="tbm_lat" property="tbmLat" jdbcType="DECIMAL" />
+    <result column="tbm_lng" property="tbmLng" jdbcType="DECIMAL" />
+    <result column="tbm_first_use" property="tbmFirstUse" jdbcType="TIMESTAMP" />
+    <result column="tbm_last_use" property="tbmLastUse" jdbcType="TIMESTAMP" />
+    <result column="tbm_all_recharge" property="tbmAllRecharge" jdbcType="DECIMAL" />
+    <result column="tbm_all_order_s" property="tbmAllOrderS" jdbcType="INTEGER" />
+    <result column="tbm_allamounts" property="tbmAllamounts" jdbcType="INTEGER" />
+    <result column="tbm_all_use_time" property="tbmAllUseTime" jdbcType="DECIMAL" />
+    <result column="tbm_all_violat_s" property="tbmAllViolatS" jdbcType="INTEGER" />
+    <result column="tbm_un_violat_s" property="tbmUnViolatS" jdbcType="INTEGER" />
+    <result column="tbm_all_trouble_s" property="tbmAllTroubleS" jdbcType="INTEGER" />
+    <result column="tbm_first_recharge" property="tbmFirstRecharge" jdbcType="TIMESTAMP" />
+    <result column="tbm_refund_time" property="tbmRefundTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_from" property="tbmFrom" jdbcType="TINYINT" />
+    <result column="tbm_certify_type" property="tbmCertifyType" jdbcType="TINYINT" />
+    <result column="tbm_certify_num" property="tbmCertifyNum" jdbcType="VARCHAR" />
+    <result column="tbm_certify_image" property="tbmCertifyImage" jdbcType="VARCHAR" />
+    <result column="tbm_certify_expire" property="tbmCertifyExpire" jdbcType="TIMESTAMP" />
+    <result column="tbm_id_front" property="tbmIdFront" jdbcType="VARCHAR" />
+    <result column="tbm_id_back" property="tbmIdBack" jdbcType="VARCHAR" />
+    <result column="tbm_driver_front" property="tbmDriverFront" jdbcType="VARCHAR" />
+    <result column="tbm_driver_back" property="tbmDriverBack" jdbcType="VARCHAR" />
+    <result column="tbm_check_image" property="tbmCheckImage" jdbcType="VARCHAR" />
+    <result column="tbm_company" property="tbmCompany" jdbcType="VARCHAR" />
+    <result column="tbm_certify_info" property="tbmCertifyInfo" jdbcType="VARCHAR" />
+    <result column="tbm_hold_image" property="tbmHoldImage" jdbcType="VARCHAR" />
+    <result column="tbm_driver_image" property="tbmDriverImage" jdbcType="VARCHAR" />
+    <result column="tbm_driver_expire" property="tbmDriverExpire" jdbcType="TIMESTAMP" />
+    <result column="tbm_driver_type" property="tbmDriverType" jdbcType="VARCHAR" />
+    <result column="tbm_driver_info" property="tbmDriverInfo" jdbcType="VARCHAR" />
+    <result column="tbm_sex" property="tbmSex" jdbcType="TINYINT" />
+    <result column="tbm_birthday" property="tbmBirthday" jdbcType="DATE" />
+    <result column="tbm_nation" property="tbmNation" jdbcType="VARCHAR" />
+    <result column="tbm_address" property="tbmAddress" jdbcType="VARCHAR" />
+    <result column="tbm_postil" property="tbmPostil" jdbcType="VARCHAR" />
+    <result column="tbm_remark" property="tbmRemark" jdbcType="VARCHAR" />
+    <result column="tbm_can_order" property="tbmCanOrder" jdbcType="TINYINT" />
+    <result column="tbm_state" property="tbmState" jdbcType="TINYINT" />
+    <result column="tbm_status" property="tbmStatus" jdbcType="TINYINT" />
+    <result column="tbm_mobile_platform" property="tbmMobilePlatform" jdbcType="VARCHAR" />
+    <result column="tbm_system_version" property="tbmSystemVersion" jdbcType="VARCHAR" />
+    <result column="tbm_app_version" property="tbmAppVersion" jdbcType="VARCHAR" />
+    <result column="tbm_protocol_ids" property="tbmProtocolIds" jdbcType="VARCHAR" />
+    <result column="tbm_sys_msg_ids" property="tbmSysMsgIds" jdbcType="VARCHAR" />
+    <result column="tbm_certify_count" property="tbmCertifyCount" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+    <result column="tbm_info" property="tbmInfo" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbm_id, tbm_host, tbm_mobile, tbm_name, tbm_type, tbm_user_type, tbm_income, tbm_header, 
+    tbm_email, tbm_invite_code, tbm_invite_user, tbm_update_time, tbm_add_time, tbm_deposit_addtime, 
+    tbm_ldeposit_addtime, tbm_check_time, tbm_last_time, tbm_login_s, tbm_lat, tbm_lng, 
+    tbm_first_use, tbm_last_use, tbm_all_recharge, tbm_all_order_s, tbm_allamounts, tbm_all_use_time, 
+    tbm_all_violat_s, tbm_un_violat_s, tbm_all_trouble_s, tbm_first_recharge, tbm_refund_time, 
+    tbm_from, tbm_certify_type, tbm_certify_num, tbm_certify_image, tbm_certify_expire, 
+    tbm_id_front, tbm_id_back, tbm_driver_front, tbm_driver_back, tbm_check_image, tbm_company, 
+    tbm_certify_info, tbm_hold_image, tbm_driver_image, tbm_driver_expire, tbm_driver_type, 
+    tbm_driver_info, tbm_sex, tbm_birthday, tbm_nation, tbm_address, tbm_postil, tbm_remark, 
+    tbm_can_order, tbm_state, tbm_status, tbm_mobile_platform, tbm_system_version, tbm_app_version, 
+    tbm_protocol_ids, tbm_sys_msg_ids, tbm_certify_count, createTime, modifyDate, tbm_info
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.MemberExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_member
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_member
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Member" >
+    insert into tb_member (tbm_id, tbm_host, tbm_mobile, 
+      tbm_name, tbm_type, tbm_user_type, 
+      tbm_income, tbm_header, tbm_email, 
+      tbm_invite_code, tbm_invite_user, tbm_update_time, 
+      tbm_add_time, tbm_deposit_addtime, tbm_ldeposit_addtime, 
+      tbm_check_time, tbm_last_time, tbm_login_s, 
+      tbm_lat, tbm_lng, tbm_first_use, 
+      tbm_last_use, tbm_all_recharge, tbm_all_order_s, 
+      tbm_allamounts, tbm_all_use_time, tbm_all_violat_s, 
+      tbm_un_violat_s, tbm_all_trouble_s, tbm_first_recharge, 
+      tbm_refund_time, tbm_from, tbm_certify_type, 
+      tbm_certify_num, tbm_certify_image, tbm_certify_expire, 
+      tbm_id_front, tbm_id_back, tbm_driver_front, 
+      tbm_driver_back, tbm_check_image, tbm_company, 
+      tbm_certify_info, tbm_hold_image, tbm_driver_image, 
+      tbm_driver_expire, tbm_driver_type, tbm_driver_info, 
+      tbm_sex, tbm_birthday, tbm_nation, 
+      tbm_address, tbm_postil, tbm_remark, 
+      tbm_can_order, tbm_state, tbm_status, 
+      tbm_mobile_platform, tbm_system_version, tbm_app_version, 
+      tbm_protocol_ids, tbm_sys_msg_ids, tbm_certify_count, 
+      createTime, modifyDate, tbm_info
+      )
+    values (#{tbmId,jdbcType=INTEGER}, #{tbmHost,jdbcType=SMALLINT}, #{tbmMobile,jdbcType=VARCHAR}, 
+      #{tbmName,jdbcType=VARCHAR}, #{tbmType,jdbcType=TINYINT}, #{tbmUserType,jdbcType=SMALLINT}, 
+      #{tbmIncome,jdbcType=TINYINT}, #{tbmHeader,jdbcType=VARCHAR}, #{tbmEmail,jdbcType=VARCHAR}, 
+      #{tbmInviteCode,jdbcType=VARCHAR}, #{tbmInviteUser,jdbcType=INTEGER}, #{tbmUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbmAddTime,jdbcType=TIMESTAMP}, #{tbmDepositAddtime,jdbcType=TIMESTAMP}, #{tbmLdepositAddtime,jdbcType=TIMESTAMP}, 
+      #{tbmCheckTime,jdbcType=TIMESTAMP}, #{tbmLastTime,jdbcType=TIMESTAMP}, #{tbmLoginS,jdbcType=INTEGER}, 
+      #{tbmLat,jdbcType=DECIMAL}, #{tbmLng,jdbcType=DECIMAL}, #{tbmFirstUse,jdbcType=TIMESTAMP}, 
+      #{tbmLastUse,jdbcType=TIMESTAMP}, #{tbmAllRecharge,jdbcType=DECIMAL}, #{tbmAllOrderS,jdbcType=INTEGER}, 
+      #{tbmAllamounts,jdbcType=INTEGER}, #{tbmAllUseTime,jdbcType=DECIMAL}, #{tbmAllViolatS,jdbcType=INTEGER}, 
+      #{tbmUnViolatS,jdbcType=INTEGER}, #{tbmAllTroubleS,jdbcType=INTEGER}, #{tbmFirstRecharge,jdbcType=TIMESTAMP}, 
+      #{tbmRefundTime,jdbcType=TIMESTAMP}, #{tbmFrom,jdbcType=TINYINT}, #{tbmCertifyType,jdbcType=TINYINT}, 
+      #{tbmCertifyNum,jdbcType=VARCHAR}, #{tbmCertifyImage,jdbcType=VARCHAR}, #{tbmCertifyExpire,jdbcType=TIMESTAMP}, 
+      #{tbmIdFront,jdbcType=VARCHAR}, #{tbmIdBack,jdbcType=VARCHAR}, #{tbmDriverFront,jdbcType=VARCHAR}, 
+      #{tbmDriverBack,jdbcType=VARCHAR}, #{tbmCheckImage,jdbcType=VARCHAR}, #{tbmCompany,jdbcType=VARCHAR}, 
+      #{tbmCertifyInfo,jdbcType=VARCHAR}, #{tbmHoldImage,jdbcType=VARCHAR}, #{tbmDriverImage,jdbcType=VARCHAR}, 
+      #{tbmDriverExpire,jdbcType=TIMESTAMP}, #{tbmDriverType,jdbcType=VARCHAR}, #{tbmDriverInfo,jdbcType=VARCHAR}, 
+      #{tbmSex,jdbcType=TINYINT}, #{tbmBirthday,jdbcType=DATE}, #{tbmNation,jdbcType=VARCHAR}, 
+      #{tbmAddress,jdbcType=VARCHAR}, #{tbmPostil,jdbcType=VARCHAR}, #{tbmRemark,jdbcType=VARCHAR}, 
+      #{tbmCanOrder,jdbcType=TINYINT}, #{tbmState,jdbcType=TINYINT}, #{tbmStatus,jdbcType=TINYINT}, 
+      #{tbmMobilePlatform,jdbcType=VARCHAR}, #{tbmSystemVersion,jdbcType=VARCHAR}, #{tbmAppVersion,jdbcType=VARCHAR}, 
+      #{tbmProtocolIds,jdbcType=VARCHAR}, #{tbmSysMsgIds,jdbcType=VARCHAR}, #{tbmCertifyCount,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}, #{tbmInfo,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Member" >
+    insert into tb_member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbmId != null" >
+        tbm_id,
+      </if>
+      <if test="tbmHost != null" >
+        tbm_host,
+      </if>
+      <if test="tbmMobile != null" >
+        tbm_mobile,
+      </if>
+      <if test="tbmName != null" >
+        tbm_name,
+      </if>
+      <if test="tbmType != null" >
+        tbm_type,
+      </if>
+      <if test="tbmUserType != null" >
+        tbm_user_type,
+      </if>
+      <if test="tbmIncome != null" >
+        tbm_income,
+      </if>
+      <if test="tbmHeader != null" >
+        tbm_header,
+      </if>
+      <if test="tbmEmail != null" >
+        tbm_email,
+      </if>
+      <if test="tbmInviteCode != null" >
+        tbm_invite_code,
+      </if>
+      <if test="tbmInviteUser != null" >
+        tbm_invite_user,
+      </if>
+      <if test="tbmUpdateTime != null" >
+        tbm_update_time,
+      </if>
+      <if test="tbmAddTime != null" >
+        tbm_add_time,
+      </if>
+      <if test="tbmDepositAddtime != null" >
+        tbm_deposit_addtime,
+      </if>
+      <if test="tbmLdepositAddtime != null" >
+        tbm_ldeposit_addtime,
+      </if>
+      <if test="tbmCheckTime != null" >
+        tbm_check_time,
+      </if>
+      <if test="tbmLastTime != null" >
+        tbm_last_time,
+      </if>
+      <if test="tbmLoginS != null" >
+        tbm_login_s,
+      </if>
+      <if test="tbmLat != null" >
+        tbm_lat,
+      </if>
+      <if test="tbmLng != null" >
+        tbm_lng,
+      </if>
+      <if test="tbmFirstUse != null" >
+        tbm_first_use,
+      </if>
+      <if test="tbmLastUse != null" >
+        tbm_last_use,
+      </if>
+      <if test="tbmAllRecharge != null" >
+        tbm_all_recharge,
+      </if>
+      <if test="tbmAllOrderS != null" >
+        tbm_all_order_s,
+      </if>
+      <if test="tbmAllamounts != null" >
+        tbm_allamounts,
+      </if>
+      <if test="tbmAllUseTime != null" >
+        tbm_all_use_time,
+      </if>
+      <if test="tbmAllViolatS != null" >
+        tbm_all_violat_s,
+      </if>
+      <if test="tbmUnViolatS != null" >
+        tbm_un_violat_s,
+      </if>
+      <if test="tbmAllTroubleS != null" >
+        tbm_all_trouble_s,
+      </if>
+      <if test="tbmFirstRecharge != null" >
+        tbm_first_recharge,
+      </if>
+      <if test="tbmRefundTime != null" >
+        tbm_refund_time,
+      </if>
+      <if test="tbmFrom != null" >
+        tbm_from,
+      </if>
+      <if test="tbmCertifyType != null" >
+        tbm_certify_type,
+      </if>
+      <if test="tbmCertifyNum != null" >
+        tbm_certify_num,
+      </if>
+      <if test="tbmCertifyImage != null" >
+        tbm_certify_image,
+      </if>
+      <if test="tbmCertifyExpire != null" >
+        tbm_certify_expire,
+      </if>
+      <if test="tbmIdFront != null" >
+        tbm_id_front,
+      </if>
+      <if test="tbmIdBack != null" >
+        tbm_id_back,
+      </if>
+      <if test="tbmDriverFront != null" >
+        tbm_driver_front,
+      </if>
+      <if test="tbmDriverBack != null" >
+        tbm_driver_back,
+      </if>
+      <if test="tbmCheckImage != null" >
+        tbm_check_image,
+      </if>
+      <if test="tbmCompany != null" >
+        tbm_company,
+      </if>
+      <if test="tbmCertifyInfo != null" >
+        tbm_certify_info,
+      </if>
+      <if test="tbmHoldImage != null" >
+        tbm_hold_image,
+      </if>
+      <if test="tbmDriverImage != null" >
+        tbm_driver_image,
+      </if>
+      <if test="tbmDriverExpire != null" >
+        tbm_driver_expire,
+      </if>
+      <if test="tbmDriverType != null" >
+        tbm_driver_type,
+      </if>
+      <if test="tbmDriverInfo != null" >
+        tbm_driver_info,
+      </if>
+      <if test="tbmSex != null" >
+        tbm_sex,
+      </if>
+      <if test="tbmBirthday != null" >
+        tbm_birthday,
+      </if>
+      <if test="tbmNation != null" >
+        tbm_nation,
+      </if>
+      <if test="tbmAddress != null" >
+        tbm_address,
+      </if>
+      <if test="tbmPostil != null" >
+        tbm_postil,
+      </if>
+      <if test="tbmRemark != null" >
+        tbm_remark,
+      </if>
+      <if test="tbmCanOrder != null" >
+        tbm_can_order,
+      </if>
+      <if test="tbmState != null" >
+        tbm_state,
+      </if>
+      <if test="tbmStatus != null" >
+        tbm_status,
+      </if>
+      <if test="tbmMobilePlatform != null" >
+        tbm_mobile_platform,
+      </if>
+      <if test="tbmSystemVersion != null" >
+        tbm_system_version,
+      </if>
+      <if test="tbmAppVersion != null" >
+        tbm_app_version,
+      </if>
+      <if test="tbmProtocolIds != null" >
+        tbm_protocol_ids,
+      </if>
+      <if test="tbmSysMsgIds != null" >
+        tbm_sys_msg_ids,
+      </if>
+      <if test="tbmCertifyCount != null" >
+        tbm_certify_count,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+      <if test="tbmInfo != null" >
+        tbm_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbmId != null" >
+        #{tbmId,jdbcType=INTEGER},
+      </if>
+      <if test="tbmHost != null" >
+        #{tbmHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmMobile != null" >
+        #{tbmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmName != null" >
+        #{tbmName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmType != null" >
+        #{tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="tbmUserType != null" >
+        #{tbmUserType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmIncome != null" >
+        #{tbmIncome,jdbcType=TINYINT},
+      </if>
+      <if test="tbmHeader != null" >
+        #{tbmHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmEmail != null" >
+        #{tbmEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmInviteCode != null" >
+        #{tbmInviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmInviteUser != null" >
+        #{tbmInviteUser,jdbcType=INTEGER},
+      </if>
+      <if test="tbmUpdateTime != null" >
+        #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmAddTime != null" >
+        #{tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmDepositAddtime != null" >
+        #{tbmDepositAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmLdepositAddtime != null" >
+        #{tbmLdepositAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmCheckTime != null" >
+        #{tbmCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmLastTime != null" >
+        #{tbmLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmLoginS != null" >
+        #{tbmLoginS,jdbcType=INTEGER},
+      </if>
+      <if test="tbmLat != null" >
+        #{tbmLat,jdbcType=DECIMAL},
+      </if>
+      <if test="tbmLng != null" >
+        #{tbmLng,jdbcType=DECIMAL},
+      </if>
+      <if test="tbmFirstUse != null" >
+        #{tbmFirstUse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmLastUse != null" >
+        #{tbmLastUse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmAllRecharge != null" >
+        #{tbmAllRecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="tbmAllOrderS != null" >
+        #{tbmAllOrderS,jdbcType=INTEGER},
+      </if>
+      <if test="tbmAllamounts != null" >
+        #{tbmAllamounts,jdbcType=INTEGER},
+      </if>
+      <if test="tbmAllUseTime != null" >
+        #{tbmAllUseTime,jdbcType=DECIMAL},
+      </if>
+      <if test="tbmAllViolatS != null" >
+        #{tbmAllViolatS,jdbcType=INTEGER},
+      </if>
+      <if test="tbmUnViolatS != null" >
+        #{tbmUnViolatS,jdbcType=INTEGER},
+      </if>
+      <if test="tbmAllTroubleS != null" >
+        #{tbmAllTroubleS,jdbcType=INTEGER},
+      </if>
+      <if test="tbmFirstRecharge != null" >
+        #{tbmFirstRecharge,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmRefundTime != null" >
+        #{tbmRefundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmFrom != null" >
+        #{tbmFrom,jdbcType=TINYINT},
+      </if>
+      <if test="tbmCertifyType != null" >
+        #{tbmCertifyType,jdbcType=TINYINT},
+      </if>
+      <if test="tbmCertifyNum != null" >
+        #{tbmCertifyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCertifyImage != null" >
+        #{tbmCertifyImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCertifyExpire != null" >
+        #{tbmCertifyExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmIdFront != null" >
+        #{tbmIdFront,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmIdBack != null" >
+        #{tbmIdBack,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmDriverFront != null" >
+        #{tbmDriverFront,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmDriverBack != null" >
+        #{tbmDriverBack,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCheckImage != null" >
+        #{tbmCheckImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCompany != null" >
+        #{tbmCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCertifyInfo != null" >
+        #{tbmCertifyInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmHoldImage != null" >
+        #{tbmHoldImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmDriverImage != null" >
+        #{tbmDriverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmDriverExpire != null" >
+        #{tbmDriverExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmDriverType != null" >
+        #{tbmDriverType,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmDriverInfo != null" >
+        #{tbmDriverInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmSex != null" >
+        #{tbmSex,jdbcType=TINYINT},
+      </if>
+      <if test="tbmBirthday != null" >
+        #{tbmBirthday,jdbcType=DATE},
+      </if>
+      <if test="tbmNation != null" >
+        #{tbmNation,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmAddress != null" >
+        #{tbmAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmPostil != null" >
+        #{tbmPostil,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmRemark != null" >
+        #{tbmRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCanOrder != null" >
+        #{tbmCanOrder,jdbcType=TINYINT},
+      </if>
+      <if test="tbmState != null" >
+        #{tbmState,jdbcType=TINYINT},
+      </if>
+      <if test="tbmStatus != null" >
+        #{tbmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbmMobilePlatform != null" >
+        #{tbmMobilePlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmSystemVersion != null" >
+        #{tbmSystemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmAppVersion != null" >
+        #{tbmAppVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmProtocolIds != null" >
+        #{tbmProtocolIds,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmSysMsgIds != null" >
+        #{tbmSysMsgIds,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCertifyCount != null" >
+        #{tbmCertifyCount,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmInfo != null" >
+        #{tbmInfo,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.MemberExample" resultType="java.lang.Integer" >
+    select count(*) from tb_member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_member
+    <set >
+      <if test="record.tbmId != null" >
+        tbm_id = #{record.tbmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmHost != null" >
+        tbm_host = #{record.tbmHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbmMobile != null" >
+        tbm_mobile = #{record.tbmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmName != null" >
+        tbm_name = #{record.tbmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmType != null" >
+        tbm_type = #{record.tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmUserType != null" >
+        tbm_user_type = #{record.tbmUserType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbmIncome != null" >
+        tbm_income = #{record.tbmIncome,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmHeader != null" >
+        tbm_header = #{record.tbmHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmEmail != null" >
+        tbm_email = #{record.tbmEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmInviteCode != null" >
+        tbm_invite_code = #{record.tbmInviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmInviteUser != null" >
+        tbm_invite_user = #{record.tbmInviteUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmUpdateTime != null" >
+        tbm_update_time = #{record.tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmAddTime != null" >
+        tbm_add_time = #{record.tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmDepositAddtime != null" >
+        tbm_deposit_addtime = #{record.tbmDepositAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmLdepositAddtime != null" >
+        tbm_ldeposit_addtime = #{record.tbmLdepositAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmCheckTime != null" >
+        tbm_check_time = #{record.tbmCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmLastTime != null" >
+        tbm_last_time = #{record.tbmLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmLoginS != null" >
+        tbm_login_s = #{record.tbmLoginS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmLat != null" >
+        tbm_lat = #{record.tbmLat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbmLng != null" >
+        tbm_lng = #{record.tbmLng,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbmFirstUse != null" >
+        tbm_first_use = #{record.tbmFirstUse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmLastUse != null" >
+        tbm_last_use = #{record.tbmLastUse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmAllRecharge != null" >
+        tbm_all_recharge = #{record.tbmAllRecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbmAllOrderS != null" >
+        tbm_all_order_s = #{record.tbmAllOrderS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmAllamounts != null" >
+        tbm_allamounts = #{record.tbmAllamounts,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmAllUseTime != null" >
+        tbm_all_use_time = #{record.tbmAllUseTime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbmAllViolatS != null" >
+        tbm_all_violat_s = #{record.tbmAllViolatS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmUnViolatS != null" >
+        tbm_un_violat_s = #{record.tbmUnViolatS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmAllTroubleS != null" >
+        tbm_all_trouble_s = #{record.tbmAllTroubleS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmFirstRecharge != null" >
+        tbm_first_recharge = #{record.tbmFirstRecharge,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmRefundTime != null" >
+        tbm_refund_time = #{record.tbmRefundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmFrom != null" >
+        tbm_from = #{record.tbmFrom,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmCertifyType != null" >
+        tbm_certify_type = #{record.tbmCertifyType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmCertifyNum != null" >
+        tbm_certify_num = #{record.tbmCertifyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmCertifyImage != null" >
+        tbm_certify_image = #{record.tbmCertifyImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmCertifyExpire != null" >
+        tbm_certify_expire = #{record.tbmCertifyExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmIdFront != null" >
+        tbm_id_front = #{record.tbmIdFront,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmIdBack != null" >
+        tbm_id_back = #{record.tbmIdBack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmDriverFront != null" >
+        tbm_driver_front = #{record.tbmDriverFront,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmDriverBack != null" >
+        tbm_driver_back = #{record.tbmDriverBack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmCheckImage != null" >
+        tbm_check_image = #{record.tbmCheckImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmCompany != null" >
+        tbm_company = #{record.tbmCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmCertifyInfo != null" >
+        tbm_certify_info = #{record.tbmCertifyInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmHoldImage != null" >
+        tbm_hold_image = #{record.tbmHoldImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmDriverImage != null" >
+        tbm_driver_image = #{record.tbmDriverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmDriverExpire != null" >
+        tbm_driver_expire = #{record.tbmDriverExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmDriverType != null" >
+        tbm_driver_type = #{record.tbmDriverType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmDriverInfo != null" >
+        tbm_driver_info = #{record.tbmDriverInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmSex != null" >
+        tbm_sex = #{record.tbmSex,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmBirthday != null" >
+        tbm_birthday = #{record.tbmBirthday,jdbcType=DATE},
+      </if>
+      <if test="record.tbmNation != null" >
+        tbm_nation = #{record.tbmNation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmAddress != null" >
+        tbm_address = #{record.tbmAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmPostil != null" >
+        tbm_postil = #{record.tbmPostil,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmRemark != null" >
+        tbm_remark = #{record.tbmRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmCanOrder != null" >
+        tbm_can_order = #{record.tbmCanOrder,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmState != null" >
+        tbm_state = #{record.tbmState,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmStatus != null" >
+        tbm_status = #{record.tbmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmMobilePlatform != null" >
+        tbm_mobile_platform = #{record.tbmMobilePlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmSystemVersion != null" >
+        tbm_system_version = #{record.tbmSystemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmAppVersion != null" >
+        tbm_app_version = #{record.tbmAppVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmProtocolIds != null" >
+        tbm_protocol_ids = #{record.tbmProtocolIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmSysMsgIds != null" >
+        tbm_sys_msg_ids = #{record.tbmSysMsgIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmCertifyCount != null" >
+        tbm_certify_count = #{record.tbmCertifyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmInfo != null" >
+        tbm_info = #{record.tbmInfo,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_member
+    set tbm_id = #{record.tbmId,jdbcType=INTEGER},
+      tbm_host = #{record.tbmHost,jdbcType=SMALLINT},
+      tbm_mobile = #{record.tbmMobile,jdbcType=VARCHAR},
+      tbm_name = #{record.tbmName,jdbcType=VARCHAR},
+      tbm_type = #{record.tbmType,jdbcType=TINYINT},
+      tbm_user_type = #{record.tbmUserType,jdbcType=SMALLINT},
+      tbm_income = #{record.tbmIncome,jdbcType=TINYINT},
+      tbm_header = #{record.tbmHeader,jdbcType=VARCHAR},
+      tbm_email = #{record.tbmEmail,jdbcType=VARCHAR},
+      tbm_invite_code = #{record.tbmInviteCode,jdbcType=VARCHAR},
+      tbm_invite_user = #{record.tbmInviteUser,jdbcType=INTEGER},
+      tbm_update_time = #{record.tbmUpdateTime,jdbcType=TIMESTAMP},
+      tbm_add_time = #{record.tbmAddTime,jdbcType=TIMESTAMP},
+      tbm_deposit_addtime = #{record.tbmDepositAddtime,jdbcType=TIMESTAMP},
+      tbm_ldeposit_addtime = #{record.tbmLdepositAddtime,jdbcType=TIMESTAMP},
+      tbm_check_time = #{record.tbmCheckTime,jdbcType=TIMESTAMP},
+      tbm_last_time = #{record.tbmLastTime,jdbcType=TIMESTAMP},
+      tbm_login_s = #{record.tbmLoginS,jdbcType=INTEGER},
+      tbm_lat = #{record.tbmLat,jdbcType=DECIMAL},
+      tbm_lng = #{record.tbmLng,jdbcType=DECIMAL},
+      tbm_first_use = #{record.tbmFirstUse,jdbcType=TIMESTAMP},
+      tbm_last_use = #{record.tbmLastUse,jdbcType=TIMESTAMP},
+      tbm_all_recharge = #{record.tbmAllRecharge,jdbcType=DECIMAL},
+      tbm_all_order_s = #{record.tbmAllOrderS,jdbcType=INTEGER},
+      tbm_allamounts = #{record.tbmAllamounts,jdbcType=INTEGER},
+      tbm_all_use_time = #{record.tbmAllUseTime,jdbcType=DECIMAL},
+      tbm_all_violat_s = #{record.tbmAllViolatS,jdbcType=INTEGER},
+      tbm_un_violat_s = #{record.tbmUnViolatS,jdbcType=INTEGER},
+      tbm_all_trouble_s = #{record.tbmAllTroubleS,jdbcType=INTEGER},
+      tbm_first_recharge = #{record.tbmFirstRecharge,jdbcType=TIMESTAMP},
+      tbm_refund_time = #{record.tbmRefundTime,jdbcType=TIMESTAMP},
+      tbm_from = #{record.tbmFrom,jdbcType=TINYINT},
+      tbm_certify_type = #{record.tbmCertifyType,jdbcType=TINYINT},
+      tbm_certify_num = #{record.tbmCertifyNum,jdbcType=VARCHAR},
+      tbm_certify_image = #{record.tbmCertifyImage,jdbcType=VARCHAR},
+      tbm_certify_expire = #{record.tbmCertifyExpire,jdbcType=TIMESTAMP},
+      tbm_id_front = #{record.tbmIdFront,jdbcType=VARCHAR},
+      tbm_id_back = #{record.tbmIdBack,jdbcType=VARCHAR},
+      tbm_driver_front = #{record.tbmDriverFront,jdbcType=VARCHAR},
+      tbm_driver_back = #{record.tbmDriverBack,jdbcType=VARCHAR},
+      tbm_check_image = #{record.tbmCheckImage,jdbcType=VARCHAR},
+      tbm_company = #{record.tbmCompany,jdbcType=VARCHAR},
+      tbm_certify_info = #{record.tbmCertifyInfo,jdbcType=VARCHAR},
+      tbm_hold_image = #{record.tbmHoldImage,jdbcType=VARCHAR},
+      tbm_driver_image = #{record.tbmDriverImage,jdbcType=VARCHAR},
+      tbm_driver_expire = #{record.tbmDriverExpire,jdbcType=TIMESTAMP},
+      tbm_driver_type = #{record.tbmDriverType,jdbcType=VARCHAR},
+      tbm_driver_info = #{record.tbmDriverInfo,jdbcType=VARCHAR},
+      tbm_sex = #{record.tbmSex,jdbcType=TINYINT},
+      tbm_birthday = #{record.tbmBirthday,jdbcType=DATE},
+      tbm_nation = #{record.tbmNation,jdbcType=VARCHAR},
+      tbm_address = #{record.tbmAddress,jdbcType=VARCHAR},
+      tbm_postil = #{record.tbmPostil,jdbcType=VARCHAR},
+      tbm_remark = #{record.tbmRemark,jdbcType=VARCHAR},
+      tbm_can_order = #{record.tbmCanOrder,jdbcType=TINYINT},
+      tbm_state = #{record.tbmState,jdbcType=TINYINT},
+      tbm_status = #{record.tbmStatus,jdbcType=TINYINT},
+      tbm_mobile_platform = #{record.tbmMobilePlatform,jdbcType=VARCHAR},
+      tbm_system_version = #{record.tbmSystemVersion,jdbcType=VARCHAR},
+      tbm_app_version = #{record.tbmAppVersion,jdbcType=VARCHAR},
+      tbm_protocol_ids = #{record.tbmProtocolIds,jdbcType=VARCHAR},
+      tbm_sys_msg_ids = #{record.tbmSysMsgIds,jdbcType=VARCHAR},
+      tbm_certify_count = #{record.tbmCertifyCount,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      tbm_info = #{record.tbmInfo,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Member" >
+    update tb_member
+    <set >
+      <if test="tbmHost != null" >
+        tbm_host = #{tbmHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmMobile != null" >
+        tbm_mobile = #{tbmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmName != null" >
+        tbm_name = #{tbmName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmType != null" >
+        tbm_type = #{tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="tbmUserType != null" >
+        tbm_user_type = #{tbmUserType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmIncome != null" >
+        tbm_income = #{tbmIncome,jdbcType=TINYINT},
+      </if>
+      <if test="tbmHeader != null" >
+        tbm_header = #{tbmHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmEmail != null" >
+        tbm_email = #{tbmEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmInviteCode != null" >
+        tbm_invite_code = #{tbmInviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmInviteUser != null" >
+        tbm_invite_user = #{tbmInviteUser,jdbcType=INTEGER},
+      </if>
+      <if test="tbmUpdateTime != null" >
+        tbm_update_time = #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmAddTime != null" >
+        tbm_add_time = #{tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmDepositAddtime != null" >
+        tbm_deposit_addtime = #{tbmDepositAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmLdepositAddtime != null" >
+        tbm_ldeposit_addtime = #{tbmLdepositAddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmCheckTime != null" >
+        tbm_check_time = #{tbmCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmLastTime != null" >
+        tbm_last_time = #{tbmLastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmLoginS != null" >
+        tbm_login_s = #{tbmLoginS,jdbcType=INTEGER},
+      </if>
+      <if test="tbmLat != null" >
+        tbm_lat = #{tbmLat,jdbcType=DECIMAL},
+      </if>
+      <if test="tbmLng != null" >
+        tbm_lng = #{tbmLng,jdbcType=DECIMAL},
+      </if>
+      <if test="tbmFirstUse != null" >
+        tbm_first_use = #{tbmFirstUse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmLastUse != null" >
+        tbm_last_use = #{tbmLastUse,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmAllRecharge != null" >
+        tbm_all_recharge = #{tbmAllRecharge,jdbcType=DECIMAL},
+      </if>
+      <if test="tbmAllOrderS != null" >
+        tbm_all_order_s = #{tbmAllOrderS,jdbcType=INTEGER},
+      </if>
+      <if test="tbmAllamounts != null" >
+        tbm_allamounts = #{tbmAllamounts,jdbcType=INTEGER},
+      </if>
+      <if test="tbmAllUseTime != null" >
+        tbm_all_use_time = #{tbmAllUseTime,jdbcType=DECIMAL},
+      </if>
+      <if test="tbmAllViolatS != null" >
+        tbm_all_violat_s = #{tbmAllViolatS,jdbcType=INTEGER},
+      </if>
+      <if test="tbmUnViolatS != null" >
+        tbm_un_violat_s = #{tbmUnViolatS,jdbcType=INTEGER},
+      </if>
+      <if test="tbmAllTroubleS != null" >
+        tbm_all_trouble_s = #{tbmAllTroubleS,jdbcType=INTEGER},
+      </if>
+      <if test="tbmFirstRecharge != null" >
+        tbm_first_recharge = #{tbmFirstRecharge,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmRefundTime != null" >
+        tbm_refund_time = #{tbmRefundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmFrom != null" >
+        tbm_from = #{tbmFrom,jdbcType=TINYINT},
+      </if>
+      <if test="tbmCertifyType != null" >
+        tbm_certify_type = #{tbmCertifyType,jdbcType=TINYINT},
+      </if>
+      <if test="tbmCertifyNum != null" >
+        tbm_certify_num = #{tbmCertifyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCertifyImage != null" >
+        tbm_certify_image = #{tbmCertifyImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCertifyExpire != null" >
+        tbm_certify_expire = #{tbmCertifyExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmIdFront != null" >
+        tbm_id_front = #{tbmIdFront,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmIdBack != null" >
+        tbm_id_back = #{tbmIdBack,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmDriverFront != null" >
+        tbm_driver_front = #{tbmDriverFront,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmDriverBack != null" >
+        tbm_driver_back = #{tbmDriverBack,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCheckImage != null" >
+        tbm_check_image = #{tbmCheckImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCompany != null" >
+        tbm_company = #{tbmCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCertifyInfo != null" >
+        tbm_certify_info = #{tbmCertifyInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmHoldImage != null" >
+        tbm_hold_image = #{tbmHoldImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmDriverImage != null" >
+        tbm_driver_image = #{tbmDriverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmDriverExpire != null" >
+        tbm_driver_expire = #{tbmDriverExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmDriverType != null" >
+        tbm_driver_type = #{tbmDriverType,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmDriverInfo != null" >
+        tbm_driver_info = #{tbmDriverInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmSex != null" >
+        tbm_sex = #{tbmSex,jdbcType=TINYINT},
+      </if>
+      <if test="tbmBirthday != null" >
+        tbm_birthday = #{tbmBirthday,jdbcType=DATE},
+      </if>
+      <if test="tbmNation != null" >
+        tbm_nation = #{tbmNation,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmAddress != null" >
+        tbm_address = #{tbmAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmPostil != null" >
+        tbm_postil = #{tbmPostil,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmRemark != null" >
+        tbm_remark = #{tbmRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCanOrder != null" >
+        tbm_can_order = #{tbmCanOrder,jdbcType=TINYINT},
+      </if>
+      <if test="tbmState != null" >
+        tbm_state = #{tbmState,jdbcType=TINYINT},
+      </if>
+      <if test="tbmStatus != null" >
+        tbm_status = #{tbmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbmMobilePlatform != null" >
+        tbm_mobile_platform = #{tbmMobilePlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmSystemVersion != null" >
+        tbm_system_version = #{tbmSystemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmAppVersion != null" >
+        tbm_app_version = #{tbmAppVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmProtocolIds != null" >
+        tbm_protocol_ids = #{tbmProtocolIds,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmSysMsgIds != null" >
+        tbm_sys_msg_ids = #{tbmSysMsgIds,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCertifyCount != null" >
+        tbm_certify_count = #{tbmCertifyCount,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmInfo != null" >
+        tbm_info = #{tbmInfo,jdbcType=BIGINT},
+      </if>
+    </set>
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Member" >
+    update tb_member
+    set tbm_host = #{tbmHost,jdbcType=SMALLINT},
+      tbm_mobile = #{tbmMobile,jdbcType=VARCHAR},
+      tbm_name = #{tbmName,jdbcType=VARCHAR},
+      tbm_type = #{tbmType,jdbcType=TINYINT},
+      tbm_user_type = #{tbmUserType,jdbcType=SMALLINT},
+      tbm_income = #{tbmIncome,jdbcType=TINYINT},
+      tbm_header = #{tbmHeader,jdbcType=VARCHAR},
+      tbm_email = #{tbmEmail,jdbcType=VARCHAR},
+      tbm_invite_code = #{tbmInviteCode,jdbcType=VARCHAR},
+      tbm_invite_user = #{tbmInviteUser,jdbcType=INTEGER},
+      tbm_update_time = #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      tbm_add_time = #{tbmAddTime,jdbcType=TIMESTAMP},
+      tbm_deposit_addtime = #{tbmDepositAddtime,jdbcType=TIMESTAMP},
+      tbm_ldeposit_addtime = #{tbmLdepositAddtime,jdbcType=TIMESTAMP},
+      tbm_check_time = #{tbmCheckTime,jdbcType=TIMESTAMP},
+      tbm_last_time = #{tbmLastTime,jdbcType=TIMESTAMP},
+      tbm_login_s = #{tbmLoginS,jdbcType=INTEGER},
+      tbm_lat = #{tbmLat,jdbcType=DECIMAL},
+      tbm_lng = #{tbmLng,jdbcType=DECIMAL},
+      tbm_first_use = #{tbmFirstUse,jdbcType=TIMESTAMP},
+      tbm_last_use = #{tbmLastUse,jdbcType=TIMESTAMP},
+      tbm_all_recharge = #{tbmAllRecharge,jdbcType=DECIMAL},
+      tbm_all_order_s = #{tbmAllOrderS,jdbcType=INTEGER},
+      tbm_allamounts = #{tbmAllamounts,jdbcType=INTEGER},
+      tbm_all_use_time = #{tbmAllUseTime,jdbcType=DECIMAL},
+      tbm_all_violat_s = #{tbmAllViolatS,jdbcType=INTEGER},
+      tbm_un_violat_s = #{tbmUnViolatS,jdbcType=INTEGER},
+      tbm_all_trouble_s = #{tbmAllTroubleS,jdbcType=INTEGER},
+      tbm_first_recharge = #{tbmFirstRecharge,jdbcType=TIMESTAMP},
+      tbm_refund_time = #{tbmRefundTime,jdbcType=TIMESTAMP},
+      tbm_from = #{tbmFrom,jdbcType=TINYINT},
+      tbm_certify_type = #{tbmCertifyType,jdbcType=TINYINT},
+      tbm_certify_num = #{tbmCertifyNum,jdbcType=VARCHAR},
+      tbm_certify_image = #{tbmCertifyImage,jdbcType=VARCHAR},
+      tbm_certify_expire = #{tbmCertifyExpire,jdbcType=TIMESTAMP},
+      tbm_id_front = #{tbmIdFront,jdbcType=VARCHAR},
+      tbm_id_back = #{tbmIdBack,jdbcType=VARCHAR},
+      tbm_driver_front = #{tbmDriverFront,jdbcType=VARCHAR},
+      tbm_driver_back = #{tbmDriverBack,jdbcType=VARCHAR},
+      tbm_check_image = #{tbmCheckImage,jdbcType=VARCHAR},
+      tbm_company = #{tbmCompany,jdbcType=VARCHAR},
+      tbm_certify_info = #{tbmCertifyInfo,jdbcType=VARCHAR},
+      tbm_hold_image = #{tbmHoldImage,jdbcType=VARCHAR},
+      tbm_driver_image = #{tbmDriverImage,jdbcType=VARCHAR},
+      tbm_driver_expire = #{tbmDriverExpire,jdbcType=TIMESTAMP},
+      tbm_driver_type = #{tbmDriverType,jdbcType=VARCHAR},
+      tbm_driver_info = #{tbmDriverInfo,jdbcType=VARCHAR},
+      tbm_sex = #{tbmSex,jdbcType=TINYINT},
+      tbm_birthday = #{tbmBirthday,jdbcType=DATE},
+      tbm_nation = #{tbmNation,jdbcType=VARCHAR},
+      tbm_address = #{tbmAddress,jdbcType=VARCHAR},
+      tbm_postil = #{tbmPostil,jdbcType=VARCHAR},
+      tbm_remark = #{tbmRemark,jdbcType=VARCHAR},
+      tbm_can_order = #{tbmCanOrder,jdbcType=TINYINT},
+      tbm_state = #{tbmState,jdbcType=TINYINT},
+      tbm_status = #{tbmStatus,jdbcType=TINYINT},
+      tbm_mobile_platform = #{tbmMobilePlatform,jdbcType=VARCHAR},
+      tbm_system_version = #{tbmSystemVersion,jdbcType=VARCHAR},
+      tbm_app_version = #{tbmAppVersion,jdbcType=VARCHAR},
+      tbm_protocol_ids = #{tbmProtocolIds,jdbcType=VARCHAR},
+      tbm_sys_msg_ids = #{tbmSysMsgIds,jdbcType=VARCHAR},
+      tbm_certify_count = #{tbmCertifyCount,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      tbm_info = #{tbmInfo,jdbcType=BIGINT}
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </update>
+</mapper>

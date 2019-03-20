@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.CarMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Car" >
+    <id column="tbc_id" property="tbcId" jdbcType="INTEGER" />
+    <result column="tbc_host" property="tbcHost" jdbcType="SMALLINT" />
+    <result column="tbc_vin" property="tbcVin" jdbcType="VARCHAR" />
+    <result column="tbc_car_no" property="tbcCarNo" jdbcType="VARCHAR" />
+    <result column="tbc_number" property="tbcNumber" jdbcType="VARCHAR" />
+    <result column="tbc_vehicle" property="tbcVehicle" jdbcType="INTEGER" />
+    <result column="tbc_provid" property="tbcProvid" jdbcType="INTEGER" />
+    <result column="tbc_model" property="tbcModel" jdbcType="INTEGER" />
+    <result column="tbc_area" property="tbcArea" jdbcType="BIGINT" />
+    <result column="tbc_outlets" property="tbcOutlets" jdbcType="INTEGER" />
+    <result column="tbc_engine" property="tbcEngine" jdbcType="VARCHAR" />
+    <result column="tbc_color" property="tbcColor" jdbcType="VARCHAR" />
+    <result column="tbc_lat" property="tbcLat" jdbcType="DECIMAL" />
+    <result column="tbc_lng" property="tbcLng" jdbcType="DECIMAL" />
+    <result column="tbc_editor" property="tbcEditor" jdbcType="INTEGER" />
+    <result column="tbc_remark" property="tbcRemark" jdbcType="VARCHAR" />
+    <result column="tbc_condition" property="tbcCondition" jdbcType="VARCHAR" />
+    <result column="tbc_reason" property="tbcReason" jdbcType="VARCHAR" />
+    <result column="tbc_update_time" property="tbcUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbc_add_time" property="tbcAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbc_state" property="tbcState" jdbcType="TINYINT" />
+    <result column="tbc_status_ex" property="tbcStatusEx" jdbcType="TINYINT" />
+    <result column="tbc_status" property="tbcStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+    <result column="tbc_driving" property="tbcDriving" jdbcType="VARCHAR" />
+    <result column="tbc_noday" property="tbcNoday" jdbcType="SMALLINT" />
+    <result column="tbc_yntask" property="tbcYntask" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbc_id, tbc_host, tbc_vin, tbc_car_no, tbc_number, tbc_vehicle, tbc_provid, tbc_model, 
+    tbc_area, tbc_outlets, tbc_engine, tbc_color, tbc_lat, tbc_lng, tbc_editor, tbc_remark, 
+    tbc_condition, tbc_reason, tbc_update_time, tbc_add_time, tbc_state, tbc_status_ex, 
+    tbc_status, createTime, modifyDate, tbc_driving, tbc_noday, tbc_yntask
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.CarExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_car
+    where tbc_id = #{tbcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_car
+    where tbc_id = #{tbcId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Car" >
+    insert into tb_car (tbc_id, tbc_host, tbc_vin, 
+      tbc_car_no, tbc_number, tbc_vehicle, 
+      tbc_provid, tbc_model, tbc_area, 
+      tbc_outlets, tbc_engine, tbc_color, 
+      tbc_lat, tbc_lng, tbc_editor, 
+      tbc_remark, tbc_condition, tbc_reason, 
+      tbc_update_time, tbc_add_time, tbc_state, 
+      tbc_status_ex, tbc_status, createTime, 
+      modifyDate, tbc_driving, tbc_noday, 
+      tbc_yntask)
+    values (#{tbcId,jdbcType=INTEGER}, #{tbcHost,jdbcType=SMALLINT}, #{tbcVin,jdbcType=VARCHAR}, 
+      #{tbcCarNo,jdbcType=VARCHAR}, #{tbcNumber,jdbcType=VARCHAR}, #{tbcVehicle,jdbcType=INTEGER}, 
+      #{tbcProvid,jdbcType=INTEGER}, #{tbcModel,jdbcType=INTEGER}, #{tbcArea,jdbcType=BIGINT}, 
+      #{tbcOutlets,jdbcType=INTEGER}, #{tbcEngine,jdbcType=VARCHAR}, #{tbcColor,jdbcType=VARCHAR}, 
+      #{tbcLat,jdbcType=DECIMAL}, #{tbcLng,jdbcType=DECIMAL}, #{tbcEditor,jdbcType=INTEGER}, 
+      #{tbcRemark,jdbcType=VARCHAR}, #{tbcCondition,jdbcType=VARCHAR}, #{tbcReason,jdbcType=VARCHAR}, 
+      #{tbcUpdateTime,jdbcType=TIMESTAMP}, #{tbcAddTime,jdbcType=TIMESTAMP}, #{tbcState,jdbcType=TINYINT}, 
+      #{tbcStatusEx,jdbcType=TINYINT}, #{tbcStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifydate,jdbcType=TIMESTAMP}, #{tbcDriving,jdbcType=VARCHAR}, #{tbcNoday,jdbcType=SMALLINT}, 
+      #{tbcYntask,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Car" >
+    insert into tb_car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbcId != null" >
+        tbc_id,
+      </if>
+      <if test="tbcHost != null" >
+        tbc_host,
+      </if>
+      <if test="tbcVin != null" >
+        tbc_vin,
+      </if>
+      <if test="tbcCarNo != null" >
+        tbc_car_no,
+      </if>
+      <if test="tbcNumber != null" >
+        tbc_number,
+      </if>
+      <if test="tbcVehicle != null" >
+        tbc_vehicle,
+      </if>
+      <if test="tbcProvid != null" >
+        tbc_provid,
+      </if>
+      <if test="tbcModel != null" >
+        tbc_model,
+      </if>
+      <if test="tbcArea != null" >
+        tbc_area,
+      </if>
+      <if test="tbcOutlets != null" >
+        tbc_outlets,
+      </if>
+      <if test="tbcEngine != null" >
+        tbc_engine,
+      </if>
+      <if test="tbcColor != null" >
+        tbc_color,
+      </if>
+      <if test="tbcLat != null" >
+        tbc_lat,
+      </if>
+      <if test="tbcLng != null" >
+        tbc_lng,
+      </if>
+      <if test="tbcEditor != null" >
+        tbc_editor,
+      </if>
+      <if test="tbcRemark != null" >
+        tbc_remark,
+      </if>
+      <if test="tbcCondition != null" >
+        tbc_condition,
+      </if>
+      <if test="tbcReason != null" >
+        tbc_reason,
+      </if>
+      <if test="tbcUpdateTime != null" >
+        tbc_update_time,
+      </if>
+      <if test="tbcAddTime != null" >
+        tbc_add_time,
+      </if>
+      <if test="tbcState != null" >
+        tbc_state,
+      </if>
+      <if test="tbcStatusEx != null" >
+        tbc_status_ex,
+      </if>
+      <if test="tbcStatus != null" >
+        tbc_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+      <if test="tbcDriving != null" >
+        tbc_driving,
+      </if>
+      <if test="tbcNoday != null" >
+        tbc_noday,
+      </if>
+      <if test="tbcYntask != null" >
+        tbc_yntask,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbcId != null" >
+        #{tbcId,jdbcType=INTEGER},
+      </if>
+      <if test="tbcHost != null" >
+        #{tbcHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbcVin != null" >
+        #{tbcVin,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcCarNo != null" >
+        #{tbcCarNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcNumber != null" >
+        #{tbcNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcVehicle != null" >
+        #{tbcVehicle,jdbcType=INTEGER},
+      </if>
+      <if test="tbcProvid != null" >
+        #{tbcProvid,jdbcType=INTEGER},
+      </if>
+      <if test="tbcModel != null" >
+        #{tbcModel,jdbcType=INTEGER},
+      </if>
+      <if test="tbcArea != null" >
+        #{tbcArea,jdbcType=BIGINT},
+      </if>
+      <if test="tbcOutlets != null" >
+        #{tbcOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="tbcEngine != null" >
+        #{tbcEngine,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcColor != null" >
+        #{tbcColor,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcLat != null" >
+        #{tbcLat,jdbcType=DECIMAL},
+      </if>
+      <if test="tbcLng != null" >
+        #{tbcLng,jdbcType=DECIMAL},
+      </if>
+      <if test="tbcEditor != null" >
+        #{tbcEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbcRemark != null" >
+        #{tbcRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcCondition != null" >
+        #{tbcCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcReason != null" >
+        #{tbcReason,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcUpdateTime != null" >
+        #{tbcUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcAddTime != null" >
+        #{tbcAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcState != null" >
+        #{tbcState,jdbcType=TINYINT},
+      </if>
+      <if test="tbcStatusEx != null" >
+        #{tbcStatusEx,jdbcType=TINYINT},
+      </if>
+      <if test="tbcStatus != null" >
+        #{tbcStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcDriving != null" >
+        #{tbcDriving,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcNoday != null" >
+        #{tbcNoday,jdbcType=SMALLINT},
+      </if>
+      <if test="tbcYntask != null" >
+        #{tbcYntask,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.CarExample" resultType="java.lang.Integer" >
+    select count(*) from tb_car
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_car
+    <set >
+      <if test="record.tbcId != null" >
+        tbc_id = #{record.tbcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcHost != null" >
+        tbc_host = #{record.tbcHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbcVin != null" >
+        tbc_vin = #{record.tbcVin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcCarNo != null" >
+        tbc_car_no = #{record.tbcCarNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcNumber != null" >
+        tbc_number = #{record.tbcNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcVehicle != null" >
+        tbc_vehicle = #{record.tbcVehicle,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcProvid != null" >
+        tbc_provid = #{record.tbcProvid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcModel != null" >
+        tbc_model = #{record.tbcModel,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcArea != null" >
+        tbc_area = #{record.tbcArea,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcOutlets != null" >
+        tbc_outlets = #{record.tbcOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcEngine != null" >
+        tbc_engine = #{record.tbcEngine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcColor != null" >
+        tbc_color = #{record.tbcColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcLat != null" >
+        tbc_lat = #{record.tbcLat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbcLng != null" >
+        tbc_lng = #{record.tbcLng,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbcEditor != null" >
+        tbc_editor = #{record.tbcEditor,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcRemark != null" >
+        tbc_remark = #{record.tbcRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcCondition != null" >
+        tbc_condition = #{record.tbcCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcReason != null" >
+        tbc_reason = #{record.tbcReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcUpdateTime != null" >
+        tbc_update_time = #{record.tbcUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcAddTime != null" >
+        tbc_add_time = #{record.tbcAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcState != null" >
+        tbc_state = #{record.tbcState,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbcStatusEx != null" >
+        tbc_status_ex = #{record.tbcStatusEx,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbcStatus != null" >
+        tbc_status = #{record.tbcStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcDriving != null" >
+        tbc_driving = #{record.tbcDriving,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcNoday != null" >
+        tbc_noday = #{record.tbcNoday,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbcYntask != null" >
+        tbc_yntask = #{record.tbcYntask,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_car
+    set tbc_id = #{record.tbcId,jdbcType=INTEGER},
+      tbc_host = #{record.tbcHost,jdbcType=SMALLINT},
+      tbc_vin = #{record.tbcVin,jdbcType=VARCHAR},
+      tbc_car_no = #{record.tbcCarNo,jdbcType=VARCHAR},
+      tbc_number = #{record.tbcNumber,jdbcType=VARCHAR},
+      tbc_vehicle = #{record.tbcVehicle,jdbcType=INTEGER},
+      tbc_provid = #{record.tbcProvid,jdbcType=INTEGER},
+      tbc_model = #{record.tbcModel,jdbcType=INTEGER},
+      tbc_area = #{record.tbcArea,jdbcType=BIGINT},
+      tbc_outlets = #{record.tbcOutlets,jdbcType=INTEGER},
+      tbc_engine = #{record.tbcEngine,jdbcType=VARCHAR},
+      tbc_color = #{record.tbcColor,jdbcType=VARCHAR},
+      tbc_lat = #{record.tbcLat,jdbcType=DECIMAL},
+      tbc_lng = #{record.tbcLng,jdbcType=DECIMAL},
+      tbc_editor = #{record.tbcEditor,jdbcType=INTEGER},
+      tbc_remark = #{record.tbcRemark,jdbcType=VARCHAR},
+      tbc_condition = #{record.tbcCondition,jdbcType=VARCHAR},
+      tbc_reason = #{record.tbcReason,jdbcType=VARCHAR},
+      tbc_update_time = #{record.tbcUpdateTime,jdbcType=TIMESTAMP},
+      tbc_add_time = #{record.tbcAddTime,jdbcType=TIMESTAMP},
+      tbc_state = #{record.tbcState,jdbcType=TINYINT},
+      tbc_status_ex = #{record.tbcStatusEx,jdbcType=TINYINT},
+      tbc_status = #{record.tbcStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      tbc_driving = #{record.tbcDriving,jdbcType=VARCHAR},
+      tbc_noday = #{record.tbcNoday,jdbcType=SMALLINT},
+      tbc_yntask = #{record.tbcYntask,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Car" >
+    update tb_car
+    <set >
+      <if test="tbcHost != null" >
+        tbc_host = #{tbcHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbcVin != null" >
+        tbc_vin = #{tbcVin,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcCarNo != null" >
+        tbc_car_no = #{tbcCarNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcNumber != null" >
+        tbc_number = #{tbcNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcVehicle != null" >
+        tbc_vehicle = #{tbcVehicle,jdbcType=INTEGER},
+      </if>
+      <if test="tbcProvid != null" >
+        tbc_provid = #{tbcProvid,jdbcType=INTEGER},
+      </if>
+      <if test="tbcModel != null" >
+        tbc_model = #{tbcModel,jdbcType=INTEGER},
+      </if>
+      <if test="tbcArea != null" >
+        tbc_area = #{tbcArea,jdbcType=BIGINT},
+      </if>
+      <if test="tbcOutlets != null" >
+        tbc_outlets = #{tbcOutlets,jdbcType=INTEGER},
+      </if>
+      <if test="tbcEngine != null" >
+        tbc_engine = #{tbcEngine,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcColor != null" >
+        tbc_color = #{tbcColor,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcLat != null" >
+        tbc_lat = #{tbcLat,jdbcType=DECIMAL},
+      </if>
+      <if test="tbcLng != null" >
+        tbc_lng = #{tbcLng,jdbcType=DECIMAL},
+      </if>
+      <if test="tbcEditor != null" >
+        tbc_editor = #{tbcEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbcRemark != null" >
+        tbc_remark = #{tbcRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcCondition != null" >
+        tbc_condition = #{tbcCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcReason != null" >
+        tbc_reason = #{tbcReason,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcUpdateTime != null" >
+        tbc_update_time = #{tbcUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcAddTime != null" >
+        tbc_add_time = #{tbcAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcState != null" >
+        tbc_state = #{tbcState,jdbcType=TINYINT},
+      </if>
+      <if test="tbcStatusEx != null" >
+        tbc_status_ex = #{tbcStatusEx,jdbcType=TINYINT},
+      </if>
+      <if test="tbcStatus != null" >
+        tbc_status = #{tbcStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcDriving != null" >
+        tbc_driving = #{tbcDriving,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcNoday != null" >
+        tbc_noday = #{tbcNoday,jdbcType=SMALLINT},
+      </if>
+      <if test="tbcYntask != null" >
+        tbc_yntask = #{tbcYntask,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tbc_id = #{tbcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Car" >
+    update tb_car
+    set tbc_host = #{tbcHost,jdbcType=SMALLINT},
+      tbc_vin = #{tbcVin,jdbcType=VARCHAR},
+      tbc_car_no = #{tbcCarNo,jdbcType=VARCHAR},
+      tbc_number = #{tbcNumber,jdbcType=VARCHAR},
+      tbc_vehicle = #{tbcVehicle,jdbcType=INTEGER},
+      tbc_provid = #{tbcProvid,jdbcType=INTEGER},
+      tbc_model = #{tbcModel,jdbcType=INTEGER},
+      tbc_area = #{tbcArea,jdbcType=BIGINT},
+      tbc_outlets = #{tbcOutlets,jdbcType=INTEGER},
+      tbc_engine = #{tbcEngine,jdbcType=VARCHAR},
+      tbc_color = #{tbcColor,jdbcType=VARCHAR},
+      tbc_lat = #{tbcLat,jdbcType=DECIMAL},
+      tbc_lng = #{tbcLng,jdbcType=DECIMAL},
+      tbc_editor = #{tbcEditor,jdbcType=INTEGER},
+      tbc_remark = #{tbcRemark,jdbcType=VARCHAR},
+      tbc_condition = #{tbcCondition,jdbcType=VARCHAR},
+      tbc_reason = #{tbcReason,jdbcType=VARCHAR},
+      tbc_update_time = #{tbcUpdateTime,jdbcType=TIMESTAMP},
+      tbc_add_time = #{tbcAddTime,jdbcType=TIMESTAMP},
+      tbc_state = #{tbcState,jdbcType=TINYINT},
+      tbc_status_ex = #{tbcStatusEx,jdbcType=TINYINT},
+      tbc_status = #{tbcStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      tbc_driving = #{tbcDriving,jdbcType=VARCHAR},
+      tbc_noday = #{tbcNoday,jdbcType=SMALLINT},
+      tbc_yntask = #{tbcYntask,jdbcType=INTEGER}
+    where tbc_id = #{tbcId,jdbcType=INTEGER}
+  </update>
+</mapper>

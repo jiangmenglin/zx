@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.RemoteMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Remote" >
+    <id column="tbr_id" property="tbrId" jdbcType="BIGINT" />
+    <result column="tbr_host" property="tbrHost" jdbcType="SMALLINT" />
+    <result column="tbr_car" property="tbrCar" jdbcType="INTEGER" />
+    <result column="tbr_type" property="tbrType" jdbcType="SMALLINT" />
+    <result column="tbr_editor" property="tbrEditor" jdbcType="VARCHAR" />
+    <result column="tbr_remark" property="tbrRemark" jdbcType="VARCHAR" />
+    <result column="tbr_update_time" property="tbrUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_add_time" property="tbrAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_ret_time" property="tbrRetTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_message" property="tbrMessage" jdbcType="VARCHAR" />
+    <result column="tbr_code" property="tbrCode" jdbcType="VARCHAR" />
+    <result column="tbr_result" property="tbrResult" jdbcType="VARCHAR" />
+    <result column="tbr_status" property="tbrStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbr_id, tbr_host, tbr_car, tbr_type, tbr_editor, tbr_remark, tbr_update_time, tbr_add_time, 
+    tbr_ret_time, tbr_message, tbr_code, tbr_result, tbr_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.RemoteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_remote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_remote
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_remote
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Remote" >
+    insert into tb_remote (tbr_id, tbr_host, tbr_car, 
+      tbr_type, tbr_editor, tbr_remark, 
+      tbr_update_time, tbr_add_time, tbr_ret_time, 
+      tbr_message, tbr_code, tbr_result, 
+      tbr_status, createTime, modifyDate
+      )
+    values (#{tbrId,jdbcType=BIGINT}, #{tbrHost,jdbcType=SMALLINT}, #{tbrCar,jdbcType=INTEGER}, 
+      #{tbrType,jdbcType=SMALLINT}, #{tbrEditor,jdbcType=VARCHAR}, #{tbrRemark,jdbcType=VARCHAR}, 
+      #{tbrUpdateTime,jdbcType=TIMESTAMP}, #{tbrAddTime,jdbcType=TIMESTAMP}, #{tbrRetTime,jdbcType=TIMESTAMP}, 
+      #{tbrMessage,jdbcType=VARCHAR}, #{tbrCode,jdbcType=VARCHAR}, #{tbrResult,jdbcType=VARCHAR}, 
+      #{tbrStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Remote" >
+    insert into tb_remote
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        tbr_id,
+      </if>
+      <if test="tbrHost != null" >
+        tbr_host,
+      </if>
+      <if test="tbrCar != null" >
+        tbr_car,
+      </if>
+      <if test="tbrType != null" >
+        tbr_type,
+      </if>
+      <if test="tbrEditor != null" >
+        tbr_editor,
+      </if>
+      <if test="tbrRemark != null" >
+        tbr_remark,
+      </if>
+      <if test="tbrUpdateTime != null" >
+        tbr_update_time,
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time,
+      </if>
+      <if test="tbrRetTime != null" >
+        tbr_ret_time,
+      </if>
+      <if test="tbrMessage != null" >
+        tbr_message,
+      </if>
+      <if test="tbrCode != null" >
+        tbr_code,
+      </if>
+      <if test="tbrResult != null" >
+        tbr_result,
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        #{tbrId,jdbcType=BIGINT},
+      </if>
+      <if test="tbrHost != null" >
+        #{tbrHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbrCar != null" >
+        #{tbrCar,jdbcType=INTEGER},
+      </if>
+      <if test="tbrType != null" >
+        #{tbrType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbrEditor != null" >
+        #{tbrEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRemark != null" >
+        #{tbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrUpdateTime != null" >
+        #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrAddTime != null" >
+        #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrRetTime != null" >
+        #{tbrRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrMessage != null" >
+        #{tbrMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrCode != null" >
+        #{tbrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrResult != null" >
+        #{tbrResult,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrStatus != null" >
+        #{tbrStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.RemoteExample" resultType="java.lang.Integer" >
+    select count(*) from tb_remote
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_remote
+    <set >
+      <if test="record.tbrId != null" >
+        tbr_id = #{record.tbrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrHost != null" >
+        tbr_host = #{record.tbrHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbrCar != null" >
+        tbr_car = #{record.tbrCar,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbrType != null" >
+        tbr_type = #{record.tbrType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbrEditor != null" >
+        tbr_editor = #{record.tbrEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrRemark != null" >
+        tbr_remark = #{record.tbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrUpdateTime != null" >
+        tbr_update_time = #{record.tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrAddTime != null" >
+        tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrRetTime != null" >
+        tbr_ret_time = #{record.tbrRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrMessage != null" >
+        tbr_message = #{record.tbrMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrCode != null" >
+        tbr_code = #{record.tbrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrResult != null" >
+        tbr_result = #{record.tbrResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrStatus != null" >
+        tbr_status = #{record.tbrStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_remote
+    set tbr_id = #{record.tbrId,jdbcType=BIGINT},
+      tbr_host = #{record.tbrHost,jdbcType=SMALLINT},
+      tbr_car = #{record.tbrCar,jdbcType=INTEGER},
+      tbr_type = #{record.tbrType,jdbcType=SMALLINT},
+      tbr_editor = #{record.tbrEditor,jdbcType=VARCHAR},
+      tbr_remark = #{record.tbrRemark,jdbcType=VARCHAR},
+      tbr_update_time = #{record.tbrUpdateTime,jdbcType=TIMESTAMP},
+      tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_ret_time = #{record.tbrRetTime,jdbcType=TIMESTAMP},
+      tbr_message = #{record.tbrMessage,jdbcType=VARCHAR},
+      tbr_code = #{record.tbrCode,jdbcType=VARCHAR},
+      tbr_result = #{record.tbrResult,jdbcType=VARCHAR},
+      tbr_status = #{record.tbrStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Remote" >
+    update tb_remote
+    <set >
+      <if test="tbrHost != null" >
+        tbr_host = #{tbrHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbrCar != null" >
+        tbr_car = #{tbrCar,jdbcType=INTEGER},
+      </if>
+      <if test="tbrType != null" >
+        tbr_type = #{tbrType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbrEditor != null" >
+        tbr_editor = #{tbrEditor,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRemark != null" >
+        tbr_remark = #{tbrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrUpdateTime != null" >
+        tbr_update_time = #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrRetTime != null" >
+        tbr_ret_time = #{tbrRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrMessage != null" >
+        tbr_message = #{tbrMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrCode != null" >
+        tbr_code = #{tbrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrResult != null" >
+        tbr_result = #{tbrResult,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status = #{tbrStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Remote" >
+    update tb_remote
+    set tbr_host = #{tbrHost,jdbcType=SMALLINT},
+      tbr_car = #{tbrCar,jdbcType=INTEGER},
+      tbr_type = #{tbrType,jdbcType=SMALLINT},
+      tbr_editor = #{tbrEditor,jdbcType=VARCHAR},
+      tbr_remark = #{tbrRemark,jdbcType=VARCHAR},
+      tbr_update_time = #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_ret_time = #{tbrRetTime,jdbcType=TIMESTAMP},
+      tbr_message = #{tbrMessage,jdbcType=VARCHAR},
+      tbr_code = #{tbrCode,jdbcType=VARCHAR},
+      tbr_result = #{tbrResult,jdbcType=VARCHAR},
+      tbr_status = #{tbrStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </update>
+</mapper>

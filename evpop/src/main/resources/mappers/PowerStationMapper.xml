@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.PowerStationMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.PowerStation" >
+    <id column="tbps_id" property="tbpsId" jdbcType="BIGINT" />
+    <result column="tbps_host" property="tbpsHost" jdbcType="BIGINT" />
+    <result column="tbps_area" property="tbpsArea" jdbcType="BIGINT" />
+    <result column="tbps_outlets" property="tbpsOutlets" jdbcType="BIGINT" />
+    <result column="tbps_supplier" property="tbpsSupplier" jdbcType="BIGINT" />
+    <result column="tbps_name" property="tbpsName" jdbcType="VARCHAR" />
+    <result column="tbps_flag" property="tbpsFlag" jdbcType="VARCHAR" />
+    <result column="tbps_address" property="tbpsAddress" jdbcType="VARCHAR" />
+    <result column="tbps_longitude" property="tbpsLongitude" jdbcType="DOUBLE" />
+    <result column="tbps_latitude" property="tbpsLatitude" jdbcType="DOUBLE" />
+    <result column="tbps_fast" property="tbpsFast" jdbcType="INTEGER" />
+    <result column="tbps_slow" property="tbpsSlow" jdbcType="INTEGER" />
+    <result column="tbps_person" property="tbpsPerson" jdbcType="VARCHAR" />
+    <result column="tbps_tel" property="tbpsTel" jdbcType="VARCHAR" />
+    <result column="tbps_time_desc" property="tbpsTimeDesc" jdbcType="VARCHAR" />
+    <result column="tbps_fee_server" property="tbpsFeeServer" jdbcType="VARCHAR" />
+    <result column="tbps_fee_park" property="tbpsFeePark" jdbcType="VARCHAR" />
+    <result column="tbps_profile" property="tbpsProfile" jdbcType="VARCHAR" />
+    <result column="tbps_remark" property="tbpsRemark" jdbcType="VARCHAR" />
+    <result column="tbps_update_time" property="tbpsUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbps_add_time" property="tbpsAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbps_status" property="tbpsStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbps_id, tbps_host, tbps_area, tbps_outlets, tbps_supplier, tbps_name, tbps_flag, 
+    tbps_address, tbps_longitude, tbps_latitude, tbps_fast, tbps_slow, tbps_person, tbps_tel, 
+    tbps_time_desc, tbps_fee_server, tbps_fee_park, tbps_profile, tbps_remark, tbps_update_time, 
+    tbps_add_time, tbps_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.PowerStationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_power_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_power_station
+    where tbps_id = #{tbpsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_power_station
+    where tbps_id = #{tbpsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.PowerStation" >
+    insert into tb_power_station (tbps_id, tbps_host, tbps_area, 
+      tbps_outlets, tbps_supplier, tbps_name, 
+      tbps_flag, tbps_address, tbps_longitude, 
+      tbps_latitude, tbps_fast, tbps_slow, 
+      tbps_person, tbps_tel, tbps_time_desc, 
+      tbps_fee_server, tbps_fee_park, tbps_profile, 
+      tbps_remark, tbps_update_time, tbps_add_time, 
+      tbps_status)
+    values (#{tbpsId,jdbcType=BIGINT}, #{tbpsHost,jdbcType=BIGINT}, #{tbpsArea,jdbcType=BIGINT}, 
+      #{tbpsOutlets,jdbcType=BIGINT}, #{tbpsSupplier,jdbcType=BIGINT}, #{tbpsName,jdbcType=VARCHAR}, 
+      #{tbpsFlag,jdbcType=VARCHAR}, #{tbpsAddress,jdbcType=VARCHAR}, #{tbpsLongitude,jdbcType=DOUBLE}, 
+      #{tbpsLatitude,jdbcType=DOUBLE}, #{tbpsFast,jdbcType=INTEGER}, #{tbpsSlow,jdbcType=INTEGER}, 
+      #{tbpsPerson,jdbcType=VARCHAR}, #{tbpsTel,jdbcType=VARCHAR}, #{tbpsTimeDesc,jdbcType=VARCHAR}, 
+      #{tbpsFeeServer,jdbcType=VARCHAR}, #{tbpsFeePark,jdbcType=VARCHAR}, #{tbpsProfile,jdbcType=VARCHAR}, 
+      #{tbpsRemark,jdbcType=VARCHAR}, #{tbpsUpdateTime,jdbcType=TIMESTAMP}, #{tbpsAddTime,jdbcType=TIMESTAMP}, 
+      #{tbpsStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.PowerStation" >
+    insert into tb_power_station
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbpsId != null" >
+        tbps_id,
+      </if>
+      <if test="tbpsHost != null" >
+        tbps_host,
+      </if>
+      <if test="tbpsArea != null" >
+        tbps_area,
+      </if>
+      <if test="tbpsOutlets != null" >
+        tbps_outlets,
+      </if>
+      <if test="tbpsSupplier != null" >
+        tbps_supplier,
+      </if>
+      <if test="tbpsName != null" >
+        tbps_name,
+      </if>
+      <if test="tbpsFlag != null" >
+        tbps_flag,
+      </if>
+      <if test="tbpsAddress != null" >
+        tbps_address,
+      </if>
+      <if test="tbpsLongitude != null" >
+        tbps_longitude,
+      </if>
+      <if test="tbpsLatitude != null" >
+        tbps_latitude,
+      </if>
+      <if test="tbpsFast != null" >
+        tbps_fast,
+      </if>
+      <if test="tbpsSlow != null" >
+        tbps_slow,
+      </if>
+      <if test="tbpsPerson != null" >
+        tbps_person,
+      </if>
+      <if test="tbpsTel != null" >
+        tbps_tel,
+      </if>
+      <if test="tbpsTimeDesc != null" >
+        tbps_time_desc,
+      </if>
+      <if test="tbpsFeeServer != null" >
+        tbps_fee_server,
+      </if>
+      <if test="tbpsFeePark != null" >
+        tbps_fee_park,
+      </if>
+      <if test="tbpsProfile != null" >
+        tbps_profile,
+      </if>
+      <if test="tbpsRemark != null" >
+        tbps_remark,
+      </if>
+      <if test="tbpsUpdateTime != null" >
+        tbps_update_time,
+      </if>
+      <if test="tbpsAddTime != null" >
+        tbps_add_time,
+      </if>
+      <if test="tbpsStatus != null" >
+        tbps_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbpsId != null" >
+        #{tbpsId,jdbcType=BIGINT},
+      </if>
+      <if test="tbpsHost != null" >
+        #{tbpsHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbpsArea != null" >
+        #{tbpsArea,jdbcType=BIGINT},
+      </if>
+      <if test="tbpsOutlets != null" >
+        #{tbpsOutlets,jdbcType=BIGINT},
+      </if>
+      <if test="tbpsSupplier != null" >
+        #{tbpsSupplier,jdbcType=BIGINT},
+      </if>
+      <if test="tbpsName != null" >
+        #{tbpsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsFlag != null" >
+        #{tbpsFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsAddress != null" >
+        #{tbpsAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsLongitude != null" >
+        #{tbpsLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="tbpsLatitude != null" >
+        #{tbpsLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="tbpsFast != null" >
+        #{tbpsFast,jdbcType=INTEGER},
+      </if>
+      <if test="tbpsSlow != null" >
+        #{tbpsSlow,jdbcType=INTEGER},
+      </if>
+      <if test="tbpsPerson != null" >
+        #{tbpsPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsTel != null" >
+        #{tbpsTel,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsTimeDesc != null" >
+        #{tbpsTimeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsFeeServer != null" >
+        #{tbpsFeeServer,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsFeePark != null" >
+        #{tbpsFeePark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsProfile != null" >
+        #{tbpsProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsRemark != null" >
+        #{tbpsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsUpdateTime != null" >
+        #{tbpsUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpsAddTime != null" >
+        #{tbpsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpsStatus != null" >
+        #{tbpsStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.PowerStationExample" resultType="java.lang.Integer" >
+    select count(*) from tb_power_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_power_station
+    <set >
+      <if test="record.tbpsId != null" >
+        tbps_id = #{record.tbpsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpsHost != null" >
+        tbps_host = #{record.tbpsHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpsArea != null" >
+        tbps_area = #{record.tbpsArea,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpsOutlets != null" >
+        tbps_outlets = #{record.tbpsOutlets,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpsSupplier != null" >
+        tbps_supplier = #{record.tbpsSupplier,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpsName != null" >
+        tbps_name = #{record.tbpsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpsFlag != null" >
+        tbps_flag = #{record.tbpsFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpsAddress != null" >
+        tbps_address = #{record.tbpsAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpsLongitude != null" >
+        tbps_longitude = #{record.tbpsLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbpsLatitude != null" >
+        tbps_latitude = #{record.tbpsLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbpsFast != null" >
+        tbps_fast = #{record.tbpsFast,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbpsSlow != null" >
+        tbps_slow = #{record.tbpsSlow,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbpsPerson != null" >
+        tbps_person = #{record.tbpsPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpsTel != null" >
+        tbps_tel = #{record.tbpsTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpsTimeDesc != null" >
+        tbps_time_desc = #{record.tbpsTimeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpsFeeServer != null" >
+        tbps_fee_server = #{record.tbpsFeeServer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpsFeePark != null" >
+        tbps_fee_park = #{record.tbpsFeePark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpsProfile != null" >
+        tbps_profile = #{record.tbpsProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpsRemark != null" >
+        tbps_remark = #{record.tbpsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpsUpdateTime != null" >
+        tbps_update_time = #{record.tbpsUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbpsAddTime != null" >
+        tbps_add_time = #{record.tbpsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbpsStatus != null" >
+        tbps_status = #{record.tbpsStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_power_station
+    set tbps_id = #{record.tbpsId,jdbcType=BIGINT},
+      tbps_host = #{record.tbpsHost,jdbcType=BIGINT},
+      tbps_area = #{record.tbpsArea,jdbcType=BIGINT},
+      tbps_outlets = #{record.tbpsOutlets,jdbcType=BIGINT},
+      tbps_supplier = #{record.tbpsSupplier,jdbcType=BIGINT},
+      tbps_name = #{record.tbpsName,jdbcType=VARCHAR},
+      tbps_flag = #{record.tbpsFlag,jdbcType=VARCHAR},
+      tbps_address = #{record.tbpsAddress,jdbcType=VARCHAR},
+      tbps_longitude = #{record.tbpsLongitude,jdbcType=DOUBLE},
+      tbps_latitude = #{record.tbpsLatitude,jdbcType=DOUBLE},
+      tbps_fast = #{record.tbpsFast,jdbcType=INTEGER},
+      tbps_slow = #{record.tbpsSlow,jdbcType=INTEGER},
+      tbps_person = #{record.tbpsPerson,jdbcType=VARCHAR},
+      tbps_tel = #{record.tbpsTel,jdbcType=VARCHAR},
+      tbps_time_desc = #{record.tbpsTimeDesc,jdbcType=VARCHAR},
+      tbps_fee_server = #{record.tbpsFeeServer,jdbcType=VARCHAR},
+      tbps_fee_park = #{record.tbpsFeePark,jdbcType=VARCHAR},
+      tbps_profile = #{record.tbpsProfile,jdbcType=VARCHAR},
+      tbps_remark = #{record.tbpsRemark,jdbcType=VARCHAR},
+      tbps_update_time = #{record.tbpsUpdateTime,jdbcType=TIMESTAMP},
+      tbps_add_time = #{record.tbpsAddTime,jdbcType=TIMESTAMP},
+      tbps_status = #{record.tbpsStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.PowerStation" >
+    update tb_power_station
+    <set >
+      <if test="tbpsHost != null" >
+        tbps_host = #{tbpsHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbpsArea != null" >
+        tbps_area = #{tbpsArea,jdbcType=BIGINT},
+      </if>
+      <if test="tbpsOutlets != null" >
+        tbps_outlets = #{tbpsOutlets,jdbcType=BIGINT},
+      </if>
+      <if test="tbpsSupplier != null" >
+        tbps_supplier = #{tbpsSupplier,jdbcType=BIGINT},
+      </if>
+      <if test="tbpsName != null" >
+        tbps_name = #{tbpsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsFlag != null" >
+        tbps_flag = #{tbpsFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsAddress != null" >
+        tbps_address = #{tbpsAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsLongitude != null" >
+        tbps_longitude = #{tbpsLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="tbpsLatitude != null" >
+        tbps_latitude = #{tbpsLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="tbpsFast != null" >
+        tbps_fast = #{tbpsFast,jdbcType=INTEGER},
+      </if>
+      <if test="tbpsSlow != null" >
+        tbps_slow = #{tbpsSlow,jdbcType=INTEGER},
+      </if>
+      <if test="tbpsPerson != null" >
+        tbps_person = #{tbpsPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsTel != null" >
+        tbps_tel = #{tbpsTel,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsTimeDesc != null" >
+        tbps_time_desc = #{tbpsTimeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsFeeServer != null" >
+        tbps_fee_server = #{tbpsFeeServer,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsFeePark != null" >
+        tbps_fee_park = #{tbpsFeePark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsProfile != null" >
+        tbps_profile = #{tbpsProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsRemark != null" >
+        tbps_remark = #{tbpsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpsUpdateTime != null" >
+        tbps_update_time = #{tbpsUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpsAddTime != null" >
+        tbps_add_time = #{tbpsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpsStatus != null" >
+        tbps_status = #{tbpsStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbps_id = #{tbpsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.PowerStation" >
+    update tb_power_station
+    set tbps_host = #{tbpsHost,jdbcType=BIGINT},
+      tbps_area = #{tbpsArea,jdbcType=BIGINT},
+      tbps_outlets = #{tbpsOutlets,jdbcType=BIGINT},
+      tbps_supplier = #{tbpsSupplier,jdbcType=BIGINT},
+      tbps_name = #{tbpsName,jdbcType=VARCHAR},
+      tbps_flag = #{tbpsFlag,jdbcType=VARCHAR},
+      tbps_address = #{tbpsAddress,jdbcType=VARCHAR},
+      tbps_longitude = #{tbpsLongitude,jdbcType=DOUBLE},
+      tbps_latitude = #{tbpsLatitude,jdbcType=DOUBLE},
+      tbps_fast = #{tbpsFast,jdbcType=INTEGER},
+      tbps_slow = #{tbpsSlow,jdbcType=INTEGER},
+      tbps_person = #{tbpsPerson,jdbcType=VARCHAR},
+      tbps_tel = #{tbpsTel,jdbcType=VARCHAR},
+      tbps_time_desc = #{tbpsTimeDesc,jdbcType=VARCHAR},
+      tbps_fee_server = #{tbpsFeeServer,jdbcType=VARCHAR},
+      tbps_fee_park = #{tbpsFeePark,jdbcType=VARCHAR},
+      tbps_profile = #{tbpsProfile,jdbcType=VARCHAR},
+      tbps_remark = #{tbpsRemark,jdbcType=VARCHAR},
+      tbps_update_time = #{tbpsUpdateTime,jdbcType=TIMESTAMP},
+      tbps_add_time = #{tbpsAddTime,jdbcType=TIMESTAMP},
+      tbps_status = #{tbpsStatus,jdbcType=SMALLINT}
+    where tbps_id = #{tbpsId,jdbcType=BIGINT}
+  </update>
+</mapper>

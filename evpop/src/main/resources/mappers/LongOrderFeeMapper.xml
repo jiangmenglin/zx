@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LongOrderFeeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.LongOrderFee" >
+    <id column="tblof_id" property="tblofId" jdbcType="BIGINT" />
+    <result column="tblof_host" property="tblofHost" jdbcType="BIGINT" />
+    <result column="tblof_longorder" property="tblofLongorder" jdbcType="BIGINT" />
+    <result column="tblof_name" property="tblofName" jdbcType="VARCHAR" />
+    <result column="tblof_type" property="tblofType" jdbcType="SMALLINT" />
+    <result column="tblof_ammount" property="tblofAmmount" jdbcType="DOUBLE" />
+    <result column="tblof_pay_record" property="tblofPayRecord" jdbcType="BIGINT" />
+    <result column="tblof_ret_record" property="tblofRetRecord" jdbcType="BIGINT" />
+    <result column="tblof_remark" property="tblofRemark" jdbcType="VARCHAR" />
+    <result column="tblof_update_time" property="tblofUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tblof_add_time" property="tblofAddTime" jdbcType="TIMESTAMP" />
+    <result column="tblof_status" property="tblofStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tblof_id, tblof_host, tblof_longorder, tblof_name, tblof_type, tblof_ammount, tblof_pay_record, 
+    tblof_ret_record, tblof_remark, tblof_update_time, tblof_add_time, tblof_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LongOrderFeeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_long_order_fee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_long_order_fee
+    where tblof_id = #{tblofId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_long_order_fee
+    where tblof_id = #{tblofId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.LongOrderFee" >
+    insert into tb_long_order_fee (tblof_id, tblof_host, tblof_longorder, 
+      tblof_name, tblof_type, tblof_ammount, 
+      tblof_pay_record, tblof_ret_record, tblof_remark, 
+      tblof_update_time, tblof_add_time, tblof_status
+      )
+    values (#{tblofId,jdbcType=BIGINT}, #{tblofHost,jdbcType=BIGINT}, #{tblofLongorder,jdbcType=BIGINT}, 
+      #{tblofName,jdbcType=VARCHAR}, #{tblofType,jdbcType=SMALLINT}, #{tblofAmmount,jdbcType=DOUBLE}, 
+      #{tblofPayRecord,jdbcType=BIGINT}, #{tblofRetRecord,jdbcType=BIGINT}, #{tblofRemark,jdbcType=VARCHAR}, 
+      #{tblofUpdateTime,jdbcType=TIMESTAMP}, #{tblofAddTime,jdbcType=TIMESTAMP}, #{tblofStatus,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.LongOrderFee" >
+    insert into tb_long_order_fee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tblofId != null" >
+        tblof_id,
+      </if>
+      <if test="tblofHost != null" >
+        tblof_host,
+      </if>
+      <if test="tblofLongorder != null" >
+        tblof_longorder,
+      </if>
+      <if test="tblofName != null" >
+        tblof_name,
+      </if>
+      <if test="tblofType != null" >
+        tblof_type,
+      </if>
+      <if test="tblofAmmount != null" >
+        tblof_ammount,
+      </if>
+      <if test="tblofPayRecord != null" >
+        tblof_pay_record,
+      </if>
+      <if test="tblofRetRecord != null" >
+        tblof_ret_record,
+      </if>
+      <if test="tblofRemark != null" >
+        tblof_remark,
+      </if>
+      <if test="tblofUpdateTime != null" >
+        tblof_update_time,
+      </if>
+      <if test="tblofAddTime != null" >
+        tblof_add_time,
+      </if>
+      <if test="tblofStatus != null" >
+        tblof_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tblofId != null" >
+        #{tblofId,jdbcType=BIGINT},
+      </if>
+      <if test="tblofHost != null" >
+        #{tblofHost,jdbcType=BIGINT},
+      </if>
+      <if test="tblofLongorder != null" >
+        #{tblofLongorder,jdbcType=BIGINT},
+      </if>
+      <if test="tblofName != null" >
+        #{tblofName,jdbcType=VARCHAR},
+      </if>
+      <if test="tblofType != null" >
+        #{tblofType,jdbcType=SMALLINT},
+      </if>
+      <if test="tblofAmmount != null" >
+        #{tblofAmmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tblofPayRecord != null" >
+        #{tblofPayRecord,jdbcType=BIGINT},
+      </if>
+      <if test="tblofRetRecord != null" >
+        #{tblofRetRecord,jdbcType=BIGINT},
+      </if>
+      <if test="tblofRemark != null" >
+        #{tblofRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tblofUpdateTime != null" >
+        #{tblofUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblofAddTime != null" >
+        #{tblofAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblofStatus != null" >
+        #{tblofStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LongOrderFeeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_long_order_fee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_long_order_fee
+    <set >
+      <if test="record.tblofId != null" >
+        tblof_id = #{record.tblofId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblofHost != null" >
+        tblof_host = #{record.tblofHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblofLongorder != null" >
+        tblof_longorder = #{record.tblofLongorder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblofName != null" >
+        tblof_name = #{record.tblofName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblofType != null" >
+        tblof_type = #{record.tblofType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tblofAmmount != null" >
+        tblof_ammount = #{record.tblofAmmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tblofPayRecord != null" >
+        tblof_pay_record = #{record.tblofPayRecord,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblofRetRecord != null" >
+        tblof_ret_record = #{record.tblofRetRecord,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblofRemark != null" >
+        tblof_remark = #{record.tblofRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblofUpdateTime != null" >
+        tblof_update_time = #{record.tblofUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblofAddTime != null" >
+        tblof_add_time = #{record.tblofAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblofStatus != null" >
+        tblof_status = #{record.tblofStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_long_order_fee
+    set tblof_id = #{record.tblofId,jdbcType=BIGINT},
+      tblof_host = #{record.tblofHost,jdbcType=BIGINT},
+      tblof_longorder = #{record.tblofLongorder,jdbcType=BIGINT},
+      tblof_name = #{record.tblofName,jdbcType=VARCHAR},
+      tblof_type = #{record.tblofType,jdbcType=SMALLINT},
+      tblof_ammount = #{record.tblofAmmount,jdbcType=DOUBLE},
+      tblof_pay_record = #{record.tblofPayRecord,jdbcType=BIGINT},
+      tblof_ret_record = #{record.tblofRetRecord,jdbcType=BIGINT},
+      tblof_remark = #{record.tblofRemark,jdbcType=VARCHAR},
+      tblof_update_time = #{record.tblofUpdateTime,jdbcType=TIMESTAMP},
+      tblof_add_time = #{record.tblofAddTime,jdbcType=TIMESTAMP},
+      tblof_status = #{record.tblofStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.LongOrderFee" >
+    update tb_long_order_fee
+    <set >
+      <if test="tblofHost != null" >
+        tblof_host = #{tblofHost,jdbcType=BIGINT},
+      </if>
+      <if test="tblofLongorder != null" >
+        tblof_longorder = #{tblofLongorder,jdbcType=BIGINT},
+      </if>
+      <if test="tblofName != null" >
+        tblof_name = #{tblofName,jdbcType=VARCHAR},
+      </if>
+      <if test="tblofType != null" >
+        tblof_type = #{tblofType,jdbcType=SMALLINT},
+      </if>
+      <if test="tblofAmmount != null" >
+        tblof_ammount = #{tblofAmmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tblofPayRecord != null" >
+        tblof_pay_record = #{tblofPayRecord,jdbcType=BIGINT},
+      </if>
+      <if test="tblofRetRecord != null" >
+        tblof_ret_record = #{tblofRetRecord,jdbcType=BIGINT},
+      </if>
+      <if test="tblofRemark != null" >
+        tblof_remark = #{tblofRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tblofUpdateTime != null" >
+        tblof_update_time = #{tblofUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblofAddTime != null" >
+        tblof_add_time = #{tblofAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblofStatus != null" >
+        tblof_status = #{tblofStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tblof_id = #{tblofId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.LongOrderFee" >
+    update tb_long_order_fee
+    set tblof_host = #{tblofHost,jdbcType=BIGINT},
+      tblof_longorder = #{tblofLongorder,jdbcType=BIGINT},
+      tblof_name = #{tblofName,jdbcType=VARCHAR},
+      tblof_type = #{tblofType,jdbcType=SMALLINT},
+      tblof_ammount = #{tblofAmmount,jdbcType=DOUBLE},
+      tblof_pay_record = #{tblofPayRecord,jdbcType=BIGINT},
+      tblof_ret_record = #{tblofRetRecord,jdbcType=BIGINT},
+      tblof_remark = #{tblofRemark,jdbcType=VARCHAR},
+      tblof_update_time = #{tblofUpdateTime,jdbcType=TIMESTAMP},
+      tblof_add_time = #{tblofAddTime,jdbcType=TIMESTAMP},
+      tblof_status = #{tblofStatus,jdbcType=SMALLINT}
+    where tblof_id = #{tblofId,jdbcType=BIGINT}
+  </update>
+</mapper>

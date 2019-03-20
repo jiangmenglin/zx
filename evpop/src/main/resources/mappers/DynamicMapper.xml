@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.DynamicMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Dynamic" >
+    <id column="tbd_id" property="tbdId" jdbcType="BIGINT" />
+    <result column="tbd_host" property="tbdHost" jdbcType="BIGINT" />
+    <result column="tbd_title" property="tbdTitle" jdbcType="VARCHAR" />
+    <result column="tbd_relate" property="tbdRelate" jdbcType="VARCHAR" />
+    <result column="tbd_update_time" property="tbdUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbd_add_time" property="tbdAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbd_status" property="tbdStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbd_id, tbd_host, tbd_title, tbd_relate, tbd_update_time, tbd_add_time, tbd_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.DynamicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_dynamic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dynamic
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_dynamic
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Dynamic" >
+    insert into tb_dynamic (tbd_id, tbd_host, tbd_title, 
+      tbd_relate, tbd_update_time, tbd_add_time, 
+      tbd_status)
+    values (#{tbdId,jdbcType=BIGINT}, #{tbdHost,jdbcType=BIGINT}, #{tbdTitle,jdbcType=VARCHAR}, 
+      #{tbdRelate,jdbcType=VARCHAR}, #{tbdUpdateTime,jdbcType=TIMESTAMP}, #{tbdAddTime,jdbcType=TIMESTAMP}, 
+      #{tbdStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Dynamic" >
+    insert into tb_dynamic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbdId != null" >
+        tbd_id,
+      </if>
+      <if test="tbdHost != null" >
+        tbd_host,
+      </if>
+      <if test="tbdTitle != null" >
+        tbd_title,
+      </if>
+      <if test="tbdRelate != null" >
+        tbd_relate,
+      </if>
+      <if test="tbdUpdateTime != null" >
+        tbd_update_time,
+      </if>
+      <if test="tbdAddTime != null" >
+        tbd_add_time,
+      </if>
+      <if test="tbdStatus != null" >
+        tbd_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbdId != null" >
+        #{tbdId,jdbcType=BIGINT},
+      </if>
+      <if test="tbdHost != null" >
+        #{tbdHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbdTitle != null" >
+        #{tbdTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdRelate != null" >
+        #{tbdRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdUpdateTime != null" >
+        #{tbdUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdAddTime != null" >
+        #{tbdAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdStatus != null" >
+        #{tbdStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.DynamicExample" resultType="java.lang.Integer" >
+    select count(*) from tb_dynamic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_dynamic
+    <set >
+      <if test="record.tbdId != null" >
+        tbd_id = #{record.tbdId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbdHost != null" >
+        tbd_host = #{record.tbdHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbdTitle != null" >
+        tbd_title = #{record.tbdTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbdRelate != null" >
+        tbd_relate = #{record.tbdRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbdUpdateTime != null" >
+        tbd_update_time = #{record.tbdUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbdAddTime != null" >
+        tbd_add_time = #{record.tbdAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbdStatus != null" >
+        tbd_status = #{record.tbdStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_dynamic
+    set tbd_id = #{record.tbdId,jdbcType=BIGINT},
+      tbd_host = #{record.tbdHost,jdbcType=BIGINT},
+      tbd_title = #{record.tbdTitle,jdbcType=VARCHAR},
+      tbd_relate = #{record.tbdRelate,jdbcType=VARCHAR},
+      tbd_update_time = #{record.tbdUpdateTime,jdbcType=TIMESTAMP},
+      tbd_add_time = #{record.tbdAddTime,jdbcType=TIMESTAMP},
+      tbd_status = #{record.tbdStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Dynamic" >
+    update tb_dynamic
+    <set >
+      <if test="tbdHost != null" >
+        tbd_host = #{tbdHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbdTitle != null" >
+        tbd_title = #{tbdTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdRelate != null" >
+        tbd_relate = #{tbdRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdUpdateTime != null" >
+        tbd_update_time = #{tbdUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdAddTime != null" >
+        tbd_add_time = #{tbdAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdStatus != null" >
+        tbd_status = #{tbdStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Dynamic" >
+    update tb_dynamic
+    set tbd_host = #{tbdHost,jdbcType=BIGINT},
+      tbd_title = #{tbdTitle,jdbcType=VARCHAR},
+      tbd_relate = #{tbdRelate,jdbcType=VARCHAR},
+      tbd_update_time = #{tbdUpdateTime,jdbcType=TIMESTAMP},
+      tbd_add_time = #{tbdAddTime,jdbcType=TIMESTAMP},
+      tbd_status = #{tbdStatus,jdbcType=SMALLINT}
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </update>
+</mapper>

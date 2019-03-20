@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.InterfaceResponseMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.InterfaceResponse" >
+    <id column="response_no" property="responseNo" jdbcType="VARCHAR" />
+    <result column="rsp_type" property="rspType" jdbcType="INTEGER" />
+    <result column="inner_rsp_code" property="innerRspCode" jdbcType="VARCHAR" />
+    <result column="inner_rsp_desc" property="innerRspDesc" jdbcType="VARCHAR" />
+    <result column="outer_rsp_code" property="outerRspCode" jdbcType="VARCHAR" />
+    <result column="outer_rsp_desc" property="outerRspDesc" jdbcType="VARCHAR" />
+    <result column="request_no" property="requestNo" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.InterfaceResponse" extends="BaseResultMap" >
+    <result column="inner_message" property="innerMessage" jdbcType="LONGVARCHAR" />
+    <result column="outer_message" property="outerMessage" jdbcType="LONGVARCHAR" />
+    <result column="cause_stack_trace" property="causeStackTrace" jdbcType="LONGVARCHAR" />
+    <result column="cause_message" property="causeMessage" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    response_no, rsp_type, inner_rsp_code, inner_rsp_desc, outer_rsp_code, outer_rsp_desc, 
+    request_no, create_date, last_update_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    inner_message, outer_message, cause_stack_trace, cause_message
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.InterfaceResponseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_interface_response
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.InterfaceResponseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_interface_response
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_interface_response
+    where response_no = #{responseNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_interface_response
+    where response_no = #{responseNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.InterfaceResponse" >
+    insert into tb_interface_response (response_no, rsp_type, inner_rsp_code, 
+      inner_rsp_desc, outer_rsp_code, outer_rsp_desc, 
+      request_no, create_date, last_update_date, 
+      inner_message, outer_message, cause_stack_trace, 
+      cause_message)
+    values (#{responseNo,jdbcType=VARCHAR}, #{rspType,jdbcType=INTEGER}, #{innerRspCode,jdbcType=VARCHAR}, 
+      #{innerRspDesc,jdbcType=VARCHAR}, #{outerRspCode,jdbcType=VARCHAR}, #{outerRspDesc,jdbcType=VARCHAR}, 
+      #{requestNo,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateDate,jdbcType=TIMESTAMP}, 
+      #{innerMessage,jdbcType=LONGVARCHAR}, #{outerMessage,jdbcType=LONGVARCHAR}, #{causeStackTrace,jdbcType=LONGVARCHAR}, 
+      #{causeMessage,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.InterfaceResponse" >
+    insert into tb_interface_response
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="responseNo != null" >
+        response_no,
+      </if>
+      <if test="rspType != null" >
+        rsp_type,
+      </if>
+      <if test="innerRspCode != null" >
+        inner_rsp_code,
+      </if>
+      <if test="innerRspDesc != null" >
+        inner_rsp_desc,
+      </if>
+      <if test="outerRspCode != null" >
+        outer_rsp_code,
+      </if>
+      <if test="outerRspDesc != null" >
+        outer_rsp_desc,
+      </if>
+      <if test="requestNo != null" >
+        request_no,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date,
+      </if>
+      <if test="innerMessage != null" >
+        inner_message,
+      </if>
+      <if test="outerMessage != null" >
+        outer_message,
+      </if>
+      <if test="causeStackTrace != null" >
+        cause_stack_trace,
+      </if>
+      <if test="causeMessage != null" >
+        cause_message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="responseNo != null" >
+        #{responseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="rspType != null" >
+        #{rspType,jdbcType=INTEGER},
+      </if>
+      <if test="innerRspCode != null" >
+        #{innerRspCode,jdbcType=VARCHAR},
+      </if>
+      <if test="innerRspDesc != null" >
+        #{innerRspDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="outerRspCode != null" >
+        #{outerRspCode,jdbcType=VARCHAR},
+      </if>
+      <if test="outerRspDesc != null" >
+        #{outerRspDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="requestNo != null" >
+        #{requestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="innerMessage != null" >
+        #{innerMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="outerMessage != null" >
+        #{outerMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="causeStackTrace != null" >
+        #{causeStackTrace,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="causeMessage != null" >
+        #{causeMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.InterfaceResponseExample" resultType="java.lang.Integer" >
+    select count(*) from tb_interface_response
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_interface_response
+    <set >
+      <if test="record.responseNo != null" >
+        response_no = #{record.responseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rspType != null" >
+        rsp_type = #{record.rspType,jdbcType=INTEGER},
+      </if>
+      <if test="record.innerRspCode != null" >
+        inner_rsp_code = #{record.innerRspCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innerRspDesc != null" >
+        inner_rsp_desc = #{record.innerRspDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outerRspCode != null" >
+        outer_rsp_code = #{record.outerRspCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outerRspDesc != null" >
+        outer_rsp_desc = #{record.outerRspDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requestNo != null" >
+        request_no = #{record.requestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateDate != null" >
+        last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.innerMessage != null" >
+        inner_message = #{record.innerMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.outerMessage != null" >
+        outer_message = #{record.outerMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.causeStackTrace != null" >
+        cause_stack_trace = #{record.causeStackTrace,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.causeMessage != null" >
+        cause_message = #{record.causeMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_interface_response
+    set response_no = #{record.responseNo,jdbcType=VARCHAR},
+      rsp_type = #{record.rspType,jdbcType=INTEGER},
+      inner_rsp_code = #{record.innerRspCode,jdbcType=VARCHAR},
+      inner_rsp_desc = #{record.innerRspDesc,jdbcType=VARCHAR},
+      outer_rsp_code = #{record.outerRspCode,jdbcType=VARCHAR},
+      outer_rsp_desc = #{record.outerRspDesc,jdbcType=VARCHAR},
+      request_no = #{record.requestNo,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      inner_message = #{record.innerMessage,jdbcType=LONGVARCHAR},
+      outer_message = #{record.outerMessage,jdbcType=LONGVARCHAR},
+      cause_stack_trace = #{record.causeStackTrace,jdbcType=LONGVARCHAR},
+      cause_message = #{record.causeMessage,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_interface_response
+    set response_no = #{record.responseNo,jdbcType=VARCHAR},
+      rsp_type = #{record.rspType,jdbcType=INTEGER},
+      inner_rsp_code = #{record.innerRspCode,jdbcType=VARCHAR},
+      inner_rsp_desc = #{record.innerRspDesc,jdbcType=VARCHAR},
+      outer_rsp_code = #{record.outerRspCode,jdbcType=VARCHAR},
+      outer_rsp_desc = #{record.outerRspDesc,jdbcType=VARCHAR},
+      request_no = #{record.requestNo,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.InterfaceResponse" >
+    update tb_interface_response
+    <set >
+      <if test="rspType != null" >
+        rsp_type = #{rspType,jdbcType=INTEGER},
+      </if>
+      <if test="innerRspCode != null" >
+        inner_rsp_code = #{innerRspCode,jdbcType=VARCHAR},
+      </if>
+      <if test="innerRspDesc != null" >
+        inner_rsp_desc = #{innerRspDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="outerRspCode != null" >
+        outer_rsp_code = #{outerRspCode,jdbcType=VARCHAR},
+      </if>
+      <if test="outerRspDesc != null" >
+        outer_rsp_desc = #{outerRspDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="requestNo != null" >
+        request_no = #{requestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="innerMessage != null" >
+        inner_message = #{innerMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="outerMessage != null" >
+        outer_message = #{outerMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="causeStackTrace != null" >
+        cause_stack_trace = #{causeStackTrace,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="causeMessage != null" >
+        cause_message = #{causeMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where response_no = #{responseNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.InterfaceResponse" >
+    update tb_interface_response
+    set rsp_type = #{rspType,jdbcType=INTEGER},
+      inner_rsp_code = #{innerRspCode,jdbcType=VARCHAR},
+      inner_rsp_desc = #{innerRspDesc,jdbcType=VARCHAR},
+      outer_rsp_code = #{outerRspCode,jdbcType=VARCHAR},
+      outer_rsp_desc = #{outerRspDesc,jdbcType=VARCHAR},
+      request_no = #{requestNo,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      inner_message = #{innerMessage,jdbcType=LONGVARCHAR},
+      outer_message = #{outerMessage,jdbcType=LONGVARCHAR},
+      cause_stack_trace = #{causeStackTrace,jdbcType=LONGVARCHAR},
+      cause_message = #{causeMessage,jdbcType=LONGVARCHAR}
+    where response_no = #{responseNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.InterfaceResponse" >
+    update tb_interface_response
+    set rsp_type = #{rspType,jdbcType=INTEGER},
+      inner_rsp_code = #{innerRspCode,jdbcType=VARCHAR},
+      inner_rsp_desc = #{innerRspDesc,jdbcType=VARCHAR},
+      outer_rsp_code = #{outerRspCode,jdbcType=VARCHAR},
+      outer_rsp_desc = #{outerRspDesc,jdbcType=VARCHAR},
+      request_no = #{requestNo,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
+    where response_no = #{responseNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

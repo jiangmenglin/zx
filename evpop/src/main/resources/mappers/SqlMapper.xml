@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.SqlMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Sql" >
+    <id column="ss_id" property="ssId" jdbcType="BIGINT" />
+    <result column="ss_name" property="ssName" jdbcType="VARCHAR" />
+    <result column="ss_sql" property="ssSql" jdbcType="VARCHAR" />
+    <result column="ss_interval" property="ssInterval" jdbcType="INTEGER" />
+    <result column="ss_last" property="ssLast" jdbcType="TIMESTAMP" />
+    <result column="ss_update_time" property="ssUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="ss_add_time" property="ssAddTime" jdbcType="TIMESTAMP" />
+    <result column="ss_status" property="ssStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ss_id, ss_name, ss_sql, ss_interval, ss_last, ss_update_time, ss_add_time, ss_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.SqlExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_sql
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from srv_sql
+    where ss_id = #{ssId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from srv_sql
+    where ss_id = #{ssId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Sql" >
+    insert into srv_sql (ss_id, ss_name, ss_sql, 
+      ss_interval, ss_last, ss_update_time, 
+      ss_add_time, ss_status)
+    values (#{ssId,jdbcType=BIGINT}, #{ssName,jdbcType=VARCHAR}, #{ssSql,jdbcType=VARCHAR}, 
+      #{ssInterval,jdbcType=INTEGER}, #{ssLast,jdbcType=TIMESTAMP}, #{ssUpdateTime,jdbcType=TIMESTAMP}, 
+      #{ssAddTime,jdbcType=TIMESTAMP}, #{ssStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Sql" >
+    insert into srv_sql
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ssId != null" >
+        ss_id,
+      </if>
+      <if test="ssName != null" >
+        ss_name,
+      </if>
+      <if test="ssSql != null" >
+        ss_sql,
+      </if>
+      <if test="ssInterval != null" >
+        ss_interval,
+      </if>
+      <if test="ssLast != null" >
+        ss_last,
+      </if>
+      <if test="ssUpdateTime != null" >
+        ss_update_time,
+      </if>
+      <if test="ssAddTime != null" >
+        ss_add_time,
+      </if>
+      <if test="ssStatus != null" >
+        ss_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ssId != null" >
+        #{ssId,jdbcType=BIGINT},
+      </if>
+      <if test="ssName != null" >
+        #{ssName,jdbcType=VARCHAR},
+      </if>
+      <if test="ssSql != null" >
+        #{ssSql,jdbcType=VARCHAR},
+      </if>
+      <if test="ssInterval != null" >
+        #{ssInterval,jdbcType=INTEGER},
+      </if>
+      <if test="ssLast != null" >
+        #{ssLast,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ssUpdateTime != null" >
+        #{ssUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ssAddTime != null" >
+        #{ssAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ssStatus != null" >
+        #{ssStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.SqlExample" resultType="java.lang.Integer" >
+    select count(*) from srv_sql
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_sql
+    <set >
+      <if test="record.ssId != null" >
+        ss_id = #{record.ssId,jdbcType=BIGINT},
+      </if>
+      <if test="record.ssName != null" >
+        ss_name = #{record.ssName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssSql != null" >
+        ss_sql = #{record.ssSql,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssInterval != null" >
+        ss_interval = #{record.ssInterval,jdbcType=INTEGER},
+      </if>
+      <if test="record.ssLast != null" >
+        ss_last = #{record.ssLast,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ssUpdateTime != null" >
+        ss_update_time = #{record.ssUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ssAddTime != null" >
+        ss_add_time = #{record.ssAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ssStatus != null" >
+        ss_status = #{record.ssStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_sql
+    set ss_id = #{record.ssId,jdbcType=BIGINT},
+      ss_name = #{record.ssName,jdbcType=VARCHAR},
+      ss_sql = #{record.ssSql,jdbcType=VARCHAR},
+      ss_interval = #{record.ssInterval,jdbcType=INTEGER},
+      ss_last = #{record.ssLast,jdbcType=TIMESTAMP},
+      ss_update_time = #{record.ssUpdateTime,jdbcType=TIMESTAMP},
+      ss_add_time = #{record.ssAddTime,jdbcType=TIMESTAMP},
+      ss_status = #{record.ssStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Sql" >
+    update srv_sql
+    <set >
+      <if test="ssName != null" >
+        ss_name = #{ssName,jdbcType=VARCHAR},
+      </if>
+      <if test="ssSql != null" >
+        ss_sql = #{ssSql,jdbcType=VARCHAR},
+      </if>
+      <if test="ssInterval != null" >
+        ss_interval = #{ssInterval,jdbcType=INTEGER},
+      </if>
+      <if test="ssLast != null" >
+        ss_last = #{ssLast,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ssUpdateTime != null" >
+        ss_update_time = #{ssUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ssAddTime != null" >
+        ss_add_time = #{ssAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ssStatus != null" >
+        ss_status = #{ssStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where ss_id = #{ssId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Sql" >
+    update srv_sql
+    set ss_name = #{ssName,jdbcType=VARCHAR},
+      ss_sql = #{ssSql,jdbcType=VARCHAR},
+      ss_interval = #{ssInterval,jdbcType=INTEGER},
+      ss_last = #{ssLast,jdbcType=TIMESTAMP},
+      ss_update_time = #{ssUpdateTime,jdbcType=TIMESTAMP},
+      ss_add_time = #{ssAddTime,jdbcType=TIMESTAMP},
+      ss_status = #{ssStatus,jdbcType=SMALLINT}
+    where ss_id = #{ssId,jdbcType=BIGINT}
+  </update>
+</mapper>

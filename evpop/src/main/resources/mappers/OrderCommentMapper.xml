@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.OrderCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.OrderComment" >
+    <id column="tboc_id" property="tbocId" jdbcType="INTEGER" />
+    <result column="tboc_host" property="tbocHost" jdbcType="SMALLINT" />
+    <result column="tboc_content" property="tbocContent" jdbcType="VARCHAR" />
+    <result column="tboc_image" property="tbocImage" jdbcType="VARCHAR" />
+    <result column="tboc_member" property="tbocMember" jdbcType="INTEGER" />
+    <result column="tboc_order" property="tbocOrder" jdbcType="BIGINT" />
+    <result column="tboc_score" property="tbocScore" jdbcType="SMALLINT" />
+    <result column="tboc_update_time" property="tbocUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tboc_add_time" property="tbocAddTime" jdbcType="TIMESTAMP" />
+    <result column="tboc_status" property="tbocStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tboc_id, tboc_host, tboc_content, tboc_image, tboc_member, tboc_order, tboc_score, 
+    tboc_update_time, tboc_add_time, tboc_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.OrderCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_order_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_comment
+    where tboc_id = #{tbocId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_order_comment
+    where tboc_id = #{tbocId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.OrderComment" >
+    insert into tb_order_comment (tboc_id, tboc_host, tboc_content, 
+      tboc_image, tboc_member, tboc_order, 
+      tboc_score, tboc_update_time, tboc_add_time, 
+      tboc_status, createTime, modifyDate
+      )
+    values (#{tbocId,jdbcType=INTEGER}, #{tbocHost,jdbcType=SMALLINT}, #{tbocContent,jdbcType=VARCHAR}, 
+      #{tbocImage,jdbcType=VARCHAR}, #{tbocMember,jdbcType=INTEGER}, #{tbocOrder,jdbcType=BIGINT}, 
+      #{tbocScore,jdbcType=SMALLINT}, #{tbocUpdateTime,jdbcType=TIMESTAMP}, #{tbocAddTime,jdbcType=TIMESTAMP}, 
+      #{tbocStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.OrderComment" >
+    insert into tb_order_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbocId != null" >
+        tboc_id,
+      </if>
+      <if test="tbocHost != null" >
+        tboc_host,
+      </if>
+      <if test="tbocContent != null" >
+        tboc_content,
+      </if>
+      <if test="tbocImage != null" >
+        tboc_image,
+      </if>
+      <if test="tbocMember != null" >
+        tboc_member,
+      </if>
+      <if test="tbocOrder != null" >
+        tboc_order,
+      </if>
+      <if test="tbocScore != null" >
+        tboc_score,
+      </if>
+      <if test="tbocUpdateTime != null" >
+        tboc_update_time,
+      </if>
+      <if test="tbocAddTime != null" >
+        tboc_add_time,
+      </if>
+      <if test="tbocStatus != null" >
+        tboc_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbocId != null" >
+        #{tbocId,jdbcType=INTEGER},
+      </if>
+      <if test="tbocHost != null" >
+        #{tbocHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbocContent != null" >
+        #{tbocContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbocImage != null" >
+        #{tbocImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbocMember != null" >
+        #{tbocMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbocOrder != null" >
+        #{tbocOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbocScore != null" >
+        #{tbocScore,jdbcType=SMALLINT},
+      </if>
+      <if test="tbocUpdateTime != null" >
+        #{tbocUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbocAddTime != null" >
+        #{tbocAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbocStatus != null" >
+        #{tbocStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.OrderCommentExample" resultType="java.lang.Integer" >
+    select count(*) from tb_order_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_order_comment
+    <set >
+      <if test="record.tbocId != null" >
+        tboc_id = #{record.tbocId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbocHost != null" >
+        tboc_host = #{record.tbocHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbocContent != null" >
+        tboc_content = #{record.tbocContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbocImage != null" >
+        tboc_image = #{record.tbocImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbocMember != null" >
+        tboc_member = #{record.tbocMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbocOrder != null" >
+        tboc_order = #{record.tbocOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbocScore != null" >
+        tboc_score = #{record.tbocScore,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbocUpdateTime != null" >
+        tboc_update_time = #{record.tbocUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbocAddTime != null" >
+        tboc_add_time = #{record.tbocAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbocStatus != null" >
+        tboc_status = #{record.tbocStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_order_comment
+    set tboc_id = #{record.tbocId,jdbcType=INTEGER},
+      tboc_host = #{record.tbocHost,jdbcType=SMALLINT},
+      tboc_content = #{record.tbocContent,jdbcType=VARCHAR},
+      tboc_image = #{record.tbocImage,jdbcType=VARCHAR},
+      tboc_member = #{record.tbocMember,jdbcType=INTEGER},
+      tboc_order = #{record.tbocOrder,jdbcType=BIGINT},
+      tboc_score = #{record.tbocScore,jdbcType=SMALLINT},
+      tboc_update_time = #{record.tbocUpdateTime,jdbcType=TIMESTAMP},
+      tboc_add_time = #{record.tbocAddTime,jdbcType=TIMESTAMP},
+      tboc_status = #{record.tbocStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.OrderComment" >
+    update tb_order_comment
+    <set >
+      <if test="tbocHost != null" >
+        tboc_host = #{tbocHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbocContent != null" >
+        tboc_content = #{tbocContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbocImage != null" >
+        tboc_image = #{tbocImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbocMember != null" >
+        tboc_member = #{tbocMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbocOrder != null" >
+        tboc_order = #{tbocOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbocScore != null" >
+        tboc_score = #{tbocScore,jdbcType=SMALLINT},
+      </if>
+      <if test="tbocUpdateTime != null" >
+        tboc_update_time = #{tbocUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbocAddTime != null" >
+        tboc_add_time = #{tbocAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbocStatus != null" >
+        tboc_status = #{tbocStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tboc_id = #{tbocId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.OrderComment" >
+    update tb_order_comment
+    set tboc_host = #{tbocHost,jdbcType=SMALLINT},
+      tboc_content = #{tbocContent,jdbcType=VARCHAR},
+      tboc_image = #{tbocImage,jdbcType=VARCHAR},
+      tboc_member = #{tbocMember,jdbcType=INTEGER},
+      tboc_order = #{tbocOrder,jdbcType=BIGINT},
+      tboc_score = #{tbocScore,jdbcType=SMALLINT},
+      tboc_update_time = #{tbocUpdateTime,jdbcType=TIMESTAMP},
+      tboc_add_time = #{tbocAddTime,jdbcType=TIMESTAMP},
+      tboc_status = #{tbocStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tboc_id = #{tbocId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.OauthMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Oauth" >
+    <id column="so_id" property="soId" jdbcType="BIGINT" />
+    <result column="so_token" property="soToken" jdbcType="VARCHAR" />
+    <result column="so_user_id" property="soUserId" jdbcType="BIGINT" />
+    <result column="so_api_client" property="soApiClient" jdbcType="BIGINT" />
+    <result column="so_ticket" property="soTicket" jdbcType="VARCHAR" />
+    <result column="so_params" property="soParams" jdbcType="VARCHAR" />
+    <result column="so_update_time" property="soUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    so_id, so_token, so_user_id, so_api_client, so_ticket, so_params, so_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.OauthExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_oauth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from srv_oauth
+    where so_id = #{soId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from srv_oauth
+    where so_id = #{soId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Oauth" >
+    insert into srv_oauth (so_id, so_token, so_user_id, 
+      so_api_client, so_ticket, so_params, 
+      so_update_time)
+    values (#{soId,jdbcType=BIGINT}, #{soToken,jdbcType=VARCHAR}, #{soUserId,jdbcType=BIGINT}, 
+      #{soApiClient,jdbcType=BIGINT}, #{soTicket,jdbcType=VARCHAR}, #{soParams,jdbcType=VARCHAR}, 
+      #{soUpdateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Oauth" >
+    insert into srv_oauth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="soId != null" >
+        so_id,
+      </if>
+      <if test="soToken != null" >
+        so_token,
+      </if>
+      <if test="soUserId != null" >
+        so_user_id,
+      </if>
+      <if test="soApiClient != null" >
+        so_api_client,
+      </if>
+      <if test="soTicket != null" >
+        so_ticket,
+      </if>
+      <if test="soParams != null" >
+        so_params,
+      </if>
+      <if test="soUpdateTime != null" >
+        so_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="soId != null" >
+        #{soId,jdbcType=BIGINT},
+      </if>
+      <if test="soToken != null" >
+        #{soToken,jdbcType=VARCHAR},
+      </if>
+      <if test="soUserId != null" >
+        #{soUserId,jdbcType=BIGINT},
+      </if>
+      <if test="soApiClient != null" >
+        #{soApiClient,jdbcType=BIGINT},
+      </if>
+      <if test="soTicket != null" >
+        #{soTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="soParams != null" >
+        #{soParams,jdbcType=VARCHAR},
+      </if>
+      <if test="soUpdateTime != null" >
+        #{soUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.OauthExample" resultType="java.lang.Integer" >
+    select count(*) from srv_oauth
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_oauth
+    <set >
+      <if test="record.soId != null" >
+        so_id = #{record.soId,jdbcType=BIGINT},
+      </if>
+      <if test="record.soToken != null" >
+        so_token = #{record.soToken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.soUserId != null" >
+        so_user_id = #{record.soUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.soApiClient != null" >
+        so_api_client = #{record.soApiClient,jdbcType=BIGINT},
+      </if>
+      <if test="record.soTicket != null" >
+        so_ticket = #{record.soTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.soParams != null" >
+        so_params = #{record.soParams,jdbcType=VARCHAR},
+      </if>
+      <if test="record.soUpdateTime != null" >
+        so_update_time = #{record.soUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_oauth
+    set so_id = #{record.soId,jdbcType=BIGINT},
+      so_token = #{record.soToken,jdbcType=VARCHAR},
+      so_user_id = #{record.soUserId,jdbcType=BIGINT},
+      so_api_client = #{record.soApiClient,jdbcType=BIGINT},
+      so_ticket = #{record.soTicket,jdbcType=VARCHAR},
+      so_params = #{record.soParams,jdbcType=VARCHAR},
+      so_update_time = #{record.soUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Oauth" >
+    update srv_oauth
+    <set >
+      <if test="soToken != null" >
+        so_token = #{soToken,jdbcType=VARCHAR},
+      </if>
+      <if test="soUserId != null" >
+        so_user_id = #{soUserId,jdbcType=BIGINT},
+      </if>
+      <if test="soApiClient != null" >
+        so_api_client = #{soApiClient,jdbcType=BIGINT},
+      </if>
+      <if test="soTicket != null" >
+        so_ticket = #{soTicket,jdbcType=VARCHAR},
+      </if>
+      <if test="soParams != null" >
+        so_params = #{soParams,jdbcType=VARCHAR},
+      </if>
+      <if test="soUpdateTime != null" >
+        so_update_time = #{soUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where so_id = #{soId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Oauth" >
+    update srv_oauth
+    set so_token = #{soToken,jdbcType=VARCHAR},
+      so_user_id = #{soUserId,jdbcType=BIGINT},
+      so_api_client = #{soApiClient,jdbcType=BIGINT},
+      so_ticket = #{soTicket,jdbcType=VARCHAR},
+      so_params = #{soParams,jdbcType=VARCHAR},
+      so_update_time = #{soUpdateTime,jdbcType=TIMESTAMP}
+    where so_id = #{soId,jdbcType=BIGINT}
+  </update>
+</mapper>

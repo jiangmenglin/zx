@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ArtifRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.ArtifRecord" >
+    <id column="tbar_id" property="tbarId" jdbcType="INTEGER" />
+    <result column="tbar_host" property="tbarHost" jdbcType="SMALLINT" />
+    <result column="tbar_title" property="tbarTitle" jdbcType="VARCHAR" />
+    <result column="tbar_member" property="tbarMember" jdbcType="INTEGER" />
+    <result column="tbar_count" property="tbarCount" jdbcType="DOUBLE" />
+    <result column="tbar_money_type" property="tbarMoneyType" jdbcType="TINYINT" />
+    <result column="tbar_record_subject" property="tbarRecordSubject" jdbcType="INTEGER" />
+    <result column="tbar_order" property="tbarOrder" jdbcType="INTEGER" />
+    <result column="tbar_long_order" property="tbarLongOrder" jdbcType="BIGINT" />
+    <result column="tbar_relate" property="tbarRelate" jdbcType="VARCHAR" />
+    <result column="tbar_voucher" property="tbarVoucher" jdbcType="INTEGER" />
+    <result column="tbar_adder" property="tbarAdder" jdbcType="INTEGER" />
+    <result column="tbar_editor" property="tbarEditor" jdbcType="INTEGER" />
+    <result column="tbar_confirmer" property="tbarConfirmer" jdbcType="INTEGER" />
+    <result column="tbar_update_time" property="tbarUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbar_add_time" property="tbarAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbar_confirm_time" property="tbarConfirmTime" jdbcType="TIMESTAMP" />
+    <result column="tbar_remark" property="tbarRemark" jdbcType="VARCHAR" />
+    <result column="tbar_status" property="tbarStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbar_id, tbar_host, tbar_title, tbar_member, tbar_count, tbar_money_type, tbar_record_subject, 
+    tbar_order, tbar_long_order, tbar_relate, tbar_voucher, tbar_adder, tbar_editor, 
+    tbar_confirmer, tbar_update_time, tbar_add_time, tbar_confirm_time, tbar_remark, 
+    tbar_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ArtifRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_artif_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_artif_record
+    where tbar_id = #{tbarId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_artif_record
+    where tbar_id = #{tbarId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.ArtifRecord" >
+    insert into tb_artif_record (tbar_id, tbar_host, tbar_title, 
+      tbar_member, tbar_count, tbar_money_type, 
+      tbar_record_subject, tbar_order, tbar_long_order, 
+      tbar_relate, tbar_voucher, tbar_adder, 
+      tbar_editor, tbar_confirmer, tbar_update_time, 
+      tbar_add_time, tbar_confirm_time, tbar_remark, 
+      tbar_status, createTime, modifyDate
+      )
+    values (#{tbarId,jdbcType=INTEGER}, #{tbarHost,jdbcType=SMALLINT}, #{tbarTitle,jdbcType=VARCHAR}, 
+      #{tbarMember,jdbcType=INTEGER}, #{tbarCount,jdbcType=DOUBLE}, #{tbarMoneyType,jdbcType=TINYINT}, 
+      #{tbarRecordSubject,jdbcType=INTEGER}, #{tbarOrder,jdbcType=INTEGER}, #{tbarLongOrder,jdbcType=BIGINT}, 
+      #{tbarRelate,jdbcType=VARCHAR}, #{tbarVoucher,jdbcType=INTEGER}, #{tbarAdder,jdbcType=INTEGER}, 
+      #{tbarEditor,jdbcType=INTEGER}, #{tbarConfirmer,jdbcType=INTEGER}, #{tbarUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbarAddTime,jdbcType=TIMESTAMP}, #{tbarConfirmTime,jdbcType=TIMESTAMP}, #{tbarRemark,jdbcType=VARCHAR}, 
+      #{tbarStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.ArtifRecord" >
+    insert into tb_artif_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbarId != null" >
+        tbar_id,
+      </if>
+      <if test="tbarHost != null" >
+        tbar_host,
+      </if>
+      <if test="tbarTitle != null" >
+        tbar_title,
+      </if>
+      <if test="tbarMember != null" >
+        tbar_member,
+      </if>
+      <if test="tbarCount != null" >
+        tbar_count,
+      </if>
+      <if test="tbarMoneyType != null" >
+        tbar_money_type,
+      </if>
+      <if test="tbarRecordSubject != null" >
+        tbar_record_subject,
+      </if>
+      <if test="tbarOrder != null" >
+        tbar_order,
+      </if>
+      <if test="tbarLongOrder != null" >
+        tbar_long_order,
+      </if>
+      <if test="tbarRelate != null" >
+        tbar_relate,
+      </if>
+      <if test="tbarVoucher != null" >
+        tbar_voucher,
+      </if>
+      <if test="tbarAdder != null" >
+        tbar_adder,
+      </if>
+      <if test="tbarEditor != null" >
+        tbar_editor,
+      </if>
+      <if test="tbarConfirmer != null" >
+        tbar_confirmer,
+      </if>
+      <if test="tbarUpdateTime != null" >
+        tbar_update_time,
+      </if>
+      <if test="tbarAddTime != null" >
+        tbar_add_time,
+      </if>
+      <if test="tbarConfirmTime != null" >
+        tbar_confirm_time,
+      </if>
+      <if test="tbarRemark != null" >
+        tbar_remark,
+      </if>
+      <if test="tbarStatus != null" >
+        tbar_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbarId != null" >
+        #{tbarId,jdbcType=INTEGER},
+      </if>
+      <if test="tbarHost != null" >
+        #{tbarHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbarTitle != null" >
+        #{tbarTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbarMember != null" >
+        #{tbarMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbarCount != null" >
+        #{tbarCount,jdbcType=DOUBLE},
+      </if>
+      <if test="tbarMoneyType != null" >
+        #{tbarMoneyType,jdbcType=TINYINT},
+      </if>
+      <if test="tbarRecordSubject != null" >
+        #{tbarRecordSubject,jdbcType=INTEGER},
+      </if>
+      <if test="tbarOrder != null" >
+        #{tbarOrder,jdbcType=INTEGER},
+      </if>
+      <if test="tbarLongOrder != null" >
+        #{tbarLongOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbarRelate != null" >
+        #{tbarRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="tbarVoucher != null" >
+        #{tbarVoucher,jdbcType=INTEGER},
+      </if>
+      <if test="tbarAdder != null" >
+        #{tbarAdder,jdbcType=INTEGER},
+      </if>
+      <if test="tbarEditor != null" >
+        #{tbarEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbarConfirmer != null" >
+        #{tbarConfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="tbarUpdateTime != null" >
+        #{tbarUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbarAddTime != null" >
+        #{tbarAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbarConfirmTime != null" >
+        #{tbarConfirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbarRemark != null" >
+        #{tbarRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbarStatus != null" >
+        #{tbarStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ArtifRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tb_artif_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_artif_record
+    <set >
+      <if test="record.tbarId != null" >
+        tbar_id = #{record.tbarId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbarHost != null" >
+        tbar_host = #{record.tbarHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbarTitle != null" >
+        tbar_title = #{record.tbarTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbarMember != null" >
+        tbar_member = #{record.tbarMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbarCount != null" >
+        tbar_count = #{record.tbarCount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbarMoneyType != null" >
+        tbar_money_type = #{record.tbarMoneyType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbarRecordSubject != null" >
+        tbar_record_subject = #{record.tbarRecordSubject,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbarOrder != null" >
+        tbar_order = #{record.tbarOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbarLongOrder != null" >
+        tbar_long_order = #{record.tbarLongOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbarRelate != null" >
+        tbar_relate = #{record.tbarRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbarVoucher != null" >
+        tbar_voucher = #{record.tbarVoucher,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbarAdder != null" >
+        tbar_adder = #{record.tbarAdder,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbarEditor != null" >
+        tbar_editor = #{record.tbarEditor,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbarConfirmer != null" >
+        tbar_confirmer = #{record.tbarConfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbarUpdateTime != null" >
+        tbar_update_time = #{record.tbarUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbarAddTime != null" >
+        tbar_add_time = #{record.tbarAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbarConfirmTime != null" >
+        tbar_confirm_time = #{record.tbarConfirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbarRemark != null" >
+        tbar_remark = #{record.tbarRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbarStatus != null" >
+        tbar_status = #{record.tbarStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_artif_record
+    set tbar_id = #{record.tbarId,jdbcType=INTEGER},
+      tbar_host = #{record.tbarHost,jdbcType=SMALLINT},
+      tbar_title = #{record.tbarTitle,jdbcType=VARCHAR},
+      tbar_member = #{record.tbarMember,jdbcType=INTEGER},
+      tbar_count = #{record.tbarCount,jdbcType=DOUBLE},
+      tbar_money_type = #{record.tbarMoneyType,jdbcType=TINYINT},
+      tbar_record_subject = #{record.tbarRecordSubject,jdbcType=INTEGER},
+      tbar_order = #{record.tbarOrder,jdbcType=INTEGER},
+      tbar_long_order = #{record.tbarLongOrder,jdbcType=BIGINT},
+      tbar_relate = #{record.tbarRelate,jdbcType=VARCHAR},
+      tbar_voucher = #{record.tbarVoucher,jdbcType=INTEGER},
+      tbar_adder = #{record.tbarAdder,jdbcType=INTEGER},
+      tbar_editor = #{record.tbarEditor,jdbcType=INTEGER},
+      tbar_confirmer = #{record.tbarConfirmer,jdbcType=INTEGER},
+      tbar_update_time = #{record.tbarUpdateTime,jdbcType=TIMESTAMP},
+      tbar_add_time = #{record.tbarAddTime,jdbcType=TIMESTAMP},
+      tbar_confirm_time = #{record.tbarConfirmTime,jdbcType=TIMESTAMP},
+      tbar_remark = #{record.tbarRemark,jdbcType=VARCHAR},
+      tbar_status = #{record.tbarStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.ArtifRecord" >
+    update tb_artif_record
+    <set >
+      <if test="tbarHost != null" >
+        tbar_host = #{tbarHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbarTitle != null" >
+        tbar_title = #{tbarTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbarMember != null" >
+        tbar_member = #{tbarMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbarCount != null" >
+        tbar_count = #{tbarCount,jdbcType=DOUBLE},
+      </if>
+      <if test="tbarMoneyType != null" >
+        tbar_money_type = #{tbarMoneyType,jdbcType=TINYINT},
+      </if>
+      <if test="tbarRecordSubject != null" >
+        tbar_record_subject = #{tbarRecordSubject,jdbcType=INTEGER},
+      </if>
+      <if test="tbarOrder != null" >
+        tbar_order = #{tbarOrder,jdbcType=INTEGER},
+      </if>
+      <if test="tbarLongOrder != null" >
+        tbar_long_order = #{tbarLongOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbarRelate != null" >
+        tbar_relate = #{tbarRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="tbarVoucher != null" >
+        tbar_voucher = #{tbarVoucher,jdbcType=INTEGER},
+      </if>
+      <if test="tbarAdder != null" >
+        tbar_adder = #{tbarAdder,jdbcType=INTEGER},
+      </if>
+      <if test="tbarEditor != null" >
+        tbar_editor = #{tbarEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbarConfirmer != null" >
+        tbar_confirmer = #{tbarConfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="tbarUpdateTime != null" >
+        tbar_update_time = #{tbarUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbarAddTime != null" >
+        tbar_add_time = #{tbarAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbarConfirmTime != null" >
+        tbar_confirm_time = #{tbarConfirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbarRemark != null" >
+        tbar_remark = #{tbarRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbarStatus != null" >
+        tbar_status = #{tbarStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbar_id = #{tbarId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.ArtifRecord" >
+    update tb_artif_record
+    set tbar_host = #{tbarHost,jdbcType=SMALLINT},
+      tbar_title = #{tbarTitle,jdbcType=VARCHAR},
+      tbar_member = #{tbarMember,jdbcType=INTEGER},
+      tbar_count = #{tbarCount,jdbcType=DOUBLE},
+      tbar_money_type = #{tbarMoneyType,jdbcType=TINYINT},
+      tbar_record_subject = #{tbarRecordSubject,jdbcType=INTEGER},
+      tbar_order = #{tbarOrder,jdbcType=INTEGER},
+      tbar_long_order = #{tbarLongOrder,jdbcType=BIGINT},
+      tbar_relate = #{tbarRelate,jdbcType=VARCHAR},
+      tbar_voucher = #{tbarVoucher,jdbcType=INTEGER},
+      tbar_adder = #{tbarAdder,jdbcType=INTEGER},
+      tbar_editor = #{tbarEditor,jdbcType=INTEGER},
+      tbar_confirmer = #{tbarConfirmer,jdbcType=INTEGER},
+      tbar_update_time = #{tbarUpdateTime,jdbcType=TIMESTAMP},
+      tbar_add_time = #{tbarAddTime,jdbcType=TIMESTAMP},
+      tbar_confirm_time = #{tbarConfirmTime,jdbcType=TIMESTAMP},
+      tbar_remark = #{tbarRemark,jdbcType=VARCHAR},
+      tbar_status = #{tbarStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbar_id = #{tbarId,jdbcType=INTEGER}
+  </update>
+</mapper>

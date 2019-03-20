@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.AffairMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Affair" >
+    <id column="tba_id" property="tbaId" jdbcType="INTEGER" />
+    <result column="tba_name" property="tbaName" jdbcType="VARCHAR" />
+    <result column="tba_flag" property="tbaFlag" jdbcType="VARCHAR" />
+    <result column="tba_model" property="tbaModel" jdbcType="VARCHAR" />
+    <result column="tba_field" property="tbaField" jdbcType="VARCHAR" />
+    <result column="tba_profile" property="tbaProfile" jdbcType="VARCHAR" />
+    <result column="tba_update_time" property="tbaUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tba_add_time" property="tbaAddTime" jdbcType="TIMESTAMP" />
+    <result column="tba_status" property="tbaStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tba_id, tba_name, tba_flag, tba_model, tba_field, tba_profile, tba_update_time, tba_add_time, 
+    tba_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.AffairExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_affair
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_affair
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_affair
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Affair" >
+    insert into tb_affair (tba_id, tba_name, tba_flag, 
+      tba_model, tba_field, tba_profile, 
+      tba_update_time, tba_add_time, tba_status, 
+      createTime, modifyDate)
+    values (#{tbaId,jdbcType=INTEGER}, #{tbaName,jdbcType=VARCHAR}, #{tbaFlag,jdbcType=VARCHAR}, 
+      #{tbaModel,jdbcType=VARCHAR}, #{tbaField,jdbcType=VARCHAR}, #{tbaProfile,jdbcType=VARCHAR}, 
+      #{tbaUpdateTime,jdbcType=TIMESTAMP}, #{tbaAddTime,jdbcType=TIMESTAMP}, #{tbaStatus,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Affair" >
+    insert into tb_affair
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbaId != null" >
+        tba_id,
+      </if>
+      <if test="tbaName != null" >
+        tba_name,
+      </if>
+      <if test="tbaFlag != null" >
+        tba_flag,
+      </if>
+      <if test="tbaModel != null" >
+        tba_model,
+      </if>
+      <if test="tbaField != null" >
+        tba_field,
+      </if>
+      <if test="tbaProfile != null" >
+        tba_profile,
+      </if>
+      <if test="tbaUpdateTime != null" >
+        tba_update_time,
+      </if>
+      <if test="tbaAddTime != null" >
+        tba_add_time,
+      </if>
+      <if test="tbaStatus != null" >
+        tba_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbaId != null" >
+        #{tbaId,jdbcType=INTEGER},
+      </if>
+      <if test="tbaName != null" >
+        #{tbaName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaFlag != null" >
+        #{tbaFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaModel != null" >
+        #{tbaModel,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaField != null" >
+        #{tbaField,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaProfile != null" >
+        #{tbaProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaUpdateTime != null" >
+        #{tbaUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbaAddTime != null" >
+        #{tbaAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbaStatus != null" >
+        #{tbaStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.AffairExample" resultType="java.lang.Integer" >
+    select count(*) from tb_affair
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_affair
+    <set >
+      <if test="record.tbaId != null" >
+        tba_id = #{record.tbaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbaName != null" >
+        tba_name = #{record.tbaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaFlag != null" >
+        tba_flag = #{record.tbaFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaModel != null" >
+        tba_model = #{record.tbaModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaField != null" >
+        tba_field = #{record.tbaField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaProfile != null" >
+        tba_profile = #{record.tbaProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaUpdateTime != null" >
+        tba_update_time = #{record.tbaUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbaAddTime != null" >
+        tba_add_time = #{record.tbaAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbaStatus != null" >
+        tba_status = #{record.tbaStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_affair
+    set tba_id = #{record.tbaId,jdbcType=INTEGER},
+      tba_name = #{record.tbaName,jdbcType=VARCHAR},
+      tba_flag = #{record.tbaFlag,jdbcType=VARCHAR},
+      tba_model = #{record.tbaModel,jdbcType=VARCHAR},
+      tba_field = #{record.tbaField,jdbcType=VARCHAR},
+      tba_profile = #{record.tbaProfile,jdbcType=VARCHAR},
+      tba_update_time = #{record.tbaUpdateTime,jdbcType=TIMESTAMP},
+      tba_add_time = #{record.tbaAddTime,jdbcType=TIMESTAMP},
+      tba_status = #{record.tbaStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Affair" >
+    update tb_affair
+    <set >
+      <if test="tbaName != null" >
+        tba_name = #{tbaName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaFlag != null" >
+        tba_flag = #{tbaFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaModel != null" >
+        tba_model = #{tbaModel,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaField != null" >
+        tba_field = #{tbaField,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaProfile != null" >
+        tba_profile = #{tbaProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaUpdateTime != null" >
+        tba_update_time = #{tbaUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbaAddTime != null" >
+        tba_add_time = #{tbaAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbaStatus != null" >
+        tba_status = #{tbaStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Affair" >
+    update tb_affair
+    set tba_name = #{tbaName,jdbcType=VARCHAR},
+      tba_flag = #{tbaFlag,jdbcType=VARCHAR},
+      tba_model = #{tbaModel,jdbcType=VARCHAR},
+      tba_field = #{tbaField,jdbcType=VARCHAR},
+      tba_profile = #{tbaProfile,jdbcType=VARCHAR},
+      tba_update_time = #{tbaUpdateTime,jdbcType=TIMESTAMP},
+      tba_add_time = #{tbaAddTime,jdbcType=TIMESTAMP},
+      tba_status = #{tbaStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </update>
+</mapper>

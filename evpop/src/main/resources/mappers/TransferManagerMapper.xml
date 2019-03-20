@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.TransferManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.TransferManager" >
+    <id column="tbtm_id" property="tbtmId" jdbcType="BIGINT" />
+    <result column="tbtm_host" property="tbtmHost" jdbcType="BIGINT" />
+    <result column="tbtm_order_no" property="tbtmOrderNo" jdbcType="BIGINT" />
+    <result column="tbtm_fault_car" property="tbtmFaultCar" jdbcType="BIGINT" />
+    <result column="tbtm_fault" property="tbtmFault" jdbcType="VARCHAR" />
+    <result column="tbtm_failt_gettime" property="tbtmFailtGettime" jdbcType="TIMESTAMP" />
+    <result column="tbtm_freturn_time" property="tbtmFreturnTime" jdbcType="TIMESTAMP" />
+    <result column="tbtm_car" property="tbtmCar" jdbcType="BIGINT" />
+    <result column="tbtm_get_time" property="tbtmGetTime" jdbcType="TIMESTAMP" />
+    <result column="tbtm_return_time" property="tbtmReturnTime" jdbcType="TIMESTAMP" />
+    <result column="tbtm_name" property="tbtmName" jdbcType="BIGINT" />
+    <result column="tbtm_user" property="tbtmUser" jdbcType="BIGINT" />
+    <result column="tbtm_add_time" property="tbtmAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbtm_handle" property="tbtmHandle" jdbcType="BIGINT" />
+    <result column="tbtm_update_time" property="tbtmUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbtm_status" property="tbtmStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.TransferManager" extends="BaseResultMap" >
+    <result column="tbtm_text" property="tbtmText" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbtm_id, tbtm_host, tbtm_order_no, tbtm_fault_car, tbtm_fault, tbtm_failt_gettime, 
+    tbtm_freturn_time, tbtm_car, tbtm_get_time, tbtm_return_time, tbtm_name, tbtm_user, 
+    tbtm_add_time, tbtm_handle, tbtm_update_time, tbtm_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbtm_text
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.TransferManagerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_transfer_manager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.TransferManagerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_transfer_manager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_transfer_manager
+    where tbtm_id = #{tbtmId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_transfer_manager
+    where tbtm_id = #{tbtmId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.TransferManager" >
+    insert into tb_transfer_manager (tbtm_id, tbtm_host, tbtm_order_no, 
+      tbtm_fault_car, tbtm_fault, tbtm_failt_gettime, 
+      tbtm_freturn_time, tbtm_car, tbtm_get_time, 
+      tbtm_return_time, tbtm_name, tbtm_user, 
+      tbtm_add_time, tbtm_handle, tbtm_update_time, 
+      tbtm_status, tbtm_text)
+    values (#{tbtmId,jdbcType=BIGINT}, #{tbtmHost,jdbcType=BIGINT}, #{tbtmOrderNo,jdbcType=BIGINT}, 
+      #{tbtmFaultCar,jdbcType=BIGINT}, #{tbtmFault,jdbcType=VARCHAR}, #{tbtmFailtGettime,jdbcType=TIMESTAMP}, 
+      #{tbtmFreturnTime,jdbcType=TIMESTAMP}, #{tbtmCar,jdbcType=BIGINT}, #{tbtmGetTime,jdbcType=TIMESTAMP}, 
+      #{tbtmReturnTime,jdbcType=TIMESTAMP}, #{tbtmName,jdbcType=BIGINT}, #{tbtmUser,jdbcType=BIGINT}, 
+      #{tbtmAddTime,jdbcType=TIMESTAMP}, #{tbtmHandle,jdbcType=BIGINT}, #{tbtmUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbtmStatus,jdbcType=SMALLINT}, #{tbtmText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.TransferManager" >
+    insert into tb_transfer_manager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbtmId != null" >
+        tbtm_id,
+      </if>
+      <if test="tbtmHost != null" >
+        tbtm_host,
+      </if>
+      <if test="tbtmOrderNo != null" >
+        tbtm_order_no,
+      </if>
+      <if test="tbtmFaultCar != null" >
+        tbtm_fault_car,
+      </if>
+      <if test="tbtmFault != null" >
+        tbtm_fault,
+      </if>
+      <if test="tbtmFailtGettime != null" >
+        tbtm_failt_gettime,
+      </if>
+      <if test="tbtmFreturnTime != null" >
+        tbtm_freturn_time,
+      </if>
+      <if test="tbtmCar != null" >
+        tbtm_car,
+      </if>
+      <if test="tbtmGetTime != null" >
+        tbtm_get_time,
+      </if>
+      <if test="tbtmReturnTime != null" >
+        tbtm_return_time,
+      </if>
+      <if test="tbtmName != null" >
+        tbtm_name,
+      </if>
+      <if test="tbtmUser != null" >
+        tbtm_user,
+      </if>
+      <if test="tbtmAddTime != null" >
+        tbtm_add_time,
+      </if>
+      <if test="tbtmHandle != null" >
+        tbtm_handle,
+      </if>
+      <if test="tbtmUpdateTime != null" >
+        tbtm_update_time,
+      </if>
+      <if test="tbtmStatus != null" >
+        tbtm_status,
+      </if>
+      <if test="tbtmText != null" >
+        tbtm_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbtmId != null" >
+        #{tbtmId,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmHost != null" >
+        #{tbtmHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmOrderNo != null" >
+        #{tbtmOrderNo,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmFaultCar != null" >
+        #{tbtmFaultCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmFault != null" >
+        #{tbtmFault,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtmFailtGettime != null" >
+        #{tbtmFailtGettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmFreturnTime != null" >
+        #{tbtmFreturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmCar != null" >
+        #{tbtmCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmGetTime != null" >
+        #{tbtmGetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmReturnTime != null" >
+        #{tbtmReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmName != null" >
+        #{tbtmName,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmUser != null" >
+        #{tbtmUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmAddTime != null" >
+        #{tbtmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmHandle != null" >
+        #{tbtmHandle,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmUpdateTime != null" >
+        #{tbtmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmStatus != null" >
+        #{tbtmStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbtmText != null" >
+        #{tbtmText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.TransferManagerExample" resultType="java.lang.Integer" >
+    select count(*) from tb_transfer_manager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_transfer_manager
+    <set >
+      <if test="record.tbtmId != null" >
+        tbtm_id = #{record.tbtmId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtmHost != null" >
+        tbtm_host = #{record.tbtmHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtmOrderNo != null" >
+        tbtm_order_no = #{record.tbtmOrderNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtmFaultCar != null" >
+        tbtm_fault_car = #{record.tbtmFaultCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtmFault != null" >
+        tbtm_fault = #{record.tbtmFault,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtmFailtGettime != null" >
+        tbtm_failt_gettime = #{record.tbtmFailtGettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtmFreturnTime != null" >
+        tbtm_freturn_time = #{record.tbtmFreturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtmCar != null" >
+        tbtm_car = #{record.tbtmCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtmGetTime != null" >
+        tbtm_get_time = #{record.tbtmGetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtmReturnTime != null" >
+        tbtm_return_time = #{record.tbtmReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtmName != null" >
+        tbtm_name = #{record.tbtmName,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtmUser != null" >
+        tbtm_user = #{record.tbtmUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtmAddTime != null" >
+        tbtm_add_time = #{record.tbtmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtmHandle != null" >
+        tbtm_handle = #{record.tbtmHandle,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtmUpdateTime != null" >
+        tbtm_update_time = #{record.tbtmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtmStatus != null" >
+        tbtm_status = #{record.tbtmStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbtmText != null" >
+        tbtm_text = #{record.tbtmText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_transfer_manager
+    set tbtm_id = #{record.tbtmId,jdbcType=BIGINT},
+      tbtm_host = #{record.tbtmHost,jdbcType=BIGINT},
+      tbtm_order_no = #{record.tbtmOrderNo,jdbcType=BIGINT},
+      tbtm_fault_car = #{record.tbtmFaultCar,jdbcType=BIGINT},
+      tbtm_fault = #{record.tbtmFault,jdbcType=VARCHAR},
+      tbtm_failt_gettime = #{record.tbtmFailtGettime,jdbcType=TIMESTAMP},
+      tbtm_freturn_time = #{record.tbtmFreturnTime,jdbcType=TIMESTAMP},
+      tbtm_car = #{record.tbtmCar,jdbcType=BIGINT},
+      tbtm_get_time = #{record.tbtmGetTime,jdbcType=TIMESTAMP},
+      tbtm_return_time = #{record.tbtmReturnTime,jdbcType=TIMESTAMP},
+      tbtm_name = #{record.tbtmName,jdbcType=BIGINT},
+      tbtm_user = #{record.tbtmUser,jdbcType=BIGINT},
+      tbtm_add_time = #{record.tbtmAddTime,jdbcType=TIMESTAMP},
+      tbtm_handle = #{record.tbtmHandle,jdbcType=BIGINT},
+      tbtm_update_time = #{record.tbtmUpdateTime,jdbcType=TIMESTAMP},
+      tbtm_status = #{record.tbtmStatus,jdbcType=SMALLINT},
+      tbtm_text = #{record.tbtmText,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_transfer_manager
+    set tbtm_id = #{record.tbtmId,jdbcType=BIGINT},
+      tbtm_host = #{record.tbtmHost,jdbcType=BIGINT},
+      tbtm_order_no = #{record.tbtmOrderNo,jdbcType=BIGINT},
+      tbtm_fault_car = #{record.tbtmFaultCar,jdbcType=BIGINT},
+      tbtm_fault = #{record.tbtmFault,jdbcType=VARCHAR},
+      tbtm_failt_gettime = #{record.tbtmFailtGettime,jdbcType=TIMESTAMP},
+      tbtm_freturn_time = #{record.tbtmFreturnTime,jdbcType=TIMESTAMP},
+      tbtm_car = #{record.tbtmCar,jdbcType=BIGINT},
+      tbtm_get_time = #{record.tbtmGetTime,jdbcType=TIMESTAMP},
+      tbtm_return_time = #{record.tbtmReturnTime,jdbcType=TIMESTAMP},
+      tbtm_name = #{record.tbtmName,jdbcType=BIGINT},
+      tbtm_user = #{record.tbtmUser,jdbcType=BIGINT},
+      tbtm_add_time = #{record.tbtmAddTime,jdbcType=TIMESTAMP},
+      tbtm_handle = #{record.tbtmHandle,jdbcType=BIGINT},
+      tbtm_update_time = #{record.tbtmUpdateTime,jdbcType=TIMESTAMP},
+      tbtm_status = #{record.tbtmStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.TransferManager" >
+    update tb_transfer_manager
+    <set >
+      <if test="tbtmHost != null" >
+        tbtm_host = #{tbtmHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmOrderNo != null" >
+        tbtm_order_no = #{tbtmOrderNo,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmFaultCar != null" >
+        tbtm_fault_car = #{tbtmFaultCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmFault != null" >
+        tbtm_fault = #{tbtmFault,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtmFailtGettime != null" >
+        tbtm_failt_gettime = #{tbtmFailtGettime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmFreturnTime != null" >
+        tbtm_freturn_time = #{tbtmFreturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmCar != null" >
+        tbtm_car = #{tbtmCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmGetTime != null" >
+        tbtm_get_time = #{tbtmGetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmReturnTime != null" >
+        tbtm_return_time = #{tbtmReturnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmName != null" >
+        tbtm_name = #{tbtmName,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmUser != null" >
+        tbtm_user = #{tbtmUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmAddTime != null" >
+        tbtm_add_time = #{tbtmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmHandle != null" >
+        tbtm_handle = #{tbtmHandle,jdbcType=BIGINT},
+      </if>
+      <if test="tbtmUpdateTime != null" >
+        tbtm_update_time = #{tbtmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtmStatus != null" >
+        tbtm_status = #{tbtmStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbtmText != null" >
+        tbtm_text = #{tbtmText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbtm_id = #{tbtmId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.TransferManager" >
+    update tb_transfer_manager
+    set tbtm_host = #{tbtmHost,jdbcType=BIGINT},
+      tbtm_order_no = #{tbtmOrderNo,jdbcType=BIGINT},
+      tbtm_fault_car = #{tbtmFaultCar,jdbcType=BIGINT},
+      tbtm_fault = #{tbtmFault,jdbcType=VARCHAR},
+      tbtm_failt_gettime = #{tbtmFailtGettime,jdbcType=TIMESTAMP},
+      tbtm_freturn_time = #{tbtmFreturnTime,jdbcType=TIMESTAMP},
+      tbtm_car = #{tbtmCar,jdbcType=BIGINT},
+      tbtm_get_time = #{tbtmGetTime,jdbcType=TIMESTAMP},
+      tbtm_return_time = #{tbtmReturnTime,jdbcType=TIMESTAMP},
+      tbtm_name = #{tbtmName,jdbcType=BIGINT},
+      tbtm_user = #{tbtmUser,jdbcType=BIGINT},
+      tbtm_add_time = #{tbtmAddTime,jdbcType=TIMESTAMP},
+      tbtm_handle = #{tbtmHandle,jdbcType=BIGINT},
+      tbtm_update_time = #{tbtmUpdateTime,jdbcType=TIMESTAMP},
+      tbtm_status = #{tbtmStatus,jdbcType=SMALLINT},
+      tbtm_text = #{tbtmText,jdbcType=LONGVARCHAR}
+    where tbtm_id = #{tbtmId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.TransferManager" >
+    update tb_transfer_manager
+    set tbtm_host = #{tbtmHost,jdbcType=BIGINT},
+      tbtm_order_no = #{tbtmOrderNo,jdbcType=BIGINT},
+      tbtm_fault_car = #{tbtmFaultCar,jdbcType=BIGINT},
+      tbtm_fault = #{tbtmFault,jdbcType=VARCHAR},
+      tbtm_failt_gettime = #{tbtmFailtGettime,jdbcType=TIMESTAMP},
+      tbtm_freturn_time = #{tbtmFreturnTime,jdbcType=TIMESTAMP},
+      tbtm_car = #{tbtmCar,jdbcType=BIGINT},
+      tbtm_get_time = #{tbtmGetTime,jdbcType=TIMESTAMP},
+      tbtm_return_time = #{tbtmReturnTime,jdbcType=TIMESTAMP},
+      tbtm_name = #{tbtmName,jdbcType=BIGINT},
+      tbtm_user = #{tbtmUser,jdbcType=BIGINT},
+      tbtm_add_time = #{tbtmAddTime,jdbcType=TIMESTAMP},
+      tbtm_handle = #{tbtmHandle,jdbcType=BIGINT},
+      tbtm_update_time = #{tbtmUpdateTime,jdbcType=TIMESTAMP},
+      tbtm_status = #{tbtmStatus,jdbcType=SMALLINT}
+    where tbtm_id = #{tbtmId,jdbcType=BIGINT}
+  </update>
+</mapper>

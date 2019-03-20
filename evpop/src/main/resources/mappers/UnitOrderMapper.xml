@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.UnitOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.UnitOrder" >
+    <id column="tbuo_id" property="tbuoId" jdbcType="BIGINT" />
+    <result column="tbuo_host" property="tbuoHost" jdbcType="BIGINT" />
+    <result column="tbuo_order" property="tbuoOrder" jdbcType="BIGINT" />
+    <result column="tbuo_unit_info" property="tbuoUnitInfo" jdbcType="BIGINT" />
+    <result column="tbuo_unit_group" property="tbuoUnitGroup" jdbcType="BIGINT" />
+    <result column="tbuo_car" property="tbuoCar" jdbcType="BIGINT" />
+    <result column="tbuo_person" property="tbuoPerson" jdbcType="BIGINT" />
+    <result column="tbuo_name" property="tbuoName" jdbcType="VARCHAR" />
+    <result column="tbuo_alias" property="tbuoAlias" jdbcType="VARCHAR" />
+    <result column="tbuo_mobile" property="tbuoMobile" jdbcType="VARCHAR" />
+    <result column="tbuo_profile" property="tbuoProfile" jdbcType="VARCHAR" />
+    <result column="tbuo_idcard" property="tbuoIdcard" jdbcType="VARCHAR" />
+    <result column="tbuo_start_time" property="tbuoStartTime" jdbcType="TIMESTAMP" />
+    <result column="tbuo_finish_time" property="tbuoFinishTime" jdbcType="TIMESTAMP" />
+    <result column="tbuo_ret_time" property="tbuoRetTime" jdbcType="TIMESTAMP" />
+    <result column="tbuo_remark" property="tbuoRemark" jdbcType="VARCHAR" />
+    <result column="tbuo_add_time" property="tbuoAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbuo_update_time" property="tbuoUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbuo_mileage" property="tbuoMileage" jdbcType="DOUBLE" />
+    <result column="tbuo_settlement" property="tbuoSettlement" jdbcType="DOUBLE" />
+    <result column="tbuo_statement" property="tbuoStatement" jdbcType="BIGINT" />
+    <result column="tbuo_from" property="tbuoFrom" jdbcType="VARCHAR" />
+    <result column="tbuo_check_time" property="tbuoCheckTime" jdbcType="TIMESTAMP" />
+    <result column="tbuo_checker" property="tbuoChecker" jdbcType="VARCHAR" />
+    <result column="tbuo_state" property="tbuoState" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbuo_id, tbuo_host, tbuo_order, tbuo_unit_info, tbuo_unit_group, tbuo_car, tbuo_person, 
+    tbuo_name, tbuo_alias, tbuo_mobile, tbuo_profile, tbuo_idcard, tbuo_start_time, tbuo_finish_time, 
+    tbuo_ret_time, tbuo_remark, tbuo_add_time, tbuo_update_time, tbuo_mileage, tbuo_settlement, 
+    tbuo_statement, tbuo_from, tbuo_check_time, tbuo_checker, tbuo_state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.UnitOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_unit_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_unit_order
+    where tbuo_id = #{tbuoId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_unit_order
+    where tbuo_id = #{tbuoId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.UnitOrder" >
+    insert into tb_unit_order (tbuo_id, tbuo_host, tbuo_order, 
+      tbuo_unit_info, tbuo_unit_group, tbuo_car, 
+      tbuo_person, tbuo_name, tbuo_alias, 
+      tbuo_mobile, tbuo_profile, tbuo_idcard, 
+      tbuo_start_time, tbuo_finish_time, tbuo_ret_time, 
+      tbuo_remark, tbuo_add_time, tbuo_update_time, 
+      tbuo_mileage, tbuo_settlement, tbuo_statement, 
+      tbuo_from, tbuo_check_time, tbuo_checker, 
+      tbuo_state)
+    values (#{tbuoId,jdbcType=BIGINT}, #{tbuoHost,jdbcType=BIGINT}, #{tbuoOrder,jdbcType=BIGINT}, 
+      #{tbuoUnitInfo,jdbcType=BIGINT}, #{tbuoUnitGroup,jdbcType=BIGINT}, #{tbuoCar,jdbcType=BIGINT}, 
+      #{tbuoPerson,jdbcType=BIGINT}, #{tbuoName,jdbcType=VARCHAR}, #{tbuoAlias,jdbcType=VARCHAR}, 
+      #{tbuoMobile,jdbcType=VARCHAR}, #{tbuoProfile,jdbcType=VARCHAR}, #{tbuoIdcard,jdbcType=VARCHAR}, 
+      #{tbuoStartTime,jdbcType=TIMESTAMP}, #{tbuoFinishTime,jdbcType=TIMESTAMP}, #{tbuoRetTime,jdbcType=TIMESTAMP}, 
+      #{tbuoRemark,jdbcType=VARCHAR}, #{tbuoAddTime,jdbcType=TIMESTAMP}, #{tbuoUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbuoMileage,jdbcType=DOUBLE}, #{tbuoSettlement,jdbcType=DOUBLE}, #{tbuoStatement,jdbcType=BIGINT}, 
+      #{tbuoFrom,jdbcType=VARCHAR}, #{tbuoCheckTime,jdbcType=TIMESTAMP}, #{tbuoChecker,jdbcType=VARCHAR}, 
+      #{tbuoState,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.UnitOrder" >
+    insert into tb_unit_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbuoId != null" >
+        tbuo_id,
+      </if>
+      <if test="tbuoHost != null" >
+        tbuo_host,
+      </if>
+      <if test="tbuoOrder != null" >
+        tbuo_order,
+      </if>
+      <if test="tbuoUnitInfo != null" >
+        tbuo_unit_info,
+      </if>
+      <if test="tbuoUnitGroup != null" >
+        tbuo_unit_group,
+      </if>
+      <if test="tbuoCar != null" >
+        tbuo_car,
+      </if>
+      <if test="tbuoPerson != null" >
+        tbuo_person,
+      </if>
+      <if test="tbuoName != null" >
+        tbuo_name,
+      </if>
+      <if test="tbuoAlias != null" >
+        tbuo_alias,
+      </if>
+      <if test="tbuoMobile != null" >
+        tbuo_mobile,
+      </if>
+      <if test="tbuoProfile != null" >
+        tbuo_profile,
+      </if>
+      <if test="tbuoIdcard != null" >
+        tbuo_idcard,
+      </if>
+      <if test="tbuoStartTime != null" >
+        tbuo_start_time,
+      </if>
+      <if test="tbuoFinishTime != null" >
+        tbuo_finish_time,
+      </if>
+      <if test="tbuoRetTime != null" >
+        tbuo_ret_time,
+      </if>
+      <if test="tbuoRemark != null" >
+        tbuo_remark,
+      </if>
+      <if test="tbuoAddTime != null" >
+        tbuo_add_time,
+      </if>
+      <if test="tbuoUpdateTime != null" >
+        tbuo_update_time,
+      </if>
+      <if test="tbuoMileage != null" >
+        tbuo_mileage,
+      </if>
+      <if test="tbuoSettlement != null" >
+        tbuo_settlement,
+      </if>
+      <if test="tbuoStatement != null" >
+        tbuo_statement,
+      </if>
+      <if test="tbuoFrom != null" >
+        tbuo_from,
+      </if>
+      <if test="tbuoCheckTime != null" >
+        tbuo_check_time,
+      </if>
+      <if test="tbuoChecker != null" >
+        tbuo_checker,
+      </if>
+      <if test="tbuoState != null" >
+        tbuo_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbuoId != null" >
+        #{tbuoId,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoHost != null" >
+        #{tbuoHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoOrder != null" >
+        #{tbuoOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoUnitInfo != null" >
+        #{tbuoUnitInfo,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoUnitGroup != null" >
+        #{tbuoUnitGroup,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoCar != null" >
+        #{tbuoCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoPerson != null" >
+        #{tbuoPerson,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoName != null" >
+        #{tbuoName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoAlias != null" >
+        #{tbuoAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoMobile != null" >
+        #{tbuoMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoProfile != null" >
+        #{tbuoProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoIdcard != null" >
+        #{tbuoIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoStartTime != null" >
+        #{tbuoStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoFinishTime != null" >
+        #{tbuoFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoRetTime != null" >
+        #{tbuoRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoRemark != null" >
+        #{tbuoRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoAddTime != null" >
+        #{tbuoAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoUpdateTime != null" >
+        #{tbuoUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoMileage != null" >
+        #{tbuoMileage,jdbcType=DOUBLE},
+      </if>
+      <if test="tbuoSettlement != null" >
+        #{tbuoSettlement,jdbcType=DOUBLE},
+      </if>
+      <if test="tbuoStatement != null" >
+        #{tbuoStatement,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoFrom != null" >
+        #{tbuoFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoCheckTime != null" >
+        #{tbuoCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoChecker != null" >
+        #{tbuoChecker,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoState != null" >
+        #{tbuoState,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.UnitOrderExample" resultType="java.lang.Integer" >
+    select count(*) from tb_unit_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_unit_order
+    <set >
+      <if test="record.tbuoId != null" >
+        tbuo_id = #{record.tbuoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbuoHost != null" >
+        tbuo_host = #{record.tbuoHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbuoOrder != null" >
+        tbuo_order = #{record.tbuoOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbuoUnitInfo != null" >
+        tbuo_unit_info = #{record.tbuoUnitInfo,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbuoUnitGroup != null" >
+        tbuo_unit_group = #{record.tbuoUnitGroup,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbuoCar != null" >
+        tbuo_car = #{record.tbuoCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbuoPerson != null" >
+        tbuo_person = #{record.tbuoPerson,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbuoName != null" >
+        tbuo_name = #{record.tbuoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuoAlias != null" >
+        tbuo_alias = #{record.tbuoAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuoMobile != null" >
+        tbuo_mobile = #{record.tbuoMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuoProfile != null" >
+        tbuo_profile = #{record.tbuoProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuoIdcard != null" >
+        tbuo_idcard = #{record.tbuoIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuoStartTime != null" >
+        tbuo_start_time = #{record.tbuoStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuoFinishTime != null" >
+        tbuo_finish_time = #{record.tbuoFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuoRetTime != null" >
+        tbuo_ret_time = #{record.tbuoRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuoRemark != null" >
+        tbuo_remark = #{record.tbuoRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuoAddTime != null" >
+        tbuo_add_time = #{record.tbuoAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuoUpdateTime != null" >
+        tbuo_update_time = #{record.tbuoUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuoMileage != null" >
+        tbuo_mileage = #{record.tbuoMileage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbuoSettlement != null" >
+        tbuo_settlement = #{record.tbuoSettlement,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbuoStatement != null" >
+        tbuo_statement = #{record.tbuoStatement,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbuoFrom != null" >
+        tbuo_from = #{record.tbuoFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuoCheckTime != null" >
+        tbuo_check_time = #{record.tbuoCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuoChecker != null" >
+        tbuo_checker = #{record.tbuoChecker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuoState != null" >
+        tbuo_state = #{record.tbuoState,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_unit_order
+    set tbuo_id = #{record.tbuoId,jdbcType=BIGINT},
+      tbuo_host = #{record.tbuoHost,jdbcType=BIGINT},
+      tbuo_order = #{record.tbuoOrder,jdbcType=BIGINT},
+      tbuo_unit_info = #{record.tbuoUnitInfo,jdbcType=BIGINT},
+      tbuo_unit_group = #{record.tbuoUnitGroup,jdbcType=BIGINT},
+      tbuo_car = #{record.tbuoCar,jdbcType=BIGINT},
+      tbuo_person = #{record.tbuoPerson,jdbcType=BIGINT},
+      tbuo_name = #{record.tbuoName,jdbcType=VARCHAR},
+      tbuo_alias = #{record.tbuoAlias,jdbcType=VARCHAR},
+      tbuo_mobile = #{record.tbuoMobile,jdbcType=VARCHAR},
+      tbuo_profile = #{record.tbuoProfile,jdbcType=VARCHAR},
+      tbuo_idcard = #{record.tbuoIdcard,jdbcType=VARCHAR},
+      tbuo_start_time = #{record.tbuoStartTime,jdbcType=TIMESTAMP},
+      tbuo_finish_time = #{record.tbuoFinishTime,jdbcType=TIMESTAMP},
+      tbuo_ret_time = #{record.tbuoRetTime,jdbcType=TIMESTAMP},
+      tbuo_remark = #{record.tbuoRemark,jdbcType=VARCHAR},
+      tbuo_add_time = #{record.tbuoAddTime,jdbcType=TIMESTAMP},
+      tbuo_update_time = #{record.tbuoUpdateTime,jdbcType=TIMESTAMP},
+      tbuo_mileage = #{record.tbuoMileage,jdbcType=DOUBLE},
+      tbuo_settlement = #{record.tbuoSettlement,jdbcType=DOUBLE},
+      tbuo_statement = #{record.tbuoStatement,jdbcType=BIGINT},
+      tbuo_from = #{record.tbuoFrom,jdbcType=VARCHAR},
+      tbuo_check_time = #{record.tbuoCheckTime,jdbcType=TIMESTAMP},
+      tbuo_checker = #{record.tbuoChecker,jdbcType=VARCHAR},
+      tbuo_state = #{record.tbuoState,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.UnitOrder" >
+    update tb_unit_order
+    <set >
+      <if test="tbuoHost != null" >
+        tbuo_host = #{tbuoHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoOrder != null" >
+        tbuo_order = #{tbuoOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoUnitInfo != null" >
+        tbuo_unit_info = #{tbuoUnitInfo,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoUnitGroup != null" >
+        tbuo_unit_group = #{tbuoUnitGroup,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoCar != null" >
+        tbuo_car = #{tbuoCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoPerson != null" >
+        tbuo_person = #{tbuoPerson,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoName != null" >
+        tbuo_name = #{tbuoName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoAlias != null" >
+        tbuo_alias = #{tbuoAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoMobile != null" >
+        tbuo_mobile = #{tbuoMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoProfile != null" >
+        tbuo_profile = #{tbuoProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoIdcard != null" >
+        tbuo_idcard = #{tbuoIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoStartTime != null" >
+        tbuo_start_time = #{tbuoStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoFinishTime != null" >
+        tbuo_finish_time = #{tbuoFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoRetTime != null" >
+        tbuo_ret_time = #{tbuoRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoRemark != null" >
+        tbuo_remark = #{tbuoRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoAddTime != null" >
+        tbuo_add_time = #{tbuoAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoUpdateTime != null" >
+        tbuo_update_time = #{tbuoUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoMileage != null" >
+        tbuo_mileage = #{tbuoMileage,jdbcType=DOUBLE},
+      </if>
+      <if test="tbuoSettlement != null" >
+        tbuo_settlement = #{tbuoSettlement,jdbcType=DOUBLE},
+      </if>
+      <if test="tbuoStatement != null" >
+        tbuo_statement = #{tbuoStatement,jdbcType=BIGINT},
+      </if>
+      <if test="tbuoFrom != null" >
+        tbuo_from = #{tbuoFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoCheckTime != null" >
+        tbuo_check_time = #{tbuoCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuoChecker != null" >
+        tbuo_checker = #{tbuoChecker,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuoState != null" >
+        tbuo_state = #{tbuoState,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbuo_id = #{tbuoId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.UnitOrder" >
+    update tb_unit_order
+    set tbuo_host = #{tbuoHost,jdbcType=BIGINT},
+      tbuo_order = #{tbuoOrder,jdbcType=BIGINT},
+      tbuo_unit_info = #{tbuoUnitInfo,jdbcType=BIGINT},
+      tbuo_unit_group = #{tbuoUnitGroup,jdbcType=BIGINT},
+      tbuo_car = #{tbuoCar,jdbcType=BIGINT},
+      tbuo_person = #{tbuoPerson,jdbcType=BIGINT},
+      tbuo_name = #{tbuoName,jdbcType=VARCHAR},
+      tbuo_alias = #{tbuoAlias,jdbcType=VARCHAR},
+      tbuo_mobile = #{tbuoMobile,jdbcType=VARCHAR},
+      tbuo_profile = #{tbuoProfile,jdbcType=VARCHAR},
+      tbuo_idcard = #{tbuoIdcard,jdbcType=VARCHAR},
+      tbuo_start_time = #{tbuoStartTime,jdbcType=TIMESTAMP},
+      tbuo_finish_time = #{tbuoFinishTime,jdbcType=TIMESTAMP},
+      tbuo_ret_time = #{tbuoRetTime,jdbcType=TIMESTAMP},
+      tbuo_remark = #{tbuoRemark,jdbcType=VARCHAR},
+      tbuo_add_time = #{tbuoAddTime,jdbcType=TIMESTAMP},
+      tbuo_update_time = #{tbuoUpdateTime,jdbcType=TIMESTAMP},
+      tbuo_mileage = #{tbuoMileage,jdbcType=DOUBLE},
+      tbuo_settlement = #{tbuoSettlement,jdbcType=DOUBLE},
+      tbuo_statement = #{tbuoStatement,jdbcType=BIGINT},
+      tbuo_from = #{tbuoFrom,jdbcType=VARCHAR},
+      tbuo_check_time = #{tbuoCheckTime,jdbcType=TIMESTAMP},
+      tbuo_checker = #{tbuoChecker,jdbcType=VARCHAR},
+      tbuo_state = #{tbuoState,jdbcType=SMALLINT}
+    where tbuo_id = #{tbuoId,jdbcType=BIGINT}
+  </update>
+</mapper>

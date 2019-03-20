@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ApiTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.ApiType" >
+    <id column="sat_id" property="satId" jdbcType="BIGINT" />
+    <result column="sat_name" property="satName" jdbcType="VARCHAR" />
+    <result column="sat_parent" property="satParent" jdbcType="BIGINT" />
+    <result column="sat_flag" property="satFlag" jdbcType="VARCHAR" />
+    <result column="sat_update_time" property="satUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="sat_add_time" property="satAddTime" jdbcType="TIMESTAMP" />
+    <result column="sat_status" property="satStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sat_id, sat_name, sat_parent, sat_flag, sat_update_time, sat_add_time, sat_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ApiTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_api_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from srv_api_type
+    where sat_id = #{satId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from srv_api_type
+    where sat_id = #{satId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.ApiType" >
+    insert into srv_api_type (sat_id, sat_name, sat_parent, 
+      sat_flag, sat_update_time, sat_add_time, 
+      sat_status)
+    values (#{satId,jdbcType=BIGINT}, #{satName,jdbcType=VARCHAR}, #{satParent,jdbcType=BIGINT}, 
+      #{satFlag,jdbcType=VARCHAR}, #{satUpdateTime,jdbcType=TIMESTAMP}, #{satAddTime,jdbcType=TIMESTAMP}, 
+      #{satStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.ApiType" >
+    insert into srv_api_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="satId != null" >
+        sat_id,
+      </if>
+      <if test="satName != null" >
+        sat_name,
+      </if>
+      <if test="satParent != null" >
+        sat_parent,
+      </if>
+      <if test="satFlag != null" >
+        sat_flag,
+      </if>
+      <if test="satUpdateTime != null" >
+        sat_update_time,
+      </if>
+      <if test="satAddTime != null" >
+        sat_add_time,
+      </if>
+      <if test="satStatus != null" >
+        sat_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="satId != null" >
+        #{satId,jdbcType=BIGINT},
+      </if>
+      <if test="satName != null" >
+        #{satName,jdbcType=VARCHAR},
+      </if>
+      <if test="satParent != null" >
+        #{satParent,jdbcType=BIGINT},
+      </if>
+      <if test="satFlag != null" >
+        #{satFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="satUpdateTime != null" >
+        #{satUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satAddTime != null" >
+        #{satAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satStatus != null" >
+        #{satStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ApiTypeExample" resultType="java.lang.Integer" >
+    select count(*) from srv_api_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_api_type
+    <set >
+      <if test="record.satId != null" >
+        sat_id = #{record.satId,jdbcType=BIGINT},
+      </if>
+      <if test="record.satName != null" >
+        sat_name = #{record.satName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.satParent != null" >
+        sat_parent = #{record.satParent,jdbcType=BIGINT},
+      </if>
+      <if test="record.satFlag != null" >
+        sat_flag = #{record.satFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.satUpdateTime != null" >
+        sat_update_time = #{record.satUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.satAddTime != null" >
+        sat_add_time = #{record.satAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.satStatus != null" >
+        sat_status = #{record.satStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_api_type
+    set sat_id = #{record.satId,jdbcType=BIGINT},
+      sat_name = #{record.satName,jdbcType=VARCHAR},
+      sat_parent = #{record.satParent,jdbcType=BIGINT},
+      sat_flag = #{record.satFlag,jdbcType=VARCHAR},
+      sat_update_time = #{record.satUpdateTime,jdbcType=TIMESTAMP},
+      sat_add_time = #{record.satAddTime,jdbcType=TIMESTAMP},
+      sat_status = #{record.satStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.ApiType" >
+    update srv_api_type
+    <set >
+      <if test="satName != null" >
+        sat_name = #{satName,jdbcType=VARCHAR},
+      </if>
+      <if test="satParent != null" >
+        sat_parent = #{satParent,jdbcType=BIGINT},
+      </if>
+      <if test="satFlag != null" >
+        sat_flag = #{satFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="satUpdateTime != null" >
+        sat_update_time = #{satUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satAddTime != null" >
+        sat_add_time = #{satAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="satStatus != null" >
+        sat_status = #{satStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where sat_id = #{satId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.ApiType" >
+    update srv_api_type
+    set sat_name = #{satName,jdbcType=VARCHAR},
+      sat_parent = #{satParent,jdbcType=BIGINT},
+      sat_flag = #{satFlag,jdbcType=VARCHAR},
+      sat_update_time = #{satUpdateTime,jdbcType=TIMESTAMP},
+      sat_add_time = #{satAddTime,jdbcType=TIMESTAMP},
+      sat_status = #{satStatus,jdbcType=SMALLINT}
+    where sat_id = #{satId,jdbcType=BIGINT}
+  </update>
+</mapper>

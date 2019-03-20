@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.SequenceInfMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.SequenceInf" >
+    <id column="seq_name" property="seqName" jdbcType="VARCHAR" />
+    <id column="seq_feature" property="seqFeature" jdbcType="VARCHAR" />
+    <id column="seq_value" property="seqValue" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    seq_name, seq_feature, seq_value
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.SequenceInfExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_sequence_inf
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from tb_sequence_inf
+    where seq_name = #{seqName,jdbcType=VARCHAR}
+      and seq_feature = #{seqFeature,jdbcType=VARCHAR}
+      and seq_value = #{seqValue,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.SequenceInf" >
+    insert into tb_sequence_inf (seq_name, seq_feature, seq_value
+      )
+    values (#{seqName,jdbcType=VARCHAR}, #{seqFeature,jdbcType=VARCHAR}, #{seqValue,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.SequenceInf" >
+    insert into tb_sequence_inf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seqName != null" >
+        seq_name,
+      </if>
+      <if test="seqFeature != null" >
+        seq_feature,
+      </if>
+      <if test="seqValue != null" >
+        seq_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seqName != null" >
+        #{seqName,jdbcType=VARCHAR},
+      </if>
+      <if test="seqFeature != null" >
+        #{seqFeature,jdbcType=VARCHAR},
+      </if>
+      <if test="seqValue != null" >
+        #{seqValue,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.SequenceInfExample" resultType="java.lang.Integer" >
+    select count(*) from tb_sequence_inf
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_sequence_inf
+    <set >
+      <if test="record.seqName != null" >
+        seq_name = #{record.seqName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seqFeature != null" >
+        seq_feature = #{record.seqFeature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seqValue != null" >
+        seq_value = #{record.seqValue,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_sequence_inf
+    set seq_name = #{record.seqName,jdbcType=VARCHAR},
+      seq_feature = #{record.seqFeature,jdbcType=VARCHAR},
+      seq_value = #{record.seqValue,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

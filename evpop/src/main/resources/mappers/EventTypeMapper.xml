@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.EventTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.EventType" >
+    <id column="tbet_id" property="tbetId" jdbcType="INTEGER" />
+    <result column="tbet_name" property="tbetName" jdbcType="VARCHAR" />
+    <result column="tbet_flag" property="tbetFlag" jdbcType="VARCHAR" />
+    <result column="tbet_type" property="tbetType" jdbcType="SMALLINT" />
+    <result column="tbet_support" property="tbetSupport" jdbcType="SMALLINT" />
+    <result column="tbet_model" property="tbetModel" jdbcType="VARCHAR" />
+    <result column="tbet_profile" property="tbetProfile" jdbcType="VARCHAR" />
+    <result column="tbet_update_time" property="tbetUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbet_add_time" property="tbetAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbet_status" property="tbetStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbet_id, tbet_name, tbet_flag, tbet_type, tbet_support, tbet_model, tbet_profile, 
+    tbet_update_time, tbet_add_time, tbet_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.EventTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_event_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_event_type
+    where tbet_id = #{tbetId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_event_type
+    where tbet_id = #{tbetId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.EventType" >
+    insert into tb_event_type (tbet_id, tbet_name, tbet_flag, 
+      tbet_type, tbet_support, tbet_model, 
+      tbet_profile, tbet_update_time, tbet_add_time, 
+      tbet_status)
+    values (#{tbetId,jdbcType=INTEGER}, #{tbetName,jdbcType=VARCHAR}, #{tbetFlag,jdbcType=VARCHAR}, 
+      #{tbetType,jdbcType=SMALLINT}, #{tbetSupport,jdbcType=SMALLINT}, #{tbetModel,jdbcType=VARCHAR}, 
+      #{tbetProfile,jdbcType=VARCHAR}, #{tbetUpdateTime,jdbcType=TIMESTAMP}, #{tbetAddTime,jdbcType=TIMESTAMP}, 
+      #{tbetStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.EventType" >
+    insert into tb_event_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbetId != null" >
+        tbet_id,
+      </if>
+      <if test="tbetName != null" >
+        tbet_name,
+      </if>
+      <if test="tbetFlag != null" >
+        tbet_flag,
+      </if>
+      <if test="tbetType != null" >
+        tbet_type,
+      </if>
+      <if test="tbetSupport != null" >
+        tbet_support,
+      </if>
+      <if test="tbetModel != null" >
+        tbet_model,
+      </if>
+      <if test="tbetProfile != null" >
+        tbet_profile,
+      </if>
+      <if test="tbetUpdateTime != null" >
+        tbet_update_time,
+      </if>
+      <if test="tbetAddTime != null" >
+        tbet_add_time,
+      </if>
+      <if test="tbetStatus != null" >
+        tbet_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbetId != null" >
+        #{tbetId,jdbcType=INTEGER},
+      </if>
+      <if test="tbetName != null" >
+        #{tbetName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbetFlag != null" >
+        #{tbetFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbetType != null" >
+        #{tbetType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbetSupport != null" >
+        #{tbetSupport,jdbcType=SMALLINT},
+      </if>
+      <if test="tbetModel != null" >
+        #{tbetModel,jdbcType=VARCHAR},
+      </if>
+      <if test="tbetProfile != null" >
+        #{tbetProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbetUpdateTime != null" >
+        #{tbetUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbetAddTime != null" >
+        #{tbetAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbetStatus != null" >
+        #{tbetStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.EventTypeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_event_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_event_type
+    <set >
+      <if test="record.tbetId != null" >
+        tbet_id = #{record.tbetId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbetName != null" >
+        tbet_name = #{record.tbetName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbetFlag != null" >
+        tbet_flag = #{record.tbetFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbetType != null" >
+        tbet_type = #{record.tbetType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbetSupport != null" >
+        tbet_support = #{record.tbetSupport,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbetModel != null" >
+        tbet_model = #{record.tbetModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbetProfile != null" >
+        tbet_profile = #{record.tbetProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbetUpdateTime != null" >
+        tbet_update_time = #{record.tbetUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbetAddTime != null" >
+        tbet_add_time = #{record.tbetAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbetStatus != null" >
+        tbet_status = #{record.tbetStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_event_type
+    set tbet_id = #{record.tbetId,jdbcType=INTEGER},
+      tbet_name = #{record.tbetName,jdbcType=VARCHAR},
+      tbet_flag = #{record.tbetFlag,jdbcType=VARCHAR},
+      tbet_type = #{record.tbetType,jdbcType=SMALLINT},
+      tbet_support = #{record.tbetSupport,jdbcType=SMALLINT},
+      tbet_model = #{record.tbetModel,jdbcType=VARCHAR},
+      tbet_profile = #{record.tbetProfile,jdbcType=VARCHAR},
+      tbet_update_time = #{record.tbetUpdateTime,jdbcType=TIMESTAMP},
+      tbet_add_time = #{record.tbetAddTime,jdbcType=TIMESTAMP},
+      tbet_status = #{record.tbetStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.EventType" >
+    update tb_event_type
+    <set >
+      <if test="tbetName != null" >
+        tbet_name = #{tbetName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbetFlag != null" >
+        tbet_flag = #{tbetFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbetType != null" >
+        tbet_type = #{tbetType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbetSupport != null" >
+        tbet_support = #{tbetSupport,jdbcType=SMALLINT},
+      </if>
+      <if test="tbetModel != null" >
+        tbet_model = #{tbetModel,jdbcType=VARCHAR},
+      </if>
+      <if test="tbetProfile != null" >
+        tbet_profile = #{tbetProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbetUpdateTime != null" >
+        tbet_update_time = #{tbetUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbetAddTime != null" >
+        tbet_add_time = #{tbetAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbetStatus != null" >
+        tbet_status = #{tbetStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbet_id = #{tbetId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.EventType" >
+    update tb_event_type
+    set tbet_name = #{tbetName,jdbcType=VARCHAR},
+      tbet_flag = #{tbetFlag,jdbcType=VARCHAR},
+      tbet_type = #{tbetType,jdbcType=SMALLINT},
+      tbet_support = #{tbetSupport,jdbcType=SMALLINT},
+      tbet_model = #{tbetModel,jdbcType=VARCHAR},
+      tbet_profile = #{tbetProfile,jdbcType=VARCHAR},
+      tbet_update_time = #{tbetUpdateTime,jdbcType=TIMESTAMP},
+      tbet_add_time = #{tbetAddTime,jdbcType=TIMESTAMP},
+      tbet_status = #{tbetStatus,jdbcType=TINYINT}
+    where tbet_id = #{tbetId,jdbcType=INTEGER}
+  </update>
+</mapper>

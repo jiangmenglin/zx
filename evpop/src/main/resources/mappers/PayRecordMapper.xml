@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.PayRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.PayRecord" >
+    <id column="tbpr_id" property="tbprId" jdbcType="INTEGER" />
+    <result column="tbpr_host" property="tbprHost" jdbcType="SMALLINT" />
+    <result column="tbpr_pay_type" property="tbprPayType" jdbcType="TINYINT" />
+    <result column="tbpr_bank_type" property="tbprBankType" jdbcType="TINYINT" />
+    <result column="tbpr_trade_no" property="tbprTradeNo" jdbcType="VARCHAR" />
+    <result column="tbpr_member" property="tbprMember" jdbcType="INTEGER" />
+    <result column="tbpr_real_name" property="tbprRealName" jdbcType="VARCHAR" />
+    <result column="tbpr_amount" property="tbprAmount" jdbcType="DECIMAL" />
+    <result column="tbpr_refund" property="tbprRefund" jdbcType="DECIMAL" />
+    <result column="tbpr_pay_method" property="tbprPayMethod" jdbcType="VARCHAR" />
+    <result column="tbpr_blank" property="tbprBlank" jdbcType="VARCHAR" />
+    <result column="tbpr_alipay_no" property="tbprAlipayNo" jdbcType="VARCHAR" />
+    <result column="tbpr_buyer_account" property="tbprBuyerAccount" jdbcType="VARCHAR" />
+    <result column="tbpr_record" property="tbprRecord" jdbcType="INTEGER" />
+    <result column="tbpr_client_id" property="tbprClientId" jdbcType="INTEGER" />
+    <result column="tbpr_third_back" property="tbprThirdBack" jdbcType="VARCHAR" />
+    <result column="tbpr_arrival_time" property="tbprArrivalTime" jdbcType="TIMESTAMP" />
+    <result column="tbpr_update_time" property="tbprUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbpr_add_time" property="tbprAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbpr_status" property="tbprStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbpr_id, tbpr_host, tbpr_pay_type, tbpr_bank_type, tbpr_trade_no, tbpr_member, tbpr_real_name, 
+    tbpr_amount, tbpr_refund, tbpr_pay_method, tbpr_blank, tbpr_alipay_no, tbpr_buyer_account, 
+    tbpr_record, tbpr_client_id, tbpr_third_back, tbpr_arrival_time, tbpr_update_time, 
+    tbpr_add_time, tbpr_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.PayRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_pay_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_pay_record
+    where tbpr_id = #{tbprId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_pay_record
+    where tbpr_id = #{tbprId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.PayRecord" >
+    insert into tb_pay_record (tbpr_id, tbpr_host, tbpr_pay_type, 
+      tbpr_bank_type, tbpr_trade_no, tbpr_member, 
+      tbpr_real_name, tbpr_amount, tbpr_refund, 
+      tbpr_pay_method, tbpr_blank, tbpr_alipay_no, 
+      tbpr_buyer_account, tbpr_record, tbpr_client_id, 
+      tbpr_third_back, tbpr_arrival_time, tbpr_update_time, 
+      tbpr_add_time, tbpr_status, createTime, 
+      modifyDate)
+    values (#{tbprId,jdbcType=INTEGER}, #{tbprHost,jdbcType=SMALLINT}, #{tbprPayType,jdbcType=TINYINT}, 
+      #{tbprBankType,jdbcType=TINYINT}, #{tbprTradeNo,jdbcType=VARCHAR}, #{tbprMember,jdbcType=INTEGER}, 
+      #{tbprRealName,jdbcType=VARCHAR}, #{tbprAmount,jdbcType=DECIMAL}, #{tbprRefund,jdbcType=DECIMAL}, 
+      #{tbprPayMethod,jdbcType=VARCHAR}, #{tbprBlank,jdbcType=VARCHAR}, #{tbprAlipayNo,jdbcType=VARCHAR}, 
+      #{tbprBuyerAccount,jdbcType=VARCHAR}, #{tbprRecord,jdbcType=INTEGER}, #{tbprClientId,jdbcType=INTEGER}, 
+      #{tbprThirdBack,jdbcType=VARCHAR}, #{tbprArrivalTime,jdbcType=TIMESTAMP}, #{tbprUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbprAddTime,jdbcType=TIMESTAMP}, #{tbprStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.PayRecord" >
+    insert into tb_pay_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbprId != null" >
+        tbpr_id,
+      </if>
+      <if test="tbprHost != null" >
+        tbpr_host,
+      </if>
+      <if test="tbprPayType != null" >
+        tbpr_pay_type,
+      </if>
+      <if test="tbprBankType != null" >
+        tbpr_bank_type,
+      </if>
+      <if test="tbprTradeNo != null" >
+        tbpr_trade_no,
+      </if>
+      <if test="tbprMember != null" >
+        tbpr_member,
+      </if>
+      <if test="tbprRealName != null" >
+        tbpr_real_name,
+      </if>
+      <if test="tbprAmount != null" >
+        tbpr_amount,
+      </if>
+      <if test="tbprRefund != null" >
+        tbpr_refund,
+      </if>
+      <if test="tbprPayMethod != null" >
+        tbpr_pay_method,
+      </if>
+      <if test="tbprBlank != null" >
+        tbpr_blank,
+      </if>
+      <if test="tbprAlipayNo != null" >
+        tbpr_alipay_no,
+      </if>
+      <if test="tbprBuyerAccount != null" >
+        tbpr_buyer_account,
+      </if>
+      <if test="tbprRecord != null" >
+        tbpr_record,
+      </if>
+      <if test="tbprClientId != null" >
+        tbpr_client_id,
+      </if>
+      <if test="tbprThirdBack != null" >
+        tbpr_third_back,
+      </if>
+      <if test="tbprArrivalTime != null" >
+        tbpr_arrival_time,
+      </if>
+      <if test="tbprUpdateTime != null" >
+        tbpr_update_time,
+      </if>
+      <if test="tbprAddTime != null" >
+        tbpr_add_time,
+      </if>
+      <if test="tbprStatus != null" >
+        tbpr_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbprId != null" >
+        #{tbprId,jdbcType=INTEGER},
+      </if>
+      <if test="tbprHost != null" >
+        #{tbprHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbprPayType != null" >
+        #{tbprPayType,jdbcType=TINYINT},
+      </if>
+      <if test="tbprBankType != null" >
+        #{tbprBankType,jdbcType=TINYINT},
+      </if>
+      <if test="tbprTradeNo != null" >
+        #{tbprTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprMember != null" >
+        #{tbprMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbprRealName != null" >
+        #{tbprRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprAmount != null" >
+        #{tbprAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="tbprRefund != null" >
+        #{tbprRefund,jdbcType=DECIMAL},
+      </if>
+      <if test="tbprPayMethod != null" >
+        #{tbprPayMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprBlank != null" >
+        #{tbprBlank,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprAlipayNo != null" >
+        #{tbprAlipayNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprBuyerAccount != null" >
+        #{tbprBuyerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprRecord != null" >
+        #{tbprRecord,jdbcType=INTEGER},
+      </if>
+      <if test="tbprClientId != null" >
+        #{tbprClientId,jdbcType=INTEGER},
+      </if>
+      <if test="tbprThirdBack != null" >
+        #{tbprThirdBack,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprArrivalTime != null" >
+        #{tbprArrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbprUpdateTime != null" >
+        #{tbprUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbprAddTime != null" >
+        #{tbprAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbprStatus != null" >
+        #{tbprStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.PayRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tb_pay_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_pay_record
+    <set >
+      <if test="record.tbprId != null" >
+        tbpr_id = #{record.tbprId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbprHost != null" >
+        tbpr_host = #{record.tbprHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbprPayType != null" >
+        tbpr_pay_type = #{record.tbprPayType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbprBankType != null" >
+        tbpr_bank_type = #{record.tbprBankType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbprTradeNo != null" >
+        tbpr_trade_no = #{record.tbprTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbprMember != null" >
+        tbpr_member = #{record.tbprMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbprRealName != null" >
+        tbpr_real_name = #{record.tbprRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbprAmount != null" >
+        tbpr_amount = #{record.tbprAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbprRefund != null" >
+        tbpr_refund = #{record.tbprRefund,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbprPayMethod != null" >
+        tbpr_pay_method = #{record.tbprPayMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbprBlank != null" >
+        tbpr_blank = #{record.tbprBlank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbprAlipayNo != null" >
+        tbpr_alipay_no = #{record.tbprAlipayNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbprBuyerAccount != null" >
+        tbpr_buyer_account = #{record.tbprBuyerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbprRecord != null" >
+        tbpr_record = #{record.tbprRecord,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbprClientId != null" >
+        tbpr_client_id = #{record.tbprClientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbprThirdBack != null" >
+        tbpr_third_back = #{record.tbprThirdBack,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbprArrivalTime != null" >
+        tbpr_arrival_time = #{record.tbprArrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbprUpdateTime != null" >
+        tbpr_update_time = #{record.tbprUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbprAddTime != null" >
+        tbpr_add_time = #{record.tbprAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbprStatus != null" >
+        tbpr_status = #{record.tbprStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_pay_record
+    set tbpr_id = #{record.tbprId,jdbcType=INTEGER},
+      tbpr_host = #{record.tbprHost,jdbcType=SMALLINT},
+      tbpr_pay_type = #{record.tbprPayType,jdbcType=TINYINT},
+      tbpr_bank_type = #{record.tbprBankType,jdbcType=TINYINT},
+      tbpr_trade_no = #{record.tbprTradeNo,jdbcType=VARCHAR},
+      tbpr_member = #{record.tbprMember,jdbcType=INTEGER},
+      tbpr_real_name = #{record.tbprRealName,jdbcType=VARCHAR},
+      tbpr_amount = #{record.tbprAmount,jdbcType=DECIMAL},
+      tbpr_refund = #{record.tbprRefund,jdbcType=DECIMAL},
+      tbpr_pay_method = #{record.tbprPayMethod,jdbcType=VARCHAR},
+      tbpr_blank = #{record.tbprBlank,jdbcType=VARCHAR},
+      tbpr_alipay_no = #{record.tbprAlipayNo,jdbcType=VARCHAR},
+      tbpr_buyer_account = #{record.tbprBuyerAccount,jdbcType=VARCHAR},
+      tbpr_record = #{record.tbprRecord,jdbcType=INTEGER},
+      tbpr_client_id = #{record.tbprClientId,jdbcType=INTEGER},
+      tbpr_third_back = #{record.tbprThirdBack,jdbcType=VARCHAR},
+      tbpr_arrival_time = #{record.tbprArrivalTime,jdbcType=TIMESTAMP},
+      tbpr_update_time = #{record.tbprUpdateTime,jdbcType=TIMESTAMP},
+      tbpr_add_time = #{record.tbprAddTime,jdbcType=TIMESTAMP},
+      tbpr_status = #{record.tbprStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.PayRecord" >
+    update tb_pay_record
+    <set >
+      <if test="tbprHost != null" >
+        tbpr_host = #{tbprHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbprPayType != null" >
+        tbpr_pay_type = #{tbprPayType,jdbcType=TINYINT},
+      </if>
+      <if test="tbprBankType != null" >
+        tbpr_bank_type = #{tbprBankType,jdbcType=TINYINT},
+      </if>
+      <if test="tbprTradeNo != null" >
+        tbpr_trade_no = #{tbprTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprMember != null" >
+        tbpr_member = #{tbprMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbprRealName != null" >
+        tbpr_real_name = #{tbprRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprAmount != null" >
+        tbpr_amount = #{tbprAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="tbprRefund != null" >
+        tbpr_refund = #{tbprRefund,jdbcType=DECIMAL},
+      </if>
+      <if test="tbprPayMethod != null" >
+        tbpr_pay_method = #{tbprPayMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprBlank != null" >
+        tbpr_blank = #{tbprBlank,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprAlipayNo != null" >
+        tbpr_alipay_no = #{tbprAlipayNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprBuyerAccount != null" >
+        tbpr_buyer_account = #{tbprBuyerAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprRecord != null" >
+        tbpr_record = #{tbprRecord,jdbcType=INTEGER},
+      </if>
+      <if test="tbprClientId != null" >
+        tbpr_client_id = #{tbprClientId,jdbcType=INTEGER},
+      </if>
+      <if test="tbprThirdBack != null" >
+        tbpr_third_back = #{tbprThirdBack,jdbcType=VARCHAR},
+      </if>
+      <if test="tbprArrivalTime != null" >
+        tbpr_arrival_time = #{tbprArrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbprUpdateTime != null" >
+        tbpr_update_time = #{tbprUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbprAddTime != null" >
+        tbpr_add_time = #{tbprAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbprStatus != null" >
+        tbpr_status = #{tbprStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbpr_id = #{tbprId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.PayRecord" >
+    update tb_pay_record
+    set tbpr_host = #{tbprHost,jdbcType=SMALLINT},
+      tbpr_pay_type = #{tbprPayType,jdbcType=TINYINT},
+      tbpr_bank_type = #{tbprBankType,jdbcType=TINYINT},
+      tbpr_trade_no = #{tbprTradeNo,jdbcType=VARCHAR},
+      tbpr_member = #{tbprMember,jdbcType=INTEGER},
+      tbpr_real_name = #{tbprRealName,jdbcType=VARCHAR},
+      tbpr_amount = #{tbprAmount,jdbcType=DECIMAL},
+      tbpr_refund = #{tbprRefund,jdbcType=DECIMAL},
+      tbpr_pay_method = #{tbprPayMethod,jdbcType=VARCHAR},
+      tbpr_blank = #{tbprBlank,jdbcType=VARCHAR},
+      tbpr_alipay_no = #{tbprAlipayNo,jdbcType=VARCHAR},
+      tbpr_buyer_account = #{tbprBuyerAccount,jdbcType=VARCHAR},
+      tbpr_record = #{tbprRecord,jdbcType=INTEGER},
+      tbpr_client_id = #{tbprClientId,jdbcType=INTEGER},
+      tbpr_third_back = #{tbprThirdBack,jdbcType=VARCHAR},
+      tbpr_arrival_time = #{tbprArrivalTime,jdbcType=TIMESTAMP},
+      tbpr_update_time = #{tbprUpdateTime,jdbcType=TIMESTAMP},
+      tbpr_add_time = #{tbprAddTime,jdbcType=TIMESTAMP},
+      tbpr_status = #{tbprStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbpr_id = #{tbprId,jdbcType=INTEGER}
+  </update>
+</mapper>

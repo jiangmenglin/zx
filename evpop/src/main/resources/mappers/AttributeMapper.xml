@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.AttributeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Attribute" >
+    <id column="sa_id" property="saId" jdbcType="INTEGER" />
+    <result column="sa_host" property="saHost" jdbcType="BIGINT" />
+    <result column="sa_tel" property="saTel" jdbcType="VARCHAR" />
+    <result column="sa_sms_fix" property="saSmsFix" jdbcType="VARCHAR" />
+    <result column="sa_refund_day" property="saRefundDay" jdbcType="INTEGER" />
+    <result column="sa_invoce_mny" property="saInvoceMny" jdbcType="INTEGER" />
+    <result column="sa_cancel_order_limit" property="saCancelOrderLimit" jdbcType="INTEGER" />
+    <result column="sa_distance" property="saDistance" jdbcType="INTEGER" />
+    <result column="sa_power_tip" property="saPowerTip" jdbcType="INTEGER" />
+    <result column="sa_power_offline" property="saPowerOffline" jdbcType="INTEGER" />
+    <result column="sa_status" property="saStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sa_id, sa_host, sa_tel, sa_sms_fix, sa_refund_day, sa_invoce_mny, sa_cancel_order_limit, 
+    sa_distance, sa_power_tip, sa_power_offline, sa_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.AttributeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_attribute
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from srv_attribute
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from srv_attribute
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Attribute" >
+    insert into srv_attribute (sa_id, sa_host, sa_tel, 
+      sa_sms_fix, sa_refund_day, sa_invoce_mny, 
+      sa_cancel_order_limit, sa_distance, sa_power_tip, 
+      sa_power_offline, sa_status)
+    values (#{saId,jdbcType=INTEGER}, #{saHost,jdbcType=BIGINT}, #{saTel,jdbcType=VARCHAR}, 
+      #{saSmsFix,jdbcType=VARCHAR}, #{saRefundDay,jdbcType=INTEGER}, #{saInvoceMny,jdbcType=INTEGER}, 
+      #{saCancelOrderLimit,jdbcType=INTEGER}, #{saDistance,jdbcType=INTEGER}, #{saPowerTip,jdbcType=INTEGER}, 
+      #{saPowerOffline,jdbcType=INTEGER}, #{saStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Attribute" >
+    insert into srv_attribute
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="saId != null" >
+        sa_id,
+      </if>
+      <if test="saHost != null" >
+        sa_host,
+      </if>
+      <if test="saTel != null" >
+        sa_tel,
+      </if>
+      <if test="saSmsFix != null" >
+        sa_sms_fix,
+      </if>
+      <if test="saRefundDay != null" >
+        sa_refund_day,
+      </if>
+      <if test="saInvoceMny != null" >
+        sa_invoce_mny,
+      </if>
+      <if test="saCancelOrderLimit != null" >
+        sa_cancel_order_limit,
+      </if>
+      <if test="saDistance != null" >
+        sa_distance,
+      </if>
+      <if test="saPowerTip != null" >
+        sa_power_tip,
+      </if>
+      <if test="saPowerOffline != null" >
+        sa_power_offline,
+      </if>
+      <if test="saStatus != null" >
+        sa_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="saId != null" >
+        #{saId,jdbcType=INTEGER},
+      </if>
+      <if test="saHost != null" >
+        #{saHost,jdbcType=BIGINT},
+      </if>
+      <if test="saTel != null" >
+        #{saTel,jdbcType=VARCHAR},
+      </if>
+      <if test="saSmsFix != null" >
+        #{saSmsFix,jdbcType=VARCHAR},
+      </if>
+      <if test="saRefundDay != null" >
+        #{saRefundDay,jdbcType=INTEGER},
+      </if>
+      <if test="saInvoceMny != null" >
+        #{saInvoceMny,jdbcType=INTEGER},
+      </if>
+      <if test="saCancelOrderLimit != null" >
+        #{saCancelOrderLimit,jdbcType=INTEGER},
+      </if>
+      <if test="saDistance != null" >
+        #{saDistance,jdbcType=INTEGER},
+      </if>
+      <if test="saPowerTip != null" >
+        #{saPowerTip,jdbcType=INTEGER},
+      </if>
+      <if test="saPowerOffline != null" >
+        #{saPowerOffline,jdbcType=INTEGER},
+      </if>
+      <if test="saStatus != null" >
+        #{saStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.AttributeExample" resultType="java.lang.Integer" >
+    select count(*) from srv_attribute
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_attribute
+    <set >
+      <if test="record.saId != null" >
+        sa_id = #{record.saId,jdbcType=INTEGER},
+      </if>
+      <if test="record.saHost != null" >
+        sa_host = #{record.saHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.saTel != null" >
+        sa_tel = #{record.saTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saSmsFix != null" >
+        sa_sms_fix = #{record.saSmsFix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saRefundDay != null" >
+        sa_refund_day = #{record.saRefundDay,jdbcType=INTEGER},
+      </if>
+      <if test="record.saInvoceMny != null" >
+        sa_invoce_mny = #{record.saInvoceMny,jdbcType=INTEGER},
+      </if>
+      <if test="record.saCancelOrderLimit != null" >
+        sa_cancel_order_limit = #{record.saCancelOrderLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.saDistance != null" >
+        sa_distance = #{record.saDistance,jdbcType=INTEGER},
+      </if>
+      <if test="record.saPowerTip != null" >
+        sa_power_tip = #{record.saPowerTip,jdbcType=INTEGER},
+      </if>
+      <if test="record.saPowerOffline != null" >
+        sa_power_offline = #{record.saPowerOffline,jdbcType=INTEGER},
+      </if>
+      <if test="record.saStatus != null" >
+        sa_status = #{record.saStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_attribute
+    set sa_id = #{record.saId,jdbcType=INTEGER},
+      sa_host = #{record.saHost,jdbcType=BIGINT},
+      sa_tel = #{record.saTel,jdbcType=VARCHAR},
+      sa_sms_fix = #{record.saSmsFix,jdbcType=VARCHAR},
+      sa_refund_day = #{record.saRefundDay,jdbcType=INTEGER},
+      sa_invoce_mny = #{record.saInvoceMny,jdbcType=INTEGER},
+      sa_cancel_order_limit = #{record.saCancelOrderLimit,jdbcType=INTEGER},
+      sa_distance = #{record.saDistance,jdbcType=INTEGER},
+      sa_power_tip = #{record.saPowerTip,jdbcType=INTEGER},
+      sa_power_offline = #{record.saPowerOffline,jdbcType=INTEGER},
+      sa_status = #{record.saStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Attribute" >
+    update srv_attribute
+    <set >
+      <if test="saHost != null" >
+        sa_host = #{saHost,jdbcType=BIGINT},
+      </if>
+      <if test="saTel != null" >
+        sa_tel = #{saTel,jdbcType=VARCHAR},
+      </if>
+      <if test="saSmsFix != null" >
+        sa_sms_fix = #{saSmsFix,jdbcType=VARCHAR},
+      </if>
+      <if test="saRefundDay != null" >
+        sa_refund_day = #{saRefundDay,jdbcType=INTEGER},
+      </if>
+      <if test="saInvoceMny != null" >
+        sa_invoce_mny = #{saInvoceMny,jdbcType=INTEGER},
+      </if>
+      <if test="saCancelOrderLimit != null" >
+        sa_cancel_order_limit = #{saCancelOrderLimit,jdbcType=INTEGER},
+      </if>
+      <if test="saDistance != null" >
+        sa_distance = #{saDistance,jdbcType=INTEGER},
+      </if>
+      <if test="saPowerTip != null" >
+        sa_power_tip = #{saPowerTip,jdbcType=INTEGER},
+      </if>
+      <if test="saPowerOffline != null" >
+        sa_power_offline = #{saPowerOffline,jdbcType=INTEGER},
+      </if>
+      <if test="saStatus != null" >
+        sa_status = #{saStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Attribute" >
+    update srv_attribute
+    set sa_host = #{saHost,jdbcType=BIGINT},
+      sa_tel = #{saTel,jdbcType=VARCHAR},
+      sa_sms_fix = #{saSmsFix,jdbcType=VARCHAR},
+      sa_refund_day = #{saRefundDay,jdbcType=INTEGER},
+      sa_invoce_mny = #{saInvoceMny,jdbcType=INTEGER},
+      sa_cancel_order_limit = #{saCancelOrderLimit,jdbcType=INTEGER},
+      sa_distance = #{saDistance,jdbcType=INTEGER},
+      sa_power_tip = #{saPowerTip,jdbcType=INTEGER},
+      sa_power_offline = #{saPowerOffline,jdbcType=INTEGER},
+      sa_status = #{saStatus,jdbcType=TINYINT}
+    where sa_id = #{saId,jdbcType=INTEGER}
+  </update>
+</mapper>

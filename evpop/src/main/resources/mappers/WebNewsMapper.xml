@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.WebNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.WebNews" >
+    <id column="tbwn_id" property="tbwnId" jdbcType="BIGINT" />
+    <result column="tbwn_title" property="tbwnTitle" jdbcType="VARCHAR" />
+    <result column="tbwn_source" property="tbwnSource" jdbcType="VARCHAR" />
+    <result column="tbwn_thum1" property="tbwnThum1" jdbcType="VARCHAR" />
+    <result column="tbwn_thum2" property="tbwnThum2" jdbcType="VARCHAR" />
+    <result column="tbwn_news_time" property="tbwnNewsTime" jdbcType="TIMESTAMP" />
+    <result column="tbwn_add_time" property="tbwnAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbwn_update_time" property="tbwnUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbwn_status" property="tbwnStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.WebNews" extends="BaseResultMap" >
+    <result column="tbwn_content" property="tbwnContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbwn_id, tbwn_title, tbwn_source, tbwn_thum1, tbwn_thum2, tbwn_news_time, tbwn_add_time, 
+    tbwn_update_time, tbwn_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbwn_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.WebNewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_web_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.WebNewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_web_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_web_news
+    where tbwn_id = #{tbwnId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_web_news
+    where tbwn_id = #{tbwnId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.WebNews" >
+    insert into tb_web_news (tbwn_id, tbwn_title, tbwn_source, 
+      tbwn_thum1, tbwn_thum2, tbwn_news_time, 
+      tbwn_add_time, tbwn_update_time, tbwn_status, 
+      tbwn_content)
+    values (#{tbwnId,jdbcType=BIGINT}, #{tbwnTitle,jdbcType=VARCHAR}, #{tbwnSource,jdbcType=VARCHAR}, 
+      #{tbwnThum1,jdbcType=VARCHAR}, #{tbwnThum2,jdbcType=VARCHAR}, #{tbwnNewsTime,jdbcType=TIMESTAMP}, 
+      #{tbwnAddTime,jdbcType=TIMESTAMP}, #{tbwnUpdateTime,jdbcType=TIMESTAMP}, #{tbwnStatus,jdbcType=TINYINT}, 
+      #{tbwnContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.WebNews" >
+    insert into tb_web_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbwnId != null" >
+        tbwn_id,
+      </if>
+      <if test="tbwnTitle != null" >
+        tbwn_title,
+      </if>
+      <if test="tbwnSource != null" >
+        tbwn_source,
+      </if>
+      <if test="tbwnThum1 != null" >
+        tbwn_thum1,
+      </if>
+      <if test="tbwnThum2 != null" >
+        tbwn_thum2,
+      </if>
+      <if test="tbwnNewsTime != null" >
+        tbwn_news_time,
+      </if>
+      <if test="tbwnAddTime != null" >
+        tbwn_add_time,
+      </if>
+      <if test="tbwnUpdateTime != null" >
+        tbwn_update_time,
+      </if>
+      <if test="tbwnStatus != null" >
+        tbwn_status,
+      </if>
+      <if test="tbwnContent != null" >
+        tbwn_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbwnId != null" >
+        #{tbwnId,jdbcType=BIGINT},
+      </if>
+      <if test="tbwnTitle != null" >
+        #{tbwnTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwnSource != null" >
+        #{tbwnSource,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwnThum1 != null" >
+        #{tbwnThum1,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwnThum2 != null" >
+        #{tbwnThum2,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwnNewsTime != null" >
+        #{tbwnNewsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwnAddTime != null" >
+        #{tbwnAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwnUpdateTime != null" >
+        #{tbwnUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwnStatus != null" >
+        #{tbwnStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbwnContent != null" >
+        #{tbwnContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.WebNewsExample" resultType="java.lang.Integer" >
+    select count(*) from tb_web_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_web_news
+    <set >
+      <if test="record.tbwnId != null" >
+        tbwn_id = #{record.tbwnId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbwnTitle != null" >
+        tbwn_title = #{record.tbwnTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbwnSource != null" >
+        tbwn_source = #{record.tbwnSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbwnThum1 != null" >
+        tbwn_thum1 = #{record.tbwnThum1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbwnThum2 != null" >
+        tbwn_thum2 = #{record.tbwnThum2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbwnNewsTime != null" >
+        tbwn_news_time = #{record.tbwnNewsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbwnAddTime != null" >
+        tbwn_add_time = #{record.tbwnAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbwnUpdateTime != null" >
+        tbwn_update_time = #{record.tbwnUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbwnStatus != null" >
+        tbwn_status = #{record.tbwnStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbwnContent != null" >
+        tbwn_content = #{record.tbwnContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_web_news
+    set tbwn_id = #{record.tbwnId,jdbcType=BIGINT},
+      tbwn_title = #{record.tbwnTitle,jdbcType=VARCHAR},
+      tbwn_source = #{record.tbwnSource,jdbcType=VARCHAR},
+      tbwn_thum1 = #{record.tbwnThum1,jdbcType=VARCHAR},
+      tbwn_thum2 = #{record.tbwnThum2,jdbcType=VARCHAR},
+      tbwn_news_time = #{record.tbwnNewsTime,jdbcType=TIMESTAMP},
+      tbwn_add_time = #{record.tbwnAddTime,jdbcType=TIMESTAMP},
+      tbwn_update_time = #{record.tbwnUpdateTime,jdbcType=TIMESTAMP},
+      tbwn_status = #{record.tbwnStatus,jdbcType=TINYINT},
+      tbwn_content = #{record.tbwnContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_web_news
+    set tbwn_id = #{record.tbwnId,jdbcType=BIGINT},
+      tbwn_title = #{record.tbwnTitle,jdbcType=VARCHAR},
+      tbwn_source = #{record.tbwnSource,jdbcType=VARCHAR},
+      tbwn_thum1 = #{record.tbwnThum1,jdbcType=VARCHAR},
+      tbwn_thum2 = #{record.tbwnThum2,jdbcType=VARCHAR},
+      tbwn_news_time = #{record.tbwnNewsTime,jdbcType=TIMESTAMP},
+      tbwn_add_time = #{record.tbwnAddTime,jdbcType=TIMESTAMP},
+      tbwn_update_time = #{record.tbwnUpdateTime,jdbcType=TIMESTAMP},
+      tbwn_status = #{record.tbwnStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.WebNews" >
+    update tb_web_news
+    <set >
+      <if test="tbwnTitle != null" >
+        tbwn_title = #{tbwnTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwnSource != null" >
+        tbwn_source = #{tbwnSource,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwnThum1 != null" >
+        tbwn_thum1 = #{tbwnThum1,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwnThum2 != null" >
+        tbwn_thum2 = #{tbwnThum2,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwnNewsTime != null" >
+        tbwn_news_time = #{tbwnNewsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwnAddTime != null" >
+        tbwn_add_time = #{tbwnAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwnUpdateTime != null" >
+        tbwn_update_time = #{tbwnUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwnStatus != null" >
+        tbwn_status = #{tbwnStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbwnContent != null" >
+        tbwn_content = #{tbwnContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbwn_id = #{tbwnId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.WebNews" >
+    update tb_web_news
+    set tbwn_title = #{tbwnTitle,jdbcType=VARCHAR},
+      tbwn_source = #{tbwnSource,jdbcType=VARCHAR},
+      tbwn_thum1 = #{tbwnThum1,jdbcType=VARCHAR},
+      tbwn_thum2 = #{tbwnThum2,jdbcType=VARCHAR},
+      tbwn_news_time = #{tbwnNewsTime,jdbcType=TIMESTAMP},
+      tbwn_add_time = #{tbwnAddTime,jdbcType=TIMESTAMP},
+      tbwn_update_time = #{tbwnUpdateTime,jdbcType=TIMESTAMP},
+      tbwn_status = #{tbwnStatus,jdbcType=TINYINT},
+      tbwn_content = #{tbwnContent,jdbcType=LONGVARCHAR}
+    where tbwn_id = #{tbwnId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.WebNews" >
+    update tb_web_news
+    set tbwn_title = #{tbwnTitle,jdbcType=VARCHAR},
+      tbwn_source = #{tbwnSource,jdbcType=VARCHAR},
+      tbwn_thum1 = #{tbwnThum1,jdbcType=VARCHAR},
+      tbwn_thum2 = #{tbwnThum2,jdbcType=VARCHAR},
+      tbwn_news_time = #{tbwnNewsTime,jdbcType=TIMESTAMP},
+      tbwn_add_time = #{tbwnAddTime,jdbcType=TIMESTAMP},
+      tbwn_update_time = #{tbwnUpdateTime,jdbcType=TIMESTAMP},
+      tbwn_status = #{tbwnStatus,jdbcType=TINYINT}
+    where tbwn_id = #{tbwnId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.StateMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.State" >
+    <id column="tbs_id" property="tbsId" jdbcType="INTEGER" />
+    <result column="tbs_host" property="tbsHost" jdbcType="SMALLINT" />
+    <result column="tbs_number" property="tbsNumber" jdbcType="VARCHAR" />
+    <result column="tbs_car" property="tbsCar" jdbcType="BIGINT" />
+    <result column="tbs_rented" property="tbsRented" jdbcType="VARCHAR" />
+    <result column="tbs_warn" property="tbsWarn" jdbcType="VARCHAR" />
+    <result column="tbs_rfid" property="tbsRfid" jdbcType="VARCHAR" />
+    <result column="tbs_rfid_dte" property="tbsRfidDte" jdbcType="VARCHAR" />
+    <result column="tbs_obd_mile" property="tbsObdMile" jdbcType="VARCHAR" />
+    <result column="tbs_engine_t" property="tbsEngineT" jdbcType="INTEGER" />
+    <result column="tbs_mileage" property="tbsMileage" jdbcType="INTEGER" />
+    <result column="tbs_speed" property="tbsSpeed" jdbcType="SMALLINT" />
+    <result column="tbs_motor" property="tbsMotor" jdbcType="SMALLINT" />
+    <result column="tbs_oil" property="tbsOil" jdbcType="VARCHAR" />
+    <result column="tbs_power" property="tbsPower" jdbcType="SMALLINT" />
+    <result column="tbs_ev_battery" property="tbsEvBattery" jdbcType="SMALLINT" />
+    <result column="tbs_charging" property="tbsCharging" jdbcType="TINYINT" />
+    <result column="tbs_fuel_mileage" property="tbsFuelMileage" jdbcType="VARCHAR" />
+    <result column="tbs_electric_mileage" property="tbsElectricMileage" jdbcType="VARCHAR" />
+    <result column="tbs_endurance" property="tbsEndurance" jdbcType="SMALLINT" />
+    <result column="tbs_temperature" property="tbsTemperature" jdbcType="INTEGER" />
+    <result column="tbs_csq" property="tbsCsq" jdbcType="SMALLINT" />
+    <result column="tbs_power_consumption" property="tbsPowerConsumption" jdbcType="VARCHAR" />
+    <result column="tbs_longitude" property="tbsLongitude" jdbcType="DECIMAL" />
+    <result column="tbs_latitude" property="tbsLatitude" jdbcType="DECIMAL" />
+    <result column="tbs_dir" property="tbsDir" jdbcType="SMALLINT" />
+    <result column="tbs_circular" property="tbsCircular" jdbcType="TINYINT" />
+    <result column="tbs_ptc" property="tbsPtc" jdbcType="TINYINT" />
+    <result column="tbs_compres" property="tbsCompres" jdbcType="TINYINT" />
+    <result column="tbs_fan" property="tbsFan" jdbcType="TINYINT" />
+    <result column="tbs_saving" property="tbsSaving" jdbcType="TINYINT" />
+    <result column="tbs_door" property="tbsDoor" jdbcType="TINYINT" />
+    <result column="tbs_lock" property="tbsLock" jdbcType="SMALLINT" />
+    <result column="tbs_light" property="tbsLight" jdbcType="INTEGER" />
+    <result column="tbs_engine" property="tbsEngine" jdbcType="SMALLINT" />
+    <result column="tbs_base_lac" property="tbsBaseLac" jdbcType="INTEGER" />
+    <result column="tbs_base_ci" property="tbsBaseCi" jdbcType="INTEGER" />
+    <result column="tbs_order" property="tbsOrder" jdbcType="VARCHAR" />
+    <result column="tbs_mo_data" property="tbsMoData" jdbcType="VARCHAR" />
+    <result column="tbs_add_time" property="tbsAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbs_current_time" property="tbsCurrentTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbs_id, tbs_host, tbs_number, tbs_car, tbs_rented, tbs_warn, tbs_rfid, tbs_rfid_dte, 
+    tbs_obd_mile, tbs_engine_t, tbs_mileage, tbs_speed, tbs_motor, tbs_oil, tbs_power, 
+    tbs_ev_battery, tbs_charging, tbs_fuel_mileage, tbs_electric_mileage, tbs_endurance, 
+    tbs_temperature, tbs_csq, tbs_power_consumption, tbs_longitude, tbs_latitude, tbs_dir, 
+    tbs_circular, tbs_ptc, tbs_compres, tbs_fan, tbs_saving, tbs_door, tbs_lock, tbs_light, 
+    tbs_engine, tbs_base_lac, tbs_base_ci, tbs_order, tbs_mo_data, tbs_add_time, tbs_current_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.StateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_state
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_state
+    where tbs_id = #{tbsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_state
+    where tbs_id = #{tbsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.State" >
+    insert into tb_state (tbs_id, tbs_host, tbs_number, 
+      tbs_car, tbs_rented, tbs_warn, 
+      tbs_rfid, tbs_rfid_dte, tbs_obd_mile, 
+      tbs_engine_t, tbs_mileage, tbs_speed, 
+      tbs_motor, tbs_oil, tbs_power, 
+      tbs_ev_battery, tbs_charging, tbs_fuel_mileage, 
+      tbs_electric_mileage, tbs_endurance, tbs_temperature, 
+      tbs_csq, tbs_power_consumption, tbs_longitude, 
+      tbs_latitude, tbs_dir, tbs_circular, 
+      tbs_ptc, tbs_compres, tbs_fan, 
+      tbs_saving, tbs_door, tbs_lock, 
+      tbs_light, tbs_engine, tbs_base_lac, 
+      tbs_base_ci, tbs_order, tbs_mo_data, 
+      tbs_add_time, tbs_current_time)
+    values (#{tbsId,jdbcType=INTEGER}, #{tbsHost,jdbcType=SMALLINT}, #{tbsNumber,jdbcType=VARCHAR}, 
+      #{tbsCar,jdbcType=BIGINT}, #{tbsRented,jdbcType=VARCHAR}, #{tbsWarn,jdbcType=VARCHAR}, 
+      #{tbsRfid,jdbcType=VARCHAR}, #{tbsRfidDte,jdbcType=VARCHAR}, #{tbsObdMile,jdbcType=VARCHAR}, 
+      #{tbsEngineT,jdbcType=INTEGER}, #{tbsMileage,jdbcType=INTEGER}, #{tbsSpeed,jdbcType=SMALLINT}, 
+      #{tbsMotor,jdbcType=SMALLINT}, #{tbsOil,jdbcType=VARCHAR}, #{tbsPower,jdbcType=SMALLINT}, 
+      #{tbsEvBattery,jdbcType=SMALLINT}, #{tbsCharging,jdbcType=TINYINT}, #{tbsFuelMileage,jdbcType=VARCHAR}, 
+      #{tbsElectricMileage,jdbcType=VARCHAR}, #{tbsEndurance,jdbcType=SMALLINT}, #{tbsTemperature,jdbcType=INTEGER}, 
+      #{tbsCsq,jdbcType=SMALLINT}, #{tbsPowerConsumption,jdbcType=VARCHAR}, #{tbsLongitude,jdbcType=DECIMAL}, 
+      #{tbsLatitude,jdbcType=DECIMAL}, #{tbsDir,jdbcType=SMALLINT}, #{tbsCircular,jdbcType=TINYINT}, 
+      #{tbsPtc,jdbcType=TINYINT}, #{tbsCompres,jdbcType=TINYINT}, #{tbsFan,jdbcType=TINYINT}, 
+      #{tbsSaving,jdbcType=TINYINT}, #{tbsDoor,jdbcType=TINYINT}, #{tbsLock,jdbcType=SMALLINT}, 
+      #{tbsLight,jdbcType=INTEGER}, #{tbsEngine,jdbcType=SMALLINT}, #{tbsBaseLac,jdbcType=INTEGER}, 
+      #{tbsBaseCi,jdbcType=INTEGER}, #{tbsOrder,jdbcType=VARCHAR}, #{tbsMoData,jdbcType=VARCHAR}, 
+      #{tbsAddTime,jdbcType=TIMESTAMP}, #{tbsCurrentTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.State" >
+    insert into tb_state
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbsId != null" >
+        tbs_id,
+      </if>
+      <if test="tbsHost != null" >
+        tbs_host,
+      </if>
+      <if test="tbsNumber != null" >
+        tbs_number,
+      </if>
+      <if test="tbsCar != null" >
+        tbs_car,
+      </if>
+      <if test="tbsRented != null" >
+        tbs_rented,
+      </if>
+      <if test="tbsWarn != null" >
+        tbs_warn,
+      </if>
+      <if test="tbsRfid != null" >
+        tbs_rfid,
+      </if>
+      <if test="tbsRfidDte != null" >
+        tbs_rfid_dte,
+      </if>
+      <if test="tbsObdMile != null" >
+        tbs_obd_mile,
+      </if>
+      <if test="tbsEngineT != null" >
+        tbs_engine_t,
+      </if>
+      <if test="tbsMileage != null" >
+        tbs_mileage,
+      </if>
+      <if test="tbsSpeed != null" >
+        tbs_speed,
+      </if>
+      <if test="tbsMotor != null" >
+        tbs_motor,
+      </if>
+      <if test="tbsOil != null" >
+        tbs_oil,
+      </if>
+      <if test="tbsPower != null" >
+        tbs_power,
+      </if>
+      <if test="tbsEvBattery != null" >
+        tbs_ev_battery,
+      </if>
+      <if test="tbsCharging != null" >
+        tbs_charging,
+      </if>
+      <if test="tbsFuelMileage != null" >
+        tbs_fuel_mileage,
+      </if>
+      <if test="tbsElectricMileage != null" >
+        tbs_electric_mileage,
+      </if>
+      <if test="tbsEndurance != null" >
+        tbs_endurance,
+      </if>
+      <if test="tbsTemperature != null" >
+        tbs_temperature,
+      </if>
+      <if test="tbsCsq != null" >
+        tbs_csq,
+      </if>
+      <if test="tbsPowerConsumption != null" >
+        tbs_power_consumption,
+      </if>
+      <if test="tbsLongitude != null" >
+        tbs_longitude,
+      </if>
+      <if test="tbsLatitude != null" >
+        tbs_latitude,
+      </if>
+      <if test="tbsDir != null" >
+        tbs_dir,
+      </if>
+      <if test="tbsCircular != null" >
+        tbs_circular,
+      </if>
+      <if test="tbsPtc != null" >
+        tbs_ptc,
+      </if>
+      <if test="tbsCompres != null" >
+        tbs_compres,
+      </if>
+      <if test="tbsFan != null" >
+        tbs_fan,
+      </if>
+      <if test="tbsSaving != null" >
+        tbs_saving,
+      </if>
+      <if test="tbsDoor != null" >
+        tbs_door,
+      </if>
+      <if test="tbsLock != null" >
+        tbs_lock,
+      </if>
+      <if test="tbsLight != null" >
+        tbs_light,
+      </if>
+      <if test="tbsEngine != null" >
+        tbs_engine,
+      </if>
+      <if test="tbsBaseLac != null" >
+        tbs_base_lac,
+      </if>
+      <if test="tbsBaseCi != null" >
+        tbs_base_ci,
+      </if>
+      <if test="tbsOrder != null" >
+        tbs_order,
+      </if>
+      <if test="tbsMoData != null" >
+        tbs_mo_data,
+      </if>
+      <if test="tbsAddTime != null" >
+        tbs_add_time,
+      </if>
+      <if test="tbsCurrentTime != null" >
+        tbs_current_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbsId != null" >
+        #{tbsId,jdbcType=INTEGER},
+      </if>
+      <if test="tbsHost != null" >
+        #{tbsHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsNumber != null" >
+        #{tbsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsCar != null" >
+        #{tbsCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbsRented != null" >
+        #{tbsRented,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsWarn != null" >
+        #{tbsWarn,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsRfid != null" >
+        #{tbsRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsRfidDte != null" >
+        #{tbsRfidDte,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsObdMile != null" >
+        #{tbsObdMile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsEngineT != null" >
+        #{tbsEngineT,jdbcType=INTEGER},
+      </if>
+      <if test="tbsMileage != null" >
+        #{tbsMileage,jdbcType=INTEGER},
+      </if>
+      <if test="tbsSpeed != null" >
+        #{tbsSpeed,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsMotor != null" >
+        #{tbsMotor,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsOil != null" >
+        #{tbsOil,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsPower != null" >
+        #{tbsPower,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsEvBattery != null" >
+        #{tbsEvBattery,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsCharging != null" >
+        #{tbsCharging,jdbcType=TINYINT},
+      </if>
+      <if test="tbsFuelMileage != null" >
+        #{tbsFuelMileage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsElectricMileage != null" >
+        #{tbsElectricMileage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsEndurance != null" >
+        #{tbsEndurance,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsTemperature != null" >
+        #{tbsTemperature,jdbcType=INTEGER},
+      </if>
+      <if test="tbsCsq != null" >
+        #{tbsCsq,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsPowerConsumption != null" >
+        #{tbsPowerConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsLongitude != null" >
+        #{tbsLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="tbsLatitude != null" >
+        #{tbsLatitude,jdbcType=DECIMAL},
+      </if>
+      <if test="tbsDir != null" >
+        #{tbsDir,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsCircular != null" >
+        #{tbsCircular,jdbcType=TINYINT},
+      </if>
+      <if test="tbsPtc != null" >
+        #{tbsPtc,jdbcType=TINYINT},
+      </if>
+      <if test="tbsCompres != null" >
+        #{tbsCompres,jdbcType=TINYINT},
+      </if>
+      <if test="tbsFan != null" >
+        #{tbsFan,jdbcType=TINYINT},
+      </if>
+      <if test="tbsSaving != null" >
+        #{tbsSaving,jdbcType=TINYINT},
+      </if>
+      <if test="tbsDoor != null" >
+        #{tbsDoor,jdbcType=TINYINT},
+      </if>
+      <if test="tbsLock != null" >
+        #{tbsLock,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsLight != null" >
+        #{tbsLight,jdbcType=INTEGER},
+      </if>
+      <if test="tbsEngine != null" >
+        #{tbsEngine,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsBaseLac != null" >
+        #{tbsBaseLac,jdbcType=INTEGER},
+      </if>
+      <if test="tbsBaseCi != null" >
+        #{tbsBaseCi,jdbcType=INTEGER},
+      </if>
+      <if test="tbsOrder != null" >
+        #{tbsOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsMoData != null" >
+        #{tbsMoData,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsAddTime != null" >
+        #{tbsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsCurrentTime != null" >
+        #{tbsCurrentTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.StateExample" resultType="java.lang.Integer" >
+    select count(*) from tb_state
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_state
+    <set >
+      <if test="record.tbsId != null" >
+        tbs_id = #{record.tbsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbsHost != null" >
+        tbs_host = #{record.tbsHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsNumber != null" >
+        tbs_number = #{record.tbsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsCar != null" >
+        tbs_car = #{record.tbsCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbsRented != null" >
+        tbs_rented = #{record.tbsRented,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsWarn != null" >
+        tbs_warn = #{record.tbsWarn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsRfid != null" >
+        tbs_rfid = #{record.tbsRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsRfidDte != null" >
+        tbs_rfid_dte = #{record.tbsRfidDte,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsObdMile != null" >
+        tbs_obd_mile = #{record.tbsObdMile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsEngineT != null" >
+        tbs_engine_t = #{record.tbsEngineT,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbsMileage != null" >
+        tbs_mileage = #{record.tbsMileage,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbsSpeed != null" >
+        tbs_speed = #{record.tbsSpeed,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsMotor != null" >
+        tbs_motor = #{record.tbsMotor,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsOil != null" >
+        tbs_oil = #{record.tbsOil,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsPower != null" >
+        tbs_power = #{record.tbsPower,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsEvBattery != null" >
+        tbs_ev_battery = #{record.tbsEvBattery,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsCharging != null" >
+        tbs_charging = #{record.tbsCharging,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbsFuelMileage != null" >
+        tbs_fuel_mileage = #{record.tbsFuelMileage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsElectricMileage != null" >
+        tbs_electric_mileage = #{record.tbsElectricMileage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsEndurance != null" >
+        tbs_endurance = #{record.tbsEndurance,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsTemperature != null" >
+        tbs_temperature = #{record.tbsTemperature,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbsCsq != null" >
+        tbs_csq = #{record.tbsCsq,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsPowerConsumption != null" >
+        tbs_power_consumption = #{record.tbsPowerConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsLongitude != null" >
+        tbs_longitude = #{record.tbsLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbsLatitude != null" >
+        tbs_latitude = #{record.tbsLatitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbsDir != null" >
+        tbs_dir = #{record.tbsDir,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsCircular != null" >
+        tbs_circular = #{record.tbsCircular,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbsPtc != null" >
+        tbs_ptc = #{record.tbsPtc,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbsCompres != null" >
+        tbs_compres = #{record.tbsCompres,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbsFan != null" >
+        tbs_fan = #{record.tbsFan,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbsSaving != null" >
+        tbs_saving = #{record.tbsSaving,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbsDoor != null" >
+        tbs_door = #{record.tbsDoor,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbsLock != null" >
+        tbs_lock = #{record.tbsLock,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsLight != null" >
+        tbs_light = #{record.tbsLight,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbsEngine != null" >
+        tbs_engine = #{record.tbsEngine,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsBaseLac != null" >
+        tbs_base_lac = #{record.tbsBaseLac,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbsBaseCi != null" >
+        tbs_base_ci = #{record.tbsBaseCi,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbsOrder != null" >
+        tbs_order = #{record.tbsOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsMoData != null" >
+        tbs_mo_data = #{record.tbsMoData,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsAddTime != null" >
+        tbs_add_time = #{record.tbsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbsCurrentTime != null" >
+        tbs_current_time = #{record.tbsCurrentTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_state
+    set tbs_id = #{record.tbsId,jdbcType=INTEGER},
+      tbs_host = #{record.tbsHost,jdbcType=SMALLINT},
+      tbs_number = #{record.tbsNumber,jdbcType=VARCHAR},
+      tbs_car = #{record.tbsCar,jdbcType=BIGINT},
+      tbs_rented = #{record.tbsRented,jdbcType=VARCHAR},
+      tbs_warn = #{record.tbsWarn,jdbcType=VARCHAR},
+      tbs_rfid = #{record.tbsRfid,jdbcType=VARCHAR},
+      tbs_rfid_dte = #{record.tbsRfidDte,jdbcType=VARCHAR},
+      tbs_obd_mile = #{record.tbsObdMile,jdbcType=VARCHAR},
+      tbs_engine_t = #{record.tbsEngineT,jdbcType=INTEGER},
+      tbs_mileage = #{record.tbsMileage,jdbcType=INTEGER},
+      tbs_speed = #{record.tbsSpeed,jdbcType=SMALLINT},
+      tbs_motor = #{record.tbsMotor,jdbcType=SMALLINT},
+      tbs_oil = #{record.tbsOil,jdbcType=VARCHAR},
+      tbs_power = #{record.tbsPower,jdbcType=SMALLINT},
+      tbs_ev_battery = #{record.tbsEvBattery,jdbcType=SMALLINT},
+      tbs_charging = #{record.tbsCharging,jdbcType=TINYINT},
+      tbs_fuel_mileage = #{record.tbsFuelMileage,jdbcType=VARCHAR},
+      tbs_electric_mileage = #{record.tbsElectricMileage,jdbcType=VARCHAR},
+      tbs_endurance = #{record.tbsEndurance,jdbcType=SMALLINT},
+      tbs_temperature = #{record.tbsTemperature,jdbcType=INTEGER},
+      tbs_csq = #{record.tbsCsq,jdbcType=SMALLINT},
+      tbs_power_consumption = #{record.tbsPowerConsumption,jdbcType=VARCHAR},
+      tbs_longitude = #{record.tbsLongitude,jdbcType=DECIMAL},
+      tbs_latitude = #{record.tbsLatitude,jdbcType=DECIMAL},
+      tbs_dir = #{record.tbsDir,jdbcType=SMALLINT},
+      tbs_circular = #{record.tbsCircular,jdbcType=TINYINT},
+      tbs_ptc = #{record.tbsPtc,jdbcType=TINYINT},
+      tbs_compres = #{record.tbsCompres,jdbcType=TINYINT},
+      tbs_fan = #{record.tbsFan,jdbcType=TINYINT},
+      tbs_saving = #{record.tbsSaving,jdbcType=TINYINT},
+      tbs_door = #{record.tbsDoor,jdbcType=TINYINT},
+      tbs_lock = #{record.tbsLock,jdbcType=SMALLINT},
+      tbs_light = #{record.tbsLight,jdbcType=INTEGER},
+      tbs_engine = #{record.tbsEngine,jdbcType=SMALLINT},
+      tbs_base_lac = #{record.tbsBaseLac,jdbcType=INTEGER},
+      tbs_base_ci = #{record.tbsBaseCi,jdbcType=INTEGER},
+      tbs_order = #{record.tbsOrder,jdbcType=VARCHAR},
+      tbs_mo_data = #{record.tbsMoData,jdbcType=VARCHAR},
+      tbs_add_time = #{record.tbsAddTime,jdbcType=TIMESTAMP},
+      tbs_current_time = #{record.tbsCurrentTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.State" >
+    update tb_state
+    <set >
+      <if test="tbsHost != null" >
+        tbs_host = #{tbsHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsNumber != null" >
+        tbs_number = #{tbsNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsCar != null" >
+        tbs_car = #{tbsCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbsRented != null" >
+        tbs_rented = #{tbsRented,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsWarn != null" >
+        tbs_warn = #{tbsWarn,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsRfid != null" >
+        tbs_rfid = #{tbsRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsRfidDte != null" >
+        tbs_rfid_dte = #{tbsRfidDte,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsObdMile != null" >
+        tbs_obd_mile = #{tbsObdMile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsEngineT != null" >
+        tbs_engine_t = #{tbsEngineT,jdbcType=INTEGER},
+      </if>
+      <if test="tbsMileage != null" >
+        tbs_mileage = #{tbsMileage,jdbcType=INTEGER},
+      </if>
+      <if test="tbsSpeed != null" >
+        tbs_speed = #{tbsSpeed,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsMotor != null" >
+        tbs_motor = #{tbsMotor,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsOil != null" >
+        tbs_oil = #{tbsOil,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsPower != null" >
+        tbs_power = #{tbsPower,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsEvBattery != null" >
+        tbs_ev_battery = #{tbsEvBattery,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsCharging != null" >
+        tbs_charging = #{tbsCharging,jdbcType=TINYINT},
+      </if>
+      <if test="tbsFuelMileage != null" >
+        tbs_fuel_mileage = #{tbsFuelMileage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsElectricMileage != null" >
+        tbs_electric_mileage = #{tbsElectricMileage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsEndurance != null" >
+        tbs_endurance = #{tbsEndurance,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsTemperature != null" >
+        tbs_temperature = #{tbsTemperature,jdbcType=INTEGER},
+      </if>
+      <if test="tbsCsq != null" >
+        tbs_csq = #{tbsCsq,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsPowerConsumption != null" >
+        tbs_power_consumption = #{tbsPowerConsumption,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsLongitude != null" >
+        tbs_longitude = #{tbsLongitude,jdbcType=DECIMAL},
+      </if>
+      <if test="tbsLatitude != null" >
+        tbs_latitude = #{tbsLatitude,jdbcType=DECIMAL},
+      </if>
+      <if test="tbsDir != null" >
+        tbs_dir = #{tbsDir,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsCircular != null" >
+        tbs_circular = #{tbsCircular,jdbcType=TINYINT},
+      </if>
+      <if test="tbsPtc != null" >
+        tbs_ptc = #{tbsPtc,jdbcType=TINYINT},
+      </if>
+      <if test="tbsCompres != null" >
+        tbs_compres = #{tbsCompres,jdbcType=TINYINT},
+      </if>
+      <if test="tbsFan != null" >
+        tbs_fan = #{tbsFan,jdbcType=TINYINT},
+      </if>
+      <if test="tbsSaving != null" >
+        tbs_saving = #{tbsSaving,jdbcType=TINYINT},
+      </if>
+      <if test="tbsDoor != null" >
+        tbs_door = #{tbsDoor,jdbcType=TINYINT},
+      </if>
+      <if test="tbsLock != null" >
+        tbs_lock = #{tbsLock,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsLight != null" >
+        tbs_light = #{tbsLight,jdbcType=INTEGER},
+      </if>
+      <if test="tbsEngine != null" >
+        tbs_engine = #{tbsEngine,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsBaseLac != null" >
+        tbs_base_lac = #{tbsBaseLac,jdbcType=INTEGER},
+      </if>
+      <if test="tbsBaseCi != null" >
+        tbs_base_ci = #{tbsBaseCi,jdbcType=INTEGER},
+      </if>
+      <if test="tbsOrder != null" >
+        tbs_order = #{tbsOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsMoData != null" >
+        tbs_mo_data = #{tbsMoData,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsAddTime != null" >
+        tbs_add_time = #{tbsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsCurrentTime != null" >
+        tbs_current_time = #{tbsCurrentTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbs_id = #{tbsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.State" >
+    update tb_state
+    set tbs_host = #{tbsHost,jdbcType=SMALLINT},
+      tbs_number = #{tbsNumber,jdbcType=VARCHAR},
+      tbs_car = #{tbsCar,jdbcType=BIGINT},
+      tbs_rented = #{tbsRented,jdbcType=VARCHAR},
+      tbs_warn = #{tbsWarn,jdbcType=VARCHAR},
+      tbs_rfid = #{tbsRfid,jdbcType=VARCHAR},
+      tbs_rfid_dte = #{tbsRfidDte,jdbcType=VARCHAR},
+      tbs_obd_mile = #{tbsObdMile,jdbcType=VARCHAR},
+      tbs_engine_t = #{tbsEngineT,jdbcType=INTEGER},
+      tbs_mileage = #{tbsMileage,jdbcType=INTEGER},
+      tbs_speed = #{tbsSpeed,jdbcType=SMALLINT},
+      tbs_motor = #{tbsMotor,jdbcType=SMALLINT},
+      tbs_oil = #{tbsOil,jdbcType=VARCHAR},
+      tbs_power = #{tbsPower,jdbcType=SMALLINT},
+      tbs_ev_battery = #{tbsEvBattery,jdbcType=SMALLINT},
+      tbs_charging = #{tbsCharging,jdbcType=TINYINT},
+      tbs_fuel_mileage = #{tbsFuelMileage,jdbcType=VARCHAR},
+      tbs_electric_mileage = #{tbsElectricMileage,jdbcType=VARCHAR},
+      tbs_endurance = #{tbsEndurance,jdbcType=SMALLINT},
+      tbs_temperature = #{tbsTemperature,jdbcType=INTEGER},
+      tbs_csq = #{tbsCsq,jdbcType=SMALLINT},
+      tbs_power_consumption = #{tbsPowerConsumption,jdbcType=VARCHAR},
+      tbs_longitude = #{tbsLongitude,jdbcType=DECIMAL},
+      tbs_latitude = #{tbsLatitude,jdbcType=DECIMAL},
+      tbs_dir = #{tbsDir,jdbcType=SMALLINT},
+      tbs_circular = #{tbsCircular,jdbcType=TINYINT},
+      tbs_ptc = #{tbsPtc,jdbcType=TINYINT},
+      tbs_compres = #{tbsCompres,jdbcType=TINYINT},
+      tbs_fan = #{tbsFan,jdbcType=TINYINT},
+      tbs_saving = #{tbsSaving,jdbcType=TINYINT},
+      tbs_door = #{tbsDoor,jdbcType=TINYINT},
+      tbs_lock = #{tbsLock,jdbcType=SMALLINT},
+      tbs_light = #{tbsLight,jdbcType=INTEGER},
+      tbs_engine = #{tbsEngine,jdbcType=SMALLINT},
+      tbs_base_lac = #{tbsBaseLac,jdbcType=INTEGER},
+      tbs_base_ci = #{tbsBaseCi,jdbcType=INTEGER},
+      tbs_order = #{tbsOrder,jdbcType=VARCHAR},
+      tbs_mo_data = #{tbsMoData,jdbcType=VARCHAR},
+      tbs_add_time = #{tbsAddTime,jdbcType=TIMESTAMP},
+      tbs_current_time = #{tbsCurrentTime,jdbcType=TIMESTAMP}
+    where tbs_id = #{tbsId,jdbcType=INTEGER}
+  </update>
+</mapper>

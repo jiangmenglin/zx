@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LongFaulttypeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.LongFaulttype" >
+    <id column="tblf_id" property="tblfId" jdbcType="BIGINT" />
+    <result column="tblf_name" property="tblfName" jdbcType="VARCHAR" />
+    <result column="tblf_flag" property="tblfFlag" jdbcType="VARCHAR" />
+    <result column="tblf_priority" property="tblfPriority" jdbcType="SMALLINT" />
+    <result column="tblf_add_time" property="tblfAddTime" jdbcType="TIMESTAMP" />
+    <result column="tblf_update_time" property="tblfUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tblf_status" property="tblfStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tblf_id, tblf_name, tblf_flag, tblf_priority, tblf_add_time, tblf_update_time, tblf_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LongFaulttypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_long_faulttype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_long_faulttype
+    where tblf_id = #{tblfId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_long_faulttype
+    where tblf_id = #{tblfId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.LongFaulttype" >
+    insert into tb_long_faulttype (tblf_id, tblf_name, tblf_flag, 
+      tblf_priority, tblf_add_time, tblf_update_time, 
+      tblf_status)
+    values (#{tblfId,jdbcType=BIGINT}, #{tblfName,jdbcType=VARCHAR}, #{tblfFlag,jdbcType=VARCHAR}, 
+      #{tblfPriority,jdbcType=SMALLINT}, #{tblfAddTime,jdbcType=TIMESTAMP}, #{tblfUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tblfStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.LongFaulttype" >
+    insert into tb_long_faulttype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tblfId != null" >
+        tblf_id,
+      </if>
+      <if test="tblfName != null" >
+        tblf_name,
+      </if>
+      <if test="tblfFlag != null" >
+        tblf_flag,
+      </if>
+      <if test="tblfPriority != null" >
+        tblf_priority,
+      </if>
+      <if test="tblfAddTime != null" >
+        tblf_add_time,
+      </if>
+      <if test="tblfUpdateTime != null" >
+        tblf_update_time,
+      </if>
+      <if test="tblfStatus != null" >
+        tblf_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tblfId != null" >
+        #{tblfId,jdbcType=BIGINT},
+      </if>
+      <if test="tblfName != null" >
+        #{tblfName,jdbcType=VARCHAR},
+      </if>
+      <if test="tblfFlag != null" >
+        #{tblfFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tblfPriority != null" >
+        #{tblfPriority,jdbcType=SMALLINT},
+      </if>
+      <if test="tblfAddTime != null" >
+        #{tblfAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblfUpdateTime != null" >
+        #{tblfUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblfStatus != null" >
+        #{tblfStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LongFaulttypeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_long_faulttype
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_long_faulttype
+    <set >
+      <if test="record.tblfId != null" >
+        tblf_id = #{record.tblfId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblfName != null" >
+        tblf_name = #{record.tblfName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblfFlag != null" >
+        tblf_flag = #{record.tblfFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblfPriority != null" >
+        tblf_priority = #{record.tblfPriority,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tblfAddTime != null" >
+        tblf_add_time = #{record.tblfAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblfUpdateTime != null" >
+        tblf_update_time = #{record.tblfUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblfStatus != null" >
+        tblf_status = #{record.tblfStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_long_faulttype
+    set tblf_id = #{record.tblfId,jdbcType=BIGINT},
+      tblf_name = #{record.tblfName,jdbcType=VARCHAR},
+      tblf_flag = #{record.tblfFlag,jdbcType=VARCHAR},
+      tblf_priority = #{record.tblfPriority,jdbcType=SMALLINT},
+      tblf_add_time = #{record.tblfAddTime,jdbcType=TIMESTAMP},
+      tblf_update_time = #{record.tblfUpdateTime,jdbcType=TIMESTAMP},
+      tblf_status = #{record.tblfStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.LongFaulttype" >
+    update tb_long_faulttype
+    <set >
+      <if test="tblfName != null" >
+        tblf_name = #{tblfName,jdbcType=VARCHAR},
+      </if>
+      <if test="tblfFlag != null" >
+        tblf_flag = #{tblfFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tblfPriority != null" >
+        tblf_priority = #{tblfPriority,jdbcType=SMALLINT},
+      </if>
+      <if test="tblfAddTime != null" >
+        tblf_add_time = #{tblfAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblfUpdateTime != null" >
+        tblf_update_time = #{tblfUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblfStatus != null" >
+        tblf_status = #{tblfStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tblf_id = #{tblfId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.LongFaulttype" >
+    update tb_long_faulttype
+    set tblf_name = #{tblfName,jdbcType=VARCHAR},
+      tblf_flag = #{tblfFlag,jdbcType=VARCHAR},
+      tblf_priority = #{tblfPriority,jdbcType=SMALLINT},
+      tblf_add_time = #{tblfAddTime,jdbcType=TIMESTAMP},
+      tblf_update_time = #{tblfUpdateTime,jdbcType=TIMESTAMP},
+      tblf_status = #{tblfStatus,jdbcType=TINYINT}
+    where tblf_id = #{tblfId,jdbcType=BIGINT}
+  </update>
+</mapper>

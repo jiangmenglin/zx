@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.WebHelpMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.WebHelp" >
+    <id column="tbwh_id" property="tbwhId" jdbcType="BIGINT" />
+    <result column="tbwh_name" property="tbwhName" jdbcType="VARCHAR" />
+    <result column="tbwh_add_time" property="tbwhAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbwh_update_time" property="tbwhUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbwh_status" property="tbwhStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.WebHelp" extends="BaseResultMap" >
+    <result column="tbwh_content" property="tbwhContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbwh_id, tbwh_name, tbwh_add_time, tbwh_update_time, tbwh_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbwh_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.WebHelpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_web_help
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.WebHelpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_web_help
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_web_help
+    where tbwh_id = #{tbwhId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_web_help
+    where tbwh_id = #{tbwhId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.WebHelp" >
+    insert into tb_web_help (tbwh_id, tbwh_name, tbwh_add_time, 
+      tbwh_update_time, tbwh_status, tbwh_content
+      )
+    values (#{tbwhId,jdbcType=BIGINT}, #{tbwhName,jdbcType=VARCHAR}, #{tbwhAddTime,jdbcType=TIMESTAMP}, 
+      #{tbwhUpdateTime,jdbcType=TIMESTAMP}, #{tbwhStatus,jdbcType=TINYINT}, #{tbwhContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.WebHelp" >
+    insert into tb_web_help
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbwhId != null" >
+        tbwh_id,
+      </if>
+      <if test="tbwhName != null" >
+        tbwh_name,
+      </if>
+      <if test="tbwhAddTime != null" >
+        tbwh_add_time,
+      </if>
+      <if test="tbwhUpdateTime != null" >
+        tbwh_update_time,
+      </if>
+      <if test="tbwhStatus != null" >
+        tbwh_status,
+      </if>
+      <if test="tbwhContent != null" >
+        tbwh_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbwhId != null" >
+        #{tbwhId,jdbcType=BIGINT},
+      </if>
+      <if test="tbwhName != null" >
+        #{tbwhName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwhAddTime != null" >
+        #{tbwhAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwhUpdateTime != null" >
+        #{tbwhUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwhStatus != null" >
+        #{tbwhStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbwhContent != null" >
+        #{tbwhContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.WebHelpExample" resultType="java.lang.Integer" >
+    select count(*) from tb_web_help
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_web_help
+    <set >
+      <if test="record.tbwhId != null" >
+        tbwh_id = #{record.tbwhId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbwhName != null" >
+        tbwh_name = #{record.tbwhName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbwhAddTime != null" >
+        tbwh_add_time = #{record.tbwhAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbwhUpdateTime != null" >
+        tbwh_update_time = #{record.tbwhUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbwhStatus != null" >
+        tbwh_status = #{record.tbwhStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbwhContent != null" >
+        tbwh_content = #{record.tbwhContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_web_help
+    set tbwh_id = #{record.tbwhId,jdbcType=BIGINT},
+      tbwh_name = #{record.tbwhName,jdbcType=VARCHAR},
+      tbwh_add_time = #{record.tbwhAddTime,jdbcType=TIMESTAMP},
+      tbwh_update_time = #{record.tbwhUpdateTime,jdbcType=TIMESTAMP},
+      tbwh_status = #{record.tbwhStatus,jdbcType=TINYINT},
+      tbwh_content = #{record.tbwhContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_web_help
+    set tbwh_id = #{record.tbwhId,jdbcType=BIGINT},
+      tbwh_name = #{record.tbwhName,jdbcType=VARCHAR},
+      tbwh_add_time = #{record.tbwhAddTime,jdbcType=TIMESTAMP},
+      tbwh_update_time = #{record.tbwhUpdateTime,jdbcType=TIMESTAMP},
+      tbwh_status = #{record.tbwhStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.WebHelp" >
+    update tb_web_help
+    <set >
+      <if test="tbwhName != null" >
+        tbwh_name = #{tbwhName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwhAddTime != null" >
+        tbwh_add_time = #{tbwhAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwhUpdateTime != null" >
+        tbwh_update_time = #{tbwhUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwhStatus != null" >
+        tbwh_status = #{tbwhStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbwhContent != null" >
+        tbwh_content = #{tbwhContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbwh_id = #{tbwhId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.WebHelp" >
+    update tb_web_help
+    set tbwh_name = #{tbwhName,jdbcType=VARCHAR},
+      tbwh_add_time = #{tbwhAddTime,jdbcType=TIMESTAMP},
+      tbwh_update_time = #{tbwhUpdateTime,jdbcType=TIMESTAMP},
+      tbwh_status = #{tbwhStatus,jdbcType=TINYINT},
+      tbwh_content = #{tbwhContent,jdbcType=LONGVARCHAR}
+    where tbwh_id = #{tbwhId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.WebHelp" >
+    update tb_web_help
+    set tbwh_name = #{tbwhName,jdbcType=VARCHAR},
+      tbwh_add_time = #{tbwhAddTime,jdbcType=TIMESTAMP},
+      tbwh_update_time = #{tbwhUpdateTime,jdbcType=TIMESTAMP},
+      tbwh_status = #{tbwhStatus,jdbcType=TINYINT}
+    where tbwh_id = #{tbwhId,jdbcType=BIGINT}
+  </update>
+</mapper>

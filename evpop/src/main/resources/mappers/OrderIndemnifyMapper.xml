@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.OrderIndemnifyMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.OrderIndemnify" >
+    <id column="tboi_id" property="tboiId" jdbcType="BIGINT" />
+    <result column="tboi_orderid" property="tboiOrderid" jdbcType="VARCHAR" />
+    <result column="tboi_userid" property="tboiUserid" jdbcType="BIGINT" />
+    <result column="tboi_carno" property="tboiCarno" jdbcType="VARCHAR" />
+    <result column="tboi_fault" property="tboiFault" jdbcType="SMALLINT" />
+    <result column="tboi_money" property="tboiMoney" jdbcType="DOUBLE" />
+    <result column="tboi_head" property="tboiHead" jdbcType="VARCHAR" />
+    <result column="tboi_stime" property="tboiStime" jdbcType="TIMESTAMP" />
+    <result column="tboi_paytime" property="tboiPaytime" jdbcType="TIMESTAMP" />
+    <result column="tboi_paystatus" property="tboiPaystatus" jdbcType="SMALLINT" />
+    <result column="tboi_relationmessage" property="tboiRelationmessage" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tboi_id, tboi_orderid, tboi_userid, tboi_carno, tboi_fault, tboi_money, tboi_head, 
+    tboi_stime, tboi_paytime, tboi_paystatus, tboi_relationmessage
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.OrderIndemnifyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_order_indemnify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_indemnify
+    where tboi_id = #{tboiId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_order_indemnify
+    where tboi_id = #{tboiId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.OrderIndemnify" >
+    insert into tb_order_indemnify (tboi_id, tboi_orderid, tboi_userid, 
+      tboi_carno, tboi_fault, tboi_money, 
+      tboi_head, tboi_stime, tboi_paytime, 
+      tboi_paystatus, tboi_relationmessage)
+    values (#{tboiId,jdbcType=BIGINT}, #{tboiOrderid,jdbcType=VARCHAR}, #{tboiUserid,jdbcType=BIGINT}, 
+      #{tboiCarno,jdbcType=VARCHAR}, #{tboiFault,jdbcType=SMALLINT}, #{tboiMoney,jdbcType=DOUBLE}, 
+      #{tboiHead,jdbcType=VARCHAR}, #{tboiStime,jdbcType=TIMESTAMP}, #{tboiPaytime,jdbcType=TIMESTAMP}, 
+      #{tboiPaystatus,jdbcType=SMALLINT}, #{tboiRelationmessage,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.OrderIndemnify" >
+    insert into tb_order_indemnify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tboiId != null" >
+        tboi_id,
+      </if>
+      <if test="tboiOrderid != null" >
+        tboi_orderid,
+      </if>
+      <if test="tboiUserid != null" >
+        tboi_userid,
+      </if>
+      <if test="tboiCarno != null" >
+        tboi_carno,
+      </if>
+      <if test="tboiFault != null" >
+        tboi_fault,
+      </if>
+      <if test="tboiMoney != null" >
+        tboi_money,
+      </if>
+      <if test="tboiHead != null" >
+        tboi_head,
+      </if>
+      <if test="tboiStime != null" >
+        tboi_stime,
+      </if>
+      <if test="tboiPaytime != null" >
+        tboi_paytime,
+      </if>
+      <if test="tboiPaystatus != null" >
+        tboi_paystatus,
+      </if>
+      <if test="tboiRelationmessage != null" >
+        tboi_relationmessage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tboiId != null" >
+        #{tboiId,jdbcType=BIGINT},
+      </if>
+      <if test="tboiOrderid != null" >
+        #{tboiOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="tboiUserid != null" >
+        #{tboiUserid,jdbcType=BIGINT},
+      </if>
+      <if test="tboiCarno != null" >
+        #{tboiCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="tboiFault != null" >
+        #{tboiFault,jdbcType=SMALLINT},
+      </if>
+      <if test="tboiMoney != null" >
+        #{tboiMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tboiHead != null" >
+        #{tboiHead,jdbcType=VARCHAR},
+      </if>
+      <if test="tboiStime != null" >
+        #{tboiStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboiPaytime != null" >
+        #{tboiPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboiPaystatus != null" >
+        #{tboiPaystatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tboiRelationmessage != null" >
+        #{tboiRelationmessage,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.OrderIndemnifyExample" resultType="java.lang.Integer" >
+    select count(*) from tb_order_indemnify
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_order_indemnify
+    <set >
+      <if test="record.tboiId != null" >
+        tboi_id = #{record.tboiId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tboiOrderid != null" >
+        tboi_orderid = #{record.tboiOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboiUserid != null" >
+        tboi_userid = #{record.tboiUserid,jdbcType=BIGINT},
+      </if>
+      <if test="record.tboiCarno != null" >
+        tboi_carno = #{record.tboiCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboiFault != null" >
+        tboi_fault = #{record.tboiFault,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tboiMoney != null" >
+        tboi_money = #{record.tboiMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tboiHead != null" >
+        tboi_head = #{record.tboiHead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboiStime != null" >
+        tboi_stime = #{record.tboiStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboiPaytime != null" >
+        tboi_paytime = #{record.tboiPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboiPaystatus != null" >
+        tboi_paystatus = #{record.tboiPaystatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tboiRelationmessage != null" >
+        tboi_relationmessage = #{record.tboiRelationmessage,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_order_indemnify
+    set tboi_id = #{record.tboiId,jdbcType=BIGINT},
+      tboi_orderid = #{record.tboiOrderid,jdbcType=VARCHAR},
+      tboi_userid = #{record.tboiUserid,jdbcType=BIGINT},
+      tboi_carno = #{record.tboiCarno,jdbcType=VARCHAR},
+      tboi_fault = #{record.tboiFault,jdbcType=SMALLINT},
+      tboi_money = #{record.tboiMoney,jdbcType=DOUBLE},
+      tboi_head = #{record.tboiHead,jdbcType=VARCHAR},
+      tboi_stime = #{record.tboiStime,jdbcType=TIMESTAMP},
+      tboi_paytime = #{record.tboiPaytime,jdbcType=TIMESTAMP},
+      tboi_paystatus = #{record.tboiPaystatus,jdbcType=SMALLINT},
+      tboi_relationmessage = #{record.tboiRelationmessage,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.OrderIndemnify" >
+    update tb_order_indemnify
+    <set >
+      <if test="tboiOrderid != null" >
+        tboi_orderid = #{tboiOrderid,jdbcType=VARCHAR},
+      </if>
+      <if test="tboiUserid != null" >
+        tboi_userid = #{tboiUserid,jdbcType=BIGINT},
+      </if>
+      <if test="tboiCarno != null" >
+        tboi_carno = #{tboiCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="tboiFault != null" >
+        tboi_fault = #{tboiFault,jdbcType=SMALLINT},
+      </if>
+      <if test="tboiMoney != null" >
+        tboi_money = #{tboiMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tboiHead != null" >
+        tboi_head = #{tboiHead,jdbcType=VARCHAR},
+      </if>
+      <if test="tboiStime != null" >
+        tboi_stime = #{tboiStime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboiPaytime != null" >
+        tboi_paytime = #{tboiPaytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboiPaystatus != null" >
+        tboi_paystatus = #{tboiPaystatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tboiRelationmessage != null" >
+        tboi_relationmessage = #{tboiRelationmessage,jdbcType=BIGINT},
+      </if>
+    </set>
+    where tboi_id = #{tboiId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.OrderIndemnify" >
+    update tb_order_indemnify
+    set tboi_orderid = #{tboiOrderid,jdbcType=VARCHAR},
+      tboi_userid = #{tboiUserid,jdbcType=BIGINT},
+      tboi_carno = #{tboiCarno,jdbcType=VARCHAR},
+      tboi_fault = #{tboiFault,jdbcType=SMALLINT},
+      tboi_money = #{tboiMoney,jdbcType=DOUBLE},
+      tboi_head = #{tboiHead,jdbcType=VARCHAR},
+      tboi_stime = #{tboiStime,jdbcType=TIMESTAMP},
+      tboi_paytime = #{tboiPaytime,jdbcType=TIMESTAMP},
+      tboi_paystatus = #{tboiPaystatus,jdbcType=SMALLINT},
+      tboi_relationmessage = #{tboiRelationmessage,jdbcType=BIGINT}
+    where tboi_id = #{tboiId,jdbcType=BIGINT}
+  </update>
+</mapper>

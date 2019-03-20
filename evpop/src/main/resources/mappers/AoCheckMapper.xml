@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.AoCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.AoCheck" >
+    <id column="tbac_id" property="tbacId" jdbcType="INTEGER" />
+    <result column="tbac_title" property="tbacTitle" jdbcType="VARCHAR" />
+    <result column="tbac_user" property="tbacUser" jdbcType="INTEGER" />
+    <result column="tbac_in_pos" property="tbacInPos" jdbcType="VARCHAR" />
+    <result column="tbac_in_address" property="tbacInAddress" jdbcType="VARCHAR" />
+    <result column="tbac_in_time" property="tbacInTime" jdbcType="TIMESTAMP" />
+    <result column="tbac_out_pos" property="tbacOutPos" jdbcType="VARCHAR" />
+    <result column="tbac_out_address" property="tbacOutAddress" jdbcType="VARCHAR" />
+    <result column="tbac_out_time" property="tbacOutTime" jdbcType="TIMESTAMP" />
+    <result column="tbac_time_long" property="tbacTimeLong" jdbcType="INTEGER" />
+    <result column="tbac_remark" property="tbacRemark" jdbcType="VARCHAR" />
+    <result column="tbac_status" property="tbacStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbac_id, tbac_title, tbac_user, tbac_in_pos, tbac_in_address, tbac_in_time, tbac_out_pos, 
+    tbac_out_address, tbac_out_time, tbac_time_long, tbac_remark, tbac_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.AoCheckExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_ao_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_ao_check
+    where tbac_id = #{tbacId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_ao_check
+    where tbac_id = #{tbacId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.AoCheck" >
+    insert into tb_ao_check (tbac_id, tbac_title, tbac_user, 
+      tbac_in_pos, tbac_in_address, tbac_in_time, 
+      tbac_out_pos, tbac_out_address, tbac_out_time, 
+      tbac_time_long, tbac_remark, tbac_status
+      )
+    values (#{tbacId,jdbcType=INTEGER}, #{tbacTitle,jdbcType=VARCHAR}, #{tbacUser,jdbcType=INTEGER}, 
+      #{tbacInPos,jdbcType=VARCHAR}, #{tbacInAddress,jdbcType=VARCHAR}, #{tbacInTime,jdbcType=TIMESTAMP}, 
+      #{tbacOutPos,jdbcType=VARCHAR}, #{tbacOutAddress,jdbcType=VARCHAR}, #{tbacOutTime,jdbcType=TIMESTAMP}, 
+      #{tbacTimeLong,jdbcType=INTEGER}, #{tbacRemark,jdbcType=VARCHAR}, #{tbacStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.AoCheck" >
+    insert into tb_ao_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbacId != null" >
+        tbac_id,
+      </if>
+      <if test="tbacTitle != null" >
+        tbac_title,
+      </if>
+      <if test="tbacUser != null" >
+        tbac_user,
+      </if>
+      <if test="tbacInPos != null" >
+        tbac_in_pos,
+      </if>
+      <if test="tbacInAddress != null" >
+        tbac_in_address,
+      </if>
+      <if test="tbacInTime != null" >
+        tbac_in_time,
+      </if>
+      <if test="tbacOutPos != null" >
+        tbac_out_pos,
+      </if>
+      <if test="tbacOutAddress != null" >
+        tbac_out_address,
+      </if>
+      <if test="tbacOutTime != null" >
+        tbac_out_time,
+      </if>
+      <if test="tbacTimeLong != null" >
+        tbac_time_long,
+      </if>
+      <if test="tbacRemark != null" >
+        tbac_remark,
+      </if>
+      <if test="tbacStatus != null" >
+        tbac_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbacId != null" >
+        #{tbacId,jdbcType=INTEGER},
+      </if>
+      <if test="tbacTitle != null" >
+        #{tbacTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacUser != null" >
+        #{tbacUser,jdbcType=INTEGER},
+      </if>
+      <if test="tbacInPos != null" >
+        #{tbacInPos,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacInAddress != null" >
+        #{tbacInAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacInTime != null" >
+        #{tbacInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbacOutPos != null" >
+        #{tbacOutPos,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacOutAddress != null" >
+        #{tbacOutAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacOutTime != null" >
+        #{tbacOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbacTimeLong != null" >
+        #{tbacTimeLong,jdbcType=INTEGER},
+      </if>
+      <if test="tbacRemark != null" >
+        #{tbacRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacStatus != null" >
+        #{tbacStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.AoCheckExample" resultType="java.lang.Integer" >
+    select count(*) from tb_ao_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_ao_check
+    <set >
+      <if test="record.tbacId != null" >
+        tbac_id = #{record.tbacId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbacTitle != null" >
+        tbac_title = #{record.tbacTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbacUser != null" >
+        tbac_user = #{record.tbacUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbacInPos != null" >
+        tbac_in_pos = #{record.tbacInPos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbacInAddress != null" >
+        tbac_in_address = #{record.tbacInAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbacInTime != null" >
+        tbac_in_time = #{record.tbacInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbacOutPos != null" >
+        tbac_out_pos = #{record.tbacOutPos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbacOutAddress != null" >
+        tbac_out_address = #{record.tbacOutAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbacOutTime != null" >
+        tbac_out_time = #{record.tbacOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbacTimeLong != null" >
+        tbac_time_long = #{record.tbacTimeLong,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbacRemark != null" >
+        tbac_remark = #{record.tbacRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbacStatus != null" >
+        tbac_status = #{record.tbacStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_ao_check
+    set tbac_id = #{record.tbacId,jdbcType=INTEGER},
+      tbac_title = #{record.tbacTitle,jdbcType=VARCHAR},
+      tbac_user = #{record.tbacUser,jdbcType=INTEGER},
+      tbac_in_pos = #{record.tbacInPos,jdbcType=VARCHAR},
+      tbac_in_address = #{record.tbacInAddress,jdbcType=VARCHAR},
+      tbac_in_time = #{record.tbacInTime,jdbcType=TIMESTAMP},
+      tbac_out_pos = #{record.tbacOutPos,jdbcType=VARCHAR},
+      tbac_out_address = #{record.tbacOutAddress,jdbcType=VARCHAR},
+      tbac_out_time = #{record.tbacOutTime,jdbcType=TIMESTAMP},
+      tbac_time_long = #{record.tbacTimeLong,jdbcType=INTEGER},
+      tbac_remark = #{record.tbacRemark,jdbcType=VARCHAR},
+      tbac_status = #{record.tbacStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.AoCheck" >
+    update tb_ao_check
+    <set >
+      <if test="tbacTitle != null" >
+        tbac_title = #{tbacTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacUser != null" >
+        tbac_user = #{tbacUser,jdbcType=INTEGER},
+      </if>
+      <if test="tbacInPos != null" >
+        tbac_in_pos = #{tbacInPos,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacInAddress != null" >
+        tbac_in_address = #{tbacInAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacInTime != null" >
+        tbac_in_time = #{tbacInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbacOutPos != null" >
+        tbac_out_pos = #{tbacOutPos,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacOutAddress != null" >
+        tbac_out_address = #{tbacOutAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacOutTime != null" >
+        tbac_out_time = #{tbacOutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbacTimeLong != null" >
+        tbac_time_long = #{tbacTimeLong,jdbcType=INTEGER},
+      </if>
+      <if test="tbacRemark != null" >
+        tbac_remark = #{tbacRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbacStatus != null" >
+        tbac_status = #{tbacStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbac_id = #{tbacId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.AoCheck" >
+    update tb_ao_check
+    set tbac_title = #{tbacTitle,jdbcType=VARCHAR},
+      tbac_user = #{tbacUser,jdbcType=INTEGER},
+      tbac_in_pos = #{tbacInPos,jdbcType=VARCHAR},
+      tbac_in_address = #{tbacInAddress,jdbcType=VARCHAR},
+      tbac_in_time = #{tbacInTime,jdbcType=TIMESTAMP},
+      tbac_out_pos = #{tbacOutPos,jdbcType=VARCHAR},
+      tbac_out_address = #{tbacOutAddress,jdbcType=VARCHAR},
+      tbac_out_time = #{tbacOutTime,jdbcType=TIMESTAMP},
+      tbac_time_long = #{tbacTimeLong,jdbcType=INTEGER},
+      tbac_remark = #{tbacRemark,jdbcType=VARCHAR},
+      tbac_status = #{tbacStatus,jdbcType=TINYINT}
+    where tbac_id = #{tbacId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LgoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Lgoods" >
+    <id column="tbl_id" property="tblId" jdbcType="BIGINT" />
+    <result column="tbl_name" property="tblName" jdbcType="VARCHAR" />
+    <result column="tbl_product" property="tblProduct" jdbcType="SMALLINT" />
+    <result column="tbl_flag" property="tblFlag" jdbcType="VARCHAR" />
+    <result column="tbl_time" property="tblTime" jdbcType="INTEGER" />
+    <result column="tbl_priority" property="tblPriority" jdbcType="VARCHAR" />
+    <result column="tbl_expre" property="tblExpre" jdbcType="VARCHAR" />
+    <result column="tbl_meas" property="tblMeas" jdbcType="VARCHAR" />
+    <result column="tbl_profile" property="tblProfile" jdbcType="VARCHAR" />
+    <result column="tbl_update_time" property="tblUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbl_add_time" property="tblAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbl_status" property="tblStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbl_id, tbl_name, tbl_product, tbl_flag, tbl_time, tbl_priority, tbl_expre, tbl_meas, 
+    tbl_profile, tbl_update_time, tbl_add_time, tbl_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LgoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_lgoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_lgoods
+    where tbl_id = #{tblId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_lgoods
+    where tbl_id = #{tblId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Lgoods" >
+    insert into tb_lgoods (tbl_id, tbl_name, tbl_product, 
+      tbl_flag, tbl_time, tbl_priority, 
+      tbl_expre, tbl_meas, tbl_profile, 
+      tbl_update_time, tbl_add_time, tbl_status
+      )
+    values (#{tblId,jdbcType=BIGINT}, #{tblName,jdbcType=VARCHAR}, #{tblProduct,jdbcType=SMALLINT}, 
+      #{tblFlag,jdbcType=VARCHAR}, #{tblTime,jdbcType=INTEGER}, #{tblPriority,jdbcType=VARCHAR}, 
+      #{tblExpre,jdbcType=VARCHAR}, #{tblMeas,jdbcType=VARCHAR}, #{tblProfile,jdbcType=VARCHAR}, 
+      #{tblUpdateTime,jdbcType=TIMESTAMP}, #{tblAddTime,jdbcType=TIMESTAMP}, #{tblStatus,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Lgoods" >
+    insert into tb_lgoods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tblId != null" >
+        tbl_id,
+      </if>
+      <if test="tblName != null" >
+        tbl_name,
+      </if>
+      <if test="tblProduct != null" >
+        tbl_product,
+      </if>
+      <if test="tblFlag != null" >
+        tbl_flag,
+      </if>
+      <if test="tblTime != null" >
+        tbl_time,
+      </if>
+      <if test="tblPriority != null" >
+        tbl_priority,
+      </if>
+      <if test="tblExpre != null" >
+        tbl_expre,
+      </if>
+      <if test="tblMeas != null" >
+        tbl_meas,
+      </if>
+      <if test="tblProfile != null" >
+        tbl_profile,
+      </if>
+      <if test="tblUpdateTime != null" >
+        tbl_update_time,
+      </if>
+      <if test="tblAddTime != null" >
+        tbl_add_time,
+      </if>
+      <if test="tblStatus != null" >
+        tbl_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tblId != null" >
+        #{tblId,jdbcType=BIGINT},
+      </if>
+      <if test="tblName != null" >
+        #{tblName,jdbcType=VARCHAR},
+      </if>
+      <if test="tblProduct != null" >
+        #{tblProduct,jdbcType=SMALLINT},
+      </if>
+      <if test="tblFlag != null" >
+        #{tblFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tblTime != null" >
+        #{tblTime,jdbcType=INTEGER},
+      </if>
+      <if test="tblPriority != null" >
+        #{tblPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="tblExpre != null" >
+        #{tblExpre,jdbcType=VARCHAR},
+      </if>
+      <if test="tblMeas != null" >
+        #{tblMeas,jdbcType=VARCHAR},
+      </if>
+      <if test="tblProfile != null" >
+        #{tblProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tblUpdateTime != null" >
+        #{tblUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblAddTime != null" >
+        #{tblAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblStatus != null" >
+        #{tblStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LgoodsExample" resultType="java.lang.Integer" >
+    select count(*) from tb_lgoods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_lgoods
+    <set >
+      <if test="record.tblId != null" >
+        tbl_id = #{record.tblId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblName != null" >
+        tbl_name = #{record.tblName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblProduct != null" >
+        tbl_product = #{record.tblProduct,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tblFlag != null" >
+        tbl_flag = #{record.tblFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblTime != null" >
+        tbl_time = #{record.tblTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.tblPriority != null" >
+        tbl_priority = #{record.tblPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblExpre != null" >
+        tbl_expre = #{record.tblExpre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblMeas != null" >
+        tbl_meas = #{record.tblMeas,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblProfile != null" >
+        tbl_profile = #{record.tblProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblUpdateTime != null" >
+        tbl_update_time = #{record.tblUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblAddTime != null" >
+        tbl_add_time = #{record.tblAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblStatus != null" >
+        tbl_status = #{record.tblStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_lgoods
+    set tbl_id = #{record.tblId,jdbcType=BIGINT},
+      tbl_name = #{record.tblName,jdbcType=VARCHAR},
+      tbl_product = #{record.tblProduct,jdbcType=SMALLINT},
+      tbl_flag = #{record.tblFlag,jdbcType=VARCHAR},
+      tbl_time = #{record.tblTime,jdbcType=INTEGER},
+      tbl_priority = #{record.tblPriority,jdbcType=VARCHAR},
+      tbl_expre = #{record.tblExpre,jdbcType=VARCHAR},
+      tbl_meas = #{record.tblMeas,jdbcType=VARCHAR},
+      tbl_profile = #{record.tblProfile,jdbcType=VARCHAR},
+      tbl_update_time = #{record.tblUpdateTime,jdbcType=TIMESTAMP},
+      tbl_add_time = #{record.tblAddTime,jdbcType=TIMESTAMP},
+      tbl_status = #{record.tblStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Lgoods" >
+    update tb_lgoods
+    <set >
+      <if test="tblName != null" >
+        tbl_name = #{tblName,jdbcType=VARCHAR},
+      </if>
+      <if test="tblProduct != null" >
+        tbl_product = #{tblProduct,jdbcType=SMALLINT},
+      </if>
+      <if test="tblFlag != null" >
+        tbl_flag = #{tblFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tblTime != null" >
+        tbl_time = #{tblTime,jdbcType=INTEGER},
+      </if>
+      <if test="tblPriority != null" >
+        tbl_priority = #{tblPriority,jdbcType=VARCHAR},
+      </if>
+      <if test="tblExpre != null" >
+        tbl_expre = #{tblExpre,jdbcType=VARCHAR},
+      </if>
+      <if test="tblMeas != null" >
+        tbl_meas = #{tblMeas,jdbcType=VARCHAR},
+      </if>
+      <if test="tblProfile != null" >
+        tbl_profile = #{tblProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tblUpdateTime != null" >
+        tbl_update_time = #{tblUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblAddTime != null" >
+        tbl_add_time = #{tblAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblStatus != null" >
+        tbl_status = #{tblStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbl_id = #{tblId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Lgoods" >
+    update tb_lgoods
+    set tbl_name = #{tblName,jdbcType=VARCHAR},
+      tbl_product = #{tblProduct,jdbcType=SMALLINT},
+      tbl_flag = #{tblFlag,jdbcType=VARCHAR},
+      tbl_time = #{tblTime,jdbcType=INTEGER},
+      tbl_priority = #{tblPriority,jdbcType=VARCHAR},
+      tbl_expre = #{tblExpre,jdbcType=VARCHAR},
+      tbl_meas = #{tblMeas,jdbcType=VARCHAR},
+      tbl_profile = #{tblProfile,jdbcType=VARCHAR},
+      tbl_update_time = #{tblUpdateTime,jdbcType=TIMESTAMP},
+      tbl_add_time = #{tblAddTime,jdbcType=TIMESTAMP},
+      tbl_status = #{tblStatus,jdbcType=SMALLINT}
+    where tbl_id = #{tblId,jdbcType=BIGINT}
+  </update>
+</mapper>

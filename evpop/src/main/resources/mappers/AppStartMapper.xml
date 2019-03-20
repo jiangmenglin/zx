@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.AppStartMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.AppStart" >
+    <id column="tbas_id" property="tbasId" jdbcType="BIGINT" />
+    <result column="tbas_name" property="tbasName" jdbcType="VARCHAR" />
+    <result column="tbas_order" property="tbasOrder" jdbcType="INTEGER" />
+    <result column="tbas_thum" property="tbasThum" jdbcType="VARCHAR" />
+    <result column="tbas_introduction" property="tbasIntroduction" jdbcType="VARCHAR" />
+    <result column="tbas_link" property="tbasLink" jdbcType="VARCHAR" />
+    <result column="tbas_update_time" property="tbasUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbas_add_time" property="tbasAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbas_status" property="tbasStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.AppStart" extends="BaseResultMap" >
+    <result column="tbas_content" property="tbasContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbas_id, tbas_name, tbas_order, tbas_thum, tbas_introduction, tbas_link, tbas_update_time, 
+    tbas_add_time, tbas_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbas_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.AppStartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_app_start
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.AppStartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_app_start
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_app_start
+    where tbas_id = #{tbasId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_app_start
+    where tbas_id = #{tbasId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.AppStart" >
+    insert into tb_app_start (tbas_id, tbas_name, tbas_order, 
+      tbas_thum, tbas_introduction, tbas_link, 
+      tbas_update_time, tbas_add_time, tbas_status, 
+      tbas_content)
+    values (#{tbasId,jdbcType=BIGINT}, #{tbasName,jdbcType=VARCHAR}, #{tbasOrder,jdbcType=INTEGER}, 
+      #{tbasThum,jdbcType=VARCHAR}, #{tbasIntroduction,jdbcType=VARCHAR}, #{tbasLink,jdbcType=VARCHAR}, 
+      #{tbasUpdateTime,jdbcType=TIMESTAMP}, #{tbasAddTime,jdbcType=TIMESTAMP}, #{tbasStatus,jdbcType=TINYINT}, 
+      #{tbasContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.AppStart" >
+    insert into tb_app_start
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbasId != null" >
+        tbas_id,
+      </if>
+      <if test="tbasName != null" >
+        tbas_name,
+      </if>
+      <if test="tbasOrder != null" >
+        tbas_order,
+      </if>
+      <if test="tbasThum != null" >
+        tbas_thum,
+      </if>
+      <if test="tbasIntroduction != null" >
+        tbas_introduction,
+      </if>
+      <if test="tbasLink != null" >
+        tbas_link,
+      </if>
+      <if test="tbasUpdateTime != null" >
+        tbas_update_time,
+      </if>
+      <if test="tbasAddTime != null" >
+        tbas_add_time,
+      </if>
+      <if test="tbasStatus != null" >
+        tbas_status,
+      </if>
+      <if test="tbasContent != null" >
+        tbas_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbasId != null" >
+        #{tbasId,jdbcType=BIGINT},
+      </if>
+      <if test="tbasName != null" >
+        #{tbasName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbasOrder != null" >
+        #{tbasOrder,jdbcType=INTEGER},
+      </if>
+      <if test="tbasThum != null" >
+        #{tbasThum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbasIntroduction != null" >
+        #{tbasIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="tbasLink != null" >
+        #{tbasLink,jdbcType=VARCHAR},
+      </if>
+      <if test="tbasUpdateTime != null" >
+        #{tbasUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbasAddTime != null" >
+        #{tbasAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbasStatus != null" >
+        #{tbasStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbasContent != null" >
+        #{tbasContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.AppStartExample" resultType="java.lang.Integer" >
+    select count(*) from tb_app_start
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_app_start
+    <set >
+      <if test="record.tbasId != null" >
+        tbas_id = #{record.tbasId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbasName != null" >
+        tbas_name = #{record.tbasName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbasOrder != null" >
+        tbas_order = #{record.tbasOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbasThum != null" >
+        tbas_thum = #{record.tbasThum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbasIntroduction != null" >
+        tbas_introduction = #{record.tbasIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbasLink != null" >
+        tbas_link = #{record.tbasLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbasUpdateTime != null" >
+        tbas_update_time = #{record.tbasUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbasAddTime != null" >
+        tbas_add_time = #{record.tbasAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbasStatus != null" >
+        tbas_status = #{record.tbasStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbasContent != null" >
+        tbas_content = #{record.tbasContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_app_start
+    set tbas_id = #{record.tbasId,jdbcType=BIGINT},
+      tbas_name = #{record.tbasName,jdbcType=VARCHAR},
+      tbas_order = #{record.tbasOrder,jdbcType=INTEGER},
+      tbas_thum = #{record.tbasThum,jdbcType=VARCHAR},
+      tbas_introduction = #{record.tbasIntroduction,jdbcType=VARCHAR},
+      tbas_link = #{record.tbasLink,jdbcType=VARCHAR},
+      tbas_update_time = #{record.tbasUpdateTime,jdbcType=TIMESTAMP},
+      tbas_add_time = #{record.tbasAddTime,jdbcType=TIMESTAMP},
+      tbas_status = #{record.tbasStatus,jdbcType=TINYINT},
+      tbas_content = #{record.tbasContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_app_start
+    set tbas_id = #{record.tbasId,jdbcType=BIGINT},
+      tbas_name = #{record.tbasName,jdbcType=VARCHAR},
+      tbas_order = #{record.tbasOrder,jdbcType=INTEGER},
+      tbas_thum = #{record.tbasThum,jdbcType=VARCHAR},
+      tbas_introduction = #{record.tbasIntroduction,jdbcType=VARCHAR},
+      tbas_link = #{record.tbasLink,jdbcType=VARCHAR},
+      tbas_update_time = #{record.tbasUpdateTime,jdbcType=TIMESTAMP},
+      tbas_add_time = #{record.tbasAddTime,jdbcType=TIMESTAMP},
+      tbas_status = #{record.tbasStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.AppStart" >
+    update tb_app_start
+    <set >
+      <if test="tbasName != null" >
+        tbas_name = #{tbasName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbasOrder != null" >
+        tbas_order = #{tbasOrder,jdbcType=INTEGER},
+      </if>
+      <if test="tbasThum != null" >
+        tbas_thum = #{tbasThum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbasIntroduction != null" >
+        tbas_introduction = #{tbasIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="tbasLink != null" >
+        tbas_link = #{tbasLink,jdbcType=VARCHAR},
+      </if>
+      <if test="tbasUpdateTime != null" >
+        tbas_update_time = #{tbasUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbasAddTime != null" >
+        tbas_add_time = #{tbasAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbasStatus != null" >
+        tbas_status = #{tbasStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbasContent != null" >
+        tbas_content = #{tbasContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbas_id = #{tbasId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.AppStart" >
+    update tb_app_start
+    set tbas_name = #{tbasName,jdbcType=VARCHAR},
+      tbas_order = #{tbasOrder,jdbcType=INTEGER},
+      tbas_thum = #{tbasThum,jdbcType=VARCHAR},
+      tbas_introduction = #{tbasIntroduction,jdbcType=VARCHAR},
+      tbas_link = #{tbasLink,jdbcType=VARCHAR},
+      tbas_update_time = #{tbasUpdateTime,jdbcType=TIMESTAMP},
+      tbas_add_time = #{tbasAddTime,jdbcType=TIMESTAMP},
+      tbas_status = #{tbasStatus,jdbcType=TINYINT},
+      tbas_content = #{tbasContent,jdbcType=LONGVARCHAR}
+    where tbas_id = #{tbasId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.AppStart" >
+    update tb_app_start
+    set tbas_name = #{tbasName,jdbcType=VARCHAR},
+      tbas_order = #{tbasOrder,jdbcType=INTEGER},
+      tbas_thum = #{tbasThum,jdbcType=VARCHAR},
+      tbas_introduction = #{tbasIntroduction,jdbcType=VARCHAR},
+      tbas_link = #{tbasLink,jdbcType=VARCHAR},
+      tbas_update_time = #{tbasUpdateTime,jdbcType=TIMESTAMP},
+      tbas_add_time = #{tbasAddTime,jdbcType=TIMESTAMP},
+      tbas_status = #{tbasStatus,jdbcType=TINYINT}
+    where tbas_id = #{tbasId,jdbcType=BIGINT}
+  </update>
+</mapper>

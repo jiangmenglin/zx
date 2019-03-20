@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Account" >
+    <id column="tba_id" property="tbaId" jdbcType="INTEGER" />
+    <result column="tba_member" property="tbaMember" jdbcType="INTEGER" />
+    <result column="tba_deposit" property="tbaDeposit" jdbcType="DECIMAL" />
+    <result column="tba_money" property="tbaMoney" jdbcType="DECIMAL" />
+    <result column="tba_long_depsit" property="tbaLongDepsit" jdbcType="DOUBLE" />
+    <result column="tba_integral" property="tbaIntegral" jdbcType="INTEGER" />
+    <result column="tba_remark" property="tbaRemark" jdbcType="VARCHAR" />
+    <result column="tba_status" property="tbaStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tba_id, tba_member, tba_deposit, tba_money, tba_long_depsit, tba_integral, tba_remark, 
+    tba_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.AccountExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_account
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_account
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Account" >
+    insert into tb_account (tba_id, tba_member, tba_deposit, 
+      tba_money, tba_long_depsit, tba_integral, 
+      tba_remark, tba_status)
+    values (#{tbaId,jdbcType=INTEGER}, #{tbaMember,jdbcType=INTEGER}, #{tbaDeposit,jdbcType=DECIMAL}, 
+      #{tbaMoney,jdbcType=DECIMAL}, #{tbaLongDepsit,jdbcType=DOUBLE}, #{tbaIntegral,jdbcType=INTEGER}, 
+      #{tbaRemark,jdbcType=VARCHAR}, #{tbaStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Account" >
+    insert into tb_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbaId != null" >
+        tba_id,
+      </if>
+      <if test="tbaMember != null" >
+        tba_member,
+      </if>
+      <if test="tbaDeposit != null" >
+        tba_deposit,
+      </if>
+      <if test="tbaMoney != null" >
+        tba_money,
+      </if>
+      <if test="tbaLongDepsit != null" >
+        tba_long_depsit,
+      </if>
+      <if test="tbaIntegral != null" >
+        tba_integral,
+      </if>
+      <if test="tbaRemark != null" >
+        tba_remark,
+      </if>
+      <if test="tbaStatus != null" >
+        tba_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbaId != null" >
+        #{tbaId,jdbcType=INTEGER},
+      </if>
+      <if test="tbaMember != null" >
+        #{tbaMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbaDeposit != null" >
+        #{tbaDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="tbaMoney != null" >
+        #{tbaMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tbaLongDepsit != null" >
+        #{tbaLongDepsit,jdbcType=DOUBLE},
+      </if>
+      <if test="tbaIntegral != null" >
+        #{tbaIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="tbaRemark != null" >
+        #{tbaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaStatus != null" >
+        #{tbaStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.AccountExample" resultType="java.lang.Integer" >
+    select count(*) from tb_account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_account
+    <set >
+      <if test="record.tbaId != null" >
+        tba_id = #{record.tbaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbaMember != null" >
+        tba_member = #{record.tbaMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbaDeposit != null" >
+        tba_deposit = #{record.tbaDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbaMoney != null" >
+        tba_money = #{record.tbaMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbaLongDepsit != null" >
+        tba_long_depsit = #{record.tbaLongDepsit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbaIntegral != null" >
+        tba_integral = #{record.tbaIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbaRemark != null" >
+        tba_remark = #{record.tbaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbaStatus != null" >
+        tba_status = #{record.tbaStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_account
+    set tba_id = #{record.tbaId,jdbcType=INTEGER},
+      tba_member = #{record.tbaMember,jdbcType=INTEGER},
+      tba_deposit = #{record.tbaDeposit,jdbcType=DECIMAL},
+      tba_money = #{record.tbaMoney,jdbcType=DECIMAL},
+      tba_long_depsit = #{record.tbaLongDepsit,jdbcType=DOUBLE},
+      tba_integral = #{record.tbaIntegral,jdbcType=INTEGER},
+      tba_remark = #{record.tbaRemark,jdbcType=VARCHAR},
+      tba_status = #{record.tbaStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Account" >
+    update tb_account
+    <set >
+      <if test="tbaMember != null" >
+        tba_member = #{tbaMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbaDeposit != null" >
+        tba_deposit = #{tbaDeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="tbaMoney != null" >
+        tba_money = #{tbaMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tbaLongDepsit != null" >
+        tba_long_depsit = #{tbaLongDepsit,jdbcType=DOUBLE},
+      </if>
+      <if test="tbaIntegral != null" >
+        tba_integral = #{tbaIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="tbaRemark != null" >
+        tba_remark = #{tbaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbaStatus != null" >
+        tba_status = #{tbaStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Account" >
+    update tb_account
+    set tba_member = #{tbaMember,jdbcType=INTEGER},
+      tba_deposit = #{tbaDeposit,jdbcType=DECIMAL},
+      tba_money = #{tbaMoney,jdbcType=DECIMAL},
+      tba_long_depsit = #{tbaLongDepsit,jdbcType=DOUBLE},
+      tba_integral = #{tbaIntegral,jdbcType=INTEGER},
+      tba_remark = #{tbaRemark,jdbcType=VARCHAR},
+      tba_status = #{tbaStatus,jdbcType=TINYINT}
+    where tba_id = #{tbaId,jdbcType=INTEGER}
+  </update>
+</mapper>

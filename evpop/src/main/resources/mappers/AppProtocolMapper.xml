@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.AppProtocolMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.AppProtocol" >
+    <id column="tbap_id" property="tbapId" jdbcType="BIGINT" />
+    <result column="tbap_name" property="tbapName" jdbcType="VARCHAR" />
+    <result column="tbap_type" property="tbapType" jdbcType="SMALLINT" />
+    <result column="tbap_add_time" property="tbapAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbap_update_time" property="tbapUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbap_status" property="tbapStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.AppProtocol" extends="BaseResultMap" >
+    <result column="tbap_content" property="tbapContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbap_id, tbap_name, tbap_type, tbap_add_time, tbap_update_time, tbap_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbap_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.AppProtocolExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_app_protocol
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.AppProtocolExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_app_protocol
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_app_protocol
+    where tbap_id = #{tbapId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_app_protocol
+    where tbap_id = #{tbapId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.AppProtocol" >
+    insert into tb_app_protocol (tbap_id, tbap_name, tbap_type, 
+      tbap_add_time, tbap_update_time, tbap_status, 
+      tbap_content)
+    values (#{tbapId,jdbcType=BIGINT}, #{tbapName,jdbcType=VARCHAR}, #{tbapType,jdbcType=SMALLINT}, 
+      #{tbapAddTime,jdbcType=TIMESTAMP}, #{tbapUpdateTime,jdbcType=TIMESTAMP}, #{tbapStatus,jdbcType=TINYINT}, 
+      #{tbapContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.AppProtocol" >
+    insert into tb_app_protocol
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbapId != null" >
+        tbap_id,
+      </if>
+      <if test="tbapName != null" >
+        tbap_name,
+      </if>
+      <if test="tbapType != null" >
+        tbap_type,
+      </if>
+      <if test="tbapAddTime != null" >
+        tbap_add_time,
+      </if>
+      <if test="tbapUpdateTime != null" >
+        tbap_update_time,
+      </if>
+      <if test="tbapStatus != null" >
+        tbap_status,
+      </if>
+      <if test="tbapContent != null" >
+        tbap_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbapId != null" >
+        #{tbapId,jdbcType=BIGINT},
+      </if>
+      <if test="tbapName != null" >
+        #{tbapName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbapType != null" >
+        #{tbapType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbapAddTime != null" >
+        #{tbapAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbapUpdateTime != null" >
+        #{tbapUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbapStatus != null" >
+        #{tbapStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbapContent != null" >
+        #{tbapContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.AppProtocolExample" resultType="java.lang.Integer" >
+    select count(*) from tb_app_protocol
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_app_protocol
+    <set >
+      <if test="record.tbapId != null" >
+        tbap_id = #{record.tbapId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbapName != null" >
+        tbap_name = #{record.tbapName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbapType != null" >
+        tbap_type = #{record.tbapType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbapAddTime != null" >
+        tbap_add_time = #{record.tbapAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbapUpdateTime != null" >
+        tbap_update_time = #{record.tbapUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbapStatus != null" >
+        tbap_status = #{record.tbapStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbapContent != null" >
+        tbap_content = #{record.tbapContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_app_protocol
+    set tbap_id = #{record.tbapId,jdbcType=BIGINT},
+      tbap_name = #{record.tbapName,jdbcType=VARCHAR},
+      tbap_type = #{record.tbapType,jdbcType=SMALLINT},
+      tbap_add_time = #{record.tbapAddTime,jdbcType=TIMESTAMP},
+      tbap_update_time = #{record.tbapUpdateTime,jdbcType=TIMESTAMP},
+      tbap_status = #{record.tbapStatus,jdbcType=TINYINT},
+      tbap_content = #{record.tbapContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_app_protocol
+    set tbap_id = #{record.tbapId,jdbcType=BIGINT},
+      tbap_name = #{record.tbapName,jdbcType=VARCHAR},
+      tbap_type = #{record.tbapType,jdbcType=SMALLINT},
+      tbap_add_time = #{record.tbapAddTime,jdbcType=TIMESTAMP},
+      tbap_update_time = #{record.tbapUpdateTime,jdbcType=TIMESTAMP},
+      tbap_status = #{record.tbapStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.AppProtocol" >
+    update tb_app_protocol
+    <set >
+      <if test="tbapName != null" >
+        tbap_name = #{tbapName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbapType != null" >
+        tbap_type = #{tbapType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbapAddTime != null" >
+        tbap_add_time = #{tbapAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbapUpdateTime != null" >
+        tbap_update_time = #{tbapUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbapStatus != null" >
+        tbap_status = #{tbapStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbapContent != null" >
+        tbap_content = #{tbapContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbap_id = #{tbapId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.AppProtocol" >
+    update tb_app_protocol
+    set tbap_name = #{tbapName,jdbcType=VARCHAR},
+      tbap_type = #{tbapType,jdbcType=SMALLINT},
+      tbap_add_time = #{tbapAddTime,jdbcType=TIMESTAMP},
+      tbap_update_time = #{tbapUpdateTime,jdbcType=TIMESTAMP},
+      tbap_status = #{tbapStatus,jdbcType=TINYINT},
+      tbap_content = #{tbapContent,jdbcType=LONGVARCHAR}
+    where tbap_id = #{tbapId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.AppProtocol" >
+    update tb_app_protocol
+    set tbap_name = #{tbapName,jdbcType=VARCHAR},
+      tbap_type = #{tbapType,jdbcType=SMALLINT},
+      tbap_add_time = #{tbapAddTime,jdbcType=TIMESTAMP},
+      tbap_update_time = #{tbapUpdateTime,jdbcType=TIMESTAMP},
+      tbap_status = #{tbapStatus,jdbcType=TINYINT}
+    where tbap_id = #{tbapId,jdbcType=BIGINT}
+  </update>
+</mapper>

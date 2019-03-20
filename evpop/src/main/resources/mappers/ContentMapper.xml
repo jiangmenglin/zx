@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ContentMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Content" >
+    <id column="tbc_id" property="tbcId" jdbcType="INTEGER" />
+    <result column="tbc_title" property="tbcTitle" jdbcType="VARCHAR" />
+    <result column="tbc_parent" property="tbcParent" jdbcType="INTEGER" />
+    <result column="tbc_flag" property="tbcFlag" jdbcType="VARCHAR" />
+    <result column="tbc_order" property="tbcOrder" jdbcType="INTEGER" />
+    <result column="tbc_thum" property="tbcThum" jdbcType="VARCHAR" />
+    <result column="tbc_introduction" property="tbcIntroduction" jdbcType="VARCHAR" />
+    <result column="tbc_keywords" property="tbcKeywords" jdbcType="VARCHAR" />
+    <result column="tbc_images" property="tbcImages" jdbcType="VARCHAR" />
+    <result column="tbc_file" property="tbcFile" jdbcType="VARCHAR" />
+    <result column="tbc_link" property="tbcLink" jdbcType="VARCHAR" />
+    <result column="tbc_add_time" property="tbcAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbc_update_time" property="tbcUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbc_view_s" property="tbcViewS" jdbcType="INTEGER" />
+    <result column="tbc_reply_s" property="tbcReplyS" jdbcType="INTEGER" />
+    <result column="tbc_collect_s" property="tbcCollectS" jdbcType="INTEGER" />
+    <result column="tbc_praise_s" property="tbcPraiseS" jdbcType="INTEGER" />
+    <result column="tbc_status" property="tbcStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.Content" extends="BaseResultMap" >
+    <result column="tbc_content" property="tbcContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbc_id, tbc_title, tbc_parent, tbc_flag, tbc_order, tbc_thum, tbc_introduction, tbc_keywords, 
+    tbc_images, tbc_file, tbc_link, tbc_add_time, tbc_update_time, tbc_view_s, tbc_reply_s, 
+    tbc_collect_s, tbc_praise_s, tbc_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbc_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.ContentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ContentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_content
+    where tbc_id = #{tbcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_content
+    where tbc_id = #{tbcId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Content" >
+    insert into tb_content (tbc_id, tbc_title, tbc_parent, 
+      tbc_flag, tbc_order, tbc_thum, 
+      tbc_introduction, tbc_keywords, tbc_images, 
+      tbc_file, tbc_link, tbc_add_time, 
+      tbc_update_time, tbc_view_s, tbc_reply_s, 
+      tbc_collect_s, tbc_praise_s, tbc_status, 
+      tbc_content)
+    values (#{tbcId,jdbcType=INTEGER}, #{tbcTitle,jdbcType=VARCHAR}, #{tbcParent,jdbcType=INTEGER}, 
+      #{tbcFlag,jdbcType=VARCHAR}, #{tbcOrder,jdbcType=INTEGER}, #{tbcThum,jdbcType=VARCHAR}, 
+      #{tbcIntroduction,jdbcType=VARCHAR}, #{tbcKeywords,jdbcType=VARCHAR}, #{tbcImages,jdbcType=VARCHAR}, 
+      #{tbcFile,jdbcType=VARCHAR}, #{tbcLink,jdbcType=VARCHAR}, #{tbcAddTime,jdbcType=TIMESTAMP}, 
+      #{tbcUpdateTime,jdbcType=TIMESTAMP}, #{tbcViewS,jdbcType=INTEGER}, #{tbcReplyS,jdbcType=INTEGER}, 
+      #{tbcCollectS,jdbcType=INTEGER}, #{tbcPraiseS,jdbcType=INTEGER}, #{tbcStatus,jdbcType=TINYINT}, 
+      #{tbcContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Content" >
+    insert into tb_content
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbcId != null" >
+        tbc_id,
+      </if>
+      <if test="tbcTitle != null" >
+        tbc_title,
+      </if>
+      <if test="tbcParent != null" >
+        tbc_parent,
+      </if>
+      <if test="tbcFlag != null" >
+        tbc_flag,
+      </if>
+      <if test="tbcOrder != null" >
+        tbc_order,
+      </if>
+      <if test="tbcThum != null" >
+        tbc_thum,
+      </if>
+      <if test="tbcIntroduction != null" >
+        tbc_introduction,
+      </if>
+      <if test="tbcKeywords != null" >
+        tbc_keywords,
+      </if>
+      <if test="tbcImages != null" >
+        tbc_images,
+      </if>
+      <if test="tbcFile != null" >
+        tbc_file,
+      </if>
+      <if test="tbcLink != null" >
+        tbc_link,
+      </if>
+      <if test="tbcAddTime != null" >
+        tbc_add_time,
+      </if>
+      <if test="tbcUpdateTime != null" >
+        tbc_update_time,
+      </if>
+      <if test="tbcViewS != null" >
+        tbc_view_s,
+      </if>
+      <if test="tbcReplyS != null" >
+        tbc_reply_s,
+      </if>
+      <if test="tbcCollectS != null" >
+        tbc_collect_s,
+      </if>
+      <if test="tbcPraiseS != null" >
+        tbc_praise_s,
+      </if>
+      <if test="tbcStatus != null" >
+        tbc_status,
+      </if>
+      <if test="tbcContent != null" >
+        tbc_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbcId != null" >
+        #{tbcId,jdbcType=INTEGER},
+      </if>
+      <if test="tbcTitle != null" >
+        #{tbcTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcParent != null" >
+        #{tbcParent,jdbcType=INTEGER},
+      </if>
+      <if test="tbcFlag != null" >
+        #{tbcFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcOrder != null" >
+        #{tbcOrder,jdbcType=INTEGER},
+      </if>
+      <if test="tbcThum != null" >
+        #{tbcThum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcIntroduction != null" >
+        #{tbcIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcKeywords != null" >
+        #{tbcKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcImages != null" >
+        #{tbcImages,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcFile != null" >
+        #{tbcFile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcLink != null" >
+        #{tbcLink,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcAddTime != null" >
+        #{tbcAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcUpdateTime != null" >
+        #{tbcUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcViewS != null" >
+        #{tbcViewS,jdbcType=INTEGER},
+      </if>
+      <if test="tbcReplyS != null" >
+        #{tbcReplyS,jdbcType=INTEGER},
+      </if>
+      <if test="tbcCollectS != null" >
+        #{tbcCollectS,jdbcType=INTEGER},
+      </if>
+      <if test="tbcPraiseS != null" >
+        #{tbcPraiseS,jdbcType=INTEGER},
+      </if>
+      <if test="tbcStatus != null" >
+        #{tbcStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbcContent != null" >
+        #{tbcContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ContentExample" resultType="java.lang.Integer" >
+    select count(*) from tb_content
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_content
+    <set >
+      <if test="record.tbcId != null" >
+        tbc_id = #{record.tbcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcTitle != null" >
+        tbc_title = #{record.tbcTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcParent != null" >
+        tbc_parent = #{record.tbcParent,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcFlag != null" >
+        tbc_flag = #{record.tbcFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcOrder != null" >
+        tbc_order = #{record.tbcOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcThum != null" >
+        tbc_thum = #{record.tbcThum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcIntroduction != null" >
+        tbc_introduction = #{record.tbcIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcKeywords != null" >
+        tbc_keywords = #{record.tbcKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcImages != null" >
+        tbc_images = #{record.tbcImages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcFile != null" >
+        tbc_file = #{record.tbcFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcLink != null" >
+        tbc_link = #{record.tbcLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcAddTime != null" >
+        tbc_add_time = #{record.tbcAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcUpdateTime != null" >
+        tbc_update_time = #{record.tbcUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcViewS != null" >
+        tbc_view_s = #{record.tbcViewS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcReplyS != null" >
+        tbc_reply_s = #{record.tbcReplyS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcCollectS != null" >
+        tbc_collect_s = #{record.tbcCollectS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcPraiseS != null" >
+        tbc_praise_s = #{record.tbcPraiseS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcStatus != null" >
+        tbc_status = #{record.tbcStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbcContent != null" >
+        tbc_content = #{record.tbcContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_content
+    set tbc_id = #{record.tbcId,jdbcType=INTEGER},
+      tbc_title = #{record.tbcTitle,jdbcType=VARCHAR},
+      tbc_parent = #{record.tbcParent,jdbcType=INTEGER},
+      tbc_flag = #{record.tbcFlag,jdbcType=VARCHAR},
+      tbc_order = #{record.tbcOrder,jdbcType=INTEGER},
+      tbc_thum = #{record.tbcThum,jdbcType=VARCHAR},
+      tbc_introduction = #{record.tbcIntroduction,jdbcType=VARCHAR},
+      tbc_keywords = #{record.tbcKeywords,jdbcType=VARCHAR},
+      tbc_images = #{record.tbcImages,jdbcType=VARCHAR},
+      tbc_file = #{record.tbcFile,jdbcType=VARCHAR},
+      tbc_link = #{record.tbcLink,jdbcType=VARCHAR},
+      tbc_add_time = #{record.tbcAddTime,jdbcType=TIMESTAMP},
+      tbc_update_time = #{record.tbcUpdateTime,jdbcType=TIMESTAMP},
+      tbc_view_s = #{record.tbcViewS,jdbcType=INTEGER},
+      tbc_reply_s = #{record.tbcReplyS,jdbcType=INTEGER},
+      tbc_collect_s = #{record.tbcCollectS,jdbcType=INTEGER},
+      tbc_praise_s = #{record.tbcPraiseS,jdbcType=INTEGER},
+      tbc_status = #{record.tbcStatus,jdbcType=TINYINT},
+      tbc_content = #{record.tbcContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_content
+    set tbc_id = #{record.tbcId,jdbcType=INTEGER},
+      tbc_title = #{record.tbcTitle,jdbcType=VARCHAR},
+      tbc_parent = #{record.tbcParent,jdbcType=INTEGER},
+      tbc_flag = #{record.tbcFlag,jdbcType=VARCHAR},
+      tbc_order = #{record.tbcOrder,jdbcType=INTEGER},
+      tbc_thum = #{record.tbcThum,jdbcType=VARCHAR},
+      tbc_introduction = #{record.tbcIntroduction,jdbcType=VARCHAR},
+      tbc_keywords = #{record.tbcKeywords,jdbcType=VARCHAR},
+      tbc_images = #{record.tbcImages,jdbcType=VARCHAR},
+      tbc_file = #{record.tbcFile,jdbcType=VARCHAR},
+      tbc_link = #{record.tbcLink,jdbcType=VARCHAR},
+      tbc_add_time = #{record.tbcAddTime,jdbcType=TIMESTAMP},
+      tbc_update_time = #{record.tbcUpdateTime,jdbcType=TIMESTAMP},
+      tbc_view_s = #{record.tbcViewS,jdbcType=INTEGER},
+      tbc_reply_s = #{record.tbcReplyS,jdbcType=INTEGER},
+      tbc_collect_s = #{record.tbcCollectS,jdbcType=INTEGER},
+      tbc_praise_s = #{record.tbcPraiseS,jdbcType=INTEGER},
+      tbc_status = #{record.tbcStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Content" >
+    update tb_content
+    <set >
+      <if test="tbcTitle != null" >
+        tbc_title = #{tbcTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcParent != null" >
+        tbc_parent = #{tbcParent,jdbcType=INTEGER},
+      </if>
+      <if test="tbcFlag != null" >
+        tbc_flag = #{tbcFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcOrder != null" >
+        tbc_order = #{tbcOrder,jdbcType=INTEGER},
+      </if>
+      <if test="tbcThum != null" >
+        tbc_thum = #{tbcThum,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcIntroduction != null" >
+        tbc_introduction = #{tbcIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcKeywords != null" >
+        tbc_keywords = #{tbcKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcImages != null" >
+        tbc_images = #{tbcImages,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcFile != null" >
+        tbc_file = #{tbcFile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcLink != null" >
+        tbc_link = #{tbcLink,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcAddTime != null" >
+        tbc_add_time = #{tbcAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcUpdateTime != null" >
+        tbc_update_time = #{tbcUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcViewS != null" >
+        tbc_view_s = #{tbcViewS,jdbcType=INTEGER},
+      </if>
+      <if test="tbcReplyS != null" >
+        tbc_reply_s = #{tbcReplyS,jdbcType=INTEGER},
+      </if>
+      <if test="tbcCollectS != null" >
+        tbc_collect_s = #{tbcCollectS,jdbcType=INTEGER},
+      </if>
+      <if test="tbcPraiseS != null" >
+        tbc_praise_s = #{tbcPraiseS,jdbcType=INTEGER},
+      </if>
+      <if test="tbcStatus != null" >
+        tbc_status = #{tbcStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbcContent != null" >
+        tbc_content = #{tbcContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbc_id = #{tbcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.Content" >
+    update tb_content
+    set tbc_title = #{tbcTitle,jdbcType=VARCHAR},
+      tbc_parent = #{tbcParent,jdbcType=INTEGER},
+      tbc_flag = #{tbcFlag,jdbcType=VARCHAR},
+      tbc_order = #{tbcOrder,jdbcType=INTEGER},
+      tbc_thum = #{tbcThum,jdbcType=VARCHAR},
+      tbc_introduction = #{tbcIntroduction,jdbcType=VARCHAR},
+      tbc_keywords = #{tbcKeywords,jdbcType=VARCHAR},
+      tbc_images = #{tbcImages,jdbcType=VARCHAR},
+      tbc_file = #{tbcFile,jdbcType=VARCHAR},
+      tbc_link = #{tbcLink,jdbcType=VARCHAR},
+      tbc_add_time = #{tbcAddTime,jdbcType=TIMESTAMP},
+      tbc_update_time = #{tbcUpdateTime,jdbcType=TIMESTAMP},
+      tbc_view_s = #{tbcViewS,jdbcType=INTEGER},
+      tbc_reply_s = #{tbcReplyS,jdbcType=INTEGER},
+      tbc_collect_s = #{tbcCollectS,jdbcType=INTEGER},
+      tbc_praise_s = #{tbcPraiseS,jdbcType=INTEGER},
+      tbc_status = #{tbcStatus,jdbcType=TINYINT},
+      tbc_content = #{tbcContent,jdbcType=LONGVARCHAR}
+    where tbc_id = #{tbcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Content" >
+    update tb_content
+    set tbc_title = #{tbcTitle,jdbcType=VARCHAR},
+      tbc_parent = #{tbcParent,jdbcType=INTEGER},
+      tbc_flag = #{tbcFlag,jdbcType=VARCHAR},
+      tbc_order = #{tbcOrder,jdbcType=INTEGER},
+      tbc_thum = #{tbcThum,jdbcType=VARCHAR},
+      tbc_introduction = #{tbcIntroduction,jdbcType=VARCHAR},
+      tbc_keywords = #{tbcKeywords,jdbcType=VARCHAR},
+      tbc_images = #{tbcImages,jdbcType=VARCHAR},
+      tbc_file = #{tbcFile,jdbcType=VARCHAR},
+      tbc_link = #{tbcLink,jdbcType=VARCHAR},
+      tbc_add_time = #{tbcAddTime,jdbcType=TIMESTAMP},
+      tbc_update_time = #{tbcUpdateTime,jdbcType=TIMESTAMP},
+      tbc_view_s = #{tbcViewS,jdbcType=INTEGER},
+      tbc_reply_s = #{tbcReplyS,jdbcType=INTEGER},
+      tbc_collect_s = #{tbcCollectS,jdbcType=INTEGER},
+      tbc_praise_s = #{tbcPraiseS,jdbcType=INTEGER},
+      tbc_status = #{tbcStatus,jdbcType=TINYINT}
+    where tbc_id = #{tbcId,jdbcType=INTEGER}
+  </update>
+</mapper>

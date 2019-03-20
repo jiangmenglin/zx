@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.CouponTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.CouponType" >
+    <id column="tbct_id" property="tbctId" jdbcType="INTEGER" />
+    <result column="tbct_name" property="tbctName" jdbcType="VARCHAR" />
+    <result column="tbct_flag" property="tbctFlag" jdbcType="VARCHAR" />
+    <result column="tbct_system" property="tbctSystem" jdbcType="TINYINT" />
+    <result column="tbct_update_time" property="tbctUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbct_start" property="tbctStart" jdbcType="TIMESTAMP" />
+    <result column="tbct_end" property="tbctEnd" jdbcType="TIMESTAMP" />
+    <result column="tbct_remark" property="tbctRemark" jdbcType="VARCHAR" />
+    <result column="tbct_count" property="tbctCount" jdbcType="INTEGER" />
+    <result column="tbct_amout" property="tbctAmout" jdbcType="INTEGER" />
+    <result column="tbct_limit" property="tbctLimit" jdbcType="TINYINT" />
+    <result column="tbct_min" property="tbctMin" jdbcType="DECIMAL" />
+    <result column="tbct_order_params" property="tbctOrderParams" jdbcType="VARCHAR" />
+    <result column="tbct_order_profile" property="tbctOrderProfile" jdbcType="VARCHAR" />
+    <result column="tbct_validity" property="tbctValidity" jdbcType="TINYINT" />
+    <result column="tbct_add_time" property="tbctAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbct_status" property="tbctStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbct_id, tbct_name, tbct_flag, tbct_system, tbct_update_time, tbct_start, tbct_end, 
+    tbct_remark, tbct_count, tbct_amout, tbct_limit, tbct_min, tbct_order_params, tbct_order_profile, 
+    tbct_validity, tbct_add_time, tbct_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.CouponTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_coupon_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_coupon_type
+    where tbct_id = #{tbctId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_coupon_type
+    where tbct_id = #{tbctId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.CouponType" >
+    insert into tb_coupon_type (tbct_id, tbct_name, tbct_flag, 
+      tbct_system, tbct_update_time, tbct_start, 
+      tbct_end, tbct_remark, tbct_count, 
+      tbct_amout, tbct_limit, tbct_min, 
+      tbct_order_params, tbct_order_profile, tbct_validity, 
+      tbct_add_time, tbct_status, createTime, 
+      modifyDate)
+    values (#{tbctId,jdbcType=INTEGER}, #{tbctName,jdbcType=VARCHAR}, #{tbctFlag,jdbcType=VARCHAR}, 
+      #{tbctSystem,jdbcType=TINYINT}, #{tbctUpdateTime,jdbcType=TIMESTAMP}, #{tbctStart,jdbcType=TIMESTAMP}, 
+      #{tbctEnd,jdbcType=TIMESTAMP}, #{tbctRemark,jdbcType=VARCHAR}, #{tbctCount,jdbcType=INTEGER}, 
+      #{tbctAmout,jdbcType=INTEGER}, #{tbctLimit,jdbcType=TINYINT}, #{tbctMin,jdbcType=DECIMAL}, 
+      #{tbctOrderParams,jdbcType=VARCHAR}, #{tbctOrderProfile,jdbcType=VARCHAR}, #{tbctValidity,jdbcType=TINYINT}, 
+      #{tbctAddTime,jdbcType=TIMESTAMP}, #{tbctStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.CouponType" >
+    insert into tb_coupon_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbctId != null" >
+        tbct_id,
+      </if>
+      <if test="tbctName != null" >
+        tbct_name,
+      </if>
+      <if test="tbctFlag != null" >
+        tbct_flag,
+      </if>
+      <if test="tbctSystem != null" >
+        tbct_system,
+      </if>
+      <if test="tbctUpdateTime != null" >
+        tbct_update_time,
+      </if>
+      <if test="tbctStart != null" >
+        tbct_start,
+      </if>
+      <if test="tbctEnd != null" >
+        tbct_end,
+      </if>
+      <if test="tbctRemark != null" >
+        tbct_remark,
+      </if>
+      <if test="tbctCount != null" >
+        tbct_count,
+      </if>
+      <if test="tbctAmout != null" >
+        tbct_amout,
+      </if>
+      <if test="tbctLimit != null" >
+        tbct_limit,
+      </if>
+      <if test="tbctMin != null" >
+        tbct_min,
+      </if>
+      <if test="tbctOrderParams != null" >
+        tbct_order_params,
+      </if>
+      <if test="tbctOrderProfile != null" >
+        tbct_order_profile,
+      </if>
+      <if test="tbctValidity != null" >
+        tbct_validity,
+      </if>
+      <if test="tbctAddTime != null" >
+        tbct_add_time,
+      </if>
+      <if test="tbctStatus != null" >
+        tbct_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbctId != null" >
+        #{tbctId,jdbcType=INTEGER},
+      </if>
+      <if test="tbctName != null" >
+        #{tbctName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbctFlag != null" >
+        #{tbctFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbctSystem != null" >
+        #{tbctSystem,jdbcType=TINYINT},
+      </if>
+      <if test="tbctUpdateTime != null" >
+        #{tbctUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbctStart != null" >
+        #{tbctStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbctEnd != null" >
+        #{tbctEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbctRemark != null" >
+        #{tbctRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbctCount != null" >
+        #{tbctCount,jdbcType=INTEGER},
+      </if>
+      <if test="tbctAmout != null" >
+        #{tbctAmout,jdbcType=INTEGER},
+      </if>
+      <if test="tbctLimit != null" >
+        #{tbctLimit,jdbcType=TINYINT},
+      </if>
+      <if test="tbctMin != null" >
+        #{tbctMin,jdbcType=DECIMAL},
+      </if>
+      <if test="tbctOrderParams != null" >
+        #{tbctOrderParams,jdbcType=VARCHAR},
+      </if>
+      <if test="tbctOrderProfile != null" >
+        #{tbctOrderProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbctValidity != null" >
+        #{tbctValidity,jdbcType=TINYINT},
+      </if>
+      <if test="tbctAddTime != null" >
+        #{tbctAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbctStatus != null" >
+        #{tbctStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.CouponTypeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_coupon_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_coupon_type
+    <set >
+      <if test="record.tbctId != null" >
+        tbct_id = #{record.tbctId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbctName != null" >
+        tbct_name = #{record.tbctName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbctFlag != null" >
+        tbct_flag = #{record.tbctFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbctSystem != null" >
+        tbct_system = #{record.tbctSystem,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbctUpdateTime != null" >
+        tbct_update_time = #{record.tbctUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbctStart != null" >
+        tbct_start = #{record.tbctStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbctEnd != null" >
+        tbct_end = #{record.tbctEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbctRemark != null" >
+        tbct_remark = #{record.tbctRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbctCount != null" >
+        tbct_count = #{record.tbctCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbctAmout != null" >
+        tbct_amout = #{record.tbctAmout,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbctLimit != null" >
+        tbct_limit = #{record.tbctLimit,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbctMin != null" >
+        tbct_min = #{record.tbctMin,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbctOrderParams != null" >
+        tbct_order_params = #{record.tbctOrderParams,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbctOrderProfile != null" >
+        tbct_order_profile = #{record.tbctOrderProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbctValidity != null" >
+        tbct_validity = #{record.tbctValidity,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbctAddTime != null" >
+        tbct_add_time = #{record.tbctAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbctStatus != null" >
+        tbct_status = #{record.tbctStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_coupon_type
+    set tbct_id = #{record.tbctId,jdbcType=INTEGER},
+      tbct_name = #{record.tbctName,jdbcType=VARCHAR},
+      tbct_flag = #{record.tbctFlag,jdbcType=VARCHAR},
+      tbct_system = #{record.tbctSystem,jdbcType=TINYINT},
+      tbct_update_time = #{record.tbctUpdateTime,jdbcType=TIMESTAMP},
+      tbct_start = #{record.tbctStart,jdbcType=TIMESTAMP},
+      tbct_end = #{record.tbctEnd,jdbcType=TIMESTAMP},
+      tbct_remark = #{record.tbctRemark,jdbcType=VARCHAR},
+      tbct_count = #{record.tbctCount,jdbcType=INTEGER},
+      tbct_amout = #{record.tbctAmout,jdbcType=INTEGER},
+      tbct_limit = #{record.tbctLimit,jdbcType=TINYINT},
+      tbct_min = #{record.tbctMin,jdbcType=DECIMAL},
+      tbct_order_params = #{record.tbctOrderParams,jdbcType=VARCHAR},
+      tbct_order_profile = #{record.tbctOrderProfile,jdbcType=VARCHAR},
+      tbct_validity = #{record.tbctValidity,jdbcType=TINYINT},
+      tbct_add_time = #{record.tbctAddTime,jdbcType=TIMESTAMP},
+      tbct_status = #{record.tbctStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.CouponType" >
+    update tb_coupon_type
+    <set >
+      <if test="tbctName != null" >
+        tbct_name = #{tbctName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbctFlag != null" >
+        tbct_flag = #{tbctFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbctSystem != null" >
+        tbct_system = #{tbctSystem,jdbcType=TINYINT},
+      </if>
+      <if test="tbctUpdateTime != null" >
+        tbct_update_time = #{tbctUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbctStart != null" >
+        tbct_start = #{tbctStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbctEnd != null" >
+        tbct_end = #{tbctEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbctRemark != null" >
+        tbct_remark = #{tbctRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbctCount != null" >
+        tbct_count = #{tbctCount,jdbcType=INTEGER},
+      </if>
+      <if test="tbctAmout != null" >
+        tbct_amout = #{tbctAmout,jdbcType=INTEGER},
+      </if>
+      <if test="tbctLimit != null" >
+        tbct_limit = #{tbctLimit,jdbcType=TINYINT},
+      </if>
+      <if test="tbctMin != null" >
+        tbct_min = #{tbctMin,jdbcType=DECIMAL},
+      </if>
+      <if test="tbctOrderParams != null" >
+        tbct_order_params = #{tbctOrderParams,jdbcType=VARCHAR},
+      </if>
+      <if test="tbctOrderProfile != null" >
+        tbct_order_profile = #{tbctOrderProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbctValidity != null" >
+        tbct_validity = #{tbctValidity,jdbcType=TINYINT},
+      </if>
+      <if test="tbctAddTime != null" >
+        tbct_add_time = #{tbctAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbctStatus != null" >
+        tbct_status = #{tbctStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbct_id = #{tbctId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.CouponType" >
+    update tb_coupon_type
+    set tbct_name = #{tbctName,jdbcType=VARCHAR},
+      tbct_flag = #{tbctFlag,jdbcType=VARCHAR},
+      tbct_system = #{tbctSystem,jdbcType=TINYINT},
+      tbct_update_time = #{tbctUpdateTime,jdbcType=TIMESTAMP},
+      tbct_start = #{tbctStart,jdbcType=TIMESTAMP},
+      tbct_end = #{tbctEnd,jdbcType=TIMESTAMP},
+      tbct_remark = #{tbctRemark,jdbcType=VARCHAR},
+      tbct_count = #{tbctCount,jdbcType=INTEGER},
+      tbct_amout = #{tbctAmout,jdbcType=INTEGER},
+      tbct_limit = #{tbctLimit,jdbcType=TINYINT},
+      tbct_min = #{tbctMin,jdbcType=DECIMAL},
+      tbct_order_params = #{tbctOrderParams,jdbcType=VARCHAR},
+      tbct_order_profile = #{tbctOrderProfile,jdbcType=VARCHAR},
+      tbct_validity = #{tbctValidity,jdbcType=TINYINT},
+      tbct_add_time = #{tbctAddTime,jdbcType=TIMESTAMP},
+      tbct_status = #{tbctStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbct_id = #{tbctId,jdbcType=INTEGER}
+  </update>
+</mapper>

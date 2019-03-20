@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.MaintainMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Maintain" >
+    <id column="tbm_id" property="tbmId" jdbcType="BIGINT" />
+    <result column="tbm_host" property="tbmHost" jdbcType="BIGINT" />
+    <result column="tbm_car" property="tbmCar" jdbcType="BIGINT" />
+    <result column="tbc_model" property="tbcModel" jdbcType="BIGINT" />
+    <result column="tbc_vin" property="tbcVin" jdbcType="VARCHAR" />
+    <result column="tbm_repair_sta" property="tbmRepairSta" jdbcType="BIGINT" />
+    <result column="tbm_curr_type" property="tbmCurrType" jdbcType="SMALLINT" />
+    <result column="tbm_type" property="tbmType" jdbcType="SMALLINT" />
+    <result column="tbm_expect_by" property="tbmExpectBy" jdbcType="SMALLINT" />
+    <result column="tbm_expect_date" property="tbmExpectDate" jdbcType="DATE" />
+    <result column="tbm_date" property="tbmDate" jdbcType="DATE" />
+    <result column="tbm_expect_km" property="tbmExpectKm" jdbcType="INTEGER" />
+    <result column="tbm_real_km" property="tbmRealKm" jdbcType="INTEGER" />
+    <result column="tbm_mileage" property="tbmMileage" jdbcType="INTEGER" />
+    <result column="tbm_carstatus" property="tbmCarstatus" jdbcType="VARCHAR" />
+    <result column="tbm_next_km" property="tbmNextKm" jdbcType="INTEGER" />
+    <result column="tbm_next_date" property="tbmNextDate" jdbcType="DATE" />
+    <result column="tbm_fee_type" property="tbmFeeType" jdbcType="SMALLINT" />
+    <result column="tbm_fee" property="tbmFee" jdbcType="DOUBLE" />
+    <result column="tbm_bill_no" property="tbmBillNo" jdbcType="VARCHAR" />
+    <result column="tbm_remark" property="tbmRemark" jdbcType="VARCHAR" />
+    <result column="tbm_add_time" property="tbmAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_editer" property="tbmEditer" jdbcType="BIGINT" />
+    <result column="tbm_updat_time" property="tbmUpdatTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_status" property="tbmStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbm_id, tbm_host, tbm_car, tbc_model, tbc_vin, tbm_repair_sta, tbm_curr_type, tbm_type, 
+    tbm_expect_by, tbm_expect_date, tbm_date, tbm_expect_km, tbm_real_km, tbm_mileage, 
+    tbm_carstatus, tbm_next_km, tbm_next_date, tbm_fee_type, tbm_fee, tbm_bill_no, tbm_remark, 
+    tbm_add_time, tbm_editer, tbm_updat_time, tbm_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.MaintainExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_maintain
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_maintain
+    where tbm_id = #{tbmId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_maintain
+    where tbm_id = #{tbmId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Maintain" >
+    insert into tb_maintain (tbm_id, tbm_host, tbm_car, 
+      tbc_model, tbc_vin, tbm_repair_sta, 
+      tbm_curr_type, tbm_type, tbm_expect_by, 
+      tbm_expect_date, tbm_date, tbm_expect_km, 
+      tbm_real_km, tbm_mileage, tbm_carstatus, 
+      tbm_next_km, tbm_next_date, tbm_fee_type, 
+      tbm_fee, tbm_bill_no, tbm_remark, 
+      tbm_add_time, tbm_editer, tbm_updat_time, 
+      tbm_status)
+    values (#{tbmId,jdbcType=BIGINT}, #{tbmHost,jdbcType=BIGINT}, #{tbmCar,jdbcType=BIGINT}, 
+      #{tbcModel,jdbcType=BIGINT}, #{tbcVin,jdbcType=VARCHAR}, #{tbmRepairSta,jdbcType=BIGINT}, 
+      #{tbmCurrType,jdbcType=SMALLINT}, #{tbmType,jdbcType=SMALLINT}, #{tbmExpectBy,jdbcType=SMALLINT}, 
+      #{tbmExpectDate,jdbcType=DATE}, #{tbmDate,jdbcType=DATE}, #{tbmExpectKm,jdbcType=INTEGER}, 
+      #{tbmRealKm,jdbcType=INTEGER}, #{tbmMileage,jdbcType=INTEGER}, #{tbmCarstatus,jdbcType=VARCHAR}, 
+      #{tbmNextKm,jdbcType=INTEGER}, #{tbmNextDate,jdbcType=DATE}, #{tbmFeeType,jdbcType=SMALLINT}, 
+      #{tbmFee,jdbcType=DOUBLE}, #{tbmBillNo,jdbcType=VARCHAR}, #{tbmRemark,jdbcType=VARCHAR}, 
+      #{tbmAddTime,jdbcType=TIMESTAMP}, #{tbmEditer,jdbcType=BIGINT}, #{tbmUpdatTime,jdbcType=TIMESTAMP}, 
+      #{tbmStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Maintain" >
+    insert into tb_maintain
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbmId != null" >
+        tbm_id,
+      </if>
+      <if test="tbmHost != null" >
+        tbm_host,
+      </if>
+      <if test="tbmCar != null" >
+        tbm_car,
+      </if>
+      <if test="tbcModel != null" >
+        tbc_model,
+      </if>
+      <if test="tbcVin != null" >
+        tbc_vin,
+      </if>
+      <if test="tbmRepairSta != null" >
+        tbm_repair_sta,
+      </if>
+      <if test="tbmCurrType != null" >
+        tbm_curr_type,
+      </if>
+      <if test="tbmType != null" >
+        tbm_type,
+      </if>
+      <if test="tbmExpectBy != null" >
+        tbm_expect_by,
+      </if>
+      <if test="tbmExpectDate != null" >
+        tbm_expect_date,
+      </if>
+      <if test="tbmDate != null" >
+        tbm_date,
+      </if>
+      <if test="tbmExpectKm != null" >
+        tbm_expect_km,
+      </if>
+      <if test="tbmRealKm != null" >
+        tbm_real_km,
+      </if>
+      <if test="tbmMileage != null" >
+        tbm_mileage,
+      </if>
+      <if test="tbmCarstatus != null" >
+        tbm_carstatus,
+      </if>
+      <if test="tbmNextKm != null" >
+        tbm_next_km,
+      </if>
+      <if test="tbmNextDate != null" >
+        tbm_next_date,
+      </if>
+      <if test="tbmFeeType != null" >
+        tbm_fee_type,
+      </if>
+      <if test="tbmFee != null" >
+        tbm_fee,
+      </if>
+      <if test="tbmBillNo != null" >
+        tbm_bill_no,
+      </if>
+      <if test="tbmRemark != null" >
+        tbm_remark,
+      </if>
+      <if test="tbmAddTime != null" >
+        tbm_add_time,
+      </if>
+      <if test="tbmEditer != null" >
+        tbm_editer,
+      </if>
+      <if test="tbmUpdatTime != null" >
+        tbm_updat_time,
+      </if>
+      <if test="tbmStatus != null" >
+        tbm_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbmId != null" >
+        #{tbmId,jdbcType=BIGINT},
+      </if>
+      <if test="tbmHost != null" >
+        #{tbmHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbmCar != null" >
+        #{tbmCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbcModel != null" >
+        #{tbcModel,jdbcType=BIGINT},
+      </if>
+      <if test="tbcVin != null" >
+        #{tbcVin,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmRepairSta != null" >
+        #{tbmRepairSta,jdbcType=BIGINT},
+      </if>
+      <if test="tbmCurrType != null" >
+        #{tbmCurrType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmType != null" >
+        #{tbmType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmExpectBy != null" >
+        #{tbmExpectBy,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmExpectDate != null" >
+        #{tbmExpectDate,jdbcType=DATE},
+      </if>
+      <if test="tbmDate != null" >
+        #{tbmDate,jdbcType=DATE},
+      </if>
+      <if test="tbmExpectKm != null" >
+        #{tbmExpectKm,jdbcType=INTEGER},
+      </if>
+      <if test="tbmRealKm != null" >
+        #{tbmRealKm,jdbcType=INTEGER},
+      </if>
+      <if test="tbmMileage != null" >
+        #{tbmMileage,jdbcType=INTEGER},
+      </if>
+      <if test="tbmCarstatus != null" >
+        #{tbmCarstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmNextKm != null" >
+        #{tbmNextKm,jdbcType=INTEGER},
+      </if>
+      <if test="tbmNextDate != null" >
+        #{tbmNextDate,jdbcType=DATE},
+      </if>
+      <if test="tbmFeeType != null" >
+        #{tbmFeeType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmFee != null" >
+        #{tbmFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbmBillNo != null" >
+        #{tbmBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmRemark != null" >
+        #{tbmRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmAddTime != null" >
+        #{tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmEditer != null" >
+        #{tbmEditer,jdbcType=BIGINT},
+      </if>
+      <if test="tbmUpdatTime != null" >
+        #{tbmUpdatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmStatus != null" >
+        #{tbmStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.MaintainExample" resultType="java.lang.Integer" >
+    select count(*) from tb_maintain
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_maintain
+    <set >
+      <if test="record.tbmId != null" >
+        tbm_id = #{record.tbmId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbmHost != null" >
+        tbm_host = #{record.tbmHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbmCar != null" >
+        tbm_car = #{record.tbmCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcModel != null" >
+        tbc_model = #{record.tbcModel,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcVin != null" >
+        tbc_vin = #{record.tbcVin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmRepairSta != null" >
+        tbm_repair_sta = #{record.tbmRepairSta,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbmCurrType != null" >
+        tbm_curr_type = #{record.tbmCurrType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbmType != null" >
+        tbm_type = #{record.tbmType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbmExpectBy != null" >
+        tbm_expect_by = #{record.tbmExpectBy,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbmExpectDate != null" >
+        tbm_expect_date = #{record.tbmExpectDate,jdbcType=DATE},
+      </if>
+      <if test="record.tbmDate != null" >
+        tbm_date = #{record.tbmDate,jdbcType=DATE},
+      </if>
+      <if test="record.tbmExpectKm != null" >
+        tbm_expect_km = #{record.tbmExpectKm,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmRealKm != null" >
+        tbm_real_km = #{record.tbmRealKm,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmMileage != null" >
+        tbm_mileage = #{record.tbmMileage,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmCarstatus != null" >
+        tbm_carstatus = #{record.tbmCarstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmNextKm != null" >
+        tbm_next_km = #{record.tbmNextKm,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmNextDate != null" >
+        tbm_next_date = #{record.tbmNextDate,jdbcType=DATE},
+      </if>
+      <if test="record.tbmFeeType != null" >
+        tbm_fee_type = #{record.tbmFeeType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbmFee != null" >
+        tbm_fee = #{record.tbmFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbmBillNo != null" >
+        tbm_bill_no = #{record.tbmBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmRemark != null" >
+        tbm_remark = #{record.tbmRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmAddTime != null" >
+        tbm_add_time = #{record.tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmEditer != null" >
+        tbm_editer = #{record.tbmEditer,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbmUpdatTime != null" >
+        tbm_updat_time = #{record.tbmUpdatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmStatus != null" >
+        tbm_status = #{record.tbmStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_maintain
+    set tbm_id = #{record.tbmId,jdbcType=BIGINT},
+      tbm_host = #{record.tbmHost,jdbcType=BIGINT},
+      tbm_car = #{record.tbmCar,jdbcType=BIGINT},
+      tbc_model = #{record.tbcModel,jdbcType=BIGINT},
+      tbc_vin = #{record.tbcVin,jdbcType=VARCHAR},
+      tbm_repair_sta = #{record.tbmRepairSta,jdbcType=BIGINT},
+      tbm_curr_type = #{record.tbmCurrType,jdbcType=SMALLINT},
+      tbm_type = #{record.tbmType,jdbcType=SMALLINT},
+      tbm_expect_by = #{record.tbmExpectBy,jdbcType=SMALLINT},
+      tbm_expect_date = #{record.tbmExpectDate,jdbcType=DATE},
+      tbm_date = #{record.tbmDate,jdbcType=DATE},
+      tbm_expect_km = #{record.tbmExpectKm,jdbcType=INTEGER},
+      tbm_real_km = #{record.tbmRealKm,jdbcType=INTEGER},
+      tbm_mileage = #{record.tbmMileage,jdbcType=INTEGER},
+      tbm_carstatus = #{record.tbmCarstatus,jdbcType=VARCHAR},
+      tbm_next_km = #{record.tbmNextKm,jdbcType=INTEGER},
+      tbm_next_date = #{record.tbmNextDate,jdbcType=DATE},
+      tbm_fee_type = #{record.tbmFeeType,jdbcType=SMALLINT},
+      tbm_fee = #{record.tbmFee,jdbcType=DOUBLE},
+      tbm_bill_no = #{record.tbmBillNo,jdbcType=VARCHAR},
+      tbm_remark = #{record.tbmRemark,jdbcType=VARCHAR},
+      tbm_add_time = #{record.tbmAddTime,jdbcType=TIMESTAMP},
+      tbm_editer = #{record.tbmEditer,jdbcType=BIGINT},
+      tbm_updat_time = #{record.tbmUpdatTime,jdbcType=TIMESTAMP},
+      tbm_status = #{record.tbmStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Maintain" >
+    update tb_maintain
+    <set >
+      <if test="tbmHost != null" >
+        tbm_host = #{tbmHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbmCar != null" >
+        tbm_car = #{tbmCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbcModel != null" >
+        tbc_model = #{tbcModel,jdbcType=BIGINT},
+      </if>
+      <if test="tbcVin != null" >
+        tbc_vin = #{tbcVin,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmRepairSta != null" >
+        tbm_repair_sta = #{tbmRepairSta,jdbcType=BIGINT},
+      </if>
+      <if test="tbmCurrType != null" >
+        tbm_curr_type = #{tbmCurrType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmType != null" >
+        tbm_type = #{tbmType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmExpectBy != null" >
+        tbm_expect_by = #{tbmExpectBy,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmExpectDate != null" >
+        tbm_expect_date = #{tbmExpectDate,jdbcType=DATE},
+      </if>
+      <if test="tbmDate != null" >
+        tbm_date = #{tbmDate,jdbcType=DATE},
+      </if>
+      <if test="tbmExpectKm != null" >
+        tbm_expect_km = #{tbmExpectKm,jdbcType=INTEGER},
+      </if>
+      <if test="tbmRealKm != null" >
+        tbm_real_km = #{tbmRealKm,jdbcType=INTEGER},
+      </if>
+      <if test="tbmMileage != null" >
+        tbm_mileage = #{tbmMileage,jdbcType=INTEGER},
+      </if>
+      <if test="tbmCarstatus != null" >
+        tbm_carstatus = #{tbmCarstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmNextKm != null" >
+        tbm_next_km = #{tbmNextKm,jdbcType=INTEGER},
+      </if>
+      <if test="tbmNextDate != null" >
+        tbm_next_date = #{tbmNextDate,jdbcType=DATE},
+      </if>
+      <if test="tbmFeeType != null" >
+        tbm_fee_type = #{tbmFeeType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmFee != null" >
+        tbm_fee = #{tbmFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbmBillNo != null" >
+        tbm_bill_no = #{tbmBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmRemark != null" >
+        tbm_remark = #{tbmRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmAddTime != null" >
+        tbm_add_time = #{tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmEditer != null" >
+        tbm_editer = #{tbmEditer,jdbcType=BIGINT},
+      </if>
+      <if test="tbmUpdatTime != null" >
+        tbm_updat_time = #{tbmUpdatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmStatus != null" >
+        tbm_status = #{tbmStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbm_id = #{tbmId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Maintain" >
+    update tb_maintain
+    set tbm_host = #{tbmHost,jdbcType=BIGINT},
+      tbm_car = #{tbmCar,jdbcType=BIGINT},
+      tbc_model = #{tbcModel,jdbcType=BIGINT},
+      tbc_vin = #{tbcVin,jdbcType=VARCHAR},
+      tbm_repair_sta = #{tbmRepairSta,jdbcType=BIGINT},
+      tbm_curr_type = #{tbmCurrType,jdbcType=SMALLINT},
+      tbm_type = #{tbmType,jdbcType=SMALLINT},
+      tbm_expect_by = #{tbmExpectBy,jdbcType=SMALLINT},
+      tbm_expect_date = #{tbmExpectDate,jdbcType=DATE},
+      tbm_date = #{tbmDate,jdbcType=DATE},
+      tbm_expect_km = #{tbmExpectKm,jdbcType=INTEGER},
+      tbm_real_km = #{tbmRealKm,jdbcType=INTEGER},
+      tbm_mileage = #{tbmMileage,jdbcType=INTEGER},
+      tbm_carstatus = #{tbmCarstatus,jdbcType=VARCHAR},
+      tbm_next_km = #{tbmNextKm,jdbcType=INTEGER},
+      tbm_next_date = #{tbmNextDate,jdbcType=DATE},
+      tbm_fee_type = #{tbmFeeType,jdbcType=SMALLINT},
+      tbm_fee = #{tbmFee,jdbcType=DOUBLE},
+      tbm_bill_no = #{tbmBillNo,jdbcType=VARCHAR},
+      tbm_remark = #{tbmRemark,jdbcType=VARCHAR},
+      tbm_add_time = #{tbmAddTime,jdbcType=TIMESTAMP},
+      tbm_editer = #{tbmEditer,jdbcType=BIGINT},
+      tbm_updat_time = #{tbmUpdatTime,jdbcType=TIMESTAMP},
+      tbm_status = #{tbmStatus,jdbcType=SMALLINT}
+    where tbm_id = #{tbmId,jdbcType=BIGINT}
+  </update>
+</mapper>

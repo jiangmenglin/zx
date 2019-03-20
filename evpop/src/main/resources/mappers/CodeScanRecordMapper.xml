@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.CodeScanRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.CodeScanRecord" >
+    <id column="tbcsr_id" property="tbcsrId" jdbcType="BIGINT" />
+    <result column="tbcsr_member" property="tbcsrMember" jdbcType="BIGINT" />
+    <result column="tbcsr_coupon" property="tbcsrCoupon" jdbcType="BIGINT" />
+    <result column="tbcsr_coupon_type" property="tbcsrCouponType" jdbcType="BIGINT" />
+    <result column="tbcsr_code_scan_config" property="tbcsrCodeScanConfig" jdbcType="BIGINT" />
+    <result column="tbcsr_unit_channel" property="tbcsrUnitChannel" jdbcType="BIGINT" />
+    <result column="tbcsr_unit_partner" property="tbcsrUnitPartner" jdbcType="BIGINT" />
+    <result column="tbcsr_coupon_amount" property="tbcsrCouponAmount" jdbcType="DOUBLE" />
+    <result column="tbcsr_coupon_amount_all" property="tbcsrCouponAmountAll" jdbcType="DOUBLE" />
+    <result column="tbcsr_code_source" property="tbcsrCodeSource" jdbcType="SMALLINT" />
+    <result column="tbcsr_code" property="tbcsrCode" jdbcType="VARCHAR" />
+    <result column="tbcsr_code_state" property="tbcsrCodeState" jdbcType="SMALLINT" />
+    <result column="tbcsr_code_time" property="tbcsrCodeTime" jdbcType="TIMESTAMP" />
+    <result column="tbcsr_remark" property="tbcsrRemark" jdbcType="VARCHAR" />
+    <result column="tbcsr_update_time" property="tbcsrUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbcsr_add_time" property="tbcsrAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbcsr_status" property="tbcsrStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbcsr_id, tbcsr_member, tbcsr_coupon, tbcsr_coupon_type, tbcsr_code_scan_config, 
+    tbcsr_unit_channel, tbcsr_unit_partner, tbcsr_coupon_amount, tbcsr_coupon_amount_all, 
+    tbcsr_code_source, tbcsr_code, tbcsr_code_state, tbcsr_code_time, tbcsr_remark, tbcsr_update_time, 
+    tbcsr_add_time, tbcsr_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.CodeScanRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_code_scan_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_code_scan_record
+    where tbcsr_id = #{tbcsrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_code_scan_record
+    where tbcsr_id = #{tbcsrId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.CodeScanRecord" >
+    insert into tb_code_scan_record (tbcsr_id, tbcsr_member, tbcsr_coupon, 
+      tbcsr_coupon_type, tbcsr_code_scan_config, tbcsr_unit_channel, 
+      tbcsr_unit_partner, tbcsr_coupon_amount, tbcsr_coupon_amount_all, 
+      tbcsr_code_source, tbcsr_code, tbcsr_code_state, 
+      tbcsr_code_time, tbcsr_remark, tbcsr_update_time, 
+      tbcsr_add_time, tbcsr_status)
+    values (#{tbcsrId,jdbcType=BIGINT}, #{tbcsrMember,jdbcType=BIGINT}, #{tbcsrCoupon,jdbcType=BIGINT}, 
+      #{tbcsrCouponType,jdbcType=BIGINT}, #{tbcsrCodeScanConfig,jdbcType=BIGINT}, #{tbcsrUnitChannel,jdbcType=BIGINT}, 
+      #{tbcsrUnitPartner,jdbcType=BIGINT}, #{tbcsrCouponAmount,jdbcType=DOUBLE}, #{tbcsrCouponAmountAll,jdbcType=DOUBLE}, 
+      #{tbcsrCodeSource,jdbcType=SMALLINT}, #{tbcsrCode,jdbcType=VARCHAR}, #{tbcsrCodeState,jdbcType=SMALLINT}, 
+      #{tbcsrCodeTime,jdbcType=TIMESTAMP}, #{tbcsrRemark,jdbcType=VARCHAR}, #{tbcsrUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbcsrAddTime,jdbcType=TIMESTAMP}, #{tbcsrStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.CodeScanRecord" >
+    insert into tb_code_scan_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbcsrId != null" >
+        tbcsr_id,
+      </if>
+      <if test="tbcsrMember != null" >
+        tbcsr_member,
+      </if>
+      <if test="tbcsrCoupon != null" >
+        tbcsr_coupon,
+      </if>
+      <if test="tbcsrCouponType != null" >
+        tbcsr_coupon_type,
+      </if>
+      <if test="tbcsrCodeScanConfig != null" >
+        tbcsr_code_scan_config,
+      </if>
+      <if test="tbcsrUnitChannel != null" >
+        tbcsr_unit_channel,
+      </if>
+      <if test="tbcsrUnitPartner != null" >
+        tbcsr_unit_partner,
+      </if>
+      <if test="tbcsrCouponAmount != null" >
+        tbcsr_coupon_amount,
+      </if>
+      <if test="tbcsrCouponAmountAll != null" >
+        tbcsr_coupon_amount_all,
+      </if>
+      <if test="tbcsrCodeSource != null" >
+        tbcsr_code_source,
+      </if>
+      <if test="tbcsrCode != null" >
+        tbcsr_code,
+      </if>
+      <if test="tbcsrCodeState != null" >
+        tbcsr_code_state,
+      </if>
+      <if test="tbcsrCodeTime != null" >
+        tbcsr_code_time,
+      </if>
+      <if test="tbcsrRemark != null" >
+        tbcsr_remark,
+      </if>
+      <if test="tbcsrUpdateTime != null" >
+        tbcsr_update_time,
+      </if>
+      <if test="tbcsrAddTime != null" >
+        tbcsr_add_time,
+      </if>
+      <if test="tbcsrStatus != null" >
+        tbcsr_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbcsrId != null" >
+        #{tbcsrId,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrMember != null" >
+        #{tbcsrMember,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrCoupon != null" >
+        #{tbcsrCoupon,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrCouponType != null" >
+        #{tbcsrCouponType,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrCodeScanConfig != null" >
+        #{tbcsrCodeScanConfig,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrUnitChannel != null" >
+        #{tbcsrUnitChannel,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrUnitPartner != null" >
+        #{tbcsrUnitPartner,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrCouponAmount != null" >
+        #{tbcsrCouponAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tbcsrCouponAmountAll != null" >
+        #{tbcsrCouponAmountAll,jdbcType=DOUBLE},
+      </if>
+      <if test="tbcsrCodeSource != null" >
+        #{tbcsrCodeSource,jdbcType=SMALLINT},
+      </if>
+      <if test="tbcsrCode != null" >
+        #{tbcsrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcsrCodeState != null" >
+        #{tbcsrCodeState,jdbcType=SMALLINT},
+      </if>
+      <if test="tbcsrCodeTime != null" >
+        #{tbcsrCodeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcsrRemark != null" >
+        #{tbcsrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcsrUpdateTime != null" >
+        #{tbcsrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcsrAddTime != null" >
+        #{tbcsrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcsrStatus != null" >
+        #{tbcsrStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.CodeScanRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tb_code_scan_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_code_scan_record
+    <set >
+      <if test="record.tbcsrId != null" >
+        tbcsr_id = #{record.tbcsrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcsrMember != null" >
+        tbcsr_member = #{record.tbcsrMember,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcsrCoupon != null" >
+        tbcsr_coupon = #{record.tbcsrCoupon,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcsrCouponType != null" >
+        tbcsr_coupon_type = #{record.tbcsrCouponType,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcsrCodeScanConfig != null" >
+        tbcsr_code_scan_config = #{record.tbcsrCodeScanConfig,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcsrUnitChannel != null" >
+        tbcsr_unit_channel = #{record.tbcsrUnitChannel,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcsrUnitPartner != null" >
+        tbcsr_unit_partner = #{record.tbcsrUnitPartner,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcsrCouponAmount != null" >
+        tbcsr_coupon_amount = #{record.tbcsrCouponAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbcsrCouponAmountAll != null" >
+        tbcsr_coupon_amount_all = #{record.tbcsrCouponAmountAll,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbcsrCodeSource != null" >
+        tbcsr_code_source = #{record.tbcsrCodeSource,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbcsrCode != null" >
+        tbcsr_code = #{record.tbcsrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcsrCodeState != null" >
+        tbcsr_code_state = #{record.tbcsrCodeState,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbcsrCodeTime != null" >
+        tbcsr_code_time = #{record.tbcsrCodeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcsrRemark != null" >
+        tbcsr_remark = #{record.tbcsrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcsrUpdateTime != null" >
+        tbcsr_update_time = #{record.tbcsrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcsrAddTime != null" >
+        tbcsr_add_time = #{record.tbcsrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcsrStatus != null" >
+        tbcsr_status = #{record.tbcsrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_code_scan_record
+    set tbcsr_id = #{record.tbcsrId,jdbcType=BIGINT},
+      tbcsr_member = #{record.tbcsrMember,jdbcType=BIGINT},
+      tbcsr_coupon = #{record.tbcsrCoupon,jdbcType=BIGINT},
+      tbcsr_coupon_type = #{record.tbcsrCouponType,jdbcType=BIGINT},
+      tbcsr_code_scan_config = #{record.tbcsrCodeScanConfig,jdbcType=BIGINT},
+      tbcsr_unit_channel = #{record.tbcsrUnitChannel,jdbcType=BIGINT},
+      tbcsr_unit_partner = #{record.tbcsrUnitPartner,jdbcType=BIGINT},
+      tbcsr_coupon_amount = #{record.tbcsrCouponAmount,jdbcType=DOUBLE},
+      tbcsr_coupon_amount_all = #{record.tbcsrCouponAmountAll,jdbcType=DOUBLE},
+      tbcsr_code_source = #{record.tbcsrCodeSource,jdbcType=SMALLINT},
+      tbcsr_code = #{record.tbcsrCode,jdbcType=VARCHAR},
+      tbcsr_code_state = #{record.tbcsrCodeState,jdbcType=SMALLINT},
+      tbcsr_code_time = #{record.tbcsrCodeTime,jdbcType=TIMESTAMP},
+      tbcsr_remark = #{record.tbcsrRemark,jdbcType=VARCHAR},
+      tbcsr_update_time = #{record.tbcsrUpdateTime,jdbcType=TIMESTAMP},
+      tbcsr_add_time = #{record.tbcsrAddTime,jdbcType=TIMESTAMP},
+      tbcsr_status = #{record.tbcsrStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.CodeScanRecord" >
+    update tb_code_scan_record
+    <set >
+      <if test="tbcsrMember != null" >
+        tbcsr_member = #{tbcsrMember,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrCoupon != null" >
+        tbcsr_coupon = #{tbcsrCoupon,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrCouponType != null" >
+        tbcsr_coupon_type = #{tbcsrCouponType,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrCodeScanConfig != null" >
+        tbcsr_code_scan_config = #{tbcsrCodeScanConfig,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrUnitChannel != null" >
+        tbcsr_unit_channel = #{tbcsrUnitChannel,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrUnitPartner != null" >
+        tbcsr_unit_partner = #{tbcsrUnitPartner,jdbcType=BIGINT},
+      </if>
+      <if test="tbcsrCouponAmount != null" >
+        tbcsr_coupon_amount = #{tbcsrCouponAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tbcsrCouponAmountAll != null" >
+        tbcsr_coupon_amount_all = #{tbcsrCouponAmountAll,jdbcType=DOUBLE},
+      </if>
+      <if test="tbcsrCodeSource != null" >
+        tbcsr_code_source = #{tbcsrCodeSource,jdbcType=SMALLINT},
+      </if>
+      <if test="tbcsrCode != null" >
+        tbcsr_code = #{tbcsrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcsrCodeState != null" >
+        tbcsr_code_state = #{tbcsrCodeState,jdbcType=SMALLINT},
+      </if>
+      <if test="tbcsrCodeTime != null" >
+        tbcsr_code_time = #{tbcsrCodeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcsrRemark != null" >
+        tbcsr_remark = #{tbcsrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcsrUpdateTime != null" >
+        tbcsr_update_time = #{tbcsrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcsrAddTime != null" >
+        tbcsr_add_time = #{tbcsrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcsrStatus != null" >
+        tbcsr_status = #{tbcsrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbcsr_id = #{tbcsrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.CodeScanRecord" >
+    update tb_code_scan_record
+    set tbcsr_member = #{tbcsrMember,jdbcType=BIGINT},
+      tbcsr_coupon = #{tbcsrCoupon,jdbcType=BIGINT},
+      tbcsr_coupon_type = #{tbcsrCouponType,jdbcType=BIGINT},
+      tbcsr_code_scan_config = #{tbcsrCodeScanConfig,jdbcType=BIGINT},
+      tbcsr_unit_channel = #{tbcsrUnitChannel,jdbcType=BIGINT},
+      tbcsr_unit_partner = #{tbcsrUnitPartner,jdbcType=BIGINT},
+      tbcsr_coupon_amount = #{tbcsrCouponAmount,jdbcType=DOUBLE},
+      tbcsr_coupon_amount_all = #{tbcsrCouponAmountAll,jdbcType=DOUBLE},
+      tbcsr_code_source = #{tbcsrCodeSource,jdbcType=SMALLINT},
+      tbcsr_code = #{tbcsrCode,jdbcType=VARCHAR},
+      tbcsr_code_state = #{tbcsrCodeState,jdbcType=SMALLINT},
+      tbcsr_code_time = #{tbcsrCodeTime,jdbcType=TIMESTAMP},
+      tbcsr_remark = #{tbcsrRemark,jdbcType=VARCHAR},
+      tbcsr_update_time = #{tbcsrUpdateTime,jdbcType=TIMESTAMP},
+      tbcsr_add_time = #{tbcsrAddTime,jdbcType=TIMESTAMP},
+      tbcsr_status = #{tbcsrStatus,jdbcType=SMALLINT}
+    where tbcsr_id = #{tbcsrId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ErrorMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Error" >
+    <id column="se_id" property="seId" jdbcType="BIGINT" />
+    <result column="se_flag" property="seFlag" jdbcType="VARCHAR" />
+    <result column="se_count" property="seCount" jdbcType="INTEGER" />
+    <result column="se_update_time" property="seUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="se_add_time" property="seAddTime" jdbcType="TIMESTAMP" />
+    <result column="se_status" property="seStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.Error" extends="BaseResultMap" >
+    <result column="se_title" property="seTitle" jdbcType="LONGVARCHAR" />
+    <result column="se_content" property="seContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    se_id, se_flag, se_count, se_update_time, se_add_time, se_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    se_title, se_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.ErrorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from srv_error
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ErrorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_error
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from srv_error
+    where se_id = #{seId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from srv_error
+    where se_id = #{seId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Error" >
+    insert into srv_error (se_id, se_flag, se_count, 
+      se_update_time, se_add_time, se_status, 
+      se_title, se_content)
+    values (#{seId,jdbcType=BIGINT}, #{seFlag,jdbcType=VARCHAR}, #{seCount,jdbcType=INTEGER}, 
+      #{seUpdateTime,jdbcType=TIMESTAMP}, #{seAddTime,jdbcType=TIMESTAMP}, #{seStatus,jdbcType=SMALLINT}, 
+      #{seTitle,jdbcType=LONGVARCHAR}, #{seContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Error" >
+    insert into srv_error
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seId != null" >
+        se_id,
+      </if>
+      <if test="seFlag != null" >
+        se_flag,
+      </if>
+      <if test="seCount != null" >
+        se_count,
+      </if>
+      <if test="seUpdateTime != null" >
+        se_update_time,
+      </if>
+      <if test="seAddTime != null" >
+        se_add_time,
+      </if>
+      <if test="seStatus != null" >
+        se_status,
+      </if>
+      <if test="seTitle != null" >
+        se_title,
+      </if>
+      <if test="seContent != null" >
+        se_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seId != null" >
+        #{seId,jdbcType=BIGINT},
+      </if>
+      <if test="seFlag != null" >
+        #{seFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="seCount != null" >
+        #{seCount,jdbcType=INTEGER},
+      </if>
+      <if test="seUpdateTime != null" >
+        #{seUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seAddTime != null" >
+        #{seAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seStatus != null" >
+        #{seStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="seTitle != null" >
+        #{seTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="seContent != null" >
+        #{seContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ErrorExample" resultType="java.lang.Integer" >
+    select count(*) from srv_error
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_error
+    <set >
+      <if test="record.seId != null" >
+        se_id = #{record.seId,jdbcType=BIGINT},
+      </if>
+      <if test="record.seFlag != null" >
+        se_flag = #{record.seFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.seCount != null" >
+        se_count = #{record.seCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.seUpdateTime != null" >
+        se_update_time = #{record.seUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.seAddTime != null" >
+        se_add_time = #{record.seAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.seStatus != null" >
+        se_status = #{record.seStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.seTitle != null" >
+        se_title = #{record.seTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.seContent != null" >
+        se_content = #{record.seContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update srv_error
+    set se_id = #{record.seId,jdbcType=BIGINT},
+      se_flag = #{record.seFlag,jdbcType=VARCHAR},
+      se_count = #{record.seCount,jdbcType=INTEGER},
+      se_update_time = #{record.seUpdateTime,jdbcType=TIMESTAMP},
+      se_add_time = #{record.seAddTime,jdbcType=TIMESTAMP},
+      se_status = #{record.seStatus,jdbcType=SMALLINT},
+      se_title = #{record.seTitle,jdbcType=LONGVARCHAR},
+      se_content = #{record.seContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_error
+    set se_id = #{record.seId,jdbcType=BIGINT},
+      se_flag = #{record.seFlag,jdbcType=VARCHAR},
+      se_count = #{record.seCount,jdbcType=INTEGER},
+      se_update_time = #{record.seUpdateTime,jdbcType=TIMESTAMP},
+      se_add_time = #{record.seAddTime,jdbcType=TIMESTAMP},
+      se_status = #{record.seStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Error" >
+    update srv_error
+    <set >
+      <if test="seFlag != null" >
+        se_flag = #{seFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="seCount != null" >
+        se_count = #{seCount,jdbcType=INTEGER},
+      </if>
+      <if test="seUpdateTime != null" >
+        se_update_time = #{seUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seAddTime != null" >
+        se_add_time = #{seAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seStatus != null" >
+        se_status = #{seStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="seTitle != null" >
+        se_title = #{seTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="seContent != null" >
+        se_content = #{seContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where se_id = #{seId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.Error" >
+    update srv_error
+    set se_flag = #{seFlag,jdbcType=VARCHAR},
+      se_count = #{seCount,jdbcType=INTEGER},
+      se_update_time = #{seUpdateTime,jdbcType=TIMESTAMP},
+      se_add_time = #{seAddTime,jdbcType=TIMESTAMP},
+      se_status = #{seStatus,jdbcType=SMALLINT},
+      se_title = #{seTitle,jdbcType=LONGVARCHAR},
+      se_content = #{seContent,jdbcType=LONGVARCHAR}
+    where se_id = #{seId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Error" >
+    update srv_error
+    set se_flag = #{seFlag,jdbcType=VARCHAR},
+      se_count = #{seCount,jdbcType=INTEGER},
+      se_update_time = #{seUpdateTime,jdbcType=TIMESTAMP},
+      se_add_time = #{seAddTime,jdbcType=TIMESTAMP},
+      se_status = #{seStatus,jdbcType=SMALLINT}
+    where se_id = #{seId,jdbcType=BIGINT}
+  </update>
+</mapper>

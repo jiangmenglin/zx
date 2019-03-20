@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.CashRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.CashRecord" >
+    <id column="tbcr_id" property="tbcrId" jdbcType="BIGINT" />
+    <result column="tbcr_host" property="tbcrHost" jdbcType="BIGINT" />
+    <result column="tbcr_trade_no" property="tbcrTradeNo" jdbcType="VARCHAR" />
+    <result column="tbcr_ammount" property="tbcrAmmount" jdbcType="DOUBLE" />
+    <result column="tbcr_title" property="tbcrTitle" jdbcType="VARCHAR" />
+    <result column="tbcr_voucher" property="tbcrVoucher" jdbcType="VARCHAR" />
+    <result column="tbcr_image" property="tbcrImage" jdbcType="VARCHAR" />
+    <result column="tbcr_adder" property="tbcrAdder" jdbcType="BIGINT" />
+    <result column="tbcr_checker" property="tbcrChecker" jdbcType="BIGINT" />
+    <result column="tbcr_remark" property="tbcrRemark" jdbcType="VARCHAR" />
+    <result column="tbcr_update_time" property="tbcrUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbcr_add_time" property="tbcrAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbcr_status" property="tbcrStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbcr_id, tbcr_host, tbcr_trade_no, tbcr_ammount, tbcr_title, tbcr_voucher, tbcr_image, 
+    tbcr_adder, tbcr_checker, tbcr_remark, tbcr_update_time, tbcr_add_time, tbcr_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.CashRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_cash_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_cash_record
+    where tbcr_id = #{tbcrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_cash_record
+    where tbcr_id = #{tbcrId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.CashRecord" >
+    insert into tb_cash_record (tbcr_id, tbcr_host, tbcr_trade_no, 
+      tbcr_ammount, tbcr_title, tbcr_voucher, 
+      tbcr_image, tbcr_adder, tbcr_checker, 
+      tbcr_remark, tbcr_update_time, tbcr_add_time, 
+      tbcr_status)
+    values (#{tbcrId,jdbcType=BIGINT}, #{tbcrHost,jdbcType=BIGINT}, #{tbcrTradeNo,jdbcType=VARCHAR}, 
+      #{tbcrAmmount,jdbcType=DOUBLE}, #{tbcrTitle,jdbcType=VARCHAR}, #{tbcrVoucher,jdbcType=VARCHAR}, 
+      #{tbcrImage,jdbcType=VARCHAR}, #{tbcrAdder,jdbcType=BIGINT}, #{tbcrChecker,jdbcType=BIGINT}, 
+      #{tbcrRemark,jdbcType=VARCHAR}, #{tbcrUpdateTime,jdbcType=TIMESTAMP}, #{tbcrAddTime,jdbcType=TIMESTAMP}, 
+      #{tbcrStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.CashRecord" >
+    insert into tb_cash_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbcrId != null" >
+        tbcr_id,
+      </if>
+      <if test="tbcrHost != null" >
+        tbcr_host,
+      </if>
+      <if test="tbcrTradeNo != null" >
+        tbcr_trade_no,
+      </if>
+      <if test="tbcrAmmount != null" >
+        tbcr_ammount,
+      </if>
+      <if test="tbcrTitle != null" >
+        tbcr_title,
+      </if>
+      <if test="tbcrVoucher != null" >
+        tbcr_voucher,
+      </if>
+      <if test="tbcrImage != null" >
+        tbcr_image,
+      </if>
+      <if test="tbcrAdder != null" >
+        tbcr_adder,
+      </if>
+      <if test="tbcrChecker != null" >
+        tbcr_checker,
+      </if>
+      <if test="tbcrRemark != null" >
+        tbcr_remark,
+      </if>
+      <if test="tbcrUpdateTime != null" >
+        tbcr_update_time,
+      </if>
+      <if test="tbcrAddTime != null" >
+        tbcr_add_time,
+      </if>
+      <if test="tbcrStatus != null" >
+        tbcr_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbcrId != null" >
+        #{tbcrId,jdbcType=BIGINT},
+      </if>
+      <if test="tbcrHost != null" >
+        #{tbcrHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbcrTradeNo != null" >
+        #{tbcrTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcrAmmount != null" >
+        #{tbcrAmmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tbcrTitle != null" >
+        #{tbcrTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcrVoucher != null" >
+        #{tbcrVoucher,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcrImage != null" >
+        #{tbcrImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcrAdder != null" >
+        #{tbcrAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbcrChecker != null" >
+        #{tbcrChecker,jdbcType=BIGINT},
+      </if>
+      <if test="tbcrRemark != null" >
+        #{tbcrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcrUpdateTime != null" >
+        #{tbcrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcrAddTime != null" >
+        #{tbcrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcrStatus != null" >
+        #{tbcrStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.CashRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tb_cash_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_cash_record
+    <set >
+      <if test="record.tbcrId != null" >
+        tbcr_id = #{record.tbcrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcrHost != null" >
+        tbcr_host = #{record.tbcrHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcrTradeNo != null" >
+        tbcr_trade_no = #{record.tbcrTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcrAmmount != null" >
+        tbcr_ammount = #{record.tbcrAmmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbcrTitle != null" >
+        tbcr_title = #{record.tbcrTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcrVoucher != null" >
+        tbcr_voucher = #{record.tbcrVoucher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcrImage != null" >
+        tbcr_image = #{record.tbcrImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcrAdder != null" >
+        tbcr_adder = #{record.tbcrAdder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcrChecker != null" >
+        tbcr_checker = #{record.tbcrChecker,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcrRemark != null" >
+        tbcr_remark = #{record.tbcrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcrUpdateTime != null" >
+        tbcr_update_time = #{record.tbcrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcrAddTime != null" >
+        tbcr_add_time = #{record.tbcrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcrStatus != null" >
+        tbcr_status = #{record.tbcrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_cash_record
+    set tbcr_id = #{record.tbcrId,jdbcType=BIGINT},
+      tbcr_host = #{record.tbcrHost,jdbcType=BIGINT},
+      tbcr_trade_no = #{record.tbcrTradeNo,jdbcType=VARCHAR},
+      tbcr_ammount = #{record.tbcrAmmount,jdbcType=DOUBLE},
+      tbcr_title = #{record.tbcrTitle,jdbcType=VARCHAR},
+      tbcr_voucher = #{record.tbcrVoucher,jdbcType=VARCHAR},
+      tbcr_image = #{record.tbcrImage,jdbcType=VARCHAR},
+      tbcr_adder = #{record.tbcrAdder,jdbcType=BIGINT},
+      tbcr_checker = #{record.tbcrChecker,jdbcType=BIGINT},
+      tbcr_remark = #{record.tbcrRemark,jdbcType=VARCHAR},
+      tbcr_update_time = #{record.tbcrUpdateTime,jdbcType=TIMESTAMP},
+      tbcr_add_time = #{record.tbcrAddTime,jdbcType=TIMESTAMP},
+      tbcr_status = #{record.tbcrStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.CashRecord" >
+    update tb_cash_record
+    <set >
+      <if test="tbcrHost != null" >
+        tbcr_host = #{tbcrHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbcrTradeNo != null" >
+        tbcr_trade_no = #{tbcrTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcrAmmount != null" >
+        tbcr_ammount = #{tbcrAmmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tbcrTitle != null" >
+        tbcr_title = #{tbcrTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcrVoucher != null" >
+        tbcr_voucher = #{tbcrVoucher,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcrImage != null" >
+        tbcr_image = #{tbcrImage,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcrAdder != null" >
+        tbcr_adder = #{tbcrAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbcrChecker != null" >
+        tbcr_checker = #{tbcrChecker,jdbcType=BIGINT},
+      </if>
+      <if test="tbcrRemark != null" >
+        tbcr_remark = #{tbcrRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcrUpdateTime != null" >
+        tbcr_update_time = #{tbcrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcrAddTime != null" >
+        tbcr_add_time = #{tbcrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcrStatus != null" >
+        tbcr_status = #{tbcrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbcr_id = #{tbcrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.CashRecord" >
+    update tb_cash_record
+    set tbcr_host = #{tbcrHost,jdbcType=BIGINT},
+      tbcr_trade_no = #{tbcrTradeNo,jdbcType=VARCHAR},
+      tbcr_ammount = #{tbcrAmmount,jdbcType=DOUBLE},
+      tbcr_title = #{tbcrTitle,jdbcType=VARCHAR},
+      tbcr_voucher = #{tbcrVoucher,jdbcType=VARCHAR},
+      tbcr_image = #{tbcrImage,jdbcType=VARCHAR},
+      tbcr_adder = #{tbcrAdder,jdbcType=BIGINT},
+      tbcr_checker = #{tbcrChecker,jdbcType=BIGINT},
+      tbcr_remark = #{tbcrRemark,jdbcType=VARCHAR},
+      tbcr_update_time = #{tbcrUpdateTime,jdbcType=TIMESTAMP},
+      tbcr_add_time = #{tbcrAddTime,jdbcType=TIMESTAMP},
+      tbcr_status = #{tbcrStatus,jdbcType=SMALLINT}
+    where tbcr_id = #{tbcrId,jdbcType=BIGINT}
+  </update>
+</mapper>

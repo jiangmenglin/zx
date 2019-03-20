@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.SmsMtMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.SmsMt" >
+    <id column="tbsm_id" property="tbsmId" jdbcType="BIGINT" />
+    <result column="tbsm_host" property="tbsmHost" jdbcType="BIGINT" />
+    <result column="tbsm_type" property="tbsmType" jdbcType="SMALLINT" />
+    <result column="tbsm_mobile" property="tbsmMobile" jdbcType="VARCHAR" />
+    <result column="tbsm_content" property="tbsmContent" jdbcType="VARCHAR" />
+    <result column="tbsm_editor" property="tbsmEditor" jdbcType="BIGINT" />
+    <result column="tbsm_channel" property="tbsmChannel" jdbcType="BIGINT" />
+    <result column="tbsm_update_time" property="tbsmUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbsm_add_time" property="tbsmAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbsm_remark" property="tbsmRemark" jdbcType="VARCHAR" />
+    <result column="tbsm_status" property="tbsmStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbsm_id, tbsm_host, tbsm_type, tbsm_mobile, tbsm_content, tbsm_editor, tbsm_channel, 
+    tbsm_update_time, tbsm_add_time, tbsm_remark, tbsm_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.SmsMtExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_sms_mt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sms_mt
+    where tbsm_id = #{tbsmId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_sms_mt
+    where tbsm_id = #{tbsmId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.SmsMt" >
+    insert into tb_sms_mt (tbsm_id, tbsm_host, tbsm_type, 
+      tbsm_mobile, tbsm_content, tbsm_editor, 
+      tbsm_channel, tbsm_update_time, tbsm_add_time, 
+      tbsm_remark, tbsm_status)
+    values (#{tbsmId,jdbcType=BIGINT}, #{tbsmHost,jdbcType=BIGINT}, #{tbsmType,jdbcType=SMALLINT}, 
+      #{tbsmMobile,jdbcType=VARCHAR}, #{tbsmContent,jdbcType=VARCHAR}, #{tbsmEditor,jdbcType=BIGINT}, 
+      #{tbsmChannel,jdbcType=BIGINT}, #{tbsmUpdateTime,jdbcType=TIMESTAMP}, #{tbsmAddTime,jdbcType=TIMESTAMP}, 
+      #{tbsmRemark,jdbcType=VARCHAR}, #{tbsmStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.SmsMt" >
+    insert into tb_sms_mt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbsmId != null" >
+        tbsm_id,
+      </if>
+      <if test="tbsmHost != null" >
+        tbsm_host,
+      </if>
+      <if test="tbsmType != null" >
+        tbsm_type,
+      </if>
+      <if test="tbsmMobile != null" >
+        tbsm_mobile,
+      </if>
+      <if test="tbsmContent != null" >
+        tbsm_content,
+      </if>
+      <if test="tbsmEditor != null" >
+        tbsm_editor,
+      </if>
+      <if test="tbsmChannel != null" >
+        tbsm_channel,
+      </if>
+      <if test="tbsmUpdateTime != null" >
+        tbsm_update_time,
+      </if>
+      <if test="tbsmAddTime != null" >
+        tbsm_add_time,
+      </if>
+      <if test="tbsmRemark != null" >
+        tbsm_remark,
+      </if>
+      <if test="tbsmStatus != null" >
+        tbsm_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbsmId != null" >
+        #{tbsmId,jdbcType=BIGINT},
+      </if>
+      <if test="tbsmHost != null" >
+        #{tbsmHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbsmType != null" >
+        #{tbsmType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsmMobile != null" >
+        #{tbsmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsmContent != null" >
+        #{tbsmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsmEditor != null" >
+        #{tbsmEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tbsmChannel != null" >
+        #{tbsmChannel,jdbcType=BIGINT},
+      </if>
+      <if test="tbsmUpdateTime != null" >
+        #{tbsmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsmAddTime != null" >
+        #{tbsmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsmRemark != null" >
+        #{tbsmRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsmStatus != null" >
+        #{tbsmStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.SmsMtExample" resultType="java.lang.Integer" >
+    select count(*) from tb_sms_mt
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_sms_mt
+    <set >
+      <if test="record.tbsmId != null" >
+        tbsm_id = #{record.tbsmId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbsmHost != null" >
+        tbsm_host = #{record.tbsmHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbsmType != null" >
+        tbsm_type = #{record.tbsmType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsmMobile != null" >
+        tbsm_mobile = #{record.tbsmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsmContent != null" >
+        tbsm_content = #{record.tbsmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsmEditor != null" >
+        tbsm_editor = #{record.tbsmEditor,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbsmChannel != null" >
+        tbsm_channel = #{record.tbsmChannel,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbsmUpdateTime != null" >
+        tbsm_update_time = #{record.tbsmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbsmAddTime != null" >
+        tbsm_add_time = #{record.tbsmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbsmRemark != null" >
+        tbsm_remark = #{record.tbsmRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsmStatus != null" >
+        tbsm_status = #{record.tbsmStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_sms_mt
+    set tbsm_id = #{record.tbsmId,jdbcType=BIGINT},
+      tbsm_host = #{record.tbsmHost,jdbcType=BIGINT},
+      tbsm_type = #{record.tbsmType,jdbcType=SMALLINT},
+      tbsm_mobile = #{record.tbsmMobile,jdbcType=VARCHAR},
+      tbsm_content = #{record.tbsmContent,jdbcType=VARCHAR},
+      tbsm_editor = #{record.tbsmEditor,jdbcType=BIGINT},
+      tbsm_channel = #{record.tbsmChannel,jdbcType=BIGINT},
+      tbsm_update_time = #{record.tbsmUpdateTime,jdbcType=TIMESTAMP},
+      tbsm_add_time = #{record.tbsmAddTime,jdbcType=TIMESTAMP},
+      tbsm_remark = #{record.tbsmRemark,jdbcType=VARCHAR},
+      tbsm_status = #{record.tbsmStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.SmsMt" >
+    update tb_sms_mt
+    <set >
+      <if test="tbsmHost != null" >
+        tbsm_host = #{tbsmHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbsmType != null" >
+        tbsm_type = #{tbsmType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsmMobile != null" >
+        tbsm_mobile = #{tbsmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsmContent != null" >
+        tbsm_content = #{tbsmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsmEditor != null" >
+        tbsm_editor = #{tbsmEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tbsmChannel != null" >
+        tbsm_channel = #{tbsmChannel,jdbcType=BIGINT},
+      </if>
+      <if test="tbsmUpdateTime != null" >
+        tbsm_update_time = #{tbsmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsmAddTime != null" >
+        tbsm_add_time = #{tbsmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsmRemark != null" >
+        tbsm_remark = #{tbsmRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsmStatus != null" >
+        tbsm_status = #{tbsmStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbsm_id = #{tbsmId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.SmsMt" >
+    update tb_sms_mt
+    set tbsm_host = #{tbsmHost,jdbcType=BIGINT},
+      tbsm_type = #{tbsmType,jdbcType=SMALLINT},
+      tbsm_mobile = #{tbsmMobile,jdbcType=VARCHAR},
+      tbsm_content = #{tbsmContent,jdbcType=VARCHAR},
+      tbsm_editor = #{tbsmEditor,jdbcType=BIGINT},
+      tbsm_channel = #{tbsmChannel,jdbcType=BIGINT},
+      tbsm_update_time = #{tbsmUpdateTime,jdbcType=TIMESTAMP},
+      tbsm_add_time = #{tbsmAddTime,jdbcType=TIMESTAMP},
+      tbsm_remark = #{tbsmRemark,jdbcType=VARCHAR},
+      tbsm_status = #{tbsmStatus,jdbcType=SMALLINT}
+    where tbsm_id = #{tbsmId,jdbcType=BIGINT}
+  </update>
+</mapper>

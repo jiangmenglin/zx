@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LongInstructionsMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.LongInstructions" >
+    <id column="tbli_id" property="tbliId" jdbcType="BIGINT" />
+    <result column="tbli_host" property="tbliHost" jdbcType="BIGINT" />
+    <result column="tbli_name" property="tbliName" jdbcType="VARCHAR" />
+    <result column="tbliFlag" property="tbliflag" jdbcType="VARCHAR" />
+    <result column="tbli_describe" property="tbliDescribe" jdbcType="VARCHAR" />
+    <result column="tbli_number" property="tbliNumber" jdbcType="VARCHAR" />
+    <result column="tbli_add_time" property="tbliAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbli_update_time" property="tbliUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbli_status" property="tbliStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.LongInstructions" extends="BaseResultMap" >
+    <result column="tbli_content" property="tbliContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbli_id, tbli_host, tbli_name, tbliFlag, tbli_describe, tbli_number, tbli_add_time, 
+    tbli_update_time, tbli_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbli_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.LongInstructionsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_long_instructions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LongInstructionsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_long_instructions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_long_instructions
+    where tbli_id = #{tbliId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_long_instructions
+    where tbli_id = #{tbliId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.LongInstructions" >
+    insert into tb_long_instructions (tbli_id, tbli_host, tbli_name, 
+      tbliFlag, tbli_describe, tbli_number, 
+      tbli_add_time, tbli_update_time, tbli_status, 
+      tbli_content)
+    values (#{tbliId,jdbcType=BIGINT}, #{tbliHost,jdbcType=BIGINT}, #{tbliName,jdbcType=VARCHAR}, 
+      #{tbliflag,jdbcType=VARCHAR}, #{tbliDescribe,jdbcType=VARCHAR}, #{tbliNumber,jdbcType=VARCHAR}, 
+      #{tbliAddTime,jdbcType=TIMESTAMP}, #{tbliUpdateTime,jdbcType=TIMESTAMP}, #{tbliStatus,jdbcType=SMALLINT}, 
+      #{tbliContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.LongInstructions" >
+    insert into tb_long_instructions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbliId != null" >
+        tbli_id,
+      </if>
+      <if test="tbliHost != null" >
+        tbli_host,
+      </if>
+      <if test="tbliName != null" >
+        tbli_name,
+      </if>
+      <if test="tbliflag != null" >
+        tbliFlag,
+      </if>
+      <if test="tbliDescribe != null" >
+        tbli_describe,
+      </if>
+      <if test="tbliNumber != null" >
+        tbli_number,
+      </if>
+      <if test="tbliAddTime != null" >
+        tbli_add_time,
+      </if>
+      <if test="tbliUpdateTime != null" >
+        tbli_update_time,
+      </if>
+      <if test="tbliStatus != null" >
+        tbli_status,
+      </if>
+      <if test="tbliContent != null" >
+        tbli_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbliId != null" >
+        #{tbliId,jdbcType=BIGINT},
+      </if>
+      <if test="tbliHost != null" >
+        #{tbliHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbliName != null" >
+        #{tbliName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbliflag != null" >
+        #{tbliflag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbliDescribe != null" >
+        #{tbliDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="tbliNumber != null" >
+        #{tbliNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tbliAddTime != null" >
+        #{tbliAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbliUpdateTime != null" >
+        #{tbliUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbliStatus != null" >
+        #{tbliStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbliContent != null" >
+        #{tbliContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LongInstructionsExample" resultType="java.lang.Integer" >
+    select count(*) from tb_long_instructions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_long_instructions
+    <set >
+      <if test="record.tbliId != null" >
+        tbli_id = #{record.tbliId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbliHost != null" >
+        tbli_host = #{record.tbliHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbliName != null" >
+        tbli_name = #{record.tbliName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbliflag != null" >
+        tbliFlag = #{record.tbliflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbliDescribe != null" >
+        tbli_describe = #{record.tbliDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbliNumber != null" >
+        tbli_number = #{record.tbliNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbliAddTime != null" >
+        tbli_add_time = #{record.tbliAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbliUpdateTime != null" >
+        tbli_update_time = #{record.tbliUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbliStatus != null" >
+        tbli_status = #{record.tbliStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbliContent != null" >
+        tbli_content = #{record.tbliContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_long_instructions
+    set tbli_id = #{record.tbliId,jdbcType=BIGINT},
+      tbli_host = #{record.tbliHost,jdbcType=BIGINT},
+      tbli_name = #{record.tbliName,jdbcType=VARCHAR},
+      tbliFlag = #{record.tbliflag,jdbcType=VARCHAR},
+      tbli_describe = #{record.tbliDescribe,jdbcType=VARCHAR},
+      tbli_number = #{record.tbliNumber,jdbcType=VARCHAR},
+      tbli_add_time = #{record.tbliAddTime,jdbcType=TIMESTAMP},
+      tbli_update_time = #{record.tbliUpdateTime,jdbcType=TIMESTAMP},
+      tbli_status = #{record.tbliStatus,jdbcType=SMALLINT},
+      tbli_content = #{record.tbliContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_long_instructions
+    set tbli_id = #{record.tbliId,jdbcType=BIGINT},
+      tbli_host = #{record.tbliHost,jdbcType=BIGINT},
+      tbli_name = #{record.tbliName,jdbcType=VARCHAR},
+      tbliFlag = #{record.tbliflag,jdbcType=VARCHAR},
+      tbli_describe = #{record.tbliDescribe,jdbcType=VARCHAR},
+      tbli_number = #{record.tbliNumber,jdbcType=VARCHAR},
+      tbli_add_time = #{record.tbliAddTime,jdbcType=TIMESTAMP},
+      tbli_update_time = #{record.tbliUpdateTime,jdbcType=TIMESTAMP},
+      tbli_status = #{record.tbliStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.LongInstructions" >
+    update tb_long_instructions
+    <set >
+      <if test="tbliHost != null" >
+        tbli_host = #{tbliHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbliName != null" >
+        tbli_name = #{tbliName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbliflag != null" >
+        tbliFlag = #{tbliflag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbliDescribe != null" >
+        tbli_describe = #{tbliDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="tbliNumber != null" >
+        tbli_number = #{tbliNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tbliAddTime != null" >
+        tbli_add_time = #{tbliAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbliUpdateTime != null" >
+        tbli_update_time = #{tbliUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbliStatus != null" >
+        tbli_status = #{tbliStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbliContent != null" >
+        tbli_content = #{tbliContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbli_id = #{tbliId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.LongInstructions" >
+    update tb_long_instructions
+    set tbli_host = #{tbliHost,jdbcType=BIGINT},
+      tbli_name = #{tbliName,jdbcType=VARCHAR},
+      tbliFlag = #{tbliflag,jdbcType=VARCHAR},
+      tbli_describe = #{tbliDescribe,jdbcType=VARCHAR},
+      tbli_number = #{tbliNumber,jdbcType=VARCHAR},
+      tbli_add_time = #{tbliAddTime,jdbcType=TIMESTAMP},
+      tbli_update_time = #{tbliUpdateTime,jdbcType=TIMESTAMP},
+      tbli_status = #{tbliStatus,jdbcType=SMALLINT},
+      tbli_content = #{tbliContent,jdbcType=LONGVARCHAR}
+    where tbli_id = #{tbliId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.LongInstructions" >
+    update tb_long_instructions
+    set tbli_host = #{tbliHost,jdbcType=BIGINT},
+      tbli_name = #{tbliName,jdbcType=VARCHAR},
+      tbliFlag = #{tbliflag,jdbcType=VARCHAR},
+      tbli_describe = #{tbliDescribe,jdbcType=VARCHAR},
+      tbli_number = #{tbliNumber,jdbcType=VARCHAR},
+      tbli_add_time = #{tbliAddTime,jdbcType=TIMESTAMP},
+      tbli_update_time = #{tbliUpdateTime,jdbcType=TIMESTAMP},
+      tbli_status = #{tbliStatus,jdbcType=SMALLINT}
+    where tbli_id = #{tbliId,jdbcType=BIGINT}
+  </update>
+</mapper>

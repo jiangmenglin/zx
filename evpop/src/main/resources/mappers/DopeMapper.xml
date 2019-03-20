@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.DopeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Dope" >
+    <id column="tbd_id" property="tbdId" jdbcType="BIGINT" />
+    <result column="tbd_content" property="tbdContent" jdbcType="VARCHAR" />
+    <result column="tbd_manage" property="tbdManage" jdbcType="INTEGER" />
+    <result column="tbd_name" property="tbdName" jdbcType="VARCHAR" />
+    <result column="tbd_task" property="tbdTask" jdbcType="BIGINT" />
+    <result column="tbd_flag" property="tbdFlag" jdbcType="VARCHAR" />
+    <result column="tbd_remark" property="tbdRemark" jdbcType="VARCHAR" />
+    <result column="tbd_update_time" property="tbdUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbd_add_time" property="tbdAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbd_status" property="tbdStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbd_id, tbd_content, tbd_manage, tbd_name, tbd_task, tbd_flag, tbd_remark, tbd_update_time, 
+    tbd_add_time, tbd_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.DopeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_dope
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dope
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_dope
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Dope" >
+    insert into tb_dope (tbd_id, tbd_content, tbd_manage, 
+      tbd_name, tbd_task, tbd_flag, 
+      tbd_remark, tbd_update_time, tbd_add_time, 
+      tbd_status)
+    values (#{tbdId,jdbcType=BIGINT}, #{tbdContent,jdbcType=VARCHAR}, #{tbdManage,jdbcType=INTEGER}, 
+      #{tbdName,jdbcType=VARCHAR}, #{tbdTask,jdbcType=BIGINT}, #{tbdFlag,jdbcType=VARCHAR}, 
+      #{tbdRemark,jdbcType=VARCHAR}, #{tbdUpdateTime,jdbcType=TIMESTAMP}, #{tbdAddTime,jdbcType=TIMESTAMP}, 
+      #{tbdStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Dope" >
+    insert into tb_dope
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbdId != null" >
+        tbd_id,
+      </if>
+      <if test="tbdContent != null" >
+        tbd_content,
+      </if>
+      <if test="tbdManage != null" >
+        tbd_manage,
+      </if>
+      <if test="tbdName != null" >
+        tbd_name,
+      </if>
+      <if test="tbdTask != null" >
+        tbd_task,
+      </if>
+      <if test="tbdFlag != null" >
+        tbd_flag,
+      </if>
+      <if test="tbdRemark != null" >
+        tbd_remark,
+      </if>
+      <if test="tbdUpdateTime != null" >
+        tbd_update_time,
+      </if>
+      <if test="tbdAddTime != null" >
+        tbd_add_time,
+      </if>
+      <if test="tbdStatus != null" >
+        tbd_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbdId != null" >
+        #{tbdId,jdbcType=BIGINT},
+      </if>
+      <if test="tbdContent != null" >
+        #{tbdContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdManage != null" >
+        #{tbdManage,jdbcType=INTEGER},
+      </if>
+      <if test="tbdName != null" >
+        #{tbdName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdTask != null" >
+        #{tbdTask,jdbcType=BIGINT},
+      </if>
+      <if test="tbdFlag != null" >
+        #{tbdFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdRemark != null" >
+        #{tbdRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdUpdateTime != null" >
+        #{tbdUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdAddTime != null" >
+        #{tbdAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdStatus != null" >
+        #{tbdStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.DopeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_dope
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_dope
+    <set >
+      <if test="record.tbdId != null" >
+        tbd_id = #{record.tbdId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbdContent != null" >
+        tbd_content = #{record.tbdContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbdManage != null" >
+        tbd_manage = #{record.tbdManage,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbdName != null" >
+        tbd_name = #{record.tbdName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbdTask != null" >
+        tbd_task = #{record.tbdTask,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbdFlag != null" >
+        tbd_flag = #{record.tbdFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbdRemark != null" >
+        tbd_remark = #{record.tbdRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbdUpdateTime != null" >
+        tbd_update_time = #{record.tbdUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbdAddTime != null" >
+        tbd_add_time = #{record.tbdAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbdStatus != null" >
+        tbd_status = #{record.tbdStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_dope
+    set tbd_id = #{record.tbdId,jdbcType=BIGINT},
+      tbd_content = #{record.tbdContent,jdbcType=VARCHAR},
+      tbd_manage = #{record.tbdManage,jdbcType=INTEGER},
+      tbd_name = #{record.tbdName,jdbcType=VARCHAR},
+      tbd_task = #{record.tbdTask,jdbcType=BIGINT},
+      tbd_flag = #{record.tbdFlag,jdbcType=VARCHAR},
+      tbd_remark = #{record.tbdRemark,jdbcType=VARCHAR},
+      tbd_update_time = #{record.tbdUpdateTime,jdbcType=TIMESTAMP},
+      tbd_add_time = #{record.tbdAddTime,jdbcType=TIMESTAMP},
+      tbd_status = #{record.tbdStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Dope" >
+    update tb_dope
+    <set >
+      <if test="tbdContent != null" >
+        tbd_content = #{tbdContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdManage != null" >
+        tbd_manage = #{tbdManage,jdbcType=INTEGER},
+      </if>
+      <if test="tbdName != null" >
+        tbd_name = #{tbdName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdTask != null" >
+        tbd_task = #{tbdTask,jdbcType=BIGINT},
+      </if>
+      <if test="tbdFlag != null" >
+        tbd_flag = #{tbdFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdRemark != null" >
+        tbd_remark = #{tbdRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdUpdateTime != null" >
+        tbd_update_time = #{tbdUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdAddTime != null" >
+        tbd_add_time = #{tbdAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdStatus != null" >
+        tbd_status = #{tbdStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Dope" >
+    update tb_dope
+    set tbd_content = #{tbdContent,jdbcType=VARCHAR},
+      tbd_manage = #{tbdManage,jdbcType=INTEGER},
+      tbd_name = #{tbdName,jdbcType=VARCHAR},
+      tbd_task = #{tbdTask,jdbcType=BIGINT},
+      tbd_flag = #{tbdFlag,jdbcType=VARCHAR},
+      tbd_remark = #{tbdRemark,jdbcType=VARCHAR},
+      tbd_update_time = #{tbdUpdateTime,jdbcType=TIMESTAMP},
+      tbd_add_time = #{tbdAddTime,jdbcType=TIMESTAMP},
+      tbd_status = #{tbdStatus,jdbcType=TINYINT}
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </update>
+</mapper>

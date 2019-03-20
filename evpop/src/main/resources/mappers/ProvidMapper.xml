@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ProvidMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Provid" >
+    <id column="tbp_id" property="tbpId" jdbcType="BIGINT" />
+    <result column="tbp_host" property="tbpHost" jdbcType="BIGINT" />
+    <result column="tbp_name" property="tbpName" jdbcType="VARCHAR" />
+    <result column="tbp_person" property="tbpPerson" jdbcType="VARCHAR" />
+    <result column="tbp_concat" property="tbpConcat" jdbcType="VARCHAR" />
+    <result column="tbp_flag" property="tbpFlag" jdbcType="VARCHAR" />
+    <result column="tbp_remark" property="tbpRemark" jdbcType="VARCHAR" />
+    <result column="tbp_update_time" property="tbpUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbp_add_time" property="tbpAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbp_status" property="tbpStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbp_id, tbp_host, tbp_name, tbp_person, tbp_concat, tbp_flag, tbp_remark, tbp_update_time, 
+    tbp_add_time, tbp_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ProvidExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_provid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_provid
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_provid
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Provid" >
+    insert into tb_provid (tbp_id, tbp_host, tbp_name, 
+      tbp_person, tbp_concat, tbp_flag, 
+      tbp_remark, tbp_update_time, tbp_add_time, 
+      tbp_status)
+    values (#{tbpId,jdbcType=BIGINT}, #{tbpHost,jdbcType=BIGINT}, #{tbpName,jdbcType=VARCHAR}, 
+      #{tbpPerson,jdbcType=VARCHAR}, #{tbpConcat,jdbcType=VARCHAR}, #{tbpFlag,jdbcType=VARCHAR}, 
+      #{tbpRemark,jdbcType=VARCHAR}, #{tbpUpdateTime,jdbcType=TIMESTAMP}, #{tbpAddTime,jdbcType=TIMESTAMP}, 
+      #{tbpStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Provid" >
+    insert into tb_provid
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbpId != null" >
+        tbp_id,
+      </if>
+      <if test="tbpHost != null" >
+        tbp_host,
+      </if>
+      <if test="tbpName != null" >
+        tbp_name,
+      </if>
+      <if test="tbpPerson != null" >
+        tbp_person,
+      </if>
+      <if test="tbpConcat != null" >
+        tbp_concat,
+      </if>
+      <if test="tbpFlag != null" >
+        tbp_flag,
+      </if>
+      <if test="tbpRemark != null" >
+        tbp_remark,
+      </if>
+      <if test="tbpUpdateTime != null" >
+        tbp_update_time,
+      </if>
+      <if test="tbpAddTime != null" >
+        tbp_add_time,
+      </if>
+      <if test="tbpStatus != null" >
+        tbp_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbpId != null" >
+        #{tbpId,jdbcType=BIGINT},
+      </if>
+      <if test="tbpHost != null" >
+        #{tbpHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbpName != null" >
+        #{tbpName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpPerson != null" >
+        #{tbpPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpConcat != null" >
+        #{tbpConcat,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpFlag != null" >
+        #{tbpFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpRemark != null" >
+        #{tbpRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpUpdateTime != null" >
+        #{tbpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpAddTime != null" >
+        #{tbpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpStatus != null" >
+        #{tbpStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ProvidExample" resultType="java.lang.Integer" >
+    select count(*) from tb_provid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_provid
+    <set >
+      <if test="record.tbpId != null" >
+        tbp_id = #{record.tbpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpHost != null" >
+        tbp_host = #{record.tbpHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpName != null" >
+        tbp_name = #{record.tbpName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpPerson != null" >
+        tbp_person = #{record.tbpPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpConcat != null" >
+        tbp_concat = #{record.tbpConcat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpFlag != null" >
+        tbp_flag = #{record.tbpFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpRemark != null" >
+        tbp_remark = #{record.tbpRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpUpdateTime != null" >
+        tbp_update_time = #{record.tbpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbpAddTime != null" >
+        tbp_add_time = #{record.tbpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbpStatus != null" >
+        tbp_status = #{record.tbpStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_provid
+    set tbp_id = #{record.tbpId,jdbcType=BIGINT},
+      tbp_host = #{record.tbpHost,jdbcType=BIGINT},
+      tbp_name = #{record.tbpName,jdbcType=VARCHAR},
+      tbp_person = #{record.tbpPerson,jdbcType=VARCHAR},
+      tbp_concat = #{record.tbpConcat,jdbcType=VARCHAR},
+      tbp_flag = #{record.tbpFlag,jdbcType=VARCHAR},
+      tbp_remark = #{record.tbpRemark,jdbcType=VARCHAR},
+      tbp_update_time = #{record.tbpUpdateTime,jdbcType=TIMESTAMP},
+      tbp_add_time = #{record.tbpAddTime,jdbcType=TIMESTAMP},
+      tbp_status = #{record.tbpStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Provid" >
+    update tb_provid
+    <set >
+      <if test="tbpHost != null" >
+        tbp_host = #{tbpHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbpName != null" >
+        tbp_name = #{tbpName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpPerson != null" >
+        tbp_person = #{tbpPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpConcat != null" >
+        tbp_concat = #{tbpConcat,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpFlag != null" >
+        tbp_flag = #{tbpFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpRemark != null" >
+        tbp_remark = #{tbpRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpUpdateTime != null" >
+        tbp_update_time = #{tbpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpAddTime != null" >
+        tbp_add_time = #{tbpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpStatus != null" >
+        tbp_status = #{tbpStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Provid" >
+    update tb_provid
+    set tbp_host = #{tbpHost,jdbcType=BIGINT},
+      tbp_name = #{tbpName,jdbcType=VARCHAR},
+      tbp_person = #{tbpPerson,jdbcType=VARCHAR},
+      tbp_concat = #{tbpConcat,jdbcType=VARCHAR},
+      tbp_flag = #{tbpFlag,jdbcType=VARCHAR},
+      tbp_remark = #{tbpRemark,jdbcType=VARCHAR},
+      tbp_update_time = #{tbpUpdateTime,jdbcType=TIMESTAMP},
+      tbp_add_time = #{tbpAddTime,jdbcType=TIMESTAMP},
+      tbp_status = #{tbpStatus,jdbcType=SMALLINT}
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </update>
+</mapper>

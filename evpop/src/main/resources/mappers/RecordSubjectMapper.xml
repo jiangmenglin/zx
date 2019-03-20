@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.RecordSubjectMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.RecordSubject" >
+    <id column="tbrs_id" property="tbrsId" jdbcType="BIGINT" />
+    <result column="tbrs_name" property="tbrsName" jdbcType="VARCHAR" />
+    <result column="tbrs_is_income" property="tbrsIsIncome" jdbcType="TINYINT" />
+    <result column="tbrs_is_oper_in" property="tbrsIsOperIn" jdbcType="TINYINT" />
+    <result column="tbrs_is_oper_out" property="tbrsIsOperOut" jdbcType="TINYINT" />
+    <result column="tbrs_is_user_in" property="tbrsIsUserIn" jdbcType="TINYINT" />
+    <result column="tbrs_is_user_out" property="tbrsIsUserOut" jdbcType="TINYINT" />
+    <result column="tbrs_is_artif" property="tbrsIsArtif" jdbcType="TINYINT" />
+    <result column="tbrs_is_order" property="tbrsIsOrder" jdbcType="TINYINT" />
+    <result column="tbrs_is_invoice" property="tbrsIsInvoice" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbrs_id, tbrs_name, tbrs_is_income, tbrs_is_oper_in, tbrs_is_oper_out, tbrs_is_user_in, 
+    tbrs_is_user_out, tbrs_is_artif, tbrs_is_order, tbrs_is_invoice
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.RecordSubjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_record_subject
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_record_subject
+    where tbrs_id = #{tbrsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_record_subject
+    where tbrs_id = #{tbrsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.RecordSubject" >
+    insert into tb_record_subject (tbrs_id, tbrs_name, tbrs_is_income, 
+      tbrs_is_oper_in, tbrs_is_oper_out, tbrs_is_user_in, 
+      tbrs_is_user_out, tbrs_is_artif, tbrs_is_order, 
+      tbrs_is_invoice)
+    values (#{tbrsId,jdbcType=BIGINT}, #{tbrsName,jdbcType=VARCHAR}, #{tbrsIsIncome,jdbcType=TINYINT}, 
+      #{tbrsIsOperIn,jdbcType=TINYINT}, #{tbrsIsOperOut,jdbcType=TINYINT}, #{tbrsIsUserIn,jdbcType=TINYINT}, 
+      #{tbrsIsUserOut,jdbcType=TINYINT}, #{tbrsIsArtif,jdbcType=TINYINT}, #{tbrsIsOrder,jdbcType=TINYINT}, 
+      #{tbrsIsInvoice,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.RecordSubject" >
+    insert into tb_record_subject
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbrsId != null" >
+        tbrs_id,
+      </if>
+      <if test="tbrsName != null" >
+        tbrs_name,
+      </if>
+      <if test="tbrsIsIncome != null" >
+        tbrs_is_income,
+      </if>
+      <if test="tbrsIsOperIn != null" >
+        tbrs_is_oper_in,
+      </if>
+      <if test="tbrsIsOperOut != null" >
+        tbrs_is_oper_out,
+      </if>
+      <if test="tbrsIsUserIn != null" >
+        tbrs_is_user_in,
+      </if>
+      <if test="tbrsIsUserOut != null" >
+        tbrs_is_user_out,
+      </if>
+      <if test="tbrsIsArtif != null" >
+        tbrs_is_artif,
+      </if>
+      <if test="tbrsIsOrder != null" >
+        tbrs_is_order,
+      </if>
+      <if test="tbrsIsInvoice != null" >
+        tbrs_is_invoice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbrsId != null" >
+        #{tbrsId,jdbcType=BIGINT},
+      </if>
+      <if test="tbrsName != null" >
+        #{tbrsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrsIsIncome != null" >
+        #{tbrsIsIncome,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsOperIn != null" >
+        #{tbrsIsOperIn,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsOperOut != null" >
+        #{tbrsIsOperOut,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsUserIn != null" >
+        #{tbrsIsUserIn,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsUserOut != null" >
+        #{tbrsIsUserOut,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsArtif != null" >
+        #{tbrsIsArtif,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsOrder != null" >
+        #{tbrsIsOrder,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsInvoice != null" >
+        #{tbrsIsInvoice,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.RecordSubjectExample" resultType="java.lang.Integer" >
+    select count(*) from tb_record_subject
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_record_subject
+    <set >
+      <if test="record.tbrsId != null" >
+        tbrs_id = #{record.tbrsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrsName != null" >
+        tbrs_name = #{record.tbrsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrsIsIncome != null" >
+        tbrs_is_income = #{record.tbrsIsIncome,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrsIsOperIn != null" >
+        tbrs_is_oper_in = #{record.tbrsIsOperIn,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrsIsOperOut != null" >
+        tbrs_is_oper_out = #{record.tbrsIsOperOut,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrsIsUserIn != null" >
+        tbrs_is_user_in = #{record.tbrsIsUserIn,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrsIsUserOut != null" >
+        tbrs_is_user_out = #{record.tbrsIsUserOut,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrsIsArtif != null" >
+        tbrs_is_artif = #{record.tbrsIsArtif,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrsIsOrder != null" >
+        tbrs_is_order = #{record.tbrsIsOrder,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbrsIsInvoice != null" >
+        tbrs_is_invoice = #{record.tbrsIsInvoice,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_record_subject
+    set tbrs_id = #{record.tbrsId,jdbcType=BIGINT},
+      tbrs_name = #{record.tbrsName,jdbcType=VARCHAR},
+      tbrs_is_income = #{record.tbrsIsIncome,jdbcType=TINYINT},
+      tbrs_is_oper_in = #{record.tbrsIsOperIn,jdbcType=TINYINT},
+      tbrs_is_oper_out = #{record.tbrsIsOperOut,jdbcType=TINYINT},
+      tbrs_is_user_in = #{record.tbrsIsUserIn,jdbcType=TINYINT},
+      tbrs_is_user_out = #{record.tbrsIsUserOut,jdbcType=TINYINT},
+      tbrs_is_artif = #{record.tbrsIsArtif,jdbcType=TINYINT},
+      tbrs_is_order = #{record.tbrsIsOrder,jdbcType=TINYINT},
+      tbrs_is_invoice = #{record.tbrsIsInvoice,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.RecordSubject" >
+    update tb_record_subject
+    <set >
+      <if test="tbrsName != null" >
+        tbrs_name = #{tbrsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrsIsIncome != null" >
+        tbrs_is_income = #{tbrsIsIncome,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsOperIn != null" >
+        tbrs_is_oper_in = #{tbrsIsOperIn,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsOperOut != null" >
+        tbrs_is_oper_out = #{tbrsIsOperOut,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsUserIn != null" >
+        tbrs_is_user_in = #{tbrsIsUserIn,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsUserOut != null" >
+        tbrs_is_user_out = #{tbrsIsUserOut,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsArtif != null" >
+        tbrs_is_artif = #{tbrsIsArtif,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsOrder != null" >
+        tbrs_is_order = #{tbrsIsOrder,jdbcType=TINYINT},
+      </if>
+      <if test="tbrsIsInvoice != null" >
+        tbrs_is_invoice = #{tbrsIsInvoice,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbrs_id = #{tbrsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.RecordSubject" >
+    update tb_record_subject
+    set tbrs_name = #{tbrsName,jdbcType=VARCHAR},
+      tbrs_is_income = #{tbrsIsIncome,jdbcType=TINYINT},
+      tbrs_is_oper_in = #{tbrsIsOperIn,jdbcType=TINYINT},
+      tbrs_is_oper_out = #{tbrsIsOperOut,jdbcType=TINYINT},
+      tbrs_is_user_in = #{tbrsIsUserIn,jdbcType=TINYINT},
+      tbrs_is_user_out = #{tbrsIsUserOut,jdbcType=TINYINT},
+      tbrs_is_artif = #{tbrsIsArtif,jdbcType=TINYINT},
+      tbrs_is_order = #{tbrsIsOrder,jdbcType=TINYINT},
+      tbrs_is_invoice = #{tbrsIsInvoice,jdbcType=TINYINT}
+    where tbrs_id = #{tbrsId,jdbcType=BIGINT}
+  </update>
+</mapper>

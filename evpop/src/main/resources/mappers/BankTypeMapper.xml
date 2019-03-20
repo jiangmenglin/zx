@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.BankTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.BankType" >
+    <id column="tbbt_id" property="tbbtId" jdbcType="BIGINT" />
+    <result column="tbbt_name" property="tbbtName" jdbcType="VARCHAR" />
+    <result column="tbbt_flag" property="tbbtFlag" jdbcType="VARCHAR" />
+    <result column="tbbt_priority" property="tbbtPriority" jdbcType="SMALLINT" />
+    <result column="tbbt_add_time" property="tbbtAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbbt_update_time" property="tbbtUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbbt_status" property="tbbtStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbbt_id, tbbt_name, tbbt_flag, tbbt_priority, tbbt_add_time, tbbt_update_time, tbbt_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.BankTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_bank_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_bank_type
+    where tbbt_id = #{tbbtId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_bank_type
+    where tbbt_id = #{tbbtId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.BankType" >
+    insert into tb_bank_type (tbbt_id, tbbt_name, tbbt_flag, 
+      tbbt_priority, tbbt_add_time, tbbt_update_time, 
+      tbbt_status)
+    values (#{tbbtId,jdbcType=BIGINT}, #{tbbtName,jdbcType=VARCHAR}, #{tbbtFlag,jdbcType=VARCHAR}, 
+      #{tbbtPriority,jdbcType=SMALLINT}, #{tbbtAddTime,jdbcType=TIMESTAMP}, #{tbbtUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbbtStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.BankType" >
+    insert into tb_bank_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbbtId != null" >
+        tbbt_id,
+      </if>
+      <if test="tbbtName != null" >
+        tbbt_name,
+      </if>
+      <if test="tbbtFlag != null" >
+        tbbt_flag,
+      </if>
+      <if test="tbbtPriority != null" >
+        tbbt_priority,
+      </if>
+      <if test="tbbtAddTime != null" >
+        tbbt_add_time,
+      </if>
+      <if test="tbbtUpdateTime != null" >
+        tbbt_update_time,
+      </if>
+      <if test="tbbtStatus != null" >
+        tbbt_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbbtId != null" >
+        #{tbbtId,jdbcType=BIGINT},
+      </if>
+      <if test="tbbtName != null" >
+        #{tbbtName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbbtFlag != null" >
+        #{tbbtFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbbtPriority != null" >
+        #{tbbtPriority,jdbcType=SMALLINT},
+      </if>
+      <if test="tbbtAddTime != null" >
+        #{tbbtAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbbtUpdateTime != null" >
+        #{tbbtUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbbtStatus != null" >
+        #{tbbtStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.BankTypeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_bank_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_bank_type
+    <set >
+      <if test="record.tbbtId != null" >
+        tbbt_id = #{record.tbbtId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbbtName != null" >
+        tbbt_name = #{record.tbbtName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbbtFlag != null" >
+        tbbt_flag = #{record.tbbtFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbbtPriority != null" >
+        tbbt_priority = #{record.tbbtPriority,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbbtAddTime != null" >
+        tbbt_add_time = #{record.tbbtAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbbtUpdateTime != null" >
+        tbbt_update_time = #{record.tbbtUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbbtStatus != null" >
+        tbbt_status = #{record.tbbtStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_bank_type
+    set tbbt_id = #{record.tbbtId,jdbcType=BIGINT},
+      tbbt_name = #{record.tbbtName,jdbcType=VARCHAR},
+      tbbt_flag = #{record.tbbtFlag,jdbcType=VARCHAR},
+      tbbt_priority = #{record.tbbtPriority,jdbcType=SMALLINT},
+      tbbt_add_time = #{record.tbbtAddTime,jdbcType=TIMESTAMP},
+      tbbt_update_time = #{record.tbbtUpdateTime,jdbcType=TIMESTAMP},
+      tbbt_status = #{record.tbbtStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.BankType" >
+    update tb_bank_type
+    <set >
+      <if test="tbbtName != null" >
+        tbbt_name = #{tbbtName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbbtFlag != null" >
+        tbbt_flag = #{tbbtFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbbtPriority != null" >
+        tbbt_priority = #{tbbtPriority,jdbcType=SMALLINT},
+      </if>
+      <if test="tbbtAddTime != null" >
+        tbbt_add_time = #{tbbtAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbbtUpdateTime != null" >
+        tbbt_update_time = #{tbbtUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbbtStatus != null" >
+        tbbt_status = #{tbbtStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbbt_id = #{tbbtId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.BankType" >
+    update tb_bank_type
+    set tbbt_name = #{tbbtName,jdbcType=VARCHAR},
+      tbbt_flag = #{tbbtFlag,jdbcType=VARCHAR},
+      tbbt_priority = #{tbbtPriority,jdbcType=SMALLINT},
+      tbbt_add_time = #{tbbtAddTime,jdbcType=TIMESTAMP},
+      tbbt_update_time = #{tbbtUpdateTime,jdbcType=TIMESTAMP},
+      tbbt_status = #{tbbtStatus,jdbcType=TINYINT}
+    where tbbt_id = #{tbbtId,jdbcType=BIGINT}
+  </update>
+</mapper>

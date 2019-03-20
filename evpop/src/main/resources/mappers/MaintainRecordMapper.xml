@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.MaintainRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.MaintainRecord" >
+    <id column="tbmr_id" property="tbmrId" jdbcType="BIGINT" />
+    <result column="tbmr_maintain" property="tbmrMaintain" jdbcType="BIGINT" />
+    <result column="tbmr_car" property="tbmrCar" jdbcType="BIGINT" />
+    <result column="tbmr_type" property="tbmrType" jdbcType="SMALLINT" />
+    <result column="tbmr_repair_adr" property="tbmrRepairAdr" jdbcType="BIGINT" />
+    <result column="tbmr_fee_type" property="tbmrFeeType" jdbcType="SMALLINT" />
+    <result column="tbmr_fee" property="tbmrFee" jdbcType="DOUBLE" />
+    <result column="tbmr_bill_no" property="tbmrBillNo" jdbcType="VARCHAR" />
+    <result column="tbmr_real_km" property="tbmrRealKm" jdbcType="INTEGER" />
+    <result column="tbmr_adder" property="tbmrAdder" jdbcType="BIGINT" />
+    <result column="tbmr_add_time" property="tbmrAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbmr_status" property="tbmrStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbmr_id, tbmr_maintain, tbmr_car, tbmr_type, tbmr_repair_adr, tbmr_fee_type, tbmr_fee, 
+    tbmr_bill_no, tbmr_real_km, tbmr_adder, tbmr_add_time, tbmr_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.MaintainRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_maintain_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_maintain_record
+    where tbmr_id = #{tbmrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_maintain_record
+    where tbmr_id = #{tbmrId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.MaintainRecord" >
+    insert into tb_maintain_record (tbmr_id, tbmr_maintain, tbmr_car, 
+      tbmr_type, tbmr_repair_adr, tbmr_fee_type, 
+      tbmr_fee, tbmr_bill_no, tbmr_real_km, 
+      tbmr_adder, tbmr_add_time, tbmr_status
+      )
+    values (#{tbmrId,jdbcType=BIGINT}, #{tbmrMaintain,jdbcType=BIGINT}, #{tbmrCar,jdbcType=BIGINT}, 
+      #{tbmrType,jdbcType=SMALLINT}, #{tbmrRepairAdr,jdbcType=BIGINT}, #{tbmrFeeType,jdbcType=SMALLINT}, 
+      #{tbmrFee,jdbcType=DOUBLE}, #{tbmrBillNo,jdbcType=VARCHAR}, #{tbmrRealKm,jdbcType=INTEGER}, 
+      #{tbmrAdder,jdbcType=BIGINT}, #{tbmrAddTime,jdbcType=TIMESTAMP}, #{tbmrStatus,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.MaintainRecord" >
+    insert into tb_maintain_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbmrId != null" >
+        tbmr_id,
+      </if>
+      <if test="tbmrMaintain != null" >
+        tbmr_maintain,
+      </if>
+      <if test="tbmrCar != null" >
+        tbmr_car,
+      </if>
+      <if test="tbmrType != null" >
+        tbmr_type,
+      </if>
+      <if test="tbmrRepairAdr != null" >
+        tbmr_repair_adr,
+      </if>
+      <if test="tbmrFeeType != null" >
+        tbmr_fee_type,
+      </if>
+      <if test="tbmrFee != null" >
+        tbmr_fee,
+      </if>
+      <if test="tbmrBillNo != null" >
+        tbmr_bill_no,
+      </if>
+      <if test="tbmrRealKm != null" >
+        tbmr_real_km,
+      </if>
+      <if test="tbmrAdder != null" >
+        tbmr_adder,
+      </if>
+      <if test="tbmrAddTime != null" >
+        tbmr_add_time,
+      </if>
+      <if test="tbmrStatus != null" >
+        tbmr_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbmrId != null" >
+        #{tbmrId,jdbcType=BIGINT},
+      </if>
+      <if test="tbmrMaintain != null" >
+        #{tbmrMaintain,jdbcType=BIGINT},
+      </if>
+      <if test="tbmrCar != null" >
+        #{tbmrCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbmrType != null" >
+        #{tbmrType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmrRepairAdr != null" >
+        #{tbmrRepairAdr,jdbcType=BIGINT},
+      </if>
+      <if test="tbmrFeeType != null" >
+        #{tbmrFeeType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmrFee != null" >
+        #{tbmrFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbmrBillNo != null" >
+        #{tbmrBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmrRealKm != null" >
+        #{tbmrRealKm,jdbcType=INTEGER},
+      </if>
+      <if test="tbmrAdder != null" >
+        #{tbmrAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbmrAddTime != null" >
+        #{tbmrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmrStatus != null" >
+        #{tbmrStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.MaintainRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tb_maintain_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_maintain_record
+    <set >
+      <if test="record.tbmrId != null" >
+        tbmr_id = #{record.tbmrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbmrMaintain != null" >
+        tbmr_maintain = #{record.tbmrMaintain,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbmrCar != null" >
+        tbmr_car = #{record.tbmrCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbmrType != null" >
+        tbmr_type = #{record.tbmrType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbmrRepairAdr != null" >
+        tbmr_repair_adr = #{record.tbmrRepairAdr,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbmrFeeType != null" >
+        tbmr_fee_type = #{record.tbmrFeeType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbmrFee != null" >
+        tbmr_fee = #{record.tbmrFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbmrBillNo != null" >
+        tbmr_bill_no = #{record.tbmrBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmrRealKm != null" >
+        tbmr_real_km = #{record.tbmrRealKm,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmrAdder != null" >
+        tbmr_adder = #{record.tbmrAdder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbmrAddTime != null" >
+        tbmr_add_time = #{record.tbmrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmrStatus != null" >
+        tbmr_status = #{record.tbmrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_maintain_record
+    set tbmr_id = #{record.tbmrId,jdbcType=BIGINT},
+      tbmr_maintain = #{record.tbmrMaintain,jdbcType=BIGINT},
+      tbmr_car = #{record.tbmrCar,jdbcType=BIGINT},
+      tbmr_type = #{record.tbmrType,jdbcType=SMALLINT},
+      tbmr_repair_adr = #{record.tbmrRepairAdr,jdbcType=BIGINT},
+      tbmr_fee_type = #{record.tbmrFeeType,jdbcType=SMALLINT},
+      tbmr_fee = #{record.tbmrFee,jdbcType=DOUBLE},
+      tbmr_bill_no = #{record.tbmrBillNo,jdbcType=VARCHAR},
+      tbmr_real_km = #{record.tbmrRealKm,jdbcType=INTEGER},
+      tbmr_adder = #{record.tbmrAdder,jdbcType=BIGINT},
+      tbmr_add_time = #{record.tbmrAddTime,jdbcType=TIMESTAMP},
+      tbmr_status = #{record.tbmrStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.MaintainRecord" >
+    update tb_maintain_record
+    <set >
+      <if test="tbmrMaintain != null" >
+        tbmr_maintain = #{tbmrMaintain,jdbcType=BIGINT},
+      </if>
+      <if test="tbmrCar != null" >
+        tbmr_car = #{tbmrCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbmrType != null" >
+        tbmr_type = #{tbmrType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmrRepairAdr != null" >
+        tbmr_repair_adr = #{tbmrRepairAdr,jdbcType=BIGINT},
+      </if>
+      <if test="tbmrFeeType != null" >
+        tbmr_fee_type = #{tbmrFeeType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmrFee != null" >
+        tbmr_fee = #{tbmrFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbmrBillNo != null" >
+        tbmr_bill_no = #{tbmrBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmrRealKm != null" >
+        tbmr_real_km = #{tbmrRealKm,jdbcType=INTEGER},
+      </if>
+      <if test="tbmrAdder != null" >
+        tbmr_adder = #{tbmrAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbmrAddTime != null" >
+        tbmr_add_time = #{tbmrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmrStatus != null" >
+        tbmr_status = #{tbmrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbmr_id = #{tbmrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.MaintainRecord" >
+    update tb_maintain_record
+    set tbmr_maintain = #{tbmrMaintain,jdbcType=BIGINT},
+      tbmr_car = #{tbmrCar,jdbcType=BIGINT},
+      tbmr_type = #{tbmrType,jdbcType=SMALLINT},
+      tbmr_repair_adr = #{tbmrRepairAdr,jdbcType=BIGINT},
+      tbmr_fee_type = #{tbmrFeeType,jdbcType=SMALLINT},
+      tbmr_fee = #{tbmrFee,jdbcType=DOUBLE},
+      tbmr_bill_no = #{tbmrBillNo,jdbcType=VARCHAR},
+      tbmr_real_km = #{tbmrRealKm,jdbcType=INTEGER},
+      tbmr_adder = #{tbmrAdder,jdbcType=BIGINT},
+      tbmr_add_time = #{tbmrAddTime,jdbcType=TIMESTAMP},
+      tbmr_status = #{tbmrStatus,jdbcType=SMALLINT}
+    where tbmr_id = #{tbmrId,jdbcType=BIGINT}
+  </update>
+</mapper>

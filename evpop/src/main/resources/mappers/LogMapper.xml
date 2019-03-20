@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Log" >
+    <id column="sl_id" property="slId" jdbcType="BIGINT" />
+    <result column="sl_host" property="slHost" jdbcType="BIGINT" />
+    <result column="sl_name" property="slName" jdbcType="VARCHAR" />
+    <result column="sl_model" property="slModel" jdbcType="BIGINT" />
+    <result column="sl_type" property="slType" jdbcType="BIGINT" />
+    <result column="sl_user" property="slUser" jdbcType="BIGINT" />
+    <result column="sl_class" property="slClass" jdbcType="VARCHAR" />
+    <result column="sl_relate" property="slRelate" jdbcType="BIGINT" />
+    <result column="sl_add_time" property="slAddTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.Log" extends="BaseResultMap" >
+    <result column="sl_detail" property="slDetail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sl_id, sl_host, sl_name, sl_model, sl_type, sl_user, sl_class, sl_relate, sl_add_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    sl_detail
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.LogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from srv_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from srv_log
+    where sl_id = #{slId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from srv_log
+    where sl_id = #{slId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Log" >
+    insert into srv_log (sl_id, sl_host, sl_name, 
+      sl_model, sl_type, sl_user, 
+      sl_class, sl_relate, sl_add_time, 
+      sl_detail)
+    values (#{slId,jdbcType=BIGINT}, #{slHost,jdbcType=BIGINT}, #{slName,jdbcType=VARCHAR}, 
+      #{slModel,jdbcType=BIGINT}, #{slType,jdbcType=BIGINT}, #{slUser,jdbcType=BIGINT}, 
+      #{slClass,jdbcType=VARCHAR}, #{slRelate,jdbcType=BIGINT}, #{slAddTime,jdbcType=TIMESTAMP}, 
+      #{slDetail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Log" >
+    insert into srv_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="slId != null" >
+        sl_id,
+      </if>
+      <if test="slHost != null" >
+        sl_host,
+      </if>
+      <if test="slName != null" >
+        sl_name,
+      </if>
+      <if test="slModel != null" >
+        sl_model,
+      </if>
+      <if test="slType != null" >
+        sl_type,
+      </if>
+      <if test="slUser != null" >
+        sl_user,
+      </if>
+      <if test="slClass != null" >
+        sl_class,
+      </if>
+      <if test="slRelate != null" >
+        sl_relate,
+      </if>
+      <if test="slAddTime != null" >
+        sl_add_time,
+      </if>
+      <if test="slDetail != null" >
+        sl_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="slId != null" >
+        #{slId,jdbcType=BIGINT},
+      </if>
+      <if test="slHost != null" >
+        #{slHost,jdbcType=BIGINT},
+      </if>
+      <if test="slName != null" >
+        #{slName,jdbcType=VARCHAR},
+      </if>
+      <if test="slModel != null" >
+        #{slModel,jdbcType=BIGINT},
+      </if>
+      <if test="slType != null" >
+        #{slType,jdbcType=BIGINT},
+      </if>
+      <if test="slUser != null" >
+        #{slUser,jdbcType=BIGINT},
+      </if>
+      <if test="slClass != null" >
+        #{slClass,jdbcType=VARCHAR},
+      </if>
+      <if test="slRelate != null" >
+        #{slRelate,jdbcType=BIGINT},
+      </if>
+      <if test="slAddTime != null" >
+        #{slAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="slDetail != null" >
+        #{slDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LogExample" resultType="java.lang.Integer" >
+    select count(*) from srv_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_log
+    <set >
+      <if test="record.slId != null" >
+        sl_id = #{record.slId,jdbcType=BIGINT},
+      </if>
+      <if test="record.slHost != null" >
+        sl_host = #{record.slHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.slName != null" >
+        sl_name = #{record.slName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slModel != null" >
+        sl_model = #{record.slModel,jdbcType=BIGINT},
+      </if>
+      <if test="record.slType != null" >
+        sl_type = #{record.slType,jdbcType=BIGINT},
+      </if>
+      <if test="record.slUser != null" >
+        sl_user = #{record.slUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.slClass != null" >
+        sl_class = #{record.slClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slRelate != null" >
+        sl_relate = #{record.slRelate,jdbcType=BIGINT},
+      </if>
+      <if test="record.slAddTime != null" >
+        sl_add_time = #{record.slAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.slDetail != null" >
+        sl_detail = #{record.slDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update srv_log
+    set sl_id = #{record.slId,jdbcType=BIGINT},
+      sl_host = #{record.slHost,jdbcType=BIGINT},
+      sl_name = #{record.slName,jdbcType=VARCHAR},
+      sl_model = #{record.slModel,jdbcType=BIGINT},
+      sl_type = #{record.slType,jdbcType=BIGINT},
+      sl_user = #{record.slUser,jdbcType=BIGINT},
+      sl_class = #{record.slClass,jdbcType=VARCHAR},
+      sl_relate = #{record.slRelate,jdbcType=BIGINT},
+      sl_add_time = #{record.slAddTime,jdbcType=TIMESTAMP},
+      sl_detail = #{record.slDetail,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_log
+    set sl_id = #{record.slId,jdbcType=BIGINT},
+      sl_host = #{record.slHost,jdbcType=BIGINT},
+      sl_name = #{record.slName,jdbcType=VARCHAR},
+      sl_model = #{record.slModel,jdbcType=BIGINT},
+      sl_type = #{record.slType,jdbcType=BIGINT},
+      sl_user = #{record.slUser,jdbcType=BIGINT},
+      sl_class = #{record.slClass,jdbcType=VARCHAR},
+      sl_relate = #{record.slRelate,jdbcType=BIGINT},
+      sl_add_time = #{record.slAddTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Log" >
+    update srv_log
+    <set >
+      <if test="slHost != null" >
+        sl_host = #{slHost,jdbcType=BIGINT},
+      </if>
+      <if test="slName != null" >
+        sl_name = #{slName,jdbcType=VARCHAR},
+      </if>
+      <if test="slModel != null" >
+        sl_model = #{slModel,jdbcType=BIGINT},
+      </if>
+      <if test="slType != null" >
+        sl_type = #{slType,jdbcType=BIGINT},
+      </if>
+      <if test="slUser != null" >
+        sl_user = #{slUser,jdbcType=BIGINT},
+      </if>
+      <if test="slClass != null" >
+        sl_class = #{slClass,jdbcType=VARCHAR},
+      </if>
+      <if test="slRelate != null" >
+        sl_relate = #{slRelate,jdbcType=BIGINT},
+      </if>
+      <if test="slAddTime != null" >
+        sl_add_time = #{slAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="slDetail != null" >
+        sl_detail = #{slDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sl_id = #{slId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.Log" >
+    update srv_log
+    set sl_host = #{slHost,jdbcType=BIGINT},
+      sl_name = #{slName,jdbcType=VARCHAR},
+      sl_model = #{slModel,jdbcType=BIGINT},
+      sl_type = #{slType,jdbcType=BIGINT},
+      sl_user = #{slUser,jdbcType=BIGINT},
+      sl_class = #{slClass,jdbcType=VARCHAR},
+      sl_relate = #{slRelate,jdbcType=BIGINT},
+      sl_add_time = #{slAddTime,jdbcType=TIMESTAMP},
+      sl_detail = #{slDetail,jdbcType=LONGVARCHAR}
+    where sl_id = #{slId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Log" >
+    update srv_log
+    set sl_host = #{slHost,jdbcType=BIGINT},
+      sl_name = #{slName,jdbcType=VARCHAR},
+      sl_model = #{slModel,jdbcType=BIGINT},
+      sl_type = #{slType,jdbcType=BIGINT},
+      sl_user = #{slUser,jdbcType=BIGINT},
+      sl_class = #{slClass,jdbcType=VARCHAR},
+      sl_relate = #{slRelate,jdbcType=BIGINT},
+      sl_add_time = #{slAddTime,jdbcType=TIMESTAMP}
+    where sl_id = #{slId,jdbcType=BIGINT}
+  </update>
+</mapper>

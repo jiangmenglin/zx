@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.RestrictionMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Restriction" >
+    <id column="tbr_id" property="tbrId" jdbcType="BIGINT" />
+    <result column="tbr_host" property="tbrHost" jdbcType="BIGINT" />
+    <result column="tbr_name" property="tbrName" jdbcType="VARCHAR" />
+    <result column="tbr_car_type" property="tbrCarType" jdbcType="VARCHAR" />
+    <result column="tbr_rest_time_start" property="tbrRestTimeStart" jdbcType="VARCHAR" />
+    <result column="tbr_rest_time_end" property="tbrRestTimeEnd" jdbcType="VARCHAR" />
+    <result column="tbr_duration_start" property="tbrDurationStart" jdbcType="DATE" />
+    <result column="tbr_duration_end" property="tbrDurationEnd" jdbcType="DATE" />
+    <result column="tbr_area_text" property="tbrAreaText" jdbcType="VARCHAR" />
+    <result column="tbr_rules" property="tbrRules" jdbcType="VARCHAR" />
+    <result column="tbr_update_time" property="tbrUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_add_time" property="tbrAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_status" property="tbrStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbr_id, tbr_host, tbr_name, tbr_car_type, tbr_rest_time_start, tbr_rest_time_end, 
+    tbr_duration_start, tbr_duration_end, tbr_area_text, tbr_rules, tbr_update_time, 
+    tbr_add_time, tbr_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.RestrictionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_restriction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_restriction
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_restriction
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Restriction" >
+    insert into tb_restriction (tbr_id, tbr_host, tbr_name, 
+      tbr_car_type, tbr_rest_time_start, tbr_rest_time_end, 
+      tbr_duration_start, tbr_duration_end, tbr_area_text, 
+      tbr_rules, tbr_update_time, tbr_add_time, 
+      tbr_status)
+    values (#{tbrId,jdbcType=BIGINT}, #{tbrHost,jdbcType=BIGINT}, #{tbrName,jdbcType=VARCHAR}, 
+      #{tbrCarType,jdbcType=VARCHAR}, #{tbrRestTimeStart,jdbcType=VARCHAR}, #{tbrRestTimeEnd,jdbcType=VARCHAR}, 
+      #{tbrDurationStart,jdbcType=DATE}, #{tbrDurationEnd,jdbcType=DATE}, #{tbrAreaText,jdbcType=VARCHAR}, 
+      #{tbrRules,jdbcType=VARCHAR}, #{tbrUpdateTime,jdbcType=TIMESTAMP}, #{tbrAddTime,jdbcType=TIMESTAMP}, 
+      #{tbrStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Restriction" >
+    insert into tb_restriction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        tbr_id,
+      </if>
+      <if test="tbrHost != null" >
+        tbr_host,
+      </if>
+      <if test="tbrName != null" >
+        tbr_name,
+      </if>
+      <if test="tbrCarType != null" >
+        tbr_car_type,
+      </if>
+      <if test="tbrRestTimeStart != null" >
+        tbr_rest_time_start,
+      </if>
+      <if test="tbrRestTimeEnd != null" >
+        tbr_rest_time_end,
+      </if>
+      <if test="tbrDurationStart != null" >
+        tbr_duration_start,
+      </if>
+      <if test="tbrDurationEnd != null" >
+        tbr_duration_end,
+      </if>
+      <if test="tbrAreaText != null" >
+        tbr_area_text,
+      </if>
+      <if test="tbrRules != null" >
+        tbr_rules,
+      </if>
+      <if test="tbrUpdateTime != null" >
+        tbr_update_time,
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time,
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        #{tbrId,jdbcType=BIGINT},
+      </if>
+      <if test="tbrHost != null" >
+        #{tbrHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbrName != null" >
+        #{tbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrCarType != null" >
+        #{tbrCarType,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRestTimeStart != null" >
+        #{tbrRestTimeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRestTimeEnd != null" >
+        #{tbrRestTimeEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrDurationStart != null" >
+        #{tbrDurationStart,jdbcType=DATE},
+      </if>
+      <if test="tbrDurationEnd != null" >
+        #{tbrDurationEnd,jdbcType=DATE},
+      </if>
+      <if test="tbrAreaText != null" >
+        #{tbrAreaText,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRules != null" >
+        #{tbrRules,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrUpdateTime != null" >
+        #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrAddTime != null" >
+        #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrStatus != null" >
+        #{tbrStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.RestrictionExample" resultType="java.lang.Integer" >
+    select count(*) from tb_restriction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_restriction
+    <set >
+      <if test="record.tbrId != null" >
+        tbr_id = #{record.tbrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrHost != null" >
+        tbr_host = #{record.tbrHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrName != null" >
+        tbr_name = #{record.tbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrCarType != null" >
+        tbr_car_type = #{record.tbrCarType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrRestTimeStart != null" >
+        tbr_rest_time_start = #{record.tbrRestTimeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrRestTimeEnd != null" >
+        tbr_rest_time_end = #{record.tbrRestTimeEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrDurationStart != null" >
+        tbr_duration_start = #{record.tbrDurationStart,jdbcType=DATE},
+      </if>
+      <if test="record.tbrDurationEnd != null" >
+        tbr_duration_end = #{record.tbrDurationEnd,jdbcType=DATE},
+      </if>
+      <if test="record.tbrAreaText != null" >
+        tbr_area_text = #{record.tbrAreaText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrRules != null" >
+        tbr_rules = #{record.tbrRules,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrUpdateTime != null" >
+        tbr_update_time = #{record.tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrAddTime != null" >
+        tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrStatus != null" >
+        tbr_status = #{record.tbrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_restriction
+    set tbr_id = #{record.tbrId,jdbcType=BIGINT},
+      tbr_host = #{record.tbrHost,jdbcType=BIGINT},
+      tbr_name = #{record.tbrName,jdbcType=VARCHAR},
+      tbr_car_type = #{record.tbrCarType,jdbcType=VARCHAR},
+      tbr_rest_time_start = #{record.tbrRestTimeStart,jdbcType=VARCHAR},
+      tbr_rest_time_end = #{record.tbrRestTimeEnd,jdbcType=VARCHAR},
+      tbr_duration_start = #{record.tbrDurationStart,jdbcType=DATE},
+      tbr_duration_end = #{record.tbrDurationEnd,jdbcType=DATE},
+      tbr_area_text = #{record.tbrAreaText,jdbcType=VARCHAR},
+      tbr_rules = #{record.tbrRules,jdbcType=VARCHAR},
+      tbr_update_time = #{record.tbrUpdateTime,jdbcType=TIMESTAMP},
+      tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_status = #{record.tbrStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Restriction" >
+    update tb_restriction
+    <set >
+      <if test="tbrHost != null" >
+        tbr_host = #{tbrHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbrName != null" >
+        tbr_name = #{tbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrCarType != null" >
+        tbr_car_type = #{tbrCarType,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRestTimeStart != null" >
+        tbr_rest_time_start = #{tbrRestTimeStart,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRestTimeEnd != null" >
+        tbr_rest_time_end = #{tbrRestTimeEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrDurationStart != null" >
+        tbr_duration_start = #{tbrDurationStart,jdbcType=DATE},
+      </if>
+      <if test="tbrDurationEnd != null" >
+        tbr_duration_end = #{tbrDurationEnd,jdbcType=DATE},
+      </if>
+      <if test="tbrAreaText != null" >
+        tbr_area_text = #{tbrAreaText,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrRules != null" >
+        tbr_rules = #{tbrRules,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrUpdateTime != null" >
+        tbr_update_time = #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status = #{tbrStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Restriction" >
+    update tb_restriction
+    set tbr_host = #{tbrHost,jdbcType=BIGINT},
+      tbr_name = #{tbrName,jdbcType=VARCHAR},
+      tbr_car_type = #{tbrCarType,jdbcType=VARCHAR},
+      tbr_rest_time_start = #{tbrRestTimeStart,jdbcType=VARCHAR},
+      tbr_rest_time_end = #{tbrRestTimeEnd,jdbcType=VARCHAR},
+      tbr_duration_start = #{tbrDurationStart,jdbcType=DATE},
+      tbr_duration_end = #{tbrDurationEnd,jdbcType=DATE},
+      tbr_area_text = #{tbrAreaText,jdbcType=VARCHAR},
+      tbr_rules = #{tbrRules,jdbcType=VARCHAR},
+      tbr_update_time = #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_status = #{tbrStatus,jdbcType=SMALLINT}
+    where tbr_id = #{tbrId,jdbcType=BIGINT}
+  </update>
+</mapper>

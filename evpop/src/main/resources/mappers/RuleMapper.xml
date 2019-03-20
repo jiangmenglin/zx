@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.RuleMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Rule" >
+    <id column="tbr_id" property="tbrId" jdbcType="INTEGER" />
+    <result column="tbr_name" property="tbrName" jdbcType="VARCHAR" />
+    <result column="tbr_event" property="tbrEvent" jdbcType="INTEGER" />
+    <result column="tbr_repeat" property="tbrRepeat" jdbcType="INTEGER" />
+    <result column="tbr_info" property="tbrInfo" jdbcType="BIGINT" />
+    <result column="tbr_amount" property="tbrAmount" jdbcType="INTEGER" />
+    <result column="tbr_profile" property="tbrProfile" jdbcType="VARCHAR" />
+    <result column="tbr_condition" property="tbrCondition" jdbcType="VARCHAR" />
+    <result column="tbr_integral" property="tbrIntegral" jdbcType="VARCHAR" />
+    <result column="tbr_coupon" property="tbrCoupon" jdbcType="VARCHAR" />
+    <result column="tbr_derate" property="tbrDerate" jdbcType="VARCHAR" />
+    <result column="tbr_start" property="tbrStart" jdbcType="TIMESTAMP" />
+    <result column="tbr_end" property="tbrEnd" jdbcType="TIMESTAMP" />
+    <result column="tbr_update_time" property="tbrUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_add_time" property="tbrAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbr_status" property="tbrStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbr_id, tbr_name, tbr_event, tbr_repeat, tbr_info, tbr_amount, tbr_profile, tbr_condition, 
+    tbr_integral, tbr_coupon, tbr_derate, tbr_start, tbr_end, tbr_update_time, tbr_add_time, 
+    tbr_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.RuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_rule
+    where tbr_id = #{tbrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_rule
+    where tbr_id = #{tbrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Rule" >
+    insert into tb_rule (tbr_id, tbr_name, tbr_event, 
+      tbr_repeat, tbr_info, tbr_amount, 
+      tbr_profile, tbr_condition, tbr_integral, 
+      tbr_coupon, tbr_derate, tbr_start, 
+      tbr_end, tbr_update_time, tbr_add_time, 
+      tbr_status, createTime, modifyDate
+      )
+    values (#{tbrId,jdbcType=INTEGER}, #{tbrName,jdbcType=VARCHAR}, #{tbrEvent,jdbcType=INTEGER}, 
+      #{tbrRepeat,jdbcType=INTEGER}, #{tbrInfo,jdbcType=BIGINT}, #{tbrAmount,jdbcType=INTEGER}, 
+      #{tbrProfile,jdbcType=VARCHAR}, #{tbrCondition,jdbcType=VARCHAR}, #{tbrIntegral,jdbcType=VARCHAR}, 
+      #{tbrCoupon,jdbcType=VARCHAR}, #{tbrDerate,jdbcType=VARCHAR}, #{tbrStart,jdbcType=TIMESTAMP}, 
+      #{tbrEnd,jdbcType=TIMESTAMP}, #{tbrUpdateTime,jdbcType=TIMESTAMP}, #{tbrAddTime,jdbcType=TIMESTAMP}, 
+      #{tbrStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Rule" >
+    insert into tb_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        tbr_id,
+      </if>
+      <if test="tbrName != null" >
+        tbr_name,
+      </if>
+      <if test="tbrEvent != null" >
+        tbr_event,
+      </if>
+      <if test="tbrRepeat != null" >
+        tbr_repeat,
+      </if>
+      <if test="tbrInfo != null" >
+        tbr_info,
+      </if>
+      <if test="tbrAmount != null" >
+        tbr_amount,
+      </if>
+      <if test="tbrProfile != null" >
+        tbr_profile,
+      </if>
+      <if test="tbrCondition != null" >
+        tbr_condition,
+      </if>
+      <if test="tbrIntegral != null" >
+        tbr_integral,
+      </if>
+      <if test="tbrCoupon != null" >
+        tbr_coupon,
+      </if>
+      <if test="tbrDerate != null" >
+        tbr_derate,
+      </if>
+      <if test="tbrStart != null" >
+        tbr_start,
+      </if>
+      <if test="tbrEnd != null" >
+        tbr_end,
+      </if>
+      <if test="tbrUpdateTime != null" >
+        tbr_update_time,
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time,
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbrId != null" >
+        #{tbrId,jdbcType=INTEGER},
+      </if>
+      <if test="tbrName != null" >
+        #{tbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrEvent != null" >
+        #{tbrEvent,jdbcType=INTEGER},
+      </if>
+      <if test="tbrRepeat != null" >
+        #{tbrRepeat,jdbcType=INTEGER},
+      </if>
+      <if test="tbrInfo != null" >
+        #{tbrInfo,jdbcType=BIGINT},
+      </if>
+      <if test="tbrAmount != null" >
+        #{tbrAmount,jdbcType=INTEGER},
+      </if>
+      <if test="tbrProfile != null" >
+        #{tbrProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrCondition != null" >
+        #{tbrCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrIntegral != null" >
+        #{tbrIntegral,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrCoupon != null" >
+        #{tbrCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrDerate != null" >
+        #{tbrDerate,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrStart != null" >
+        #{tbrStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrEnd != null" >
+        #{tbrEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrUpdateTime != null" >
+        #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrAddTime != null" >
+        #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrStatus != null" >
+        #{tbrStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.RuleExample" resultType="java.lang.Integer" >
+    select count(*) from tb_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_rule
+    <set >
+      <if test="record.tbrId != null" >
+        tbr_id = #{record.tbrId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbrName != null" >
+        tbr_name = #{record.tbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrEvent != null" >
+        tbr_event = #{record.tbrEvent,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbrRepeat != null" >
+        tbr_repeat = #{record.tbrRepeat,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbrInfo != null" >
+        tbr_info = #{record.tbrInfo,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbrAmount != null" >
+        tbr_amount = #{record.tbrAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbrProfile != null" >
+        tbr_profile = #{record.tbrProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrCondition != null" >
+        tbr_condition = #{record.tbrCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrIntegral != null" >
+        tbr_integral = #{record.tbrIntegral,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrCoupon != null" >
+        tbr_coupon = #{record.tbrCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrDerate != null" >
+        tbr_derate = #{record.tbrDerate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbrStart != null" >
+        tbr_start = #{record.tbrStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrEnd != null" >
+        tbr_end = #{record.tbrEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrUpdateTime != null" >
+        tbr_update_time = #{record.tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrAddTime != null" >
+        tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbrStatus != null" >
+        tbr_status = #{record.tbrStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_rule
+    set tbr_id = #{record.tbrId,jdbcType=INTEGER},
+      tbr_name = #{record.tbrName,jdbcType=VARCHAR},
+      tbr_event = #{record.tbrEvent,jdbcType=INTEGER},
+      tbr_repeat = #{record.tbrRepeat,jdbcType=INTEGER},
+      tbr_info = #{record.tbrInfo,jdbcType=BIGINT},
+      tbr_amount = #{record.tbrAmount,jdbcType=INTEGER},
+      tbr_profile = #{record.tbrProfile,jdbcType=VARCHAR},
+      tbr_condition = #{record.tbrCondition,jdbcType=VARCHAR},
+      tbr_integral = #{record.tbrIntegral,jdbcType=VARCHAR},
+      tbr_coupon = #{record.tbrCoupon,jdbcType=VARCHAR},
+      tbr_derate = #{record.tbrDerate,jdbcType=VARCHAR},
+      tbr_start = #{record.tbrStart,jdbcType=TIMESTAMP},
+      tbr_end = #{record.tbrEnd,jdbcType=TIMESTAMP},
+      tbr_update_time = #{record.tbrUpdateTime,jdbcType=TIMESTAMP},
+      tbr_add_time = #{record.tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_status = #{record.tbrStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Rule" >
+    update tb_rule
+    <set >
+      <if test="tbrName != null" >
+        tbr_name = #{tbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrEvent != null" >
+        tbr_event = #{tbrEvent,jdbcType=INTEGER},
+      </if>
+      <if test="tbrRepeat != null" >
+        tbr_repeat = #{tbrRepeat,jdbcType=INTEGER},
+      </if>
+      <if test="tbrInfo != null" >
+        tbr_info = #{tbrInfo,jdbcType=BIGINT},
+      </if>
+      <if test="tbrAmount != null" >
+        tbr_amount = #{tbrAmount,jdbcType=INTEGER},
+      </if>
+      <if test="tbrProfile != null" >
+        tbr_profile = #{tbrProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrCondition != null" >
+        tbr_condition = #{tbrCondition,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrIntegral != null" >
+        tbr_integral = #{tbrIntegral,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrCoupon != null" >
+        tbr_coupon = #{tbrCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrDerate != null" >
+        tbr_derate = #{tbrDerate,jdbcType=VARCHAR},
+      </if>
+      <if test="tbrStart != null" >
+        tbr_start = #{tbrStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrEnd != null" >
+        tbr_end = #{tbrEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrUpdateTime != null" >
+        tbr_update_time = #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrAddTime != null" >
+        tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbrStatus != null" >
+        tbr_status = #{tbrStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbr_id = #{tbrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Rule" >
+    update tb_rule
+    set tbr_name = #{tbrName,jdbcType=VARCHAR},
+      tbr_event = #{tbrEvent,jdbcType=INTEGER},
+      tbr_repeat = #{tbrRepeat,jdbcType=INTEGER},
+      tbr_info = #{tbrInfo,jdbcType=BIGINT},
+      tbr_amount = #{tbrAmount,jdbcType=INTEGER},
+      tbr_profile = #{tbrProfile,jdbcType=VARCHAR},
+      tbr_condition = #{tbrCondition,jdbcType=VARCHAR},
+      tbr_integral = #{tbrIntegral,jdbcType=VARCHAR},
+      tbr_coupon = #{tbrCoupon,jdbcType=VARCHAR},
+      tbr_derate = #{tbrDerate,jdbcType=VARCHAR},
+      tbr_start = #{tbrStart,jdbcType=TIMESTAMP},
+      tbr_end = #{tbrEnd,jdbcType=TIMESTAMP},
+      tbr_update_time = #{tbrUpdateTime,jdbcType=TIMESTAMP},
+      tbr_add_time = #{tbrAddTime,jdbcType=TIMESTAMP},
+      tbr_status = #{tbrStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbr_id = #{tbrId,jdbcType=INTEGER}
+  </update>
+</mapper>

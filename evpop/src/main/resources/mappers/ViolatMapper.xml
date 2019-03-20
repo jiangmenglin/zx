@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ViolatMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Violat" >
+    <id column="tbv_id" property="tbvId" jdbcType="INTEGER" />
+    <result column="tbv_host" property="tbvHost" jdbcType="SMALLINT" />
+    <result column="tbv_order" property="tbvOrder" jdbcType="BIGINT" />
+    <result column="tbv_member" property="tbvMember" jdbcType="INTEGER" />
+    <result column="tbv_car" property="tbvCar" jdbcType="INTEGER" />
+    <result column="tbv_money" property="tbvMoney" jdbcType="DOUBLE" />
+    <result column="tbv_score" property="tbvScore" jdbcType="INTEGER" />
+    <result column="tbv_happen_time" property="tbvHappenTime" jdbcType="TIMESTAMP" />
+    <result column="tbv_deal_time" property="tbvDealTime" jdbcType="TIMESTAMP" />
+    <result column="tbv_address" property="tbvAddress" jdbcType="VARCHAR" />
+    <result column="tbv_decipt" property="tbvDecipt" jdbcType="VARCHAR" />
+    <result column="tbv_notice" property="tbvNotice" jdbcType="TINYINT" />
+    <result column="tbv_cutoff_time" property="tbvCutoffTime" jdbcType="TIMESTAMP" />
+    <result column="tbv_type" property="tbvType" jdbcType="TINYINT" />
+    <result column="tbv_price" property="tbvPrice" jdbcType="DOUBLE" />
+    <result column="tbv_branch" property="tbvBranch" jdbcType="TINYINT" />
+    <result column="tbv_post_type" property="tbvPostType" jdbcType="TINYINT" />
+    <result column="tbv_post_addr" property="tbvPostAddr" jdbcType="VARCHAR" />
+    <result column="tbv_remark" property="tbvRemark" jdbcType="VARCHAR" />
+    <result column="tbv_accepter" property="tbvAccepter" jdbcType="INTEGER" />
+    <result column="tbv_adder" property="tbvAdder" jdbcType="INTEGER" />
+    <result column="tbv_update_time" property="tbvUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbv_add_time" property="tbvAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbv_deal_flag" property="tbvDealFlag" jdbcType="TINYINT" />
+    <result column="tbv_query_count" property="tbvQueryCount" jdbcType="INTEGER" />
+    <result column="tbv_status" property="tbvStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbv_id, tbv_host, tbv_order, tbv_member, tbv_car, tbv_money, tbv_score, tbv_happen_time, 
+    tbv_deal_time, tbv_address, tbv_decipt, tbv_notice, tbv_cutoff_time, tbv_type, tbv_price, 
+    tbv_branch, tbv_post_type, tbv_post_addr, tbv_remark, tbv_accepter, tbv_adder, tbv_update_time, 
+    tbv_add_time, tbv_deal_flag, tbv_query_count, tbv_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ViolatExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_violat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_violat
+    where tbv_id = #{tbvId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_violat
+    where tbv_id = #{tbvId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Violat" >
+    insert into tb_violat (tbv_id, tbv_host, tbv_order, 
+      tbv_member, tbv_car, tbv_money, 
+      tbv_score, tbv_happen_time, tbv_deal_time, 
+      tbv_address, tbv_decipt, tbv_notice, 
+      tbv_cutoff_time, tbv_type, tbv_price, 
+      tbv_branch, tbv_post_type, tbv_post_addr, 
+      tbv_remark, tbv_accepter, tbv_adder, 
+      tbv_update_time, tbv_add_time, tbv_deal_flag, 
+      tbv_query_count, tbv_status, createTime, 
+      modifyDate)
+    values (#{tbvId,jdbcType=INTEGER}, #{tbvHost,jdbcType=SMALLINT}, #{tbvOrder,jdbcType=BIGINT}, 
+      #{tbvMember,jdbcType=INTEGER}, #{tbvCar,jdbcType=INTEGER}, #{tbvMoney,jdbcType=DOUBLE}, 
+      #{tbvScore,jdbcType=INTEGER}, #{tbvHappenTime,jdbcType=TIMESTAMP}, #{tbvDealTime,jdbcType=TIMESTAMP}, 
+      #{tbvAddress,jdbcType=VARCHAR}, #{tbvDecipt,jdbcType=VARCHAR}, #{tbvNotice,jdbcType=TINYINT}, 
+      #{tbvCutoffTime,jdbcType=TIMESTAMP}, #{tbvType,jdbcType=TINYINT}, #{tbvPrice,jdbcType=DOUBLE}, 
+      #{tbvBranch,jdbcType=TINYINT}, #{tbvPostType,jdbcType=TINYINT}, #{tbvPostAddr,jdbcType=VARCHAR}, 
+      #{tbvRemark,jdbcType=VARCHAR}, #{tbvAccepter,jdbcType=INTEGER}, #{tbvAdder,jdbcType=INTEGER}, 
+      #{tbvUpdateTime,jdbcType=TIMESTAMP}, #{tbvAddTime,jdbcType=TIMESTAMP}, #{tbvDealFlag,jdbcType=TINYINT}, 
+      #{tbvQueryCount,jdbcType=INTEGER}, #{tbvStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Violat" >
+    insert into tb_violat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbvId != null" >
+        tbv_id,
+      </if>
+      <if test="tbvHost != null" >
+        tbv_host,
+      </if>
+      <if test="tbvOrder != null" >
+        tbv_order,
+      </if>
+      <if test="tbvMember != null" >
+        tbv_member,
+      </if>
+      <if test="tbvCar != null" >
+        tbv_car,
+      </if>
+      <if test="tbvMoney != null" >
+        tbv_money,
+      </if>
+      <if test="tbvScore != null" >
+        tbv_score,
+      </if>
+      <if test="tbvHappenTime != null" >
+        tbv_happen_time,
+      </if>
+      <if test="tbvDealTime != null" >
+        tbv_deal_time,
+      </if>
+      <if test="tbvAddress != null" >
+        tbv_address,
+      </if>
+      <if test="tbvDecipt != null" >
+        tbv_decipt,
+      </if>
+      <if test="tbvNotice != null" >
+        tbv_notice,
+      </if>
+      <if test="tbvCutoffTime != null" >
+        tbv_cutoff_time,
+      </if>
+      <if test="tbvType != null" >
+        tbv_type,
+      </if>
+      <if test="tbvPrice != null" >
+        tbv_price,
+      </if>
+      <if test="tbvBranch != null" >
+        tbv_branch,
+      </if>
+      <if test="tbvPostType != null" >
+        tbv_post_type,
+      </if>
+      <if test="tbvPostAddr != null" >
+        tbv_post_addr,
+      </if>
+      <if test="tbvRemark != null" >
+        tbv_remark,
+      </if>
+      <if test="tbvAccepter != null" >
+        tbv_accepter,
+      </if>
+      <if test="tbvAdder != null" >
+        tbv_adder,
+      </if>
+      <if test="tbvUpdateTime != null" >
+        tbv_update_time,
+      </if>
+      <if test="tbvAddTime != null" >
+        tbv_add_time,
+      </if>
+      <if test="tbvDealFlag != null" >
+        tbv_deal_flag,
+      </if>
+      <if test="tbvQueryCount != null" >
+        tbv_query_count,
+      </if>
+      <if test="tbvStatus != null" >
+        tbv_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbvId != null" >
+        #{tbvId,jdbcType=INTEGER},
+      </if>
+      <if test="tbvHost != null" >
+        #{tbvHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbvOrder != null" >
+        #{tbvOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbvMember != null" >
+        #{tbvMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbvCar != null" >
+        #{tbvCar,jdbcType=INTEGER},
+      </if>
+      <if test="tbvMoney != null" >
+        #{tbvMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbvScore != null" >
+        #{tbvScore,jdbcType=INTEGER},
+      </if>
+      <if test="tbvHappenTime != null" >
+        #{tbvHappenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvDealTime != null" >
+        #{tbvDealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvAddress != null" >
+        #{tbvAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvDecipt != null" >
+        #{tbvDecipt,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvNotice != null" >
+        #{tbvNotice,jdbcType=TINYINT},
+      </if>
+      <if test="tbvCutoffTime != null" >
+        #{tbvCutoffTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvType != null" >
+        #{tbvType,jdbcType=TINYINT},
+      </if>
+      <if test="tbvPrice != null" >
+        #{tbvPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="tbvBranch != null" >
+        #{tbvBranch,jdbcType=TINYINT},
+      </if>
+      <if test="tbvPostType != null" >
+        #{tbvPostType,jdbcType=TINYINT},
+      </if>
+      <if test="tbvPostAddr != null" >
+        #{tbvPostAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvRemark != null" >
+        #{tbvRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvAccepter != null" >
+        #{tbvAccepter,jdbcType=INTEGER},
+      </if>
+      <if test="tbvAdder != null" >
+        #{tbvAdder,jdbcType=INTEGER},
+      </if>
+      <if test="tbvUpdateTime != null" >
+        #{tbvUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvAddTime != null" >
+        #{tbvAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvDealFlag != null" >
+        #{tbvDealFlag,jdbcType=TINYINT},
+      </if>
+      <if test="tbvQueryCount != null" >
+        #{tbvQueryCount,jdbcType=INTEGER},
+      </if>
+      <if test="tbvStatus != null" >
+        #{tbvStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ViolatExample" resultType="java.lang.Integer" >
+    select count(*) from tb_violat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_violat
+    <set >
+      <if test="record.tbvId != null" >
+        tbv_id = #{record.tbvId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbvHost != null" >
+        tbv_host = #{record.tbvHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbvOrder != null" >
+        tbv_order = #{record.tbvOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbvMember != null" >
+        tbv_member = #{record.tbvMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbvCar != null" >
+        tbv_car = #{record.tbvCar,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbvMoney != null" >
+        tbv_money = #{record.tbvMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbvScore != null" >
+        tbv_score = #{record.tbvScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbvHappenTime != null" >
+        tbv_happen_time = #{record.tbvHappenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbvDealTime != null" >
+        tbv_deal_time = #{record.tbvDealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbvAddress != null" >
+        tbv_address = #{record.tbvAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbvDecipt != null" >
+        tbv_decipt = #{record.tbvDecipt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbvNotice != null" >
+        tbv_notice = #{record.tbvNotice,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbvCutoffTime != null" >
+        tbv_cutoff_time = #{record.tbvCutoffTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbvType != null" >
+        tbv_type = #{record.tbvType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbvPrice != null" >
+        tbv_price = #{record.tbvPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbvBranch != null" >
+        tbv_branch = #{record.tbvBranch,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbvPostType != null" >
+        tbv_post_type = #{record.tbvPostType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbvPostAddr != null" >
+        tbv_post_addr = #{record.tbvPostAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbvRemark != null" >
+        tbv_remark = #{record.tbvRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbvAccepter != null" >
+        tbv_accepter = #{record.tbvAccepter,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbvAdder != null" >
+        tbv_adder = #{record.tbvAdder,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbvUpdateTime != null" >
+        tbv_update_time = #{record.tbvUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbvAddTime != null" >
+        tbv_add_time = #{record.tbvAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbvDealFlag != null" >
+        tbv_deal_flag = #{record.tbvDealFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbvQueryCount != null" >
+        tbv_query_count = #{record.tbvQueryCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbvStatus != null" >
+        tbv_status = #{record.tbvStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_violat
+    set tbv_id = #{record.tbvId,jdbcType=INTEGER},
+      tbv_host = #{record.tbvHost,jdbcType=SMALLINT},
+      tbv_order = #{record.tbvOrder,jdbcType=BIGINT},
+      tbv_member = #{record.tbvMember,jdbcType=INTEGER},
+      tbv_car = #{record.tbvCar,jdbcType=INTEGER},
+      tbv_money = #{record.tbvMoney,jdbcType=DOUBLE},
+      tbv_score = #{record.tbvScore,jdbcType=INTEGER},
+      tbv_happen_time = #{record.tbvHappenTime,jdbcType=TIMESTAMP},
+      tbv_deal_time = #{record.tbvDealTime,jdbcType=TIMESTAMP},
+      tbv_address = #{record.tbvAddress,jdbcType=VARCHAR},
+      tbv_decipt = #{record.tbvDecipt,jdbcType=VARCHAR},
+      tbv_notice = #{record.tbvNotice,jdbcType=TINYINT},
+      tbv_cutoff_time = #{record.tbvCutoffTime,jdbcType=TIMESTAMP},
+      tbv_type = #{record.tbvType,jdbcType=TINYINT},
+      tbv_price = #{record.tbvPrice,jdbcType=DOUBLE},
+      tbv_branch = #{record.tbvBranch,jdbcType=TINYINT},
+      tbv_post_type = #{record.tbvPostType,jdbcType=TINYINT},
+      tbv_post_addr = #{record.tbvPostAddr,jdbcType=VARCHAR},
+      tbv_remark = #{record.tbvRemark,jdbcType=VARCHAR},
+      tbv_accepter = #{record.tbvAccepter,jdbcType=INTEGER},
+      tbv_adder = #{record.tbvAdder,jdbcType=INTEGER},
+      tbv_update_time = #{record.tbvUpdateTime,jdbcType=TIMESTAMP},
+      tbv_add_time = #{record.tbvAddTime,jdbcType=TIMESTAMP},
+      tbv_deal_flag = #{record.tbvDealFlag,jdbcType=TINYINT},
+      tbv_query_count = #{record.tbvQueryCount,jdbcType=INTEGER},
+      tbv_status = #{record.tbvStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Violat" >
+    update tb_violat
+    <set >
+      <if test="tbvHost != null" >
+        tbv_host = #{tbvHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbvOrder != null" >
+        tbv_order = #{tbvOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbvMember != null" >
+        tbv_member = #{tbvMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbvCar != null" >
+        tbv_car = #{tbvCar,jdbcType=INTEGER},
+      </if>
+      <if test="tbvMoney != null" >
+        tbv_money = #{tbvMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbvScore != null" >
+        tbv_score = #{tbvScore,jdbcType=INTEGER},
+      </if>
+      <if test="tbvHappenTime != null" >
+        tbv_happen_time = #{tbvHappenTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvDealTime != null" >
+        tbv_deal_time = #{tbvDealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvAddress != null" >
+        tbv_address = #{tbvAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvDecipt != null" >
+        tbv_decipt = #{tbvDecipt,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvNotice != null" >
+        tbv_notice = #{tbvNotice,jdbcType=TINYINT},
+      </if>
+      <if test="tbvCutoffTime != null" >
+        tbv_cutoff_time = #{tbvCutoffTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvType != null" >
+        tbv_type = #{tbvType,jdbcType=TINYINT},
+      </if>
+      <if test="tbvPrice != null" >
+        tbv_price = #{tbvPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="tbvBranch != null" >
+        tbv_branch = #{tbvBranch,jdbcType=TINYINT},
+      </if>
+      <if test="tbvPostType != null" >
+        tbv_post_type = #{tbvPostType,jdbcType=TINYINT},
+      </if>
+      <if test="tbvPostAddr != null" >
+        tbv_post_addr = #{tbvPostAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvRemark != null" >
+        tbv_remark = #{tbvRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvAccepter != null" >
+        tbv_accepter = #{tbvAccepter,jdbcType=INTEGER},
+      </if>
+      <if test="tbvAdder != null" >
+        tbv_adder = #{tbvAdder,jdbcType=INTEGER},
+      </if>
+      <if test="tbvUpdateTime != null" >
+        tbv_update_time = #{tbvUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvAddTime != null" >
+        tbv_add_time = #{tbvAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvDealFlag != null" >
+        tbv_deal_flag = #{tbvDealFlag,jdbcType=TINYINT},
+      </if>
+      <if test="tbvQueryCount != null" >
+        tbv_query_count = #{tbvQueryCount,jdbcType=INTEGER},
+      </if>
+      <if test="tbvStatus != null" >
+        tbv_status = #{tbvStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbv_id = #{tbvId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Violat" >
+    update tb_violat
+    set tbv_host = #{tbvHost,jdbcType=SMALLINT},
+      tbv_order = #{tbvOrder,jdbcType=BIGINT},
+      tbv_member = #{tbvMember,jdbcType=INTEGER},
+      tbv_car = #{tbvCar,jdbcType=INTEGER},
+      tbv_money = #{tbvMoney,jdbcType=DOUBLE},
+      tbv_score = #{tbvScore,jdbcType=INTEGER},
+      tbv_happen_time = #{tbvHappenTime,jdbcType=TIMESTAMP},
+      tbv_deal_time = #{tbvDealTime,jdbcType=TIMESTAMP},
+      tbv_address = #{tbvAddress,jdbcType=VARCHAR},
+      tbv_decipt = #{tbvDecipt,jdbcType=VARCHAR},
+      tbv_notice = #{tbvNotice,jdbcType=TINYINT},
+      tbv_cutoff_time = #{tbvCutoffTime,jdbcType=TIMESTAMP},
+      tbv_type = #{tbvType,jdbcType=TINYINT},
+      tbv_price = #{tbvPrice,jdbcType=DOUBLE},
+      tbv_branch = #{tbvBranch,jdbcType=TINYINT},
+      tbv_post_type = #{tbvPostType,jdbcType=TINYINT},
+      tbv_post_addr = #{tbvPostAddr,jdbcType=VARCHAR},
+      tbv_remark = #{tbvRemark,jdbcType=VARCHAR},
+      tbv_accepter = #{tbvAccepter,jdbcType=INTEGER},
+      tbv_adder = #{tbvAdder,jdbcType=INTEGER},
+      tbv_update_time = #{tbvUpdateTime,jdbcType=TIMESTAMP},
+      tbv_add_time = #{tbvAddTime,jdbcType=TIMESTAMP},
+      tbv_deal_flag = #{tbvDealFlag,jdbcType=TINYINT},
+      tbv_query_count = #{tbvQueryCount,jdbcType=INTEGER},
+      tbv_status = #{tbvStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbv_id = #{tbvId,jdbcType=INTEGER}
+  </update>
+</mapper>

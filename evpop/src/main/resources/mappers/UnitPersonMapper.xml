@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.UnitPersonMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.UnitPerson" >
+    <id column="tbup_id" property="tbupId" jdbcType="INTEGER" />
+    <result column="tbup_host" property="tbupHost" jdbcType="SMALLINT" />
+    <result column="tbup_info" property="tbupInfo" jdbcType="INTEGER" />
+    <result column="tbup_group" property="tbupGroup" jdbcType="BIGINT" />
+    <result column="tbup_member" property="tbupMember" jdbcType="INTEGER" />
+    <result column="tbup_quota" property="tbupQuota" jdbcType="DECIMAL" />
+    <result column="tbup_update_time" property="tbupUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbup_add_time" property="tbupAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbup_status" property="tbupStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbup_id, tbup_host, tbup_info, tbup_group, tbup_member, tbup_quota, tbup_update_time, 
+    tbup_add_time, tbup_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.UnitPersonExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_unit_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_unit_person
+    where tbup_id = #{tbupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_unit_person
+    where tbup_id = #{tbupId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.UnitPerson" >
+    insert into tb_unit_person (tbup_id, tbup_host, tbup_info, 
+      tbup_group, tbup_member, tbup_quota, 
+      tbup_update_time, tbup_add_time, tbup_status
+      )
+    values (#{tbupId,jdbcType=INTEGER}, #{tbupHost,jdbcType=SMALLINT}, #{tbupInfo,jdbcType=INTEGER}, 
+      #{tbupGroup,jdbcType=BIGINT}, #{tbupMember,jdbcType=INTEGER}, #{tbupQuota,jdbcType=DECIMAL}, 
+      #{tbupUpdateTime,jdbcType=TIMESTAMP}, #{tbupAddTime,jdbcType=TIMESTAMP}, #{tbupStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.UnitPerson" >
+    insert into tb_unit_person
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbupId != null" >
+        tbup_id,
+      </if>
+      <if test="tbupHost != null" >
+        tbup_host,
+      </if>
+      <if test="tbupInfo != null" >
+        tbup_info,
+      </if>
+      <if test="tbupGroup != null" >
+        tbup_group,
+      </if>
+      <if test="tbupMember != null" >
+        tbup_member,
+      </if>
+      <if test="tbupQuota != null" >
+        tbup_quota,
+      </if>
+      <if test="tbupUpdateTime != null" >
+        tbup_update_time,
+      </if>
+      <if test="tbupAddTime != null" >
+        tbup_add_time,
+      </if>
+      <if test="tbupStatus != null" >
+        tbup_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbupId != null" >
+        #{tbupId,jdbcType=INTEGER},
+      </if>
+      <if test="tbupHost != null" >
+        #{tbupHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbupInfo != null" >
+        #{tbupInfo,jdbcType=INTEGER},
+      </if>
+      <if test="tbupGroup != null" >
+        #{tbupGroup,jdbcType=BIGINT},
+      </if>
+      <if test="tbupMember != null" >
+        #{tbupMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbupQuota != null" >
+        #{tbupQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="tbupUpdateTime != null" >
+        #{tbupUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbupAddTime != null" >
+        #{tbupAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbupStatus != null" >
+        #{tbupStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.UnitPersonExample" resultType="java.lang.Integer" >
+    select count(*) from tb_unit_person
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_unit_person
+    <set >
+      <if test="record.tbupId != null" >
+        tbup_id = #{record.tbupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbupHost != null" >
+        tbup_host = #{record.tbupHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbupInfo != null" >
+        tbup_info = #{record.tbupInfo,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbupGroup != null" >
+        tbup_group = #{record.tbupGroup,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbupMember != null" >
+        tbup_member = #{record.tbupMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbupQuota != null" >
+        tbup_quota = #{record.tbupQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tbupUpdateTime != null" >
+        tbup_update_time = #{record.tbupUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbupAddTime != null" >
+        tbup_add_time = #{record.tbupAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbupStatus != null" >
+        tbup_status = #{record.tbupStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_unit_person
+    set tbup_id = #{record.tbupId,jdbcType=INTEGER},
+      tbup_host = #{record.tbupHost,jdbcType=SMALLINT},
+      tbup_info = #{record.tbupInfo,jdbcType=INTEGER},
+      tbup_group = #{record.tbupGroup,jdbcType=BIGINT},
+      tbup_member = #{record.tbupMember,jdbcType=INTEGER},
+      tbup_quota = #{record.tbupQuota,jdbcType=DECIMAL},
+      tbup_update_time = #{record.tbupUpdateTime,jdbcType=TIMESTAMP},
+      tbup_add_time = #{record.tbupAddTime,jdbcType=TIMESTAMP},
+      tbup_status = #{record.tbupStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.UnitPerson" >
+    update tb_unit_person
+    <set >
+      <if test="tbupHost != null" >
+        tbup_host = #{tbupHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbupInfo != null" >
+        tbup_info = #{tbupInfo,jdbcType=INTEGER},
+      </if>
+      <if test="tbupGroup != null" >
+        tbup_group = #{tbupGroup,jdbcType=BIGINT},
+      </if>
+      <if test="tbupMember != null" >
+        tbup_member = #{tbupMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbupQuota != null" >
+        tbup_quota = #{tbupQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="tbupUpdateTime != null" >
+        tbup_update_time = #{tbupUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbupAddTime != null" >
+        tbup_add_time = #{tbupAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbupStatus != null" >
+        tbup_status = #{tbupStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbup_id = #{tbupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.UnitPerson" >
+    update tb_unit_person
+    set tbup_host = #{tbupHost,jdbcType=SMALLINT},
+      tbup_info = #{tbupInfo,jdbcType=INTEGER},
+      tbup_group = #{tbupGroup,jdbcType=BIGINT},
+      tbup_member = #{tbupMember,jdbcType=INTEGER},
+      tbup_quota = #{tbupQuota,jdbcType=DECIMAL},
+      tbup_update_time = #{tbupUpdateTime,jdbcType=TIMESTAMP},
+      tbup_add_time = #{tbupAddTime,jdbcType=TIMESTAMP},
+      tbup_status = #{tbupStatus,jdbcType=TINYINT}
+    where tbup_id = #{tbupId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.IntegralMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Integral" >
+    <id column="tbi_id" property="tbiId" jdbcType="INTEGER" />
+    <result column="tbi_host" property="tbiHost" jdbcType="SMALLINT" />
+    <result column="tbi_member" property="tbiMember" jdbcType="INTEGER" />
+    <result column="tbi_type" property="tbiType" jdbcType="TINYINT" />
+    <result column="tbi_amount" property="tbiAmount" jdbcType="DOUBLE" />
+    <result column="tbi_remark" property="tbiRemark" jdbcType="VARCHAR" />
+    <result column="tbi_add_time" property="tbiAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbi_relate" property="tbiRelate" jdbcType="VARCHAR" />
+    <result column="tbi_serial" property="tbiSerial" jdbcType="VARCHAR" />
+    <result column="tbi_editor" property="tbiEditor" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbi_id, tbi_host, tbi_member, tbi_type, tbi_amount, tbi_remark, tbi_add_time, tbi_relate, 
+    tbi_serial, tbi_editor
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.IntegralExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_integral
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_integral
+    where tbi_id = #{tbiId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_integral
+    where tbi_id = #{tbiId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Integral" >
+    insert into tb_integral (tbi_id, tbi_host, tbi_member, 
+      tbi_type, tbi_amount, tbi_remark, 
+      tbi_add_time, tbi_relate, tbi_serial, 
+      tbi_editor)
+    values (#{tbiId,jdbcType=INTEGER}, #{tbiHost,jdbcType=SMALLINT}, #{tbiMember,jdbcType=INTEGER}, 
+      #{tbiType,jdbcType=TINYINT}, #{tbiAmount,jdbcType=DOUBLE}, #{tbiRemark,jdbcType=VARCHAR}, 
+      #{tbiAddTime,jdbcType=TIMESTAMP}, #{tbiRelate,jdbcType=VARCHAR}, #{tbiSerial,jdbcType=VARCHAR}, 
+      #{tbiEditor,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Integral" >
+    insert into tb_integral
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbiId != null" >
+        tbi_id,
+      </if>
+      <if test="tbiHost != null" >
+        tbi_host,
+      </if>
+      <if test="tbiMember != null" >
+        tbi_member,
+      </if>
+      <if test="tbiType != null" >
+        tbi_type,
+      </if>
+      <if test="tbiAmount != null" >
+        tbi_amount,
+      </if>
+      <if test="tbiRemark != null" >
+        tbi_remark,
+      </if>
+      <if test="tbiAddTime != null" >
+        tbi_add_time,
+      </if>
+      <if test="tbiRelate != null" >
+        tbi_relate,
+      </if>
+      <if test="tbiSerial != null" >
+        tbi_serial,
+      </if>
+      <if test="tbiEditor != null" >
+        tbi_editor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbiId != null" >
+        #{tbiId,jdbcType=INTEGER},
+      </if>
+      <if test="tbiHost != null" >
+        #{tbiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbiMember != null" >
+        #{tbiMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbiType != null" >
+        #{tbiType,jdbcType=TINYINT},
+      </if>
+      <if test="tbiAmount != null" >
+        #{tbiAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tbiRemark != null" >
+        #{tbiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiAddTime != null" >
+        #{tbiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbiRelate != null" >
+        #{tbiRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiSerial != null" >
+        #{tbiSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiEditor != null" >
+        #{tbiEditor,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.IntegralExample" resultType="java.lang.Integer" >
+    select count(*) from tb_integral
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_integral
+    <set >
+      <if test="record.tbiId != null" >
+        tbi_id = #{record.tbiId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbiHost != null" >
+        tbi_host = #{record.tbiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbiMember != null" >
+        tbi_member = #{record.tbiMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbiType != null" >
+        tbi_type = #{record.tbiType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbiAmount != null" >
+        tbi_amount = #{record.tbiAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbiRemark != null" >
+        tbi_remark = #{record.tbiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiAddTime != null" >
+        tbi_add_time = #{record.tbiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbiRelate != null" >
+        tbi_relate = #{record.tbiRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiSerial != null" >
+        tbi_serial = #{record.tbiSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiEditor != null" >
+        tbi_editor = #{record.tbiEditor,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_integral
+    set tbi_id = #{record.tbiId,jdbcType=INTEGER},
+      tbi_host = #{record.tbiHost,jdbcType=SMALLINT},
+      tbi_member = #{record.tbiMember,jdbcType=INTEGER},
+      tbi_type = #{record.tbiType,jdbcType=TINYINT},
+      tbi_amount = #{record.tbiAmount,jdbcType=DOUBLE},
+      tbi_remark = #{record.tbiRemark,jdbcType=VARCHAR},
+      tbi_add_time = #{record.tbiAddTime,jdbcType=TIMESTAMP},
+      tbi_relate = #{record.tbiRelate,jdbcType=VARCHAR},
+      tbi_serial = #{record.tbiSerial,jdbcType=VARCHAR},
+      tbi_editor = #{record.tbiEditor,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Integral" >
+    update tb_integral
+    <set >
+      <if test="tbiHost != null" >
+        tbi_host = #{tbiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbiMember != null" >
+        tbi_member = #{tbiMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbiType != null" >
+        tbi_type = #{tbiType,jdbcType=TINYINT},
+      </if>
+      <if test="tbiAmount != null" >
+        tbi_amount = #{tbiAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tbiRemark != null" >
+        tbi_remark = #{tbiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiAddTime != null" >
+        tbi_add_time = #{tbiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbiRelate != null" >
+        tbi_relate = #{tbiRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiSerial != null" >
+        tbi_serial = #{tbiSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiEditor != null" >
+        tbi_editor = #{tbiEditor,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tbi_id = #{tbiId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Integral" >
+    update tb_integral
+    set tbi_host = #{tbiHost,jdbcType=SMALLINT},
+      tbi_member = #{tbiMember,jdbcType=INTEGER},
+      tbi_type = #{tbiType,jdbcType=TINYINT},
+      tbi_amount = #{tbiAmount,jdbcType=DOUBLE},
+      tbi_remark = #{tbiRemark,jdbcType=VARCHAR},
+      tbi_add_time = #{tbiAddTime,jdbcType=TIMESTAMP},
+      tbi_relate = #{tbiRelate,jdbcType=VARCHAR},
+      tbi_serial = #{tbiSerial,jdbcType=VARCHAR},
+      tbi_editor = #{tbiEditor,jdbcType=INTEGER}
+    where tbi_id = #{tbiId,jdbcType=INTEGER}
+  </update>
+</mapper>

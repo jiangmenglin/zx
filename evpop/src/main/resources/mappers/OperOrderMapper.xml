@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.OperOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.OperOrder" >
+    <id column="tboo_id" property="tbooId" jdbcType="BIGINT" />
+    <result column="tboo_host" property="tbooHost" jdbcType="BIGINT" />
+    <result column="tboo_user" property="tbooUser" jdbcType="BIGINT" />
+    <result column="tboo_area" property="tbooArea" jdbcType="BIGINT" />
+    <result column="tboo_outlets_from" property="tbooOutletsFrom" jdbcType="BIGINT" />
+    <result column="tboo_outlets_to" property="tbooOutletsTo" jdbcType="BIGINT" />
+    <result column="tboo_car" property="tbooCar" jdbcType="BIGINT" />
+    <result column="tboo_type" property="tbooType" jdbcType="SMALLINT" />
+    <result column="tboo_start_time" property="tbooStartTime" jdbcType="TIMESTAMP" />
+    <result column="tboo_finish_time" property="tbooFinishTime" jdbcType="TIMESTAMP" />
+    <result column="tboo_take_time" property="tbooTakeTime" jdbcType="TIMESTAMP" />
+    <result column="tboo_ret_time" property="tbooRetTime" jdbcType="TIMESTAMP" />
+    <result column="tboo_begin_time" property="tbooBeginTime" jdbcType="TIMESTAMP" />
+    <result column="tboo_end_time" property="tbooEndTime" jdbcType="TIMESTAMP" />
+    <result column="tboo_duration" property="tbooDuration" jdbcType="DOUBLE" />
+    <result column="tboo_update_time" property="tbooUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tboo_add_time" property="tbooAddTime" jdbcType="TIMESTAMP" />
+    <result column="tboo_code" property="tbooCode" jdbcType="VARCHAR" />
+    <result column="tboo_remark" property="tbooRemark" jdbcType="VARCHAR" />
+    <result column="tboo_log" property="tbooLog" jdbcType="VARCHAR" />
+    <result column="tboo_editor" property="tbooEditor" jdbcType="BIGINT" />
+    <result column="tboo_state" property="tbooState" jdbcType="SMALLINT" />
+    <result column="tboo_status" property="tbooStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tboo_id, tboo_host, tboo_user, tboo_area, tboo_outlets_from, tboo_outlets_to, tboo_car, 
+    tboo_type, tboo_start_time, tboo_finish_time, tboo_take_time, tboo_ret_time, tboo_begin_time, 
+    tboo_end_time, tboo_duration, tboo_update_time, tboo_add_time, tboo_code, tboo_remark, 
+    tboo_log, tboo_editor, tboo_state, tboo_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.OperOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_oper_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_oper_order
+    where tboo_id = #{tbooId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_oper_order
+    where tboo_id = #{tbooId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.OperOrder" >
+    insert into tb_oper_order (tboo_id, tboo_host, tboo_user, 
+      tboo_area, tboo_outlets_from, tboo_outlets_to, 
+      tboo_car, tboo_type, tboo_start_time, 
+      tboo_finish_time, tboo_take_time, tboo_ret_time, 
+      tboo_begin_time, tboo_end_time, tboo_duration, 
+      tboo_update_time, tboo_add_time, tboo_code, 
+      tboo_remark, tboo_log, tboo_editor, 
+      tboo_state, tboo_status)
+    values (#{tbooId,jdbcType=BIGINT}, #{tbooHost,jdbcType=BIGINT}, #{tbooUser,jdbcType=BIGINT}, 
+      #{tbooArea,jdbcType=BIGINT}, #{tbooOutletsFrom,jdbcType=BIGINT}, #{tbooOutletsTo,jdbcType=BIGINT}, 
+      #{tbooCar,jdbcType=BIGINT}, #{tbooType,jdbcType=SMALLINT}, #{tbooStartTime,jdbcType=TIMESTAMP}, 
+      #{tbooFinishTime,jdbcType=TIMESTAMP}, #{tbooTakeTime,jdbcType=TIMESTAMP}, #{tbooRetTime,jdbcType=TIMESTAMP}, 
+      #{tbooBeginTime,jdbcType=TIMESTAMP}, #{tbooEndTime,jdbcType=TIMESTAMP}, #{tbooDuration,jdbcType=DOUBLE}, 
+      #{tbooUpdateTime,jdbcType=TIMESTAMP}, #{tbooAddTime,jdbcType=TIMESTAMP}, #{tbooCode,jdbcType=VARCHAR}, 
+      #{tbooRemark,jdbcType=VARCHAR}, #{tbooLog,jdbcType=VARCHAR}, #{tbooEditor,jdbcType=BIGINT}, 
+      #{tbooState,jdbcType=SMALLINT}, #{tbooStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.OperOrder" >
+    insert into tb_oper_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbooId != null" >
+        tboo_id,
+      </if>
+      <if test="tbooHost != null" >
+        tboo_host,
+      </if>
+      <if test="tbooUser != null" >
+        tboo_user,
+      </if>
+      <if test="tbooArea != null" >
+        tboo_area,
+      </if>
+      <if test="tbooOutletsFrom != null" >
+        tboo_outlets_from,
+      </if>
+      <if test="tbooOutletsTo != null" >
+        tboo_outlets_to,
+      </if>
+      <if test="tbooCar != null" >
+        tboo_car,
+      </if>
+      <if test="tbooType != null" >
+        tboo_type,
+      </if>
+      <if test="tbooStartTime != null" >
+        tboo_start_time,
+      </if>
+      <if test="tbooFinishTime != null" >
+        tboo_finish_time,
+      </if>
+      <if test="tbooTakeTime != null" >
+        tboo_take_time,
+      </if>
+      <if test="tbooRetTime != null" >
+        tboo_ret_time,
+      </if>
+      <if test="tbooBeginTime != null" >
+        tboo_begin_time,
+      </if>
+      <if test="tbooEndTime != null" >
+        tboo_end_time,
+      </if>
+      <if test="tbooDuration != null" >
+        tboo_duration,
+      </if>
+      <if test="tbooUpdateTime != null" >
+        tboo_update_time,
+      </if>
+      <if test="tbooAddTime != null" >
+        tboo_add_time,
+      </if>
+      <if test="tbooCode != null" >
+        tboo_code,
+      </if>
+      <if test="tbooRemark != null" >
+        tboo_remark,
+      </if>
+      <if test="tbooLog != null" >
+        tboo_log,
+      </if>
+      <if test="tbooEditor != null" >
+        tboo_editor,
+      </if>
+      <if test="tbooState != null" >
+        tboo_state,
+      </if>
+      <if test="tbooStatus != null" >
+        tboo_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbooId != null" >
+        #{tbooId,jdbcType=BIGINT},
+      </if>
+      <if test="tbooHost != null" >
+        #{tbooHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbooUser != null" >
+        #{tbooUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbooArea != null" >
+        #{tbooArea,jdbcType=BIGINT},
+      </if>
+      <if test="tbooOutletsFrom != null" >
+        #{tbooOutletsFrom,jdbcType=BIGINT},
+      </if>
+      <if test="tbooOutletsTo != null" >
+        #{tbooOutletsTo,jdbcType=BIGINT},
+      </if>
+      <if test="tbooCar != null" >
+        #{tbooCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbooType != null" >
+        #{tbooType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbooStartTime != null" >
+        #{tbooStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooFinishTime != null" >
+        #{tbooFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooTakeTime != null" >
+        #{tbooTakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooRetTime != null" >
+        #{tbooRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooBeginTime != null" >
+        #{tbooBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooEndTime != null" >
+        #{tbooEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooDuration != null" >
+        #{tbooDuration,jdbcType=DOUBLE},
+      </if>
+      <if test="tbooUpdateTime != null" >
+        #{tbooUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooAddTime != null" >
+        #{tbooAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooCode != null" >
+        #{tbooCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbooRemark != null" >
+        #{tbooRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbooLog != null" >
+        #{tbooLog,jdbcType=VARCHAR},
+      </if>
+      <if test="tbooEditor != null" >
+        #{tbooEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tbooState != null" >
+        #{tbooState,jdbcType=SMALLINT},
+      </if>
+      <if test="tbooStatus != null" >
+        #{tbooStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.OperOrderExample" resultType="java.lang.Integer" >
+    select count(*) from tb_oper_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_oper_order
+    <set >
+      <if test="record.tbooId != null" >
+        tboo_id = #{record.tbooId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbooHost != null" >
+        tboo_host = #{record.tbooHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbooUser != null" >
+        tboo_user = #{record.tbooUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbooArea != null" >
+        tboo_area = #{record.tbooArea,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbooOutletsFrom != null" >
+        tboo_outlets_from = #{record.tbooOutletsFrom,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbooOutletsTo != null" >
+        tboo_outlets_to = #{record.tbooOutletsTo,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbooCar != null" >
+        tboo_car = #{record.tbooCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbooType != null" >
+        tboo_type = #{record.tbooType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbooStartTime != null" >
+        tboo_start_time = #{record.tbooStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbooFinishTime != null" >
+        tboo_finish_time = #{record.tbooFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbooTakeTime != null" >
+        tboo_take_time = #{record.tbooTakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbooRetTime != null" >
+        tboo_ret_time = #{record.tbooRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbooBeginTime != null" >
+        tboo_begin_time = #{record.tbooBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbooEndTime != null" >
+        tboo_end_time = #{record.tbooEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbooDuration != null" >
+        tboo_duration = #{record.tbooDuration,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbooUpdateTime != null" >
+        tboo_update_time = #{record.tbooUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbooAddTime != null" >
+        tboo_add_time = #{record.tbooAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbooCode != null" >
+        tboo_code = #{record.tbooCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbooRemark != null" >
+        tboo_remark = #{record.tbooRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbooLog != null" >
+        tboo_log = #{record.tbooLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbooEditor != null" >
+        tboo_editor = #{record.tbooEditor,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbooState != null" >
+        tboo_state = #{record.tbooState,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbooStatus != null" >
+        tboo_status = #{record.tbooStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_oper_order
+    set tboo_id = #{record.tbooId,jdbcType=BIGINT},
+      tboo_host = #{record.tbooHost,jdbcType=BIGINT},
+      tboo_user = #{record.tbooUser,jdbcType=BIGINT},
+      tboo_area = #{record.tbooArea,jdbcType=BIGINT},
+      tboo_outlets_from = #{record.tbooOutletsFrom,jdbcType=BIGINT},
+      tboo_outlets_to = #{record.tbooOutletsTo,jdbcType=BIGINT},
+      tboo_car = #{record.tbooCar,jdbcType=BIGINT},
+      tboo_type = #{record.tbooType,jdbcType=SMALLINT},
+      tboo_start_time = #{record.tbooStartTime,jdbcType=TIMESTAMP},
+      tboo_finish_time = #{record.tbooFinishTime,jdbcType=TIMESTAMP},
+      tboo_take_time = #{record.tbooTakeTime,jdbcType=TIMESTAMP},
+      tboo_ret_time = #{record.tbooRetTime,jdbcType=TIMESTAMP},
+      tboo_begin_time = #{record.tbooBeginTime,jdbcType=TIMESTAMP},
+      tboo_end_time = #{record.tbooEndTime,jdbcType=TIMESTAMP},
+      tboo_duration = #{record.tbooDuration,jdbcType=DOUBLE},
+      tboo_update_time = #{record.tbooUpdateTime,jdbcType=TIMESTAMP},
+      tboo_add_time = #{record.tbooAddTime,jdbcType=TIMESTAMP},
+      tboo_code = #{record.tbooCode,jdbcType=VARCHAR},
+      tboo_remark = #{record.tbooRemark,jdbcType=VARCHAR},
+      tboo_log = #{record.tbooLog,jdbcType=VARCHAR},
+      tboo_editor = #{record.tbooEditor,jdbcType=BIGINT},
+      tboo_state = #{record.tbooState,jdbcType=SMALLINT},
+      tboo_status = #{record.tbooStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.OperOrder" >
+    update tb_oper_order
+    <set >
+      <if test="tbooHost != null" >
+        tboo_host = #{tbooHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbooUser != null" >
+        tboo_user = #{tbooUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbooArea != null" >
+        tboo_area = #{tbooArea,jdbcType=BIGINT},
+      </if>
+      <if test="tbooOutletsFrom != null" >
+        tboo_outlets_from = #{tbooOutletsFrom,jdbcType=BIGINT},
+      </if>
+      <if test="tbooOutletsTo != null" >
+        tboo_outlets_to = #{tbooOutletsTo,jdbcType=BIGINT},
+      </if>
+      <if test="tbooCar != null" >
+        tboo_car = #{tbooCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbooType != null" >
+        tboo_type = #{tbooType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbooStartTime != null" >
+        tboo_start_time = #{tbooStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooFinishTime != null" >
+        tboo_finish_time = #{tbooFinishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooTakeTime != null" >
+        tboo_take_time = #{tbooTakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooRetTime != null" >
+        tboo_ret_time = #{tbooRetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooBeginTime != null" >
+        tboo_begin_time = #{tbooBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooEndTime != null" >
+        tboo_end_time = #{tbooEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooDuration != null" >
+        tboo_duration = #{tbooDuration,jdbcType=DOUBLE},
+      </if>
+      <if test="tbooUpdateTime != null" >
+        tboo_update_time = #{tbooUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooAddTime != null" >
+        tboo_add_time = #{tbooAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbooCode != null" >
+        tboo_code = #{tbooCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbooRemark != null" >
+        tboo_remark = #{tbooRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbooLog != null" >
+        tboo_log = #{tbooLog,jdbcType=VARCHAR},
+      </if>
+      <if test="tbooEditor != null" >
+        tboo_editor = #{tbooEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tbooState != null" >
+        tboo_state = #{tbooState,jdbcType=SMALLINT},
+      </if>
+      <if test="tbooStatus != null" >
+        tboo_status = #{tbooStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tboo_id = #{tbooId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.OperOrder" >
+    update tb_oper_order
+    set tboo_host = #{tbooHost,jdbcType=BIGINT},
+      tboo_user = #{tbooUser,jdbcType=BIGINT},
+      tboo_area = #{tbooArea,jdbcType=BIGINT},
+      tboo_outlets_from = #{tbooOutletsFrom,jdbcType=BIGINT},
+      tboo_outlets_to = #{tbooOutletsTo,jdbcType=BIGINT},
+      tboo_car = #{tbooCar,jdbcType=BIGINT},
+      tboo_type = #{tbooType,jdbcType=SMALLINT},
+      tboo_start_time = #{tbooStartTime,jdbcType=TIMESTAMP},
+      tboo_finish_time = #{tbooFinishTime,jdbcType=TIMESTAMP},
+      tboo_take_time = #{tbooTakeTime,jdbcType=TIMESTAMP},
+      tboo_ret_time = #{tbooRetTime,jdbcType=TIMESTAMP},
+      tboo_begin_time = #{tbooBeginTime,jdbcType=TIMESTAMP},
+      tboo_end_time = #{tbooEndTime,jdbcType=TIMESTAMP},
+      tboo_duration = #{tbooDuration,jdbcType=DOUBLE},
+      tboo_update_time = #{tbooUpdateTime,jdbcType=TIMESTAMP},
+      tboo_add_time = #{tbooAddTime,jdbcType=TIMESTAMP},
+      tboo_code = #{tbooCode,jdbcType=VARCHAR},
+      tboo_remark = #{tbooRemark,jdbcType=VARCHAR},
+      tboo_log = #{tbooLog,jdbcType=VARCHAR},
+      tboo_editor = #{tbooEditor,jdbcType=BIGINT},
+      tboo_state = #{tbooState,jdbcType=SMALLINT},
+      tboo_status = #{tbooStatus,jdbcType=SMALLINT}
+    where tboo_id = #{tbooId,jdbcType=BIGINT}
+  </update>
+</mapper>

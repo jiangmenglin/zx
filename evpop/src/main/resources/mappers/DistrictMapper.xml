@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.DistrictMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.District" >
+    <id column="tbd_id" property="tbdId" jdbcType="BIGINT" />
+    <result column="tbd_host" property="tbdHost" jdbcType="BIGINT" />
+    <result column="tbd_name" property="tbdName" jdbcType="VARCHAR" />
+    <result column="tbd_flag" property="tbdFlag" jdbcType="VARCHAR" />
+    <result column="tbd_lon" property="tbdLon" jdbcType="DOUBLE" />
+    <result column="tbd_lat" property="tbdLat" jdbcType="DOUBLE" />
+    <result column="tbd_add_time" property="tbdAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbd_update_time" property="tbdUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbd_status" property="tbdStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.District" extends="BaseResultMap" >
+    <result column="tbd_range" property="tbdRange" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbd_id, tbd_host, tbd_name, tbd_flag, tbd_lon, tbd_lat, tbd_add_time, tbd_update_time, 
+    tbd_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbd_range
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.DistrictExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.DistrictExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_district
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_district
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.District" >
+    insert into tb_district (tbd_id, tbd_host, tbd_name, 
+      tbd_flag, tbd_lon, tbd_lat, 
+      tbd_add_time, tbd_update_time, tbd_status, 
+      tbd_range)
+    values (#{tbdId,jdbcType=BIGINT}, #{tbdHost,jdbcType=BIGINT}, #{tbdName,jdbcType=VARCHAR}, 
+      #{tbdFlag,jdbcType=VARCHAR}, #{tbdLon,jdbcType=DOUBLE}, #{tbdLat,jdbcType=DOUBLE}, 
+      #{tbdAddTime,jdbcType=TIMESTAMP}, #{tbdUpdateTime,jdbcType=TIMESTAMP}, #{tbdStatus,jdbcType=TINYINT}, 
+      #{tbdRange,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.District" >
+    insert into tb_district
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbdId != null" >
+        tbd_id,
+      </if>
+      <if test="tbdHost != null" >
+        tbd_host,
+      </if>
+      <if test="tbdName != null" >
+        tbd_name,
+      </if>
+      <if test="tbdFlag != null" >
+        tbd_flag,
+      </if>
+      <if test="tbdLon != null" >
+        tbd_lon,
+      </if>
+      <if test="tbdLat != null" >
+        tbd_lat,
+      </if>
+      <if test="tbdAddTime != null" >
+        tbd_add_time,
+      </if>
+      <if test="tbdUpdateTime != null" >
+        tbd_update_time,
+      </if>
+      <if test="tbdStatus != null" >
+        tbd_status,
+      </if>
+      <if test="tbdRange != null" >
+        tbd_range,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbdId != null" >
+        #{tbdId,jdbcType=BIGINT},
+      </if>
+      <if test="tbdHost != null" >
+        #{tbdHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbdName != null" >
+        #{tbdName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdFlag != null" >
+        #{tbdFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdLon != null" >
+        #{tbdLon,jdbcType=DOUBLE},
+      </if>
+      <if test="tbdLat != null" >
+        #{tbdLat,jdbcType=DOUBLE},
+      </if>
+      <if test="tbdAddTime != null" >
+        #{tbdAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdUpdateTime != null" >
+        #{tbdUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdStatus != null" >
+        #{tbdStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbdRange != null" >
+        #{tbdRange,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.DistrictExample" resultType="java.lang.Integer" >
+    select count(*) from tb_district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_district
+    <set >
+      <if test="record.tbdId != null" >
+        tbd_id = #{record.tbdId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbdHost != null" >
+        tbd_host = #{record.tbdHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbdName != null" >
+        tbd_name = #{record.tbdName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbdFlag != null" >
+        tbd_flag = #{record.tbdFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbdLon != null" >
+        tbd_lon = #{record.tbdLon,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbdLat != null" >
+        tbd_lat = #{record.tbdLat,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbdAddTime != null" >
+        tbd_add_time = #{record.tbdAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbdUpdateTime != null" >
+        tbd_update_time = #{record.tbdUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbdStatus != null" >
+        tbd_status = #{record.tbdStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbdRange != null" >
+        tbd_range = #{record.tbdRange,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_district
+    set tbd_id = #{record.tbdId,jdbcType=BIGINT},
+      tbd_host = #{record.tbdHost,jdbcType=BIGINT},
+      tbd_name = #{record.tbdName,jdbcType=VARCHAR},
+      tbd_flag = #{record.tbdFlag,jdbcType=VARCHAR},
+      tbd_lon = #{record.tbdLon,jdbcType=DOUBLE},
+      tbd_lat = #{record.tbdLat,jdbcType=DOUBLE},
+      tbd_add_time = #{record.tbdAddTime,jdbcType=TIMESTAMP},
+      tbd_update_time = #{record.tbdUpdateTime,jdbcType=TIMESTAMP},
+      tbd_status = #{record.tbdStatus,jdbcType=TINYINT},
+      tbd_range = #{record.tbdRange,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_district
+    set tbd_id = #{record.tbdId,jdbcType=BIGINT},
+      tbd_host = #{record.tbdHost,jdbcType=BIGINT},
+      tbd_name = #{record.tbdName,jdbcType=VARCHAR},
+      tbd_flag = #{record.tbdFlag,jdbcType=VARCHAR},
+      tbd_lon = #{record.tbdLon,jdbcType=DOUBLE},
+      tbd_lat = #{record.tbdLat,jdbcType=DOUBLE},
+      tbd_add_time = #{record.tbdAddTime,jdbcType=TIMESTAMP},
+      tbd_update_time = #{record.tbdUpdateTime,jdbcType=TIMESTAMP},
+      tbd_status = #{record.tbdStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.District" >
+    update tb_district
+    <set >
+      <if test="tbdHost != null" >
+        tbd_host = #{tbdHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbdName != null" >
+        tbd_name = #{tbdName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdFlag != null" >
+        tbd_flag = #{tbdFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbdLon != null" >
+        tbd_lon = #{tbdLon,jdbcType=DOUBLE},
+      </if>
+      <if test="tbdLat != null" >
+        tbd_lat = #{tbdLat,jdbcType=DOUBLE},
+      </if>
+      <if test="tbdAddTime != null" >
+        tbd_add_time = #{tbdAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdUpdateTime != null" >
+        tbd_update_time = #{tbdUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbdStatus != null" >
+        tbd_status = #{tbdStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbdRange != null" >
+        tbd_range = #{tbdRange,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.District" >
+    update tb_district
+    set tbd_host = #{tbdHost,jdbcType=BIGINT},
+      tbd_name = #{tbdName,jdbcType=VARCHAR},
+      tbd_flag = #{tbdFlag,jdbcType=VARCHAR},
+      tbd_lon = #{tbdLon,jdbcType=DOUBLE},
+      tbd_lat = #{tbdLat,jdbcType=DOUBLE},
+      tbd_add_time = #{tbdAddTime,jdbcType=TIMESTAMP},
+      tbd_update_time = #{tbdUpdateTime,jdbcType=TIMESTAMP},
+      tbd_status = #{tbdStatus,jdbcType=TINYINT},
+      tbd_range = #{tbdRange,jdbcType=LONGVARCHAR}
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.District" >
+    update tb_district
+    set tbd_host = #{tbdHost,jdbcType=BIGINT},
+      tbd_name = #{tbdName,jdbcType=VARCHAR},
+      tbd_flag = #{tbdFlag,jdbcType=VARCHAR},
+      tbd_lon = #{tbdLon,jdbcType=DOUBLE},
+      tbd_lat = #{tbdLat,jdbcType=DOUBLE},
+      tbd_add_time = #{tbdAddTime,jdbcType=TIMESTAMP},
+      tbd_update_time = #{tbdUpdateTime,jdbcType=TIMESTAMP},
+      tbd_status = #{tbdStatus,jdbcType=TINYINT}
+    where tbd_id = #{tbdId,jdbcType=BIGINT}
+  </update>
+</mapper>

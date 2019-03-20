@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LongOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.LongOrder" >
+    <id column="tblo_id" property="tbloId" jdbcType="BIGINT" />
+    <result column="tblo_host" property="tbloHost" jdbcType="BIGINT" />
+    <result column="tblo_pack_no" property="tbloPackNo" jdbcType="VARCHAR" />
+    <result column="tblo_member" property="tbloMember" jdbcType="BIGINT" />
+    <result column="tblo_car" property="tbloCar" jdbcType="BIGINT" />
+    <result column="tblo_start" property="tbloStart" jdbcType="TIMESTAMP" />
+    <result column="tblo_finish" property="tbloFinish" jdbcType="TIMESTAMP" />
+    <result column="tblo_deposit" property="tbloDeposit" jdbcType="DOUBLE" />
+    <result column="tblo_fee" property="tbloFee" jdbcType="DOUBLE" />
+    <result column="tblo_pay_cycle" property="tbloPayCycle" jdbcType="SMALLINT" />
+    <result column="tblo_need_pay" property="tbloNeedPay" jdbcType="DOUBLE" />
+    <result column="tblo_real_pay" property="tbloRealPay" jdbcType="DOUBLE" />
+    <result column="tblo_pact_time" property="tbloPactTime" jdbcType="DATE" />
+    <result column="tblo_start_time" property="tbloStartTime" jdbcType="DATE" />
+    <result column="tblo_finish_time" property="tbloFinishTime" jdbcType="DATE" />
+    <result column="tblo_update_time" property="tbloUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tblo_add_time" property="tbloAddTime" jdbcType="TIMESTAMP" />
+    <result column="tblo_flag" property="tbloFlag" jdbcType="VARCHAR" />
+    <result column="tblo_tag" property="tbloTag" jdbcType="VARCHAR" />
+    <result column="tblo_serial" property="tbloSerial" jdbcType="VARCHAR" />
+    <result column="tblo_remark" property="tbloRemark" jdbcType="VARCHAR" />
+    <result column="tblo_editor" property="tbloEditor" jdbcType="BIGINT" />
+    <result column="tblo_error" property="tbloError" jdbcType="VARCHAR" />
+    <result column="tblo_status" property="tbloStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tblo_id, tblo_host, tblo_pack_no, tblo_member, tblo_car, tblo_start, tblo_finish, 
+    tblo_deposit, tblo_fee, tblo_pay_cycle, tblo_need_pay, tblo_real_pay, tblo_pact_time, 
+    tblo_start_time, tblo_finish_time, tblo_update_time, tblo_add_time, tblo_flag, tblo_tag, 
+    tblo_serial, tblo_remark, tblo_editor, tblo_error, tblo_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LongOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_long_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_long_order
+    where tblo_id = #{tbloId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_long_order
+    where tblo_id = #{tbloId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.LongOrder" >
+    insert into tb_long_order (tblo_id, tblo_host, tblo_pack_no, 
+      tblo_member, tblo_car, tblo_start, 
+      tblo_finish, tblo_deposit, tblo_fee, 
+      tblo_pay_cycle, tblo_need_pay, tblo_real_pay, 
+      tblo_pact_time, tblo_start_time, tblo_finish_time, 
+      tblo_update_time, tblo_add_time, tblo_flag, 
+      tblo_tag, tblo_serial, tblo_remark, 
+      tblo_editor, tblo_error, tblo_status
+      )
+    values (#{tbloId,jdbcType=BIGINT}, #{tbloHost,jdbcType=BIGINT}, #{tbloPackNo,jdbcType=VARCHAR}, 
+      #{tbloMember,jdbcType=BIGINT}, #{tbloCar,jdbcType=BIGINT}, #{tbloStart,jdbcType=TIMESTAMP}, 
+      #{tbloFinish,jdbcType=TIMESTAMP}, #{tbloDeposit,jdbcType=DOUBLE}, #{tbloFee,jdbcType=DOUBLE}, 
+      #{tbloPayCycle,jdbcType=SMALLINT}, #{tbloNeedPay,jdbcType=DOUBLE}, #{tbloRealPay,jdbcType=DOUBLE}, 
+      #{tbloPactTime,jdbcType=DATE}, #{tbloStartTime,jdbcType=DATE}, #{tbloFinishTime,jdbcType=DATE}, 
+      #{tbloUpdateTime,jdbcType=TIMESTAMP}, #{tbloAddTime,jdbcType=TIMESTAMP}, #{tbloFlag,jdbcType=VARCHAR}, 
+      #{tbloTag,jdbcType=VARCHAR}, #{tbloSerial,jdbcType=VARCHAR}, #{tbloRemark,jdbcType=VARCHAR}, 
+      #{tbloEditor,jdbcType=BIGINT}, #{tbloError,jdbcType=VARCHAR}, #{tbloStatus,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.LongOrder" >
+    insert into tb_long_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbloId != null" >
+        tblo_id,
+      </if>
+      <if test="tbloHost != null" >
+        tblo_host,
+      </if>
+      <if test="tbloPackNo != null" >
+        tblo_pack_no,
+      </if>
+      <if test="tbloMember != null" >
+        tblo_member,
+      </if>
+      <if test="tbloCar != null" >
+        tblo_car,
+      </if>
+      <if test="tbloStart != null" >
+        tblo_start,
+      </if>
+      <if test="tbloFinish != null" >
+        tblo_finish,
+      </if>
+      <if test="tbloDeposit != null" >
+        tblo_deposit,
+      </if>
+      <if test="tbloFee != null" >
+        tblo_fee,
+      </if>
+      <if test="tbloPayCycle != null" >
+        tblo_pay_cycle,
+      </if>
+      <if test="tbloNeedPay != null" >
+        tblo_need_pay,
+      </if>
+      <if test="tbloRealPay != null" >
+        tblo_real_pay,
+      </if>
+      <if test="tbloPactTime != null" >
+        tblo_pact_time,
+      </if>
+      <if test="tbloStartTime != null" >
+        tblo_start_time,
+      </if>
+      <if test="tbloFinishTime != null" >
+        tblo_finish_time,
+      </if>
+      <if test="tbloUpdateTime != null" >
+        tblo_update_time,
+      </if>
+      <if test="tbloAddTime != null" >
+        tblo_add_time,
+      </if>
+      <if test="tbloFlag != null" >
+        tblo_flag,
+      </if>
+      <if test="tbloTag != null" >
+        tblo_tag,
+      </if>
+      <if test="tbloSerial != null" >
+        tblo_serial,
+      </if>
+      <if test="tbloRemark != null" >
+        tblo_remark,
+      </if>
+      <if test="tbloEditor != null" >
+        tblo_editor,
+      </if>
+      <if test="tbloError != null" >
+        tblo_error,
+      </if>
+      <if test="tbloStatus != null" >
+        tblo_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbloId != null" >
+        #{tbloId,jdbcType=BIGINT},
+      </if>
+      <if test="tbloHost != null" >
+        #{tbloHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbloPackNo != null" >
+        #{tbloPackNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloMember != null" >
+        #{tbloMember,jdbcType=BIGINT},
+      </if>
+      <if test="tbloCar != null" >
+        #{tbloCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbloStart != null" >
+        #{tbloStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloFinish != null" >
+        #{tbloFinish,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloDeposit != null" >
+        #{tbloDeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloFee != null" >
+        #{tbloFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloPayCycle != null" >
+        #{tbloPayCycle,jdbcType=SMALLINT},
+      </if>
+      <if test="tbloNeedPay != null" >
+        #{tbloNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloRealPay != null" >
+        #{tbloRealPay,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloPactTime != null" >
+        #{tbloPactTime,jdbcType=DATE},
+      </if>
+      <if test="tbloStartTime != null" >
+        #{tbloStartTime,jdbcType=DATE},
+      </if>
+      <if test="tbloFinishTime != null" >
+        #{tbloFinishTime,jdbcType=DATE},
+      </if>
+      <if test="tbloUpdateTime != null" >
+        #{tbloUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloAddTime != null" >
+        #{tbloAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloFlag != null" >
+        #{tbloFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloTag != null" >
+        #{tbloTag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloSerial != null" >
+        #{tbloSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloRemark != null" >
+        #{tbloRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloEditor != null" >
+        #{tbloEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tbloError != null" >
+        #{tbloError,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloStatus != null" >
+        #{tbloStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LongOrderExample" resultType="java.lang.Integer" >
+    select count(*) from tb_long_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_long_order
+    <set >
+      <if test="record.tbloId != null" >
+        tblo_id = #{record.tbloId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloHost != null" >
+        tblo_host = #{record.tbloHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloPackNo != null" >
+        tblo_pack_no = #{record.tbloPackNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloMember != null" >
+        tblo_member = #{record.tbloMember,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloCar != null" >
+        tblo_car = #{record.tbloCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloStart != null" >
+        tblo_start = #{record.tbloStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloFinish != null" >
+        tblo_finish = #{record.tbloFinish,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloDeposit != null" >
+        tblo_deposit = #{record.tbloDeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbloFee != null" >
+        tblo_fee = #{record.tbloFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbloPayCycle != null" >
+        tblo_pay_cycle = #{record.tbloPayCycle,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbloNeedPay != null" >
+        tblo_need_pay = #{record.tbloNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbloRealPay != null" >
+        tblo_real_pay = #{record.tbloRealPay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbloPactTime != null" >
+        tblo_pact_time = #{record.tbloPactTime,jdbcType=DATE},
+      </if>
+      <if test="record.tbloStartTime != null" >
+        tblo_start_time = #{record.tbloStartTime,jdbcType=DATE},
+      </if>
+      <if test="record.tbloFinishTime != null" >
+        tblo_finish_time = #{record.tbloFinishTime,jdbcType=DATE},
+      </if>
+      <if test="record.tbloUpdateTime != null" >
+        tblo_update_time = #{record.tbloUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloAddTime != null" >
+        tblo_add_time = #{record.tbloAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbloFlag != null" >
+        tblo_flag = #{record.tbloFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloTag != null" >
+        tblo_tag = #{record.tbloTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloSerial != null" >
+        tblo_serial = #{record.tbloSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloRemark != null" >
+        tblo_remark = #{record.tbloRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloEditor != null" >
+        tblo_editor = #{record.tbloEditor,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbloError != null" >
+        tblo_error = #{record.tbloError,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbloStatus != null" >
+        tblo_status = #{record.tbloStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_long_order
+    set tblo_id = #{record.tbloId,jdbcType=BIGINT},
+      tblo_host = #{record.tbloHost,jdbcType=BIGINT},
+      tblo_pack_no = #{record.tbloPackNo,jdbcType=VARCHAR},
+      tblo_member = #{record.tbloMember,jdbcType=BIGINT},
+      tblo_car = #{record.tbloCar,jdbcType=BIGINT},
+      tblo_start = #{record.tbloStart,jdbcType=TIMESTAMP},
+      tblo_finish = #{record.tbloFinish,jdbcType=TIMESTAMP},
+      tblo_deposit = #{record.tbloDeposit,jdbcType=DOUBLE},
+      tblo_fee = #{record.tbloFee,jdbcType=DOUBLE},
+      tblo_pay_cycle = #{record.tbloPayCycle,jdbcType=SMALLINT},
+      tblo_need_pay = #{record.tbloNeedPay,jdbcType=DOUBLE},
+      tblo_real_pay = #{record.tbloRealPay,jdbcType=DOUBLE},
+      tblo_pact_time = #{record.tbloPactTime,jdbcType=DATE},
+      tblo_start_time = #{record.tbloStartTime,jdbcType=DATE},
+      tblo_finish_time = #{record.tbloFinishTime,jdbcType=DATE},
+      tblo_update_time = #{record.tbloUpdateTime,jdbcType=TIMESTAMP},
+      tblo_add_time = #{record.tbloAddTime,jdbcType=TIMESTAMP},
+      tblo_flag = #{record.tbloFlag,jdbcType=VARCHAR},
+      tblo_tag = #{record.tbloTag,jdbcType=VARCHAR},
+      tblo_serial = #{record.tbloSerial,jdbcType=VARCHAR},
+      tblo_remark = #{record.tbloRemark,jdbcType=VARCHAR},
+      tblo_editor = #{record.tbloEditor,jdbcType=BIGINT},
+      tblo_error = #{record.tbloError,jdbcType=VARCHAR},
+      tblo_status = #{record.tbloStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.LongOrder" >
+    update tb_long_order
+    <set >
+      <if test="tbloHost != null" >
+        tblo_host = #{tbloHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbloPackNo != null" >
+        tblo_pack_no = #{tbloPackNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloMember != null" >
+        tblo_member = #{tbloMember,jdbcType=BIGINT},
+      </if>
+      <if test="tbloCar != null" >
+        tblo_car = #{tbloCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbloStart != null" >
+        tblo_start = #{tbloStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloFinish != null" >
+        tblo_finish = #{tbloFinish,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloDeposit != null" >
+        tblo_deposit = #{tbloDeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloFee != null" >
+        tblo_fee = #{tbloFee,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloPayCycle != null" >
+        tblo_pay_cycle = #{tbloPayCycle,jdbcType=SMALLINT},
+      </if>
+      <if test="tbloNeedPay != null" >
+        tblo_need_pay = #{tbloNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloRealPay != null" >
+        tblo_real_pay = #{tbloRealPay,jdbcType=DOUBLE},
+      </if>
+      <if test="tbloPactTime != null" >
+        tblo_pact_time = #{tbloPactTime,jdbcType=DATE},
+      </if>
+      <if test="tbloStartTime != null" >
+        tblo_start_time = #{tbloStartTime,jdbcType=DATE},
+      </if>
+      <if test="tbloFinishTime != null" >
+        tblo_finish_time = #{tbloFinishTime,jdbcType=DATE},
+      </if>
+      <if test="tbloUpdateTime != null" >
+        tblo_update_time = #{tbloUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloAddTime != null" >
+        tblo_add_time = #{tbloAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbloFlag != null" >
+        tblo_flag = #{tbloFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloTag != null" >
+        tblo_tag = #{tbloTag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloSerial != null" >
+        tblo_serial = #{tbloSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloRemark != null" >
+        tblo_remark = #{tbloRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloEditor != null" >
+        tblo_editor = #{tbloEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tbloError != null" >
+        tblo_error = #{tbloError,jdbcType=VARCHAR},
+      </if>
+      <if test="tbloStatus != null" >
+        tblo_status = #{tbloStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tblo_id = #{tbloId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.LongOrder" >
+    update tb_long_order
+    set tblo_host = #{tbloHost,jdbcType=BIGINT},
+      tblo_pack_no = #{tbloPackNo,jdbcType=VARCHAR},
+      tblo_member = #{tbloMember,jdbcType=BIGINT},
+      tblo_car = #{tbloCar,jdbcType=BIGINT},
+      tblo_start = #{tbloStart,jdbcType=TIMESTAMP},
+      tblo_finish = #{tbloFinish,jdbcType=TIMESTAMP},
+      tblo_deposit = #{tbloDeposit,jdbcType=DOUBLE},
+      tblo_fee = #{tbloFee,jdbcType=DOUBLE},
+      tblo_pay_cycle = #{tbloPayCycle,jdbcType=SMALLINT},
+      tblo_need_pay = #{tbloNeedPay,jdbcType=DOUBLE},
+      tblo_real_pay = #{tbloRealPay,jdbcType=DOUBLE},
+      tblo_pact_time = #{tbloPactTime,jdbcType=DATE},
+      tblo_start_time = #{tbloStartTime,jdbcType=DATE},
+      tblo_finish_time = #{tbloFinishTime,jdbcType=DATE},
+      tblo_update_time = #{tbloUpdateTime,jdbcType=TIMESTAMP},
+      tblo_add_time = #{tbloAddTime,jdbcType=TIMESTAMP},
+      tblo_flag = #{tbloFlag,jdbcType=VARCHAR},
+      tblo_tag = #{tbloTag,jdbcType=VARCHAR},
+      tblo_serial = #{tbloSerial,jdbcType=VARCHAR},
+      tblo_remark = #{tbloRemark,jdbcType=VARCHAR},
+      tblo_editor = #{tbloEditor,jdbcType=BIGINT},
+      tblo_error = #{tbloError,jdbcType=VARCHAR},
+      tblo_status = #{tbloStatus,jdbcType=SMALLINT}
+    where tblo_id = #{tbloId,jdbcType=BIGINT}
+  </update>
+</mapper>

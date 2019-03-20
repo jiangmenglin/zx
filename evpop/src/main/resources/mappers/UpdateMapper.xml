@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.UpdateMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Update" >
+    <id column="tbu_id" property="tbuId" jdbcType="INTEGER" />
+    <result column="tbu_name" property="tbuName" jdbcType="VARCHAR" />
+    <result column="tbu_version" property="tbuVersion" jdbcType="VARCHAR" />
+    <result column="tbu_type" property="tbuType" jdbcType="TINYINT" />
+    <result column="tbu_mode" property="tbuMode" jdbcType="TINYINT" />
+    <result column="tbu_file" property="tbuFile" jdbcType="VARCHAR" />
+    <result column="tbu_descript" property="tbuDescript" jdbcType="VARCHAR" />
+    <result column="tbu_update_time" property="tbuUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbu_add_time" property="tbuAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbu_status" property="tbuStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbu_id, tbu_name, tbu_version, tbu_type, tbu_mode, tbu_file, tbu_descript, tbu_update_time, 
+    tbu_add_time, tbu_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.UpdateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_update
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_update
+    where tbu_id = #{tbuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_update
+    where tbu_id = #{tbuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Update" >
+    insert into tb_update (tbu_id, tbu_name, tbu_version, 
+      tbu_type, tbu_mode, tbu_file, 
+      tbu_descript, tbu_update_time, tbu_add_time, 
+      tbu_status)
+    values (#{tbuId,jdbcType=INTEGER}, #{tbuName,jdbcType=VARCHAR}, #{tbuVersion,jdbcType=VARCHAR}, 
+      #{tbuType,jdbcType=TINYINT}, #{tbuMode,jdbcType=TINYINT}, #{tbuFile,jdbcType=VARCHAR}, 
+      #{tbuDescript,jdbcType=VARCHAR}, #{tbuUpdateTime,jdbcType=TIMESTAMP}, #{tbuAddTime,jdbcType=TIMESTAMP}, 
+      #{tbuStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Update" >
+    insert into tb_update
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbuId != null" >
+        tbu_id,
+      </if>
+      <if test="tbuName != null" >
+        tbu_name,
+      </if>
+      <if test="tbuVersion != null" >
+        tbu_version,
+      </if>
+      <if test="tbuType != null" >
+        tbu_type,
+      </if>
+      <if test="tbuMode != null" >
+        tbu_mode,
+      </if>
+      <if test="tbuFile != null" >
+        tbu_file,
+      </if>
+      <if test="tbuDescript != null" >
+        tbu_descript,
+      </if>
+      <if test="tbuUpdateTime != null" >
+        tbu_update_time,
+      </if>
+      <if test="tbuAddTime != null" >
+        tbu_add_time,
+      </if>
+      <if test="tbuStatus != null" >
+        tbu_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbuId != null" >
+        #{tbuId,jdbcType=INTEGER},
+      </if>
+      <if test="tbuName != null" >
+        #{tbuName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuVersion != null" >
+        #{tbuVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuType != null" >
+        #{tbuType,jdbcType=TINYINT},
+      </if>
+      <if test="tbuMode != null" >
+        #{tbuMode,jdbcType=TINYINT},
+      </if>
+      <if test="tbuFile != null" >
+        #{tbuFile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuDescript != null" >
+        #{tbuDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuUpdateTime != null" >
+        #{tbuUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuAddTime != null" >
+        #{tbuAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuStatus != null" >
+        #{tbuStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.UpdateExample" resultType="java.lang.Integer" >
+    select count(*) from tb_update
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_update
+    <set >
+      <if test="record.tbuId != null" >
+        tbu_id = #{record.tbuId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbuName != null" >
+        tbu_name = #{record.tbuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuVersion != null" >
+        tbu_version = #{record.tbuVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuType != null" >
+        tbu_type = #{record.tbuType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbuMode != null" >
+        tbu_mode = #{record.tbuMode,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbuFile != null" >
+        tbu_file = #{record.tbuFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuDescript != null" >
+        tbu_descript = #{record.tbuDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbuUpdateTime != null" >
+        tbu_update_time = #{record.tbuUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuAddTime != null" >
+        tbu_add_time = #{record.tbuAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbuStatus != null" >
+        tbu_status = #{record.tbuStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_update
+    set tbu_id = #{record.tbuId,jdbcType=INTEGER},
+      tbu_name = #{record.tbuName,jdbcType=VARCHAR},
+      tbu_version = #{record.tbuVersion,jdbcType=VARCHAR},
+      tbu_type = #{record.tbuType,jdbcType=TINYINT},
+      tbu_mode = #{record.tbuMode,jdbcType=TINYINT},
+      tbu_file = #{record.tbuFile,jdbcType=VARCHAR},
+      tbu_descript = #{record.tbuDescript,jdbcType=VARCHAR},
+      tbu_update_time = #{record.tbuUpdateTime,jdbcType=TIMESTAMP},
+      tbu_add_time = #{record.tbuAddTime,jdbcType=TIMESTAMP},
+      tbu_status = #{record.tbuStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Update" >
+    update tb_update
+    <set >
+      <if test="tbuName != null" >
+        tbu_name = #{tbuName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuVersion != null" >
+        tbu_version = #{tbuVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuType != null" >
+        tbu_type = #{tbuType,jdbcType=TINYINT},
+      </if>
+      <if test="tbuMode != null" >
+        tbu_mode = #{tbuMode,jdbcType=TINYINT},
+      </if>
+      <if test="tbuFile != null" >
+        tbu_file = #{tbuFile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuDescript != null" >
+        tbu_descript = #{tbuDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="tbuUpdateTime != null" >
+        tbu_update_time = #{tbuUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuAddTime != null" >
+        tbu_add_time = #{tbuAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbuStatus != null" >
+        tbu_status = #{tbuStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbu_id = #{tbuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Update" >
+    update tb_update
+    set tbu_name = #{tbuName,jdbcType=VARCHAR},
+      tbu_version = #{tbuVersion,jdbcType=VARCHAR},
+      tbu_type = #{tbuType,jdbcType=TINYINT},
+      tbu_mode = #{tbuMode,jdbcType=TINYINT},
+      tbu_file = #{tbuFile,jdbcType=VARCHAR},
+      tbu_descript = #{tbuDescript,jdbcType=VARCHAR},
+      tbu_update_time = #{tbuUpdateTime,jdbcType=TIMESTAMP},
+      tbu_add_time = #{tbuAddTime,jdbcType=TIMESTAMP},
+      tbu_status = #{tbuStatus,jdbcType=TINYINT}
+    where tbu_id = #{tbuId,jdbcType=INTEGER}
+  </update>
+</mapper>

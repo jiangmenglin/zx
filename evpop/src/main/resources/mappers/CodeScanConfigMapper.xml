@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.CodeScanConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.CodeScanConfig" >
+    <id column="tbcsc_id" property="tbcscId" jdbcType="BIGINT" />
+    <result column="tbcsc_name" property="tbcscName" jdbcType="VARCHAR" />
+    <result column="tbcsc_host" property="tbcscHost" jdbcType="BIGINT" />
+    <result column="tbcsc_code_id" property="tbcscCodeId" jdbcType="VARCHAR" />
+    <result column="tbcsc_coupon_type" property="tbcscCouponType" jdbcType="BIGINT" />
+    <result column="scan_times" property="scanTimes" jdbcType="INTEGER" />
+    <result column="tbcsc_update_time" property="tbcscUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbcsc_add_time" property="tbcscAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbcsc_status" property="tbcscStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbcsc_id, tbcsc_name, tbcsc_host, tbcsc_code_id, tbcsc_coupon_type, scan_times, tbcsc_update_time, 
+    tbcsc_add_time, tbcsc_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.CodeScanConfigExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_code_scan_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_code_scan_config
+    where tbcsc_id = #{tbcscId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_code_scan_config
+    where tbcsc_id = #{tbcscId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.CodeScanConfig" >
+    insert into tb_code_scan_config (tbcsc_id, tbcsc_name, tbcsc_host, 
+      tbcsc_code_id, tbcsc_coupon_type, scan_times, 
+      tbcsc_update_time, tbcsc_add_time, tbcsc_status
+      )
+    values (#{tbcscId,jdbcType=BIGINT}, #{tbcscName,jdbcType=VARCHAR}, #{tbcscHost,jdbcType=BIGINT}, 
+      #{tbcscCodeId,jdbcType=VARCHAR}, #{tbcscCouponType,jdbcType=BIGINT}, #{scanTimes,jdbcType=INTEGER}, 
+      #{tbcscUpdateTime,jdbcType=TIMESTAMP}, #{tbcscAddTime,jdbcType=TIMESTAMP}, #{tbcscStatus,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.CodeScanConfig" >
+    insert into tb_code_scan_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbcscId != null" >
+        tbcsc_id,
+      </if>
+      <if test="tbcscName != null" >
+        tbcsc_name,
+      </if>
+      <if test="tbcscHost != null" >
+        tbcsc_host,
+      </if>
+      <if test="tbcscCodeId != null" >
+        tbcsc_code_id,
+      </if>
+      <if test="tbcscCouponType != null" >
+        tbcsc_coupon_type,
+      </if>
+      <if test="scanTimes != null" >
+        scan_times,
+      </if>
+      <if test="tbcscUpdateTime != null" >
+        tbcsc_update_time,
+      </if>
+      <if test="tbcscAddTime != null" >
+        tbcsc_add_time,
+      </if>
+      <if test="tbcscStatus != null" >
+        tbcsc_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbcscId != null" >
+        #{tbcscId,jdbcType=BIGINT},
+      </if>
+      <if test="tbcscName != null" >
+        #{tbcscName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcscHost != null" >
+        #{tbcscHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbcscCodeId != null" >
+        #{tbcscCodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcscCouponType != null" >
+        #{tbcscCouponType,jdbcType=BIGINT},
+      </if>
+      <if test="scanTimes != null" >
+        #{scanTimes,jdbcType=INTEGER},
+      </if>
+      <if test="tbcscUpdateTime != null" >
+        #{tbcscUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcscAddTime != null" >
+        #{tbcscAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcscStatus != null" >
+        #{tbcscStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.CodeScanConfigExample" resultType="java.lang.Integer" >
+    select count(*) from tb_code_scan_config
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_code_scan_config
+    <set >
+      <if test="record.tbcscId != null" >
+        tbcsc_id = #{record.tbcscId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcscName != null" >
+        tbcsc_name = #{record.tbcscName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcscHost != null" >
+        tbcsc_host = #{record.tbcscHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbcscCodeId != null" >
+        tbcsc_code_id = #{record.tbcscCodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbcscCouponType != null" >
+        tbcsc_coupon_type = #{record.tbcscCouponType,jdbcType=BIGINT},
+      </if>
+      <if test="record.scanTimes != null" >
+        scan_times = #{record.scanTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbcscUpdateTime != null" >
+        tbcsc_update_time = #{record.tbcscUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcscAddTime != null" >
+        tbcsc_add_time = #{record.tbcscAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbcscStatus != null" >
+        tbcsc_status = #{record.tbcscStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_code_scan_config
+    set tbcsc_id = #{record.tbcscId,jdbcType=BIGINT},
+      tbcsc_name = #{record.tbcscName,jdbcType=VARCHAR},
+      tbcsc_host = #{record.tbcscHost,jdbcType=BIGINT},
+      tbcsc_code_id = #{record.tbcscCodeId,jdbcType=VARCHAR},
+      tbcsc_coupon_type = #{record.tbcscCouponType,jdbcType=BIGINT},
+      scan_times = #{record.scanTimes,jdbcType=INTEGER},
+      tbcsc_update_time = #{record.tbcscUpdateTime,jdbcType=TIMESTAMP},
+      tbcsc_add_time = #{record.tbcscAddTime,jdbcType=TIMESTAMP},
+      tbcsc_status = #{record.tbcscStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.CodeScanConfig" >
+    update tb_code_scan_config
+    <set >
+      <if test="tbcscName != null" >
+        tbcsc_name = #{tbcscName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcscHost != null" >
+        tbcsc_host = #{tbcscHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbcscCodeId != null" >
+        tbcsc_code_id = #{tbcscCodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="tbcscCouponType != null" >
+        tbcsc_coupon_type = #{tbcscCouponType,jdbcType=BIGINT},
+      </if>
+      <if test="scanTimes != null" >
+        scan_times = #{scanTimes,jdbcType=INTEGER},
+      </if>
+      <if test="tbcscUpdateTime != null" >
+        tbcsc_update_time = #{tbcscUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcscAddTime != null" >
+        tbcsc_add_time = #{tbcscAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbcscStatus != null" >
+        tbcsc_status = #{tbcscStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbcsc_id = #{tbcscId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.CodeScanConfig" >
+    update tb_code_scan_config
+    set tbcsc_name = #{tbcscName,jdbcType=VARCHAR},
+      tbcsc_host = #{tbcscHost,jdbcType=BIGINT},
+      tbcsc_code_id = #{tbcscCodeId,jdbcType=VARCHAR},
+      tbcsc_coupon_type = #{tbcscCouponType,jdbcType=BIGINT},
+      scan_times = #{scanTimes,jdbcType=INTEGER},
+      tbcsc_update_time = #{tbcscUpdateTime,jdbcType=TIMESTAMP},
+      tbcsc_add_time = #{tbcscAddTime,jdbcType=TIMESTAMP},
+      tbcsc_status = #{tbcscStatus,jdbcType=SMALLINT}
+    where tbcsc_id = #{tbcscId,jdbcType=BIGINT}
+  </update>
+</mapper>

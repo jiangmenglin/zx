@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ThirdAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.ThirdAccount" >
+    <id column="tbta_id" property="tbtaId" jdbcType="INTEGER" />
+    <result column="tbta_member" property="tbtaMember" jdbcType="INTEGER" />
+    <result column="tbta_third_id" property="tbtaThirdId" jdbcType="VARCHAR" />
+    <result column="tbta_create_time" property="tbtaCreateTime" jdbcType="TIMESTAMP" />
+    <result column="tbta_last_login_time" property="tbtaLastLoginTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbta_id, tbta_member, tbta_third_id, tbta_create_time, tbta_last_login_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ThirdAccountExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_third_account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_third_account
+    where tbta_id = #{tbtaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_third_account
+    where tbta_id = #{tbtaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.ThirdAccount" >
+    insert into tb_third_account (tbta_id, tbta_member, tbta_third_id, 
+      tbta_create_time, tbta_last_login_time)
+    values (#{tbtaId,jdbcType=INTEGER}, #{tbtaMember,jdbcType=INTEGER}, #{tbtaThirdId,jdbcType=VARCHAR}, 
+      #{tbtaCreateTime,jdbcType=TIMESTAMP}, #{tbtaLastLoginTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.ThirdAccount" >
+    insert into tb_third_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbtaId != null" >
+        tbta_id,
+      </if>
+      <if test="tbtaMember != null" >
+        tbta_member,
+      </if>
+      <if test="tbtaThirdId != null" >
+        tbta_third_id,
+      </if>
+      <if test="tbtaCreateTime != null" >
+        tbta_create_time,
+      </if>
+      <if test="tbtaLastLoginTime != null" >
+        tbta_last_login_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbtaId != null" >
+        #{tbtaId,jdbcType=INTEGER},
+      </if>
+      <if test="tbtaMember != null" >
+        #{tbtaMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbtaThirdId != null" >
+        #{tbtaThirdId,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtaCreateTime != null" >
+        #{tbtaCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtaLastLoginTime != null" >
+        #{tbtaLastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ThirdAccountExample" resultType="java.lang.Integer" >
+    select count(*) from tb_third_account
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_third_account
+    <set >
+      <if test="record.tbtaId != null" >
+        tbta_id = #{record.tbtaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbtaMember != null" >
+        tbta_member = #{record.tbtaMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbtaThirdId != null" >
+        tbta_third_id = #{record.tbtaThirdId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtaCreateTime != null" >
+        tbta_create_time = #{record.tbtaCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtaLastLoginTime != null" >
+        tbta_last_login_time = #{record.tbtaLastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_third_account
+    set tbta_id = #{record.tbtaId,jdbcType=INTEGER},
+      tbta_member = #{record.tbtaMember,jdbcType=INTEGER},
+      tbta_third_id = #{record.tbtaThirdId,jdbcType=VARCHAR},
+      tbta_create_time = #{record.tbtaCreateTime,jdbcType=TIMESTAMP},
+      tbta_last_login_time = #{record.tbtaLastLoginTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.ThirdAccount" >
+    update tb_third_account
+    <set >
+      <if test="tbtaMember != null" >
+        tbta_member = #{tbtaMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbtaThirdId != null" >
+        tbta_third_id = #{tbtaThirdId,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtaCreateTime != null" >
+        tbta_create_time = #{tbtaCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtaLastLoginTime != null" >
+        tbta_last_login_time = #{tbtaLastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbta_id = #{tbtaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.ThirdAccount" >
+    update tb_third_account
+    set tbta_member = #{tbtaMember,jdbcType=INTEGER},
+      tbta_third_id = #{tbtaThirdId,jdbcType=VARCHAR},
+      tbta_create_time = #{tbtaCreateTime,jdbcType=TIMESTAMP},
+      tbta_last_login_time = #{tbtaLastLoginTime,jdbcType=TIMESTAMP}
+    where tbta_id = #{tbtaId,jdbcType=INTEGER}
+  </update>
+</mapper>

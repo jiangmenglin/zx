@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.FeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Feedback" >
+    <id column="tbtf_id" property="tbtfId" jdbcType="BIGINT" />
+    <result column="tbtf_title" property="tbtfTitle" jdbcType="VARCHAR" />
+    <result column="tbtf_type" property="tbtfType" jdbcType="SMALLINT" />
+    <result column="tbtf_content" property="tbtfContent" jdbcType="VARCHAR" />
+    <result column="tbtf_remark" property="tbtfRemark" jdbcType="VARCHAR" />
+    <result column="tbtf_adder" property="tbtfAdder" jdbcType="BIGINT" />
+    <result column="tbtf_update_time" property="tbtfUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbtf_add_time" property="tbtfAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbtf_status" property="tbtfStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.Feedback" extends="BaseResultMap" >
+    <result column="tbtf_log" property="tbtfLog" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbtf_id, tbtf_title, tbtf_type, tbtf_content, tbtf_remark, tbtf_adder, tbtf_update_time, 
+    tbtf_add_time, tbtf_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbtf_log
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.FeedbackExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.FeedbackExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_feedback
+    where tbtf_id = #{tbtfId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_feedback
+    where tbtf_id = #{tbtfId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Feedback" >
+    insert into tb_feedback (tbtf_id, tbtf_title, tbtf_type, 
+      tbtf_content, tbtf_remark, tbtf_adder, 
+      tbtf_update_time, tbtf_add_time, tbtf_status, 
+      tbtf_log)
+    values (#{tbtfId,jdbcType=BIGINT}, #{tbtfTitle,jdbcType=VARCHAR}, #{tbtfType,jdbcType=SMALLINT}, 
+      #{tbtfContent,jdbcType=VARCHAR}, #{tbtfRemark,jdbcType=VARCHAR}, #{tbtfAdder,jdbcType=BIGINT}, 
+      #{tbtfUpdateTime,jdbcType=TIMESTAMP}, #{tbtfAddTime,jdbcType=TIMESTAMP}, #{tbtfStatus,jdbcType=SMALLINT}, 
+      #{tbtfLog,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Feedback" >
+    insert into tb_feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbtfId != null" >
+        tbtf_id,
+      </if>
+      <if test="tbtfTitle != null" >
+        tbtf_title,
+      </if>
+      <if test="tbtfType != null" >
+        tbtf_type,
+      </if>
+      <if test="tbtfContent != null" >
+        tbtf_content,
+      </if>
+      <if test="tbtfRemark != null" >
+        tbtf_remark,
+      </if>
+      <if test="tbtfAdder != null" >
+        tbtf_adder,
+      </if>
+      <if test="tbtfUpdateTime != null" >
+        tbtf_update_time,
+      </if>
+      <if test="tbtfAddTime != null" >
+        tbtf_add_time,
+      </if>
+      <if test="tbtfStatus != null" >
+        tbtf_status,
+      </if>
+      <if test="tbtfLog != null" >
+        tbtf_log,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbtfId != null" >
+        #{tbtfId,jdbcType=BIGINT},
+      </if>
+      <if test="tbtfTitle != null" >
+        #{tbtfTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtfType != null" >
+        #{tbtfType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbtfContent != null" >
+        #{tbtfContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtfRemark != null" >
+        #{tbtfRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtfAdder != null" >
+        #{tbtfAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbtfUpdateTime != null" >
+        #{tbtfUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtfAddTime != null" >
+        #{tbtfAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtfStatus != null" >
+        #{tbtfStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbtfLog != null" >
+        #{tbtfLog,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.FeedbackExample" resultType="java.lang.Integer" >
+    select count(*) from tb_feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_feedback
+    <set >
+      <if test="record.tbtfId != null" >
+        tbtf_id = #{record.tbtfId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtfTitle != null" >
+        tbtf_title = #{record.tbtfTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtfType != null" >
+        tbtf_type = #{record.tbtfType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbtfContent != null" >
+        tbtf_content = #{record.tbtfContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtfRemark != null" >
+        tbtf_remark = #{record.tbtfRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtfAdder != null" >
+        tbtf_adder = #{record.tbtfAdder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtfUpdateTime != null" >
+        tbtf_update_time = #{record.tbtfUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtfAddTime != null" >
+        tbtf_add_time = #{record.tbtfAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtfStatus != null" >
+        tbtf_status = #{record.tbtfStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbtfLog != null" >
+        tbtf_log = #{record.tbtfLog,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_feedback
+    set tbtf_id = #{record.tbtfId,jdbcType=BIGINT},
+      tbtf_title = #{record.tbtfTitle,jdbcType=VARCHAR},
+      tbtf_type = #{record.tbtfType,jdbcType=SMALLINT},
+      tbtf_content = #{record.tbtfContent,jdbcType=VARCHAR},
+      tbtf_remark = #{record.tbtfRemark,jdbcType=VARCHAR},
+      tbtf_adder = #{record.tbtfAdder,jdbcType=BIGINT},
+      tbtf_update_time = #{record.tbtfUpdateTime,jdbcType=TIMESTAMP},
+      tbtf_add_time = #{record.tbtfAddTime,jdbcType=TIMESTAMP},
+      tbtf_status = #{record.tbtfStatus,jdbcType=SMALLINT},
+      tbtf_log = #{record.tbtfLog,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_feedback
+    set tbtf_id = #{record.tbtfId,jdbcType=BIGINT},
+      tbtf_title = #{record.tbtfTitle,jdbcType=VARCHAR},
+      tbtf_type = #{record.tbtfType,jdbcType=SMALLINT},
+      tbtf_content = #{record.tbtfContent,jdbcType=VARCHAR},
+      tbtf_remark = #{record.tbtfRemark,jdbcType=VARCHAR},
+      tbtf_adder = #{record.tbtfAdder,jdbcType=BIGINT},
+      tbtf_update_time = #{record.tbtfUpdateTime,jdbcType=TIMESTAMP},
+      tbtf_add_time = #{record.tbtfAddTime,jdbcType=TIMESTAMP},
+      tbtf_status = #{record.tbtfStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Feedback" >
+    update tb_feedback
+    <set >
+      <if test="tbtfTitle != null" >
+        tbtf_title = #{tbtfTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtfType != null" >
+        tbtf_type = #{tbtfType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbtfContent != null" >
+        tbtf_content = #{tbtfContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtfRemark != null" >
+        tbtf_remark = #{tbtfRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtfAdder != null" >
+        tbtf_adder = #{tbtfAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbtfUpdateTime != null" >
+        tbtf_update_time = #{tbtfUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtfAddTime != null" >
+        tbtf_add_time = #{tbtfAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtfStatus != null" >
+        tbtf_status = #{tbtfStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbtfLog != null" >
+        tbtf_log = #{tbtfLog,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbtf_id = #{tbtfId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.Feedback" >
+    update tb_feedback
+    set tbtf_title = #{tbtfTitle,jdbcType=VARCHAR},
+      tbtf_type = #{tbtfType,jdbcType=SMALLINT},
+      tbtf_content = #{tbtfContent,jdbcType=VARCHAR},
+      tbtf_remark = #{tbtfRemark,jdbcType=VARCHAR},
+      tbtf_adder = #{tbtfAdder,jdbcType=BIGINT},
+      tbtf_update_time = #{tbtfUpdateTime,jdbcType=TIMESTAMP},
+      tbtf_add_time = #{tbtfAddTime,jdbcType=TIMESTAMP},
+      tbtf_status = #{tbtfStatus,jdbcType=SMALLINT},
+      tbtf_log = #{tbtfLog,jdbcType=LONGVARCHAR}
+    where tbtf_id = #{tbtfId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Feedback" >
+    update tb_feedback
+    set tbtf_title = #{tbtfTitle,jdbcType=VARCHAR},
+      tbtf_type = #{tbtfType,jdbcType=SMALLINT},
+      tbtf_content = #{tbtfContent,jdbcType=VARCHAR},
+      tbtf_remark = #{tbtfRemark,jdbcType=VARCHAR},
+      tbtf_adder = #{tbtfAdder,jdbcType=BIGINT},
+      tbtf_update_time = #{tbtfUpdateTime,jdbcType=TIMESTAMP},
+      tbtf_add_time = #{tbtfAddTime,jdbcType=TIMESTAMP},
+      tbtf_status = #{tbtfStatus,jdbcType=SMALLINT}
+    where tbtf_id = #{tbtfId,jdbcType=BIGINT}
+  </update>
+</mapper>

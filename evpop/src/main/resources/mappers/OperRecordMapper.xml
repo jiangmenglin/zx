@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.OperRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.OperRecord" >
+    <id column="tbor_id" property="tborId" jdbcType="INTEGER" />
+    <result column="tbor_host" property="tborHost" jdbcType="SMALLINT" />
+    <result column="tbor_title" property="tborTitle" jdbcType="VARCHAR" />
+    <result column="tbor_money_type" property="tborMoneyType" jdbcType="TINYINT" />
+    <result column="tbor_record_type" property="tborRecordType" jdbcType="TINYINT" />
+    <result column="tbor_in" property="tborIn" jdbcType="DECIMAL" />
+    <result column="tbor_out" property="tborOut" jdbcType="DECIMAL" />
+    <result column="tbor_record" property="tborRecord" jdbcType="INTEGER" />
+    <result column="tbor_member" property="tborMember" jdbcType="INTEGER" />
+    <result column="tbor_order" property="tborOrder" jdbcType="BIGINT" />
+    <result column="tbor_long_order" property="tborLongOrder" jdbcType="BIGINT" />
+    <result column="tbor_object" property="tborObject" jdbcType="VARCHAR" />
+    <result column="tbor_indemnify" property="tborIndemnify" jdbcType="VARCHAR" />
+    <result column="tbor_date_time" property="tborDateTime" jdbcType="TIMESTAMP" />
+    <result column="tbor_cash_no" property="tborCashNo" jdbcType="BIGINT" />
+    <result column="tbor_adder" property="tborAdder" jdbcType="INTEGER" />
+    <result column="tbor_status" property="tborStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbor_id, tbor_host, tbor_title, tbor_money_type, tbor_record_type, tbor_in, tbor_out, 
+    tbor_record, tbor_member, tbor_order, tbor_long_order, tbor_object, tbor_indemnify, 
+    tbor_date_time, tbor_cash_no, tbor_adder, tbor_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.OperRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_oper_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_oper_record
+    where tbor_id = #{tborId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_oper_record
+    where tbor_id = #{tborId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.OperRecord" >
+    insert into tb_oper_record (tbor_id, tbor_host, tbor_title, 
+      tbor_money_type, tbor_record_type, tbor_in, 
+      tbor_out, tbor_record, tbor_member, 
+      tbor_order, tbor_long_order, tbor_object, 
+      tbor_indemnify, tbor_date_time, tbor_cash_no, 
+      tbor_adder, tbor_status, createTime, 
+      modifyDate)
+    values (#{tborId,jdbcType=INTEGER}, #{tborHost,jdbcType=SMALLINT}, #{tborTitle,jdbcType=VARCHAR}, 
+      #{tborMoneyType,jdbcType=TINYINT}, #{tborRecordType,jdbcType=TINYINT}, #{tborIn,jdbcType=DECIMAL}, 
+      #{tborOut,jdbcType=DECIMAL}, #{tborRecord,jdbcType=INTEGER}, #{tborMember,jdbcType=INTEGER}, 
+      #{tborOrder,jdbcType=BIGINT}, #{tborLongOrder,jdbcType=BIGINT}, #{tborObject,jdbcType=VARCHAR}, 
+      #{tborIndemnify,jdbcType=VARCHAR}, #{tborDateTime,jdbcType=TIMESTAMP}, #{tborCashNo,jdbcType=BIGINT}, 
+      #{tborAdder,jdbcType=INTEGER}, #{tborStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.OperRecord" >
+    insert into tb_oper_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tborId != null" >
+        tbor_id,
+      </if>
+      <if test="tborHost != null" >
+        tbor_host,
+      </if>
+      <if test="tborTitle != null" >
+        tbor_title,
+      </if>
+      <if test="tborMoneyType != null" >
+        tbor_money_type,
+      </if>
+      <if test="tborRecordType != null" >
+        tbor_record_type,
+      </if>
+      <if test="tborIn != null" >
+        tbor_in,
+      </if>
+      <if test="tborOut != null" >
+        tbor_out,
+      </if>
+      <if test="tborRecord != null" >
+        tbor_record,
+      </if>
+      <if test="tborMember != null" >
+        tbor_member,
+      </if>
+      <if test="tborOrder != null" >
+        tbor_order,
+      </if>
+      <if test="tborLongOrder != null" >
+        tbor_long_order,
+      </if>
+      <if test="tborObject != null" >
+        tbor_object,
+      </if>
+      <if test="tborIndemnify != null" >
+        tbor_indemnify,
+      </if>
+      <if test="tborDateTime != null" >
+        tbor_date_time,
+      </if>
+      <if test="tborCashNo != null" >
+        tbor_cash_no,
+      </if>
+      <if test="tborAdder != null" >
+        tbor_adder,
+      </if>
+      <if test="tborStatus != null" >
+        tbor_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tborId != null" >
+        #{tborId,jdbcType=INTEGER},
+      </if>
+      <if test="tborHost != null" >
+        #{tborHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tborTitle != null" >
+        #{tborTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tborMoneyType != null" >
+        #{tborMoneyType,jdbcType=TINYINT},
+      </if>
+      <if test="tborRecordType != null" >
+        #{tborRecordType,jdbcType=TINYINT},
+      </if>
+      <if test="tborIn != null" >
+        #{tborIn,jdbcType=DECIMAL},
+      </if>
+      <if test="tborOut != null" >
+        #{tborOut,jdbcType=DECIMAL},
+      </if>
+      <if test="tborRecord != null" >
+        #{tborRecord,jdbcType=INTEGER},
+      </if>
+      <if test="tborMember != null" >
+        #{tborMember,jdbcType=INTEGER},
+      </if>
+      <if test="tborOrder != null" >
+        #{tborOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tborLongOrder != null" >
+        #{tborLongOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tborObject != null" >
+        #{tborObject,jdbcType=VARCHAR},
+      </if>
+      <if test="tborIndemnify != null" >
+        #{tborIndemnify,jdbcType=VARCHAR},
+      </if>
+      <if test="tborDateTime != null" >
+        #{tborDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tborCashNo != null" >
+        #{tborCashNo,jdbcType=BIGINT},
+      </if>
+      <if test="tborAdder != null" >
+        #{tborAdder,jdbcType=INTEGER},
+      </if>
+      <if test="tborStatus != null" >
+        #{tborStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.OperRecordExample" resultType="java.lang.Integer" >
+    select count(*) from tb_oper_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_oper_record
+    <set >
+      <if test="record.tborId != null" >
+        tbor_id = #{record.tborId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tborHost != null" >
+        tbor_host = #{record.tborHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tborTitle != null" >
+        tbor_title = #{record.tborTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tborMoneyType != null" >
+        tbor_money_type = #{record.tborMoneyType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tborRecordType != null" >
+        tbor_record_type = #{record.tborRecordType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tborIn != null" >
+        tbor_in = #{record.tborIn,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tborOut != null" >
+        tbor_out = #{record.tborOut,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tborRecord != null" >
+        tbor_record = #{record.tborRecord,jdbcType=INTEGER},
+      </if>
+      <if test="record.tborMember != null" >
+        tbor_member = #{record.tborMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tborOrder != null" >
+        tbor_order = #{record.tborOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tborLongOrder != null" >
+        tbor_long_order = #{record.tborLongOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tborObject != null" >
+        tbor_object = #{record.tborObject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tborIndemnify != null" >
+        tbor_indemnify = #{record.tborIndemnify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tborDateTime != null" >
+        tbor_date_time = #{record.tborDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tborCashNo != null" >
+        tbor_cash_no = #{record.tborCashNo,jdbcType=BIGINT},
+      </if>
+      <if test="record.tborAdder != null" >
+        tbor_adder = #{record.tborAdder,jdbcType=INTEGER},
+      </if>
+      <if test="record.tborStatus != null" >
+        tbor_status = #{record.tborStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_oper_record
+    set tbor_id = #{record.tborId,jdbcType=INTEGER},
+      tbor_host = #{record.tborHost,jdbcType=SMALLINT},
+      tbor_title = #{record.tborTitle,jdbcType=VARCHAR},
+      tbor_money_type = #{record.tborMoneyType,jdbcType=TINYINT},
+      tbor_record_type = #{record.tborRecordType,jdbcType=TINYINT},
+      tbor_in = #{record.tborIn,jdbcType=DECIMAL},
+      tbor_out = #{record.tborOut,jdbcType=DECIMAL},
+      tbor_record = #{record.tborRecord,jdbcType=INTEGER},
+      tbor_member = #{record.tborMember,jdbcType=INTEGER},
+      tbor_order = #{record.tborOrder,jdbcType=BIGINT},
+      tbor_long_order = #{record.tborLongOrder,jdbcType=BIGINT},
+      tbor_object = #{record.tborObject,jdbcType=VARCHAR},
+      tbor_indemnify = #{record.tborIndemnify,jdbcType=VARCHAR},
+      tbor_date_time = #{record.tborDateTime,jdbcType=TIMESTAMP},
+      tbor_cash_no = #{record.tborCashNo,jdbcType=BIGINT},
+      tbor_adder = #{record.tborAdder,jdbcType=INTEGER},
+      tbor_status = #{record.tborStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.OperRecord" >
+    update tb_oper_record
+    <set >
+      <if test="tborHost != null" >
+        tbor_host = #{tborHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tborTitle != null" >
+        tbor_title = #{tborTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tborMoneyType != null" >
+        tbor_money_type = #{tborMoneyType,jdbcType=TINYINT},
+      </if>
+      <if test="tborRecordType != null" >
+        tbor_record_type = #{tborRecordType,jdbcType=TINYINT},
+      </if>
+      <if test="tborIn != null" >
+        tbor_in = #{tborIn,jdbcType=DECIMAL},
+      </if>
+      <if test="tborOut != null" >
+        tbor_out = #{tborOut,jdbcType=DECIMAL},
+      </if>
+      <if test="tborRecord != null" >
+        tbor_record = #{tborRecord,jdbcType=INTEGER},
+      </if>
+      <if test="tborMember != null" >
+        tbor_member = #{tborMember,jdbcType=INTEGER},
+      </if>
+      <if test="tborOrder != null" >
+        tbor_order = #{tborOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tborLongOrder != null" >
+        tbor_long_order = #{tborLongOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tborObject != null" >
+        tbor_object = #{tborObject,jdbcType=VARCHAR},
+      </if>
+      <if test="tborIndemnify != null" >
+        tbor_indemnify = #{tborIndemnify,jdbcType=VARCHAR},
+      </if>
+      <if test="tborDateTime != null" >
+        tbor_date_time = #{tborDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tborCashNo != null" >
+        tbor_cash_no = #{tborCashNo,jdbcType=BIGINT},
+      </if>
+      <if test="tborAdder != null" >
+        tbor_adder = #{tborAdder,jdbcType=INTEGER},
+      </if>
+      <if test="tborStatus != null" >
+        tbor_status = #{tborStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbor_id = #{tborId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.OperRecord" >
+    update tb_oper_record
+    set tbor_host = #{tborHost,jdbcType=SMALLINT},
+      tbor_title = #{tborTitle,jdbcType=VARCHAR},
+      tbor_money_type = #{tborMoneyType,jdbcType=TINYINT},
+      tbor_record_type = #{tborRecordType,jdbcType=TINYINT},
+      tbor_in = #{tborIn,jdbcType=DECIMAL},
+      tbor_out = #{tborOut,jdbcType=DECIMAL},
+      tbor_record = #{tborRecord,jdbcType=INTEGER},
+      tbor_member = #{tborMember,jdbcType=INTEGER},
+      tbor_order = #{tborOrder,jdbcType=BIGINT},
+      tbor_long_order = #{tborLongOrder,jdbcType=BIGINT},
+      tbor_object = #{tborObject,jdbcType=VARCHAR},
+      tbor_indemnify = #{tborIndemnify,jdbcType=VARCHAR},
+      tbor_date_time = #{tborDateTime,jdbcType=TIMESTAMP},
+      tbor_cash_no = #{tborCashNo,jdbcType=BIGINT},
+      tbor_adder = #{tborAdder,jdbcType=INTEGER},
+      tbor_status = #{tborStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbor_id = #{tborId,jdbcType=INTEGER}
+  </update>
+</mapper>

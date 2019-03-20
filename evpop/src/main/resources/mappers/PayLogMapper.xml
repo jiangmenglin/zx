@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.PayLogMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.PayLog" >
+    <id column="tbpl_id" property="tbplId" jdbcType="BIGINT" />
+    <result column="tbpl_bank_type" property="tbplBankType" jdbcType="SMALLINT" />
+    <result column="tbpl_record" property="tbplRecord" jdbcType="BIGINT" />
+    <result column="tbpl_refund" property="tbplRefund" jdbcType="BIGINT" />
+    <result column="tbpl_relate" property="tbplRelate" jdbcType="VARCHAR" />
+    <result column="tbpl_type" property="tbplType" jdbcType="SMALLINT" />
+    <result column="tbpl_add_time" property="tbplAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbpl_status" property="tbplStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.PayLog" extends="BaseResultMap" >
+    <result column="tbpl_log" property="tbplLog" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbpl_id, tbpl_bank_type, tbpl_record, tbpl_refund, tbpl_relate, tbpl_type, tbpl_add_time, 
+    tbpl_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbpl_log
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.PayLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_pay_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.PayLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_pay_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_pay_log
+    where tbpl_id = #{tbplId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_pay_log
+    where tbpl_id = #{tbplId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.PayLog" >
+    insert into tb_pay_log (tbpl_id, tbpl_bank_type, tbpl_record, 
+      tbpl_refund, tbpl_relate, tbpl_type, 
+      tbpl_add_time, tbpl_status, tbpl_log
+      )
+    values (#{tbplId,jdbcType=BIGINT}, #{tbplBankType,jdbcType=SMALLINT}, #{tbplRecord,jdbcType=BIGINT}, 
+      #{tbplRefund,jdbcType=BIGINT}, #{tbplRelate,jdbcType=VARCHAR}, #{tbplType,jdbcType=SMALLINT}, 
+      #{tbplAddTime,jdbcType=TIMESTAMP}, #{tbplStatus,jdbcType=SMALLINT}, #{tbplLog,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.PayLog" >
+    insert into tb_pay_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbplId != null" >
+        tbpl_id,
+      </if>
+      <if test="tbplBankType != null" >
+        tbpl_bank_type,
+      </if>
+      <if test="tbplRecord != null" >
+        tbpl_record,
+      </if>
+      <if test="tbplRefund != null" >
+        tbpl_refund,
+      </if>
+      <if test="tbplRelate != null" >
+        tbpl_relate,
+      </if>
+      <if test="tbplType != null" >
+        tbpl_type,
+      </if>
+      <if test="tbplAddTime != null" >
+        tbpl_add_time,
+      </if>
+      <if test="tbplStatus != null" >
+        tbpl_status,
+      </if>
+      <if test="tbplLog != null" >
+        tbpl_log,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbplId != null" >
+        #{tbplId,jdbcType=BIGINT},
+      </if>
+      <if test="tbplBankType != null" >
+        #{tbplBankType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbplRecord != null" >
+        #{tbplRecord,jdbcType=BIGINT},
+      </if>
+      <if test="tbplRefund != null" >
+        #{tbplRefund,jdbcType=BIGINT},
+      </if>
+      <if test="tbplRelate != null" >
+        #{tbplRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="tbplType != null" >
+        #{tbplType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbplAddTime != null" >
+        #{tbplAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbplStatus != null" >
+        #{tbplStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbplLog != null" >
+        #{tbplLog,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.PayLogExample" resultType="java.lang.Integer" >
+    select count(*) from tb_pay_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_pay_log
+    <set >
+      <if test="record.tbplId != null" >
+        tbpl_id = #{record.tbplId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbplBankType != null" >
+        tbpl_bank_type = #{record.tbplBankType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbplRecord != null" >
+        tbpl_record = #{record.tbplRecord,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbplRefund != null" >
+        tbpl_refund = #{record.tbplRefund,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbplRelate != null" >
+        tbpl_relate = #{record.tbplRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbplType != null" >
+        tbpl_type = #{record.tbplType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbplAddTime != null" >
+        tbpl_add_time = #{record.tbplAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbplStatus != null" >
+        tbpl_status = #{record.tbplStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbplLog != null" >
+        tbpl_log = #{record.tbplLog,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_pay_log
+    set tbpl_id = #{record.tbplId,jdbcType=BIGINT},
+      tbpl_bank_type = #{record.tbplBankType,jdbcType=SMALLINT},
+      tbpl_record = #{record.tbplRecord,jdbcType=BIGINT},
+      tbpl_refund = #{record.tbplRefund,jdbcType=BIGINT},
+      tbpl_relate = #{record.tbplRelate,jdbcType=VARCHAR},
+      tbpl_type = #{record.tbplType,jdbcType=SMALLINT},
+      tbpl_add_time = #{record.tbplAddTime,jdbcType=TIMESTAMP},
+      tbpl_status = #{record.tbplStatus,jdbcType=SMALLINT},
+      tbpl_log = #{record.tbplLog,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_pay_log
+    set tbpl_id = #{record.tbplId,jdbcType=BIGINT},
+      tbpl_bank_type = #{record.tbplBankType,jdbcType=SMALLINT},
+      tbpl_record = #{record.tbplRecord,jdbcType=BIGINT},
+      tbpl_refund = #{record.tbplRefund,jdbcType=BIGINT},
+      tbpl_relate = #{record.tbplRelate,jdbcType=VARCHAR},
+      tbpl_type = #{record.tbplType,jdbcType=SMALLINT},
+      tbpl_add_time = #{record.tbplAddTime,jdbcType=TIMESTAMP},
+      tbpl_status = #{record.tbplStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.PayLog" >
+    update tb_pay_log
+    <set >
+      <if test="tbplBankType != null" >
+        tbpl_bank_type = #{tbplBankType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbplRecord != null" >
+        tbpl_record = #{tbplRecord,jdbcType=BIGINT},
+      </if>
+      <if test="tbplRefund != null" >
+        tbpl_refund = #{tbplRefund,jdbcType=BIGINT},
+      </if>
+      <if test="tbplRelate != null" >
+        tbpl_relate = #{tbplRelate,jdbcType=VARCHAR},
+      </if>
+      <if test="tbplType != null" >
+        tbpl_type = #{tbplType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbplAddTime != null" >
+        tbpl_add_time = #{tbplAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbplStatus != null" >
+        tbpl_status = #{tbplStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbplLog != null" >
+        tbpl_log = #{tbplLog,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbpl_id = #{tbplId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.PayLog" >
+    update tb_pay_log
+    set tbpl_bank_type = #{tbplBankType,jdbcType=SMALLINT},
+      tbpl_record = #{tbplRecord,jdbcType=BIGINT},
+      tbpl_refund = #{tbplRefund,jdbcType=BIGINT},
+      tbpl_relate = #{tbplRelate,jdbcType=VARCHAR},
+      tbpl_type = #{tbplType,jdbcType=SMALLINT},
+      tbpl_add_time = #{tbplAddTime,jdbcType=TIMESTAMP},
+      tbpl_status = #{tbplStatus,jdbcType=SMALLINT},
+      tbpl_log = #{tbplLog,jdbcType=LONGVARCHAR}
+    where tbpl_id = #{tbplId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.PayLog" >
+    update tb_pay_log
+    set tbpl_bank_type = #{tbplBankType,jdbcType=SMALLINT},
+      tbpl_record = #{tbplRecord,jdbcType=BIGINT},
+      tbpl_refund = #{tbplRefund,jdbcType=BIGINT},
+      tbpl_relate = #{tbplRelate,jdbcType=VARCHAR},
+      tbpl_type = #{tbplType,jdbcType=SMALLINT},
+      tbpl_add_time = #{tbplAddTime,jdbcType=TIMESTAMP},
+      tbpl_status = #{tbplStatus,jdbcType=SMALLINT}
+    where tbpl_id = #{tbplId,jdbcType=BIGINT}
+  </update>
+</mapper>

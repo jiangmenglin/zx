@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.VoucherMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Voucher" >
+    <id column="tbv_id" property="tbvId" jdbcType="BIGINT" />
+    <result column="tbv_host" property="tbvHost" jdbcType="BIGINT" />
+    <result column="tbv_profile" property="tbvProfile" jdbcType="VARCHAR" />
+    <result column="tbv_money" property="tbvMoney" jdbcType="DOUBLE" />
+    <result column="tbv_voucher" property="tbvVoucher" jdbcType="VARCHAR" />
+    <result column="tbv_uuid" property="tbvUuid" jdbcType="VARCHAR" />
+    <result column="tbv_adder" property="tbvAdder" jdbcType="BIGINT" />
+    <result column="tbv_remark" property="tbvRemark" jdbcType="VARCHAR" />
+    <result column="tbv_update_time" property="tbvUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbv_add_time" property="tbvAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbv_status" property="tbvStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbv_id, tbv_host, tbv_profile, tbv_money, tbv_voucher, tbv_uuid, tbv_adder, tbv_remark, 
+    tbv_update_time, tbv_add_time, tbv_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.VoucherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_voucher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_voucher
+    where tbv_id = #{tbvId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_voucher
+    where tbv_id = #{tbvId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Voucher" >
+    insert into tb_voucher (tbv_id, tbv_host, tbv_profile, 
+      tbv_money, tbv_voucher, tbv_uuid, 
+      tbv_adder, tbv_remark, tbv_update_time, 
+      tbv_add_time, tbv_status)
+    values (#{tbvId,jdbcType=BIGINT}, #{tbvHost,jdbcType=BIGINT}, #{tbvProfile,jdbcType=VARCHAR}, 
+      #{tbvMoney,jdbcType=DOUBLE}, #{tbvVoucher,jdbcType=VARCHAR}, #{tbvUuid,jdbcType=VARCHAR}, 
+      #{tbvAdder,jdbcType=BIGINT}, #{tbvRemark,jdbcType=VARCHAR}, #{tbvUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbvAddTime,jdbcType=TIMESTAMP}, #{tbvStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Voucher" >
+    insert into tb_voucher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbvId != null" >
+        tbv_id,
+      </if>
+      <if test="tbvHost != null" >
+        tbv_host,
+      </if>
+      <if test="tbvProfile != null" >
+        tbv_profile,
+      </if>
+      <if test="tbvMoney != null" >
+        tbv_money,
+      </if>
+      <if test="tbvVoucher != null" >
+        tbv_voucher,
+      </if>
+      <if test="tbvUuid != null" >
+        tbv_uuid,
+      </if>
+      <if test="tbvAdder != null" >
+        tbv_adder,
+      </if>
+      <if test="tbvRemark != null" >
+        tbv_remark,
+      </if>
+      <if test="tbvUpdateTime != null" >
+        tbv_update_time,
+      </if>
+      <if test="tbvAddTime != null" >
+        tbv_add_time,
+      </if>
+      <if test="tbvStatus != null" >
+        tbv_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbvId != null" >
+        #{tbvId,jdbcType=BIGINT},
+      </if>
+      <if test="tbvHost != null" >
+        #{tbvHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbvProfile != null" >
+        #{tbvProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvMoney != null" >
+        #{tbvMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbvVoucher != null" >
+        #{tbvVoucher,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvUuid != null" >
+        #{tbvUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvAdder != null" >
+        #{tbvAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbvRemark != null" >
+        #{tbvRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvUpdateTime != null" >
+        #{tbvUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvAddTime != null" >
+        #{tbvAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvStatus != null" >
+        #{tbvStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.VoucherExample" resultType="java.lang.Integer" >
+    select count(*) from tb_voucher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_voucher
+    <set >
+      <if test="record.tbvId != null" >
+        tbv_id = #{record.tbvId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbvHost != null" >
+        tbv_host = #{record.tbvHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbvProfile != null" >
+        tbv_profile = #{record.tbvProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbvMoney != null" >
+        tbv_money = #{record.tbvMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbvVoucher != null" >
+        tbv_voucher = #{record.tbvVoucher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbvUuid != null" >
+        tbv_uuid = #{record.tbvUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbvAdder != null" >
+        tbv_adder = #{record.tbvAdder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbvRemark != null" >
+        tbv_remark = #{record.tbvRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbvUpdateTime != null" >
+        tbv_update_time = #{record.tbvUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbvAddTime != null" >
+        tbv_add_time = #{record.tbvAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbvStatus != null" >
+        tbv_status = #{record.tbvStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_voucher
+    set tbv_id = #{record.tbvId,jdbcType=BIGINT},
+      tbv_host = #{record.tbvHost,jdbcType=BIGINT},
+      tbv_profile = #{record.tbvProfile,jdbcType=VARCHAR},
+      tbv_money = #{record.tbvMoney,jdbcType=DOUBLE},
+      tbv_voucher = #{record.tbvVoucher,jdbcType=VARCHAR},
+      tbv_uuid = #{record.tbvUuid,jdbcType=VARCHAR},
+      tbv_adder = #{record.tbvAdder,jdbcType=BIGINT},
+      tbv_remark = #{record.tbvRemark,jdbcType=VARCHAR},
+      tbv_update_time = #{record.tbvUpdateTime,jdbcType=TIMESTAMP},
+      tbv_add_time = #{record.tbvAddTime,jdbcType=TIMESTAMP},
+      tbv_status = #{record.tbvStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Voucher" >
+    update tb_voucher
+    <set >
+      <if test="tbvHost != null" >
+        tbv_host = #{tbvHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbvProfile != null" >
+        tbv_profile = #{tbvProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvMoney != null" >
+        tbv_money = #{tbvMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbvVoucher != null" >
+        tbv_voucher = #{tbvVoucher,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvUuid != null" >
+        tbv_uuid = #{tbvUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvAdder != null" >
+        tbv_adder = #{tbvAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tbvRemark != null" >
+        tbv_remark = #{tbvRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbvUpdateTime != null" >
+        tbv_update_time = #{tbvUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvAddTime != null" >
+        tbv_add_time = #{tbvAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvStatus != null" >
+        tbv_status = #{tbvStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbv_id = #{tbvId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Voucher" >
+    update tb_voucher
+    set tbv_host = #{tbvHost,jdbcType=BIGINT},
+      tbv_profile = #{tbvProfile,jdbcType=VARCHAR},
+      tbv_money = #{tbvMoney,jdbcType=DOUBLE},
+      tbv_voucher = #{tbvVoucher,jdbcType=VARCHAR},
+      tbv_uuid = #{tbvUuid,jdbcType=VARCHAR},
+      tbv_adder = #{tbvAdder,jdbcType=BIGINT},
+      tbv_remark = #{tbvRemark,jdbcType=VARCHAR},
+      tbv_update_time = #{tbvUpdateTime,jdbcType=TIMESTAMP},
+      tbv_add_time = #{tbvAddTime,jdbcType=TIMESTAMP},
+      tbv_status = #{tbvStatus,jdbcType=SMALLINT}
+    where tbv_id = #{tbvId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.WebPolicyMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.WebPolicy" >
+    <id column="tbwp_id" property="tbwpId" jdbcType="BIGINT" />
+    <result column="tbwp_title" property="tbwpTitle" jdbcType="VARCHAR" />
+    <result column="tbwp_source" property="tbwpSource" jdbcType="VARCHAR" />
+    <result column="tbwp_thum1" property="tbwpThum1" jdbcType="VARCHAR" />
+    <result column="tbwp_thum2" property="tbwpThum2" jdbcType="VARCHAR" />
+    <result column="tbwp_policy_time" property="tbwpPolicyTime" jdbcType="TIMESTAMP" />
+    <result column="tbwp_add_time" property="tbwpAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbwp_update_time" property="tbwpUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbwp_status" property="tbwpStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.WebPolicy" extends="BaseResultMap" >
+    <result column="tbwp_content" property="tbwpContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbwp_id, tbwp_title, tbwp_source, tbwp_thum1, tbwp_thum2, tbwp_policy_time, tbwp_add_time, 
+    tbwp_update_time, tbwp_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbwp_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.WebPolicyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_web_policy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.WebPolicyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_web_policy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_web_policy
+    where tbwp_id = #{tbwpId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_web_policy
+    where tbwp_id = #{tbwpId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.WebPolicy" >
+    insert into tb_web_policy (tbwp_id, tbwp_title, tbwp_source, 
+      tbwp_thum1, tbwp_thum2, tbwp_policy_time, 
+      tbwp_add_time, tbwp_update_time, tbwp_status, 
+      tbwp_content)
+    values (#{tbwpId,jdbcType=BIGINT}, #{tbwpTitle,jdbcType=VARCHAR}, #{tbwpSource,jdbcType=VARCHAR}, 
+      #{tbwpThum1,jdbcType=VARCHAR}, #{tbwpThum2,jdbcType=VARCHAR}, #{tbwpPolicyTime,jdbcType=TIMESTAMP}, 
+      #{tbwpAddTime,jdbcType=TIMESTAMP}, #{tbwpUpdateTime,jdbcType=TIMESTAMP}, #{tbwpStatus,jdbcType=TINYINT}, 
+      #{tbwpContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.WebPolicy" >
+    insert into tb_web_policy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbwpId != null" >
+        tbwp_id,
+      </if>
+      <if test="tbwpTitle != null" >
+        tbwp_title,
+      </if>
+      <if test="tbwpSource != null" >
+        tbwp_source,
+      </if>
+      <if test="tbwpThum1 != null" >
+        tbwp_thum1,
+      </if>
+      <if test="tbwpThum2 != null" >
+        tbwp_thum2,
+      </if>
+      <if test="tbwpPolicyTime != null" >
+        tbwp_policy_time,
+      </if>
+      <if test="tbwpAddTime != null" >
+        tbwp_add_time,
+      </if>
+      <if test="tbwpUpdateTime != null" >
+        tbwp_update_time,
+      </if>
+      <if test="tbwpStatus != null" >
+        tbwp_status,
+      </if>
+      <if test="tbwpContent != null" >
+        tbwp_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbwpId != null" >
+        #{tbwpId,jdbcType=BIGINT},
+      </if>
+      <if test="tbwpTitle != null" >
+        #{tbwpTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwpSource != null" >
+        #{tbwpSource,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwpThum1 != null" >
+        #{tbwpThum1,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwpThum2 != null" >
+        #{tbwpThum2,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwpPolicyTime != null" >
+        #{tbwpPolicyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwpAddTime != null" >
+        #{tbwpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwpUpdateTime != null" >
+        #{tbwpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwpStatus != null" >
+        #{tbwpStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbwpContent != null" >
+        #{tbwpContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.WebPolicyExample" resultType="java.lang.Integer" >
+    select count(*) from tb_web_policy
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_web_policy
+    <set >
+      <if test="record.tbwpId != null" >
+        tbwp_id = #{record.tbwpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbwpTitle != null" >
+        tbwp_title = #{record.tbwpTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbwpSource != null" >
+        tbwp_source = #{record.tbwpSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbwpThum1 != null" >
+        tbwp_thum1 = #{record.tbwpThum1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbwpThum2 != null" >
+        tbwp_thum2 = #{record.tbwpThum2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbwpPolicyTime != null" >
+        tbwp_policy_time = #{record.tbwpPolicyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbwpAddTime != null" >
+        tbwp_add_time = #{record.tbwpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbwpUpdateTime != null" >
+        tbwp_update_time = #{record.tbwpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbwpStatus != null" >
+        tbwp_status = #{record.tbwpStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbwpContent != null" >
+        tbwp_content = #{record.tbwpContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_web_policy
+    set tbwp_id = #{record.tbwpId,jdbcType=BIGINT},
+      tbwp_title = #{record.tbwpTitle,jdbcType=VARCHAR},
+      tbwp_source = #{record.tbwpSource,jdbcType=VARCHAR},
+      tbwp_thum1 = #{record.tbwpThum1,jdbcType=VARCHAR},
+      tbwp_thum2 = #{record.tbwpThum2,jdbcType=VARCHAR},
+      tbwp_policy_time = #{record.tbwpPolicyTime,jdbcType=TIMESTAMP},
+      tbwp_add_time = #{record.tbwpAddTime,jdbcType=TIMESTAMP},
+      tbwp_update_time = #{record.tbwpUpdateTime,jdbcType=TIMESTAMP},
+      tbwp_status = #{record.tbwpStatus,jdbcType=TINYINT},
+      tbwp_content = #{record.tbwpContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_web_policy
+    set tbwp_id = #{record.tbwpId,jdbcType=BIGINT},
+      tbwp_title = #{record.tbwpTitle,jdbcType=VARCHAR},
+      tbwp_source = #{record.tbwpSource,jdbcType=VARCHAR},
+      tbwp_thum1 = #{record.tbwpThum1,jdbcType=VARCHAR},
+      tbwp_thum2 = #{record.tbwpThum2,jdbcType=VARCHAR},
+      tbwp_policy_time = #{record.tbwpPolicyTime,jdbcType=TIMESTAMP},
+      tbwp_add_time = #{record.tbwpAddTime,jdbcType=TIMESTAMP},
+      tbwp_update_time = #{record.tbwpUpdateTime,jdbcType=TIMESTAMP},
+      tbwp_status = #{record.tbwpStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.WebPolicy" >
+    update tb_web_policy
+    <set >
+      <if test="tbwpTitle != null" >
+        tbwp_title = #{tbwpTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwpSource != null" >
+        tbwp_source = #{tbwpSource,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwpThum1 != null" >
+        tbwp_thum1 = #{tbwpThum1,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwpThum2 != null" >
+        tbwp_thum2 = #{tbwpThum2,jdbcType=VARCHAR},
+      </if>
+      <if test="tbwpPolicyTime != null" >
+        tbwp_policy_time = #{tbwpPolicyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwpAddTime != null" >
+        tbwp_add_time = #{tbwpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwpUpdateTime != null" >
+        tbwp_update_time = #{tbwpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbwpStatus != null" >
+        tbwp_status = #{tbwpStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbwpContent != null" >
+        tbwp_content = #{tbwpContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbwp_id = #{tbwpId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.WebPolicy" >
+    update tb_web_policy
+    set tbwp_title = #{tbwpTitle,jdbcType=VARCHAR},
+      tbwp_source = #{tbwpSource,jdbcType=VARCHAR},
+      tbwp_thum1 = #{tbwpThum1,jdbcType=VARCHAR},
+      tbwp_thum2 = #{tbwpThum2,jdbcType=VARCHAR},
+      tbwp_policy_time = #{tbwpPolicyTime,jdbcType=TIMESTAMP},
+      tbwp_add_time = #{tbwpAddTime,jdbcType=TIMESTAMP},
+      tbwp_update_time = #{tbwpUpdateTime,jdbcType=TIMESTAMP},
+      tbwp_status = #{tbwpStatus,jdbcType=TINYINT},
+      tbwp_content = #{tbwpContent,jdbcType=LONGVARCHAR}
+    where tbwp_id = #{tbwpId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.WebPolicy" >
+    update tb_web_policy
+    set tbwp_title = #{tbwpTitle,jdbcType=VARCHAR},
+      tbwp_source = #{tbwpSource,jdbcType=VARCHAR},
+      tbwp_thum1 = #{tbwpThum1,jdbcType=VARCHAR},
+      tbwp_thum2 = #{tbwpThum2,jdbcType=VARCHAR},
+      tbwp_policy_time = #{tbwpPolicyTime,jdbcType=TIMESTAMP},
+      tbwp_add_time = #{tbwpAddTime,jdbcType=TIMESTAMP},
+      tbwp_update_time = #{tbwpUpdateTime,jdbcType=TIMESTAMP},
+      tbwp_status = #{tbwpStatus,jdbcType=TINYINT}
+    where tbwp_id = #{tbwpId,jdbcType=BIGINT}
+  </update>
+</mapper>

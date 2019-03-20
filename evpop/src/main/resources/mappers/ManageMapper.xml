@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ManageMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Manage" >
+    <id column="tbm_id" property="tbmId" jdbcType="INTEGER" />
+    <result column="tbm_host" property="tbmHost" jdbcType="INTEGER" />
+    <result column="tbm_name" property="tbmName" jdbcType="VARCHAR" />
+    <result column="tbm_mobile" property="tbmMobile" jdbcType="VARCHAR" />
+    <result column="tbm_password" property="tbmPassword" jdbcType="VARCHAR" />
+    <result column="tbm_type" property="tbmType" jdbcType="TINYINT" />
+    <result column="tbm_areas" property="tbmAreas" jdbcType="VARCHAR" />
+    <result column="tbm_update_time" property="tbmUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_add_time" property="tbmAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_state" property="tbmState" jdbcType="TINYINT" />
+    <result column="tbm_status" property="tbmStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbm_id, tbm_host, tbm_name, tbm_mobile, tbm_password, tbm_type, tbm_areas, tbm_update_time, 
+    tbm_add_time, tbm_state, tbm_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ManageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_manage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_manage
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_manage
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Manage" >
+    insert into tb_manage (tbm_id, tbm_host, tbm_name, 
+      tbm_mobile, tbm_password, tbm_type, 
+      tbm_areas, tbm_update_time, tbm_add_time, 
+      tbm_state, tbm_status)
+    values (#{tbmId,jdbcType=INTEGER}, #{tbmHost,jdbcType=INTEGER}, #{tbmName,jdbcType=VARCHAR}, 
+      #{tbmMobile,jdbcType=VARCHAR}, #{tbmPassword,jdbcType=VARCHAR}, #{tbmType,jdbcType=TINYINT}, 
+      #{tbmAreas,jdbcType=VARCHAR}, #{tbmUpdateTime,jdbcType=TIMESTAMP}, #{tbmAddTime,jdbcType=TIMESTAMP}, 
+      #{tbmState,jdbcType=TINYINT}, #{tbmStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Manage" >
+    insert into tb_manage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbmId != null" >
+        tbm_id,
+      </if>
+      <if test="tbmHost != null" >
+        tbm_host,
+      </if>
+      <if test="tbmName != null" >
+        tbm_name,
+      </if>
+      <if test="tbmMobile != null" >
+        tbm_mobile,
+      </if>
+      <if test="tbmPassword != null" >
+        tbm_password,
+      </if>
+      <if test="tbmType != null" >
+        tbm_type,
+      </if>
+      <if test="tbmAreas != null" >
+        tbm_areas,
+      </if>
+      <if test="tbmUpdateTime != null" >
+        tbm_update_time,
+      </if>
+      <if test="tbmAddTime != null" >
+        tbm_add_time,
+      </if>
+      <if test="tbmState != null" >
+        tbm_state,
+      </if>
+      <if test="tbmStatus != null" >
+        tbm_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbmId != null" >
+        #{tbmId,jdbcType=INTEGER},
+      </if>
+      <if test="tbmHost != null" >
+        #{tbmHost,jdbcType=INTEGER},
+      </if>
+      <if test="tbmName != null" >
+        #{tbmName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmMobile != null" >
+        #{tbmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmPassword != null" >
+        #{tbmPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmType != null" >
+        #{tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="tbmAreas != null" >
+        #{tbmAreas,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmUpdateTime != null" >
+        #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmAddTime != null" >
+        #{tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmState != null" >
+        #{tbmState,jdbcType=TINYINT},
+      </if>
+      <if test="tbmStatus != null" >
+        #{tbmStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ManageExample" resultType="java.lang.Integer" >
+    select count(*) from tb_manage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_manage
+    <set >
+      <if test="record.tbmId != null" >
+        tbm_id = #{record.tbmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmHost != null" >
+        tbm_host = #{record.tbmHost,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmName != null" >
+        tbm_name = #{record.tbmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmMobile != null" >
+        tbm_mobile = #{record.tbmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmPassword != null" >
+        tbm_password = #{record.tbmPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmType != null" >
+        tbm_type = #{record.tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmAreas != null" >
+        tbm_areas = #{record.tbmAreas,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmUpdateTime != null" >
+        tbm_update_time = #{record.tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmAddTime != null" >
+        tbm_add_time = #{record.tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmState != null" >
+        tbm_state = #{record.tbmState,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmStatus != null" >
+        tbm_status = #{record.tbmStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_manage
+    set tbm_id = #{record.tbmId,jdbcType=INTEGER},
+      tbm_host = #{record.tbmHost,jdbcType=INTEGER},
+      tbm_name = #{record.tbmName,jdbcType=VARCHAR},
+      tbm_mobile = #{record.tbmMobile,jdbcType=VARCHAR},
+      tbm_password = #{record.tbmPassword,jdbcType=VARCHAR},
+      tbm_type = #{record.tbmType,jdbcType=TINYINT},
+      tbm_areas = #{record.tbmAreas,jdbcType=VARCHAR},
+      tbm_update_time = #{record.tbmUpdateTime,jdbcType=TIMESTAMP},
+      tbm_add_time = #{record.tbmAddTime,jdbcType=TIMESTAMP},
+      tbm_state = #{record.tbmState,jdbcType=TINYINT},
+      tbm_status = #{record.tbmStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Manage" >
+    update tb_manage
+    <set >
+      <if test="tbmHost != null" >
+        tbm_host = #{tbmHost,jdbcType=INTEGER},
+      </if>
+      <if test="tbmName != null" >
+        tbm_name = #{tbmName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmMobile != null" >
+        tbm_mobile = #{tbmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmPassword != null" >
+        tbm_password = #{tbmPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmType != null" >
+        tbm_type = #{tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="tbmAreas != null" >
+        tbm_areas = #{tbmAreas,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmUpdateTime != null" >
+        tbm_update_time = #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmAddTime != null" >
+        tbm_add_time = #{tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmState != null" >
+        tbm_state = #{tbmState,jdbcType=TINYINT},
+      </if>
+      <if test="tbmStatus != null" >
+        tbm_status = #{tbmStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Manage" >
+    update tb_manage
+    set tbm_host = #{tbmHost,jdbcType=INTEGER},
+      tbm_name = #{tbmName,jdbcType=VARCHAR},
+      tbm_mobile = #{tbmMobile,jdbcType=VARCHAR},
+      tbm_password = #{tbmPassword,jdbcType=VARCHAR},
+      tbm_type = #{tbmType,jdbcType=TINYINT},
+      tbm_areas = #{tbmAreas,jdbcType=VARCHAR},
+      tbm_update_time = #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      tbm_add_time = #{tbmAddTime,jdbcType=TIMESTAMP},
+      tbm_state = #{tbmState,jdbcType=TINYINT},
+      tbm_status = #{tbmStatus,jdbcType=TINYINT}
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </update>
+</mapper>

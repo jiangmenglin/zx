@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ProblemMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Problem" >
+    <id column="tbp_id" property="tbpId" jdbcType="BIGINT" />
+    <result column="tbp_host" property="tbpHost" jdbcType="BIGINT" />
+    <result column="tbp_car" property="tbpCar" jdbcType="BIGINT" />
+    <result column="tbp_type" property="tbpType" jdbcType="TINYINT" />
+    <result column="tbp_profile" property="tbpProfile" jdbcType="VARCHAR" />
+    <result column="tbp_images" property="tbpImages" jdbcType="VARCHAR" />
+    <result column="tbp_manage" property="tbpManage" jdbcType="BIGINT" />
+    <result column="tbp_check_time" property="tbpCheckTime" jdbcType="TIMESTAMP" />
+    <result column="tbp_remark" property="tbpRemark" jdbcType="VARCHAR" />
+    <result column="tbp_update_time" property="tbpUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbp_add_time" property="tbpAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbp_status" property="tbpStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbp_id, tbp_host, tbp_car, tbp_type, tbp_profile, tbp_images, tbp_manage, tbp_check_time, 
+    tbp_remark, tbp_update_time, tbp_add_time, tbp_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ProblemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_problem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_problem
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_problem
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Problem" >
+    insert into tb_problem (tbp_id, tbp_host, tbp_car, 
+      tbp_type, tbp_profile, tbp_images, 
+      tbp_manage, tbp_check_time, tbp_remark, 
+      tbp_update_time, tbp_add_time, tbp_status
+      )
+    values (#{tbpId,jdbcType=BIGINT}, #{tbpHost,jdbcType=BIGINT}, #{tbpCar,jdbcType=BIGINT}, 
+      #{tbpType,jdbcType=TINYINT}, #{tbpProfile,jdbcType=VARCHAR}, #{tbpImages,jdbcType=VARCHAR}, 
+      #{tbpManage,jdbcType=BIGINT}, #{tbpCheckTime,jdbcType=TIMESTAMP}, #{tbpRemark,jdbcType=VARCHAR}, 
+      #{tbpUpdateTime,jdbcType=TIMESTAMP}, #{tbpAddTime,jdbcType=TIMESTAMP}, #{tbpStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Problem" >
+    insert into tb_problem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbpId != null" >
+        tbp_id,
+      </if>
+      <if test="tbpHost != null" >
+        tbp_host,
+      </if>
+      <if test="tbpCar != null" >
+        tbp_car,
+      </if>
+      <if test="tbpType != null" >
+        tbp_type,
+      </if>
+      <if test="tbpProfile != null" >
+        tbp_profile,
+      </if>
+      <if test="tbpImages != null" >
+        tbp_images,
+      </if>
+      <if test="tbpManage != null" >
+        tbp_manage,
+      </if>
+      <if test="tbpCheckTime != null" >
+        tbp_check_time,
+      </if>
+      <if test="tbpRemark != null" >
+        tbp_remark,
+      </if>
+      <if test="tbpUpdateTime != null" >
+        tbp_update_time,
+      </if>
+      <if test="tbpAddTime != null" >
+        tbp_add_time,
+      </if>
+      <if test="tbpStatus != null" >
+        tbp_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbpId != null" >
+        #{tbpId,jdbcType=BIGINT},
+      </if>
+      <if test="tbpHost != null" >
+        #{tbpHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbpCar != null" >
+        #{tbpCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbpType != null" >
+        #{tbpType,jdbcType=TINYINT},
+      </if>
+      <if test="tbpProfile != null" >
+        #{tbpProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpImages != null" >
+        #{tbpImages,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpManage != null" >
+        #{tbpManage,jdbcType=BIGINT},
+      </if>
+      <if test="tbpCheckTime != null" >
+        #{tbpCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpRemark != null" >
+        #{tbpRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpUpdateTime != null" >
+        #{tbpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpAddTime != null" >
+        #{tbpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpStatus != null" >
+        #{tbpStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ProblemExample" resultType="java.lang.Integer" >
+    select count(*) from tb_problem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_problem
+    <set >
+      <if test="record.tbpId != null" >
+        tbp_id = #{record.tbpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpHost != null" >
+        tbp_host = #{record.tbpHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpCar != null" >
+        tbp_car = #{record.tbpCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpType != null" >
+        tbp_type = #{record.tbpType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbpProfile != null" >
+        tbp_profile = #{record.tbpProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpImages != null" >
+        tbp_images = #{record.tbpImages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpManage != null" >
+        tbp_manage = #{record.tbpManage,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbpCheckTime != null" >
+        tbp_check_time = #{record.tbpCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbpRemark != null" >
+        tbp_remark = #{record.tbpRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbpUpdateTime != null" >
+        tbp_update_time = #{record.tbpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbpAddTime != null" >
+        tbp_add_time = #{record.tbpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbpStatus != null" >
+        tbp_status = #{record.tbpStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_problem
+    set tbp_id = #{record.tbpId,jdbcType=BIGINT},
+      tbp_host = #{record.tbpHost,jdbcType=BIGINT},
+      tbp_car = #{record.tbpCar,jdbcType=BIGINT},
+      tbp_type = #{record.tbpType,jdbcType=TINYINT},
+      tbp_profile = #{record.tbpProfile,jdbcType=VARCHAR},
+      tbp_images = #{record.tbpImages,jdbcType=VARCHAR},
+      tbp_manage = #{record.tbpManage,jdbcType=BIGINT},
+      tbp_check_time = #{record.tbpCheckTime,jdbcType=TIMESTAMP},
+      tbp_remark = #{record.tbpRemark,jdbcType=VARCHAR},
+      tbp_update_time = #{record.tbpUpdateTime,jdbcType=TIMESTAMP},
+      tbp_add_time = #{record.tbpAddTime,jdbcType=TIMESTAMP},
+      tbp_status = #{record.tbpStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Problem" >
+    update tb_problem
+    <set >
+      <if test="tbpHost != null" >
+        tbp_host = #{tbpHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbpCar != null" >
+        tbp_car = #{tbpCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbpType != null" >
+        tbp_type = #{tbpType,jdbcType=TINYINT},
+      </if>
+      <if test="tbpProfile != null" >
+        tbp_profile = #{tbpProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpImages != null" >
+        tbp_images = #{tbpImages,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpManage != null" >
+        tbp_manage = #{tbpManage,jdbcType=BIGINT},
+      </if>
+      <if test="tbpCheckTime != null" >
+        tbp_check_time = #{tbpCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpRemark != null" >
+        tbp_remark = #{tbpRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbpUpdateTime != null" >
+        tbp_update_time = #{tbpUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpAddTime != null" >
+        tbp_add_time = #{tbpAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbpStatus != null" >
+        tbp_status = #{tbpStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Problem" >
+    update tb_problem
+    set tbp_host = #{tbpHost,jdbcType=BIGINT},
+      tbp_car = #{tbpCar,jdbcType=BIGINT},
+      tbp_type = #{tbpType,jdbcType=TINYINT},
+      tbp_profile = #{tbpProfile,jdbcType=VARCHAR},
+      tbp_images = #{tbpImages,jdbcType=VARCHAR},
+      tbp_manage = #{tbpManage,jdbcType=BIGINT},
+      tbp_check_time = #{tbpCheckTime,jdbcType=TIMESTAMP},
+      tbp_remark = #{tbpRemark,jdbcType=VARCHAR},
+      tbp_update_time = #{tbpUpdateTime,jdbcType=TIMESTAMP},
+      tbp_add_time = #{tbpAddTime,jdbcType=TIMESTAMP},
+      tbp_status = #{tbpStatus,jdbcType=TINYINT}
+    where tbp_id = #{tbpId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.MessageMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Message" >
+    <id column="tbm_id" property="tbmId" jdbcType="INTEGER" />
+    <result column="tbm_host" property="tbmHost" jdbcType="SMALLINT" />
+    <result column="tbm_title" property="tbmTitle" jdbcType="VARCHAR" />
+    <result column="tbm_rentcarorder" property="tbmRentcarorder" jdbcType="VARCHAR" />
+    <result column="tbm_head" property="tbmHead" jdbcType="VARCHAR" />
+    <result column="tbm_cdorder" property="tbmCdorder" jdbcType="VARCHAR" />
+    <result column="tbm_cdmoney" property="tbmCdmoney" jdbcType="DOUBLE" />
+    <result column="tbm_content" property="tbmContent" jdbcType="VARCHAR" />
+    <result column="tbm_flag" property="tbmFlag" jdbcType="VARCHAR" />
+    <result column="tbm_link" property="tbmLink" jdbcType="VARCHAR" />
+    <result column="tbm_operator" property="tbmOperator" jdbcType="INTEGER" />
+    <result column="tbm_member" property="tbmMember" jdbcType="INTEGER" />
+    <result column="tbm_rcv_time" property="tbmRcvTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_snd_time" property="tbmSndTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_add_time" property="tbmAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_update_time" property="tbmUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbm_status" property="tbmStatus" jdbcType="TINYINT" />
+    <result column="tbm_relationmessage" property="tbmRelationmessage" jdbcType="BIGINT" />
+    <result column="tbm_operatorname" property="tbmOperatorname" jdbcType="VARCHAR" />
+    <result column="tbm_type" property="tbmType" jdbcType="TINYINT" />
+    <result column="tbm_category" property="tbmCategory" jdbcType="SMALLINT" />
+    <result column="tbm_ctype" property="tbmCtype" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbm_id, tbm_host, tbm_title, tbm_rentcarorder, tbm_head, tbm_cdorder, tbm_cdmoney, 
+    tbm_content, tbm_flag, tbm_link, tbm_operator, tbm_member, tbm_rcv_time, tbm_snd_time, 
+    tbm_add_time, tbm_update_time, tbm_status, tbm_relationmessage, tbm_operatorname, 
+    tbm_type, tbm_category, tbm_ctype
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_message
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_message
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Message" >
+    insert into tb_message (tbm_id, tbm_host, tbm_title, 
+      tbm_rentcarorder, tbm_head, tbm_cdorder, 
+      tbm_cdmoney, tbm_content, tbm_flag, 
+      tbm_link, tbm_operator, tbm_member, 
+      tbm_rcv_time, tbm_snd_time, tbm_add_time, 
+      tbm_update_time, tbm_status, tbm_relationmessage, 
+      tbm_operatorname, tbm_type, tbm_category, 
+      tbm_ctype)
+    values (#{tbmId,jdbcType=INTEGER}, #{tbmHost,jdbcType=SMALLINT}, #{tbmTitle,jdbcType=VARCHAR}, 
+      #{tbmRentcarorder,jdbcType=VARCHAR}, #{tbmHead,jdbcType=VARCHAR}, #{tbmCdorder,jdbcType=VARCHAR}, 
+      #{tbmCdmoney,jdbcType=DOUBLE}, #{tbmContent,jdbcType=VARCHAR}, #{tbmFlag,jdbcType=VARCHAR}, 
+      #{tbmLink,jdbcType=VARCHAR}, #{tbmOperator,jdbcType=INTEGER}, #{tbmMember,jdbcType=INTEGER}, 
+      #{tbmRcvTime,jdbcType=TIMESTAMP}, #{tbmSndTime,jdbcType=TIMESTAMP}, #{tbmAddTime,jdbcType=TIMESTAMP}, 
+      #{tbmUpdateTime,jdbcType=TIMESTAMP}, #{tbmStatus,jdbcType=TINYINT}, #{tbmRelationmessage,jdbcType=BIGINT}, 
+      #{tbmOperatorname,jdbcType=VARCHAR}, #{tbmType,jdbcType=TINYINT}, #{tbmCategory,jdbcType=SMALLINT}, 
+      #{tbmCtype,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Message" >
+    insert into tb_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbmId != null" >
+        tbm_id,
+      </if>
+      <if test="tbmHost != null" >
+        tbm_host,
+      </if>
+      <if test="tbmTitle != null" >
+        tbm_title,
+      </if>
+      <if test="tbmRentcarorder != null" >
+        tbm_rentcarorder,
+      </if>
+      <if test="tbmHead != null" >
+        tbm_head,
+      </if>
+      <if test="tbmCdorder != null" >
+        tbm_cdorder,
+      </if>
+      <if test="tbmCdmoney != null" >
+        tbm_cdmoney,
+      </if>
+      <if test="tbmContent != null" >
+        tbm_content,
+      </if>
+      <if test="tbmFlag != null" >
+        tbm_flag,
+      </if>
+      <if test="tbmLink != null" >
+        tbm_link,
+      </if>
+      <if test="tbmOperator != null" >
+        tbm_operator,
+      </if>
+      <if test="tbmMember != null" >
+        tbm_member,
+      </if>
+      <if test="tbmRcvTime != null" >
+        tbm_rcv_time,
+      </if>
+      <if test="tbmSndTime != null" >
+        tbm_snd_time,
+      </if>
+      <if test="tbmAddTime != null" >
+        tbm_add_time,
+      </if>
+      <if test="tbmUpdateTime != null" >
+        tbm_update_time,
+      </if>
+      <if test="tbmStatus != null" >
+        tbm_status,
+      </if>
+      <if test="tbmRelationmessage != null" >
+        tbm_relationmessage,
+      </if>
+      <if test="tbmOperatorname != null" >
+        tbm_operatorname,
+      </if>
+      <if test="tbmType != null" >
+        tbm_type,
+      </if>
+      <if test="tbmCategory != null" >
+        tbm_category,
+      </if>
+      <if test="tbmCtype != null" >
+        tbm_ctype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbmId != null" >
+        #{tbmId,jdbcType=INTEGER},
+      </if>
+      <if test="tbmHost != null" >
+        #{tbmHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmTitle != null" >
+        #{tbmTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmRentcarorder != null" >
+        #{tbmRentcarorder,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmHead != null" >
+        #{tbmHead,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCdorder != null" >
+        #{tbmCdorder,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCdmoney != null" >
+        #{tbmCdmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbmContent != null" >
+        #{tbmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmFlag != null" >
+        #{tbmFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmLink != null" >
+        #{tbmLink,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmOperator != null" >
+        #{tbmOperator,jdbcType=INTEGER},
+      </if>
+      <if test="tbmMember != null" >
+        #{tbmMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbmRcvTime != null" >
+        #{tbmRcvTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmSndTime != null" >
+        #{tbmSndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmAddTime != null" >
+        #{tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmUpdateTime != null" >
+        #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmStatus != null" >
+        #{tbmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbmRelationmessage != null" >
+        #{tbmRelationmessage,jdbcType=BIGINT},
+      </if>
+      <if test="tbmOperatorname != null" >
+        #{tbmOperatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmType != null" >
+        #{tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="tbmCategory != null" >
+        #{tbmCategory,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmCtype != null" >
+        #{tbmCtype,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.MessageExample" resultType="java.lang.Integer" >
+    select count(*) from tb_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_message
+    <set >
+      <if test="record.tbmId != null" >
+        tbm_id = #{record.tbmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmHost != null" >
+        tbm_host = #{record.tbmHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbmTitle != null" >
+        tbm_title = #{record.tbmTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmRentcarorder != null" >
+        tbm_rentcarorder = #{record.tbmRentcarorder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmHead != null" >
+        tbm_head = #{record.tbmHead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmCdorder != null" >
+        tbm_cdorder = #{record.tbmCdorder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmCdmoney != null" >
+        tbm_cdmoney = #{record.tbmCdmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbmContent != null" >
+        tbm_content = #{record.tbmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmFlag != null" >
+        tbm_flag = #{record.tbmFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmLink != null" >
+        tbm_link = #{record.tbmLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmOperator != null" >
+        tbm_operator = #{record.tbmOperator,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmMember != null" >
+        tbm_member = #{record.tbmMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbmRcvTime != null" >
+        tbm_rcv_time = #{record.tbmRcvTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmSndTime != null" >
+        tbm_snd_time = #{record.tbmSndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmAddTime != null" >
+        tbm_add_time = #{record.tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmUpdateTime != null" >
+        tbm_update_time = #{record.tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbmStatus != null" >
+        tbm_status = #{record.tbmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmRelationmessage != null" >
+        tbm_relationmessage = #{record.tbmRelationmessage,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbmOperatorname != null" >
+        tbm_operatorname = #{record.tbmOperatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbmType != null" >
+        tbm_type = #{record.tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbmCategory != null" >
+        tbm_category = #{record.tbmCategory,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbmCtype != null" >
+        tbm_ctype = #{record.tbmCtype,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_message
+    set tbm_id = #{record.tbmId,jdbcType=INTEGER},
+      tbm_host = #{record.tbmHost,jdbcType=SMALLINT},
+      tbm_title = #{record.tbmTitle,jdbcType=VARCHAR},
+      tbm_rentcarorder = #{record.tbmRentcarorder,jdbcType=VARCHAR},
+      tbm_head = #{record.tbmHead,jdbcType=VARCHAR},
+      tbm_cdorder = #{record.tbmCdorder,jdbcType=VARCHAR},
+      tbm_cdmoney = #{record.tbmCdmoney,jdbcType=DOUBLE},
+      tbm_content = #{record.tbmContent,jdbcType=VARCHAR},
+      tbm_flag = #{record.tbmFlag,jdbcType=VARCHAR},
+      tbm_link = #{record.tbmLink,jdbcType=VARCHAR},
+      tbm_operator = #{record.tbmOperator,jdbcType=INTEGER},
+      tbm_member = #{record.tbmMember,jdbcType=INTEGER},
+      tbm_rcv_time = #{record.tbmRcvTime,jdbcType=TIMESTAMP},
+      tbm_snd_time = #{record.tbmSndTime,jdbcType=TIMESTAMP},
+      tbm_add_time = #{record.tbmAddTime,jdbcType=TIMESTAMP},
+      tbm_update_time = #{record.tbmUpdateTime,jdbcType=TIMESTAMP},
+      tbm_status = #{record.tbmStatus,jdbcType=TINYINT},
+      tbm_relationmessage = #{record.tbmRelationmessage,jdbcType=BIGINT},
+      tbm_operatorname = #{record.tbmOperatorname,jdbcType=VARCHAR},
+      tbm_type = #{record.tbmType,jdbcType=TINYINT},
+      tbm_category = #{record.tbmCategory,jdbcType=SMALLINT},
+      tbm_ctype = #{record.tbmCtype,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Message" >
+    update tb_message
+    <set >
+      <if test="tbmHost != null" >
+        tbm_host = #{tbmHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmTitle != null" >
+        tbm_title = #{tbmTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmRentcarorder != null" >
+        tbm_rentcarorder = #{tbmRentcarorder,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmHead != null" >
+        tbm_head = #{tbmHead,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCdorder != null" >
+        tbm_cdorder = #{tbmCdorder,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmCdmoney != null" >
+        tbm_cdmoney = #{tbmCdmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbmContent != null" >
+        tbm_content = #{tbmContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmFlag != null" >
+        tbm_flag = #{tbmFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmLink != null" >
+        tbm_link = #{tbmLink,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmOperator != null" >
+        tbm_operator = #{tbmOperator,jdbcType=INTEGER},
+      </if>
+      <if test="tbmMember != null" >
+        tbm_member = #{tbmMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbmRcvTime != null" >
+        tbm_rcv_time = #{tbmRcvTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmSndTime != null" >
+        tbm_snd_time = #{tbmSndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmAddTime != null" >
+        tbm_add_time = #{tbmAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmUpdateTime != null" >
+        tbm_update_time = #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbmStatus != null" >
+        tbm_status = #{tbmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbmRelationmessage != null" >
+        tbm_relationmessage = #{tbmRelationmessage,jdbcType=BIGINT},
+      </if>
+      <if test="tbmOperatorname != null" >
+        tbm_operatorname = #{tbmOperatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="tbmType != null" >
+        tbm_type = #{tbmType,jdbcType=TINYINT},
+      </if>
+      <if test="tbmCategory != null" >
+        tbm_category = #{tbmCategory,jdbcType=SMALLINT},
+      </if>
+      <if test="tbmCtype != null" >
+        tbm_ctype = #{tbmCtype,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Message" >
+    update tb_message
+    set tbm_host = #{tbmHost,jdbcType=SMALLINT},
+      tbm_title = #{tbmTitle,jdbcType=VARCHAR},
+      tbm_rentcarorder = #{tbmRentcarorder,jdbcType=VARCHAR},
+      tbm_head = #{tbmHead,jdbcType=VARCHAR},
+      tbm_cdorder = #{tbmCdorder,jdbcType=VARCHAR},
+      tbm_cdmoney = #{tbmCdmoney,jdbcType=DOUBLE},
+      tbm_content = #{tbmContent,jdbcType=VARCHAR},
+      tbm_flag = #{tbmFlag,jdbcType=VARCHAR},
+      tbm_link = #{tbmLink,jdbcType=VARCHAR},
+      tbm_operator = #{tbmOperator,jdbcType=INTEGER},
+      tbm_member = #{tbmMember,jdbcType=INTEGER},
+      tbm_rcv_time = #{tbmRcvTime,jdbcType=TIMESTAMP},
+      tbm_snd_time = #{tbmSndTime,jdbcType=TIMESTAMP},
+      tbm_add_time = #{tbmAddTime,jdbcType=TIMESTAMP},
+      tbm_update_time = #{tbmUpdateTime,jdbcType=TIMESTAMP},
+      tbm_status = #{tbmStatus,jdbcType=TINYINT},
+      tbm_relationmessage = #{tbmRelationmessage,jdbcType=BIGINT},
+      tbm_operatorname = #{tbmOperatorname,jdbcType=VARCHAR},
+      tbm_type = #{tbmType,jdbcType=TINYINT},
+      tbm_category = #{tbmCategory,jdbcType=SMALLINT},
+      tbm_ctype = #{tbmCtype,jdbcType=SMALLINT}
+    where tbm_id = #{tbmId,jdbcType=INTEGER}
+  </update>
+</mapper>

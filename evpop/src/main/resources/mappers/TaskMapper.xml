@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.TaskMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Task" >
+    <id column="tbt_id" property="tbtId" jdbcType="BIGINT" />
+    <result column="tbt_host" property="tbtHost" jdbcType="BIGINT" />
+    <result column="tbt_type" property="tbtType" jdbcType="TINYINT" />
+    <result column="tbt_car" property="tbtCar" jdbcType="BIGINT" />
+    <result column="tbt_user" property="tbtUser" jdbcType="INTEGER" />
+    <result column="tbt_area_task" property="tbtAreaTask" jdbcType="BIGINT" />
+    <result column="tbt_area_from" property="tbtAreaFrom" jdbcType="BIGINT" />
+    <result column="tbt_outlets_from" property="tbtOutletsFrom" jdbcType="BIGINT" />
+    <result column="tbt_area_to" property="tbtAreaTo" jdbcType="BIGINT" />
+    <result column="tbt_outlets_to" property="tbtOutletsTo" jdbcType="BIGINT" />
+    <result column="tbt_remark" property="tbtRemark" jdbcType="VARCHAR" />
+    <result column="tbt_images" property="tbtImages" jdbcType="VARCHAR" />
+    <result column="tbt_channel" property="tbtChannel" jdbcType="TINYINT" />
+    <result column="tbt_recv_time" property="tbtRecvTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_end_time" property="tbtEndTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_update_time" property="tbtUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_add_time" property="tbtAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbt_log" property="tbtLog" jdbcType="VARCHAR" />
+    <result column="tbt_status" property="tbtStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbt_id, tbt_host, tbt_type, tbt_car, tbt_user, tbt_area_task, tbt_area_from, tbt_outlets_from, 
+    tbt_area_to, tbt_outlets_to, tbt_remark, tbt_images, tbt_channel, tbt_recv_time, 
+    tbt_end_time, tbt_update_time, tbt_add_time, tbt_log, tbt_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.TaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_task
+    where tbt_id = #{tbtId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_task
+    where tbt_id = #{tbtId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Task" >
+    insert into tb_task (tbt_id, tbt_host, tbt_type, 
+      tbt_car, tbt_user, tbt_area_task, 
+      tbt_area_from, tbt_outlets_from, tbt_area_to, 
+      tbt_outlets_to, tbt_remark, tbt_images, 
+      tbt_channel, tbt_recv_time, tbt_end_time, 
+      tbt_update_time, tbt_add_time, tbt_log, 
+      tbt_status)
+    values (#{tbtId,jdbcType=BIGINT}, #{tbtHost,jdbcType=BIGINT}, #{tbtType,jdbcType=TINYINT}, 
+      #{tbtCar,jdbcType=BIGINT}, #{tbtUser,jdbcType=INTEGER}, #{tbtAreaTask,jdbcType=BIGINT}, 
+      #{tbtAreaFrom,jdbcType=BIGINT}, #{tbtOutletsFrom,jdbcType=BIGINT}, #{tbtAreaTo,jdbcType=BIGINT}, 
+      #{tbtOutletsTo,jdbcType=BIGINT}, #{tbtRemark,jdbcType=VARCHAR}, #{tbtImages,jdbcType=VARCHAR}, 
+      #{tbtChannel,jdbcType=TINYINT}, #{tbtRecvTime,jdbcType=TIMESTAMP}, #{tbtEndTime,jdbcType=TIMESTAMP}, 
+      #{tbtUpdateTime,jdbcType=TIMESTAMP}, #{tbtAddTime,jdbcType=TIMESTAMP}, #{tbtLog,jdbcType=VARCHAR}, 
+      #{tbtStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Task" >
+    insert into tb_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbtId != null" >
+        tbt_id,
+      </if>
+      <if test="tbtHost != null" >
+        tbt_host,
+      </if>
+      <if test="tbtType != null" >
+        tbt_type,
+      </if>
+      <if test="tbtCar != null" >
+        tbt_car,
+      </if>
+      <if test="tbtUser != null" >
+        tbt_user,
+      </if>
+      <if test="tbtAreaTask != null" >
+        tbt_area_task,
+      </if>
+      <if test="tbtAreaFrom != null" >
+        tbt_area_from,
+      </if>
+      <if test="tbtOutletsFrom != null" >
+        tbt_outlets_from,
+      </if>
+      <if test="tbtAreaTo != null" >
+        tbt_area_to,
+      </if>
+      <if test="tbtOutletsTo != null" >
+        tbt_outlets_to,
+      </if>
+      <if test="tbtRemark != null" >
+        tbt_remark,
+      </if>
+      <if test="tbtImages != null" >
+        tbt_images,
+      </if>
+      <if test="tbtChannel != null" >
+        tbt_channel,
+      </if>
+      <if test="tbtRecvTime != null" >
+        tbt_recv_time,
+      </if>
+      <if test="tbtEndTime != null" >
+        tbt_end_time,
+      </if>
+      <if test="tbtUpdateTime != null" >
+        tbt_update_time,
+      </if>
+      <if test="tbtAddTime != null" >
+        tbt_add_time,
+      </if>
+      <if test="tbtLog != null" >
+        tbt_log,
+      </if>
+      <if test="tbtStatus != null" >
+        tbt_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbtId != null" >
+        #{tbtId,jdbcType=BIGINT},
+      </if>
+      <if test="tbtHost != null" >
+        #{tbtHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbtType != null" >
+        #{tbtType,jdbcType=TINYINT},
+      </if>
+      <if test="tbtCar != null" >
+        #{tbtCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbtUser != null" >
+        #{tbtUser,jdbcType=INTEGER},
+      </if>
+      <if test="tbtAreaTask != null" >
+        #{tbtAreaTask,jdbcType=BIGINT},
+      </if>
+      <if test="tbtAreaFrom != null" >
+        #{tbtAreaFrom,jdbcType=BIGINT},
+      </if>
+      <if test="tbtOutletsFrom != null" >
+        #{tbtOutletsFrom,jdbcType=BIGINT},
+      </if>
+      <if test="tbtAreaTo != null" >
+        #{tbtAreaTo,jdbcType=BIGINT},
+      </if>
+      <if test="tbtOutletsTo != null" >
+        #{tbtOutletsTo,jdbcType=BIGINT},
+      </if>
+      <if test="tbtRemark != null" >
+        #{tbtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtImages != null" >
+        #{tbtImages,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtChannel != null" >
+        #{tbtChannel,jdbcType=TINYINT},
+      </if>
+      <if test="tbtRecvTime != null" >
+        #{tbtRecvTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtEndTime != null" >
+        #{tbtEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtUpdateTime != null" >
+        #{tbtUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtAddTime != null" >
+        #{tbtAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtLog != null" >
+        #{tbtLog,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtStatus != null" >
+        #{tbtStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.TaskExample" resultType="java.lang.Integer" >
+    select count(*) from tb_task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_task
+    <set >
+      <if test="record.tbtId != null" >
+        tbt_id = #{record.tbtId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtHost != null" >
+        tbt_host = #{record.tbtHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtType != null" >
+        tbt_type = #{record.tbtType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbtCar != null" >
+        tbt_car = #{record.tbtCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtUser != null" >
+        tbt_user = #{record.tbtUser,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbtAreaTask != null" >
+        tbt_area_task = #{record.tbtAreaTask,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtAreaFrom != null" >
+        tbt_area_from = #{record.tbtAreaFrom,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtOutletsFrom != null" >
+        tbt_outlets_from = #{record.tbtOutletsFrom,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtAreaTo != null" >
+        tbt_area_to = #{record.tbtAreaTo,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtOutletsTo != null" >
+        tbt_outlets_to = #{record.tbtOutletsTo,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbtRemark != null" >
+        tbt_remark = #{record.tbtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtImages != null" >
+        tbt_images = #{record.tbtImages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtChannel != null" >
+        tbt_channel = #{record.tbtChannel,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbtRecvTime != null" >
+        tbt_recv_time = #{record.tbtRecvTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtEndTime != null" >
+        tbt_end_time = #{record.tbtEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtUpdateTime != null" >
+        tbt_update_time = #{record.tbtUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtAddTime != null" >
+        tbt_add_time = #{record.tbtAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbtLog != null" >
+        tbt_log = #{record.tbtLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbtStatus != null" >
+        tbt_status = #{record.tbtStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_task
+    set tbt_id = #{record.tbtId,jdbcType=BIGINT},
+      tbt_host = #{record.tbtHost,jdbcType=BIGINT},
+      tbt_type = #{record.tbtType,jdbcType=TINYINT},
+      tbt_car = #{record.tbtCar,jdbcType=BIGINT},
+      tbt_user = #{record.tbtUser,jdbcType=INTEGER},
+      tbt_area_task = #{record.tbtAreaTask,jdbcType=BIGINT},
+      tbt_area_from = #{record.tbtAreaFrom,jdbcType=BIGINT},
+      tbt_outlets_from = #{record.tbtOutletsFrom,jdbcType=BIGINT},
+      tbt_area_to = #{record.tbtAreaTo,jdbcType=BIGINT},
+      tbt_outlets_to = #{record.tbtOutletsTo,jdbcType=BIGINT},
+      tbt_remark = #{record.tbtRemark,jdbcType=VARCHAR},
+      tbt_images = #{record.tbtImages,jdbcType=VARCHAR},
+      tbt_channel = #{record.tbtChannel,jdbcType=TINYINT},
+      tbt_recv_time = #{record.tbtRecvTime,jdbcType=TIMESTAMP},
+      tbt_end_time = #{record.tbtEndTime,jdbcType=TIMESTAMP},
+      tbt_update_time = #{record.tbtUpdateTime,jdbcType=TIMESTAMP},
+      tbt_add_time = #{record.tbtAddTime,jdbcType=TIMESTAMP},
+      tbt_log = #{record.tbtLog,jdbcType=VARCHAR},
+      tbt_status = #{record.tbtStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Task" >
+    update tb_task
+    <set >
+      <if test="tbtHost != null" >
+        tbt_host = #{tbtHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbtType != null" >
+        tbt_type = #{tbtType,jdbcType=TINYINT},
+      </if>
+      <if test="tbtCar != null" >
+        tbt_car = #{tbtCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbtUser != null" >
+        tbt_user = #{tbtUser,jdbcType=INTEGER},
+      </if>
+      <if test="tbtAreaTask != null" >
+        tbt_area_task = #{tbtAreaTask,jdbcType=BIGINT},
+      </if>
+      <if test="tbtAreaFrom != null" >
+        tbt_area_from = #{tbtAreaFrom,jdbcType=BIGINT},
+      </if>
+      <if test="tbtOutletsFrom != null" >
+        tbt_outlets_from = #{tbtOutletsFrom,jdbcType=BIGINT},
+      </if>
+      <if test="tbtAreaTo != null" >
+        tbt_area_to = #{tbtAreaTo,jdbcType=BIGINT},
+      </if>
+      <if test="tbtOutletsTo != null" >
+        tbt_outlets_to = #{tbtOutletsTo,jdbcType=BIGINT},
+      </if>
+      <if test="tbtRemark != null" >
+        tbt_remark = #{tbtRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtImages != null" >
+        tbt_images = #{tbtImages,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtChannel != null" >
+        tbt_channel = #{tbtChannel,jdbcType=TINYINT},
+      </if>
+      <if test="tbtRecvTime != null" >
+        tbt_recv_time = #{tbtRecvTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtEndTime != null" >
+        tbt_end_time = #{tbtEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtUpdateTime != null" >
+        tbt_update_time = #{tbtUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtAddTime != null" >
+        tbt_add_time = #{tbtAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbtLog != null" >
+        tbt_log = #{tbtLog,jdbcType=VARCHAR},
+      </if>
+      <if test="tbtStatus != null" >
+        tbt_status = #{tbtStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbt_id = #{tbtId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Task" >
+    update tb_task
+    set tbt_host = #{tbtHost,jdbcType=BIGINT},
+      tbt_type = #{tbtType,jdbcType=TINYINT},
+      tbt_car = #{tbtCar,jdbcType=BIGINT},
+      tbt_user = #{tbtUser,jdbcType=INTEGER},
+      tbt_area_task = #{tbtAreaTask,jdbcType=BIGINT},
+      tbt_area_from = #{tbtAreaFrom,jdbcType=BIGINT},
+      tbt_outlets_from = #{tbtOutletsFrom,jdbcType=BIGINT},
+      tbt_area_to = #{tbtAreaTo,jdbcType=BIGINT},
+      tbt_outlets_to = #{tbtOutletsTo,jdbcType=BIGINT},
+      tbt_remark = #{tbtRemark,jdbcType=VARCHAR},
+      tbt_images = #{tbtImages,jdbcType=VARCHAR},
+      tbt_channel = #{tbtChannel,jdbcType=TINYINT},
+      tbt_recv_time = #{tbtRecvTime,jdbcType=TIMESTAMP},
+      tbt_end_time = #{tbtEndTime,jdbcType=TIMESTAMP},
+      tbt_update_time = #{tbtUpdateTime,jdbcType=TIMESTAMP},
+      tbt_add_time = #{tbtAddTime,jdbcType=TIMESTAMP},
+      tbt_log = #{tbtLog,jdbcType=VARCHAR},
+      tbt_status = #{tbtStatus,jdbcType=TINYINT}
+    where tbt_id = #{tbtId,jdbcType=BIGINT}
+  </update>
+</mapper>

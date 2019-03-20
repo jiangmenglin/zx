@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.CarLineMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.CarLine" >
+    <id column="tbcl_id" property="tbclId" jdbcType="BIGINT" />
+    <result column="tbcl_host" property="tbclHost" jdbcType="BIGINT" />
+    <result column="tbcl_car" property="tbclCar" jdbcType="BIGINT" />
+    <result column="tbcl_month" property="tbclMonth" jdbcType="VARCHAR" />
+    <result column="tbcl_d_line" property="tbclDLine" jdbcType="VARCHAR" />
+    <result column="tbcl_h_line" property="tbclHLine" jdbcType="VARCHAR" />
+    <result column="tbcl_day_s" property="tbclDayS" jdbcType="INTEGER" />
+    <result column="tbcl_hour_s" property="tbclHourS" jdbcType="INTEGER" />
+    <result column="tbcl_status" property="tbclStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbcl_id, tbcl_host, tbcl_car, tbcl_month, tbcl_d_line, tbcl_h_line, tbcl_day_s, tbcl_hour_s, 
+    tbcl_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.CarLineExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_car_line
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_car_line
+    where tbcl_id = #{tbclId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_car_line
+    where tbcl_id = #{tbclId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.CarLine" >
+    insert into tb_car_line (tbcl_id, tbcl_host, tbcl_car, 
+      tbcl_month, tbcl_d_line, tbcl_h_line, 
+      tbcl_day_s, tbcl_hour_s, tbcl_status
+      )
+    values (#{tbclId,jdbcType=BIGINT}, #{tbclHost,jdbcType=BIGINT}, #{tbclCar,jdbcType=BIGINT}, 
+      #{tbclMonth,jdbcType=VARCHAR}, #{tbclDLine,jdbcType=VARCHAR}, #{tbclHLine,jdbcType=VARCHAR}, 
+      #{tbclDayS,jdbcType=INTEGER}, #{tbclHourS,jdbcType=INTEGER}, #{tbclStatus,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.CarLine" >
+    insert into tb_car_line
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbclId != null" >
+        tbcl_id,
+      </if>
+      <if test="tbclHost != null" >
+        tbcl_host,
+      </if>
+      <if test="tbclCar != null" >
+        tbcl_car,
+      </if>
+      <if test="tbclMonth != null" >
+        tbcl_month,
+      </if>
+      <if test="tbclDLine != null" >
+        tbcl_d_line,
+      </if>
+      <if test="tbclHLine != null" >
+        tbcl_h_line,
+      </if>
+      <if test="tbclDayS != null" >
+        tbcl_day_s,
+      </if>
+      <if test="tbclHourS != null" >
+        tbcl_hour_s,
+      </if>
+      <if test="tbclStatus != null" >
+        tbcl_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbclId != null" >
+        #{tbclId,jdbcType=BIGINT},
+      </if>
+      <if test="tbclHost != null" >
+        #{tbclHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbclCar != null" >
+        #{tbclCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbclMonth != null" >
+        #{tbclMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="tbclDLine != null" >
+        #{tbclDLine,jdbcType=VARCHAR},
+      </if>
+      <if test="tbclHLine != null" >
+        #{tbclHLine,jdbcType=VARCHAR},
+      </if>
+      <if test="tbclDayS != null" >
+        #{tbclDayS,jdbcType=INTEGER},
+      </if>
+      <if test="tbclHourS != null" >
+        #{tbclHourS,jdbcType=INTEGER},
+      </if>
+      <if test="tbclStatus != null" >
+        #{tbclStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.CarLineExample" resultType="java.lang.Integer" >
+    select count(*) from tb_car_line
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_car_line
+    <set >
+      <if test="record.tbclId != null" >
+        tbcl_id = #{record.tbclId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbclHost != null" >
+        tbcl_host = #{record.tbclHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbclCar != null" >
+        tbcl_car = #{record.tbclCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbclMonth != null" >
+        tbcl_month = #{record.tbclMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbclDLine != null" >
+        tbcl_d_line = #{record.tbclDLine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbclHLine != null" >
+        tbcl_h_line = #{record.tbclHLine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbclDayS != null" >
+        tbcl_day_s = #{record.tbclDayS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbclHourS != null" >
+        tbcl_hour_s = #{record.tbclHourS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbclStatus != null" >
+        tbcl_status = #{record.tbclStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_car_line
+    set tbcl_id = #{record.tbclId,jdbcType=BIGINT},
+      tbcl_host = #{record.tbclHost,jdbcType=BIGINT},
+      tbcl_car = #{record.tbclCar,jdbcType=BIGINT},
+      tbcl_month = #{record.tbclMonth,jdbcType=VARCHAR},
+      tbcl_d_line = #{record.tbclDLine,jdbcType=VARCHAR},
+      tbcl_h_line = #{record.tbclHLine,jdbcType=VARCHAR},
+      tbcl_day_s = #{record.tbclDayS,jdbcType=INTEGER},
+      tbcl_hour_s = #{record.tbclHourS,jdbcType=INTEGER},
+      tbcl_status = #{record.tbclStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.CarLine" >
+    update tb_car_line
+    <set >
+      <if test="tbclHost != null" >
+        tbcl_host = #{tbclHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbclCar != null" >
+        tbcl_car = #{tbclCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbclMonth != null" >
+        tbcl_month = #{tbclMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="tbclDLine != null" >
+        tbcl_d_line = #{tbclDLine,jdbcType=VARCHAR},
+      </if>
+      <if test="tbclHLine != null" >
+        tbcl_h_line = #{tbclHLine,jdbcType=VARCHAR},
+      </if>
+      <if test="tbclDayS != null" >
+        tbcl_day_s = #{tbclDayS,jdbcType=INTEGER},
+      </if>
+      <if test="tbclHourS != null" >
+        tbcl_hour_s = #{tbclHourS,jdbcType=INTEGER},
+      </if>
+      <if test="tbclStatus != null" >
+        tbcl_status = #{tbclStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbcl_id = #{tbclId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.CarLine" >
+    update tb_car_line
+    set tbcl_host = #{tbclHost,jdbcType=BIGINT},
+      tbcl_car = #{tbclCar,jdbcType=BIGINT},
+      tbcl_month = #{tbclMonth,jdbcType=VARCHAR},
+      tbcl_d_line = #{tbclDLine,jdbcType=VARCHAR},
+      tbcl_h_line = #{tbclHLine,jdbcType=VARCHAR},
+      tbcl_day_s = #{tbclDayS,jdbcType=INTEGER},
+      tbcl_hour_s = #{tbclHourS,jdbcType=INTEGER},
+      tbcl_status = #{tbclStatus,jdbcType=SMALLINT}
+    where tbcl_id = #{tbclId,jdbcType=BIGINT}
+  </update>
+</mapper>

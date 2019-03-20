@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.UserFeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.UserFeedback" >
+    <id column="tbuf_id" property="tbufId" jdbcType="BIGINT" />
+    <result column="tbuf_back_type" property="tbufBackType" jdbcType="VARCHAR" />
+    <result column="tbuf_back_content" property="tbufBackContent" jdbcType="VARCHAR" />
+    <result column="tbuf_deal_detail" property="tbufDealDetail" jdbcType="VARCHAR" />
+    <result column="tbuf_member" property="tbufMember" jdbcType="BIGINT" />
+    <result column="tbuf_add_time" property="tbufAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbuf_update_time" property="tbufUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbuf_status" property="tbufStatus" jdbcType="TINYINT" />
+    <result column="tbuf_mobile_platform" property="tbufMobilePlatform" jdbcType="VARCHAR" />
+    <result column="tbuf_system_version" property="tbufSystemVersion" jdbcType="VARCHAR" />
+    <result column="tbuf_app_version" property="tbufAppVersion" jdbcType="VARCHAR" />
+    <result column="tbuf_source" property="tbufSource" jdbcType="TINYINT" />
+    <result column="tbuf_hardwareAddress" property="tbufHardwareaddress" jdbcType="VARCHAR" />
+    <result column="tbuf_uic" property="tbufUic" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbuf_id, tbuf_back_type, tbuf_back_content, tbuf_deal_detail, tbuf_member, tbuf_add_time, 
+    tbuf_update_time, tbuf_status, tbuf_mobile_platform, tbuf_system_version, tbuf_app_version, 
+    tbuf_source, tbuf_hardwareAddress, tbuf_uic
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.UserFeedbackExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_user_feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user_feedback
+    where tbuf_id = #{tbufId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_user_feedback
+    where tbuf_id = #{tbufId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.UserFeedback" >
+    insert into tb_user_feedback (tbuf_id, tbuf_back_type, tbuf_back_content, 
+      tbuf_deal_detail, tbuf_member, tbuf_add_time, 
+      tbuf_update_time, tbuf_status, tbuf_mobile_platform, 
+      tbuf_system_version, tbuf_app_version, tbuf_source, 
+      tbuf_hardwareAddress, tbuf_uic)
+    values (#{tbufId,jdbcType=BIGINT}, #{tbufBackType,jdbcType=VARCHAR}, #{tbufBackContent,jdbcType=VARCHAR}, 
+      #{tbufDealDetail,jdbcType=VARCHAR}, #{tbufMember,jdbcType=BIGINT}, #{tbufAddTime,jdbcType=TIMESTAMP}, 
+      #{tbufUpdateTime,jdbcType=TIMESTAMP}, #{tbufStatus,jdbcType=TINYINT}, #{tbufMobilePlatform,jdbcType=VARCHAR}, 
+      #{tbufSystemVersion,jdbcType=VARCHAR}, #{tbufAppVersion,jdbcType=VARCHAR}, #{tbufSource,jdbcType=TINYINT}, 
+      #{tbufHardwareaddress,jdbcType=VARCHAR}, #{tbufUic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.UserFeedback" >
+    insert into tb_user_feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbufId != null" >
+        tbuf_id,
+      </if>
+      <if test="tbufBackType != null" >
+        tbuf_back_type,
+      </if>
+      <if test="tbufBackContent != null" >
+        tbuf_back_content,
+      </if>
+      <if test="tbufDealDetail != null" >
+        tbuf_deal_detail,
+      </if>
+      <if test="tbufMember != null" >
+        tbuf_member,
+      </if>
+      <if test="tbufAddTime != null" >
+        tbuf_add_time,
+      </if>
+      <if test="tbufUpdateTime != null" >
+        tbuf_update_time,
+      </if>
+      <if test="tbufStatus != null" >
+        tbuf_status,
+      </if>
+      <if test="tbufMobilePlatform != null" >
+        tbuf_mobile_platform,
+      </if>
+      <if test="tbufSystemVersion != null" >
+        tbuf_system_version,
+      </if>
+      <if test="tbufAppVersion != null" >
+        tbuf_app_version,
+      </if>
+      <if test="tbufSource != null" >
+        tbuf_source,
+      </if>
+      <if test="tbufHardwareaddress != null" >
+        tbuf_hardwareAddress,
+      </if>
+      <if test="tbufUic != null" >
+        tbuf_uic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbufId != null" >
+        #{tbufId,jdbcType=BIGINT},
+      </if>
+      <if test="tbufBackType != null" >
+        #{tbufBackType,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufBackContent != null" >
+        #{tbufBackContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufDealDetail != null" >
+        #{tbufDealDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufMember != null" >
+        #{tbufMember,jdbcType=BIGINT},
+      </if>
+      <if test="tbufAddTime != null" >
+        #{tbufAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbufUpdateTime != null" >
+        #{tbufUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbufStatus != null" >
+        #{tbufStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbufMobilePlatform != null" >
+        #{tbufMobilePlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufSystemVersion != null" >
+        #{tbufSystemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufAppVersion != null" >
+        #{tbufAppVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufSource != null" >
+        #{tbufSource,jdbcType=TINYINT},
+      </if>
+      <if test="tbufHardwareaddress != null" >
+        #{tbufHardwareaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufUic != null" >
+        #{tbufUic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.UserFeedbackExample" resultType="java.lang.Integer" >
+    select count(*) from tb_user_feedback
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_user_feedback
+    <set >
+      <if test="record.tbufId != null" >
+        tbuf_id = #{record.tbufId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbufBackType != null" >
+        tbuf_back_type = #{record.tbufBackType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbufBackContent != null" >
+        tbuf_back_content = #{record.tbufBackContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbufDealDetail != null" >
+        tbuf_deal_detail = #{record.tbufDealDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbufMember != null" >
+        tbuf_member = #{record.tbufMember,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbufAddTime != null" >
+        tbuf_add_time = #{record.tbufAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbufUpdateTime != null" >
+        tbuf_update_time = #{record.tbufUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbufStatus != null" >
+        tbuf_status = #{record.tbufStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbufMobilePlatform != null" >
+        tbuf_mobile_platform = #{record.tbufMobilePlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbufSystemVersion != null" >
+        tbuf_system_version = #{record.tbufSystemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbufAppVersion != null" >
+        tbuf_app_version = #{record.tbufAppVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbufSource != null" >
+        tbuf_source = #{record.tbufSource,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbufHardwareaddress != null" >
+        tbuf_hardwareAddress = #{record.tbufHardwareaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbufUic != null" >
+        tbuf_uic = #{record.tbufUic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_user_feedback
+    set tbuf_id = #{record.tbufId,jdbcType=BIGINT},
+      tbuf_back_type = #{record.tbufBackType,jdbcType=VARCHAR},
+      tbuf_back_content = #{record.tbufBackContent,jdbcType=VARCHAR},
+      tbuf_deal_detail = #{record.tbufDealDetail,jdbcType=VARCHAR},
+      tbuf_member = #{record.tbufMember,jdbcType=BIGINT},
+      tbuf_add_time = #{record.tbufAddTime,jdbcType=TIMESTAMP},
+      tbuf_update_time = #{record.tbufUpdateTime,jdbcType=TIMESTAMP},
+      tbuf_status = #{record.tbufStatus,jdbcType=TINYINT},
+      tbuf_mobile_platform = #{record.tbufMobilePlatform,jdbcType=VARCHAR},
+      tbuf_system_version = #{record.tbufSystemVersion,jdbcType=VARCHAR},
+      tbuf_app_version = #{record.tbufAppVersion,jdbcType=VARCHAR},
+      tbuf_source = #{record.tbufSource,jdbcType=TINYINT},
+      tbuf_hardwareAddress = #{record.tbufHardwareaddress,jdbcType=VARCHAR},
+      tbuf_uic = #{record.tbufUic,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.UserFeedback" >
+    update tb_user_feedback
+    <set >
+      <if test="tbufBackType != null" >
+        tbuf_back_type = #{tbufBackType,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufBackContent != null" >
+        tbuf_back_content = #{tbufBackContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufDealDetail != null" >
+        tbuf_deal_detail = #{tbufDealDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufMember != null" >
+        tbuf_member = #{tbufMember,jdbcType=BIGINT},
+      </if>
+      <if test="tbufAddTime != null" >
+        tbuf_add_time = #{tbufAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbufUpdateTime != null" >
+        tbuf_update_time = #{tbufUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbufStatus != null" >
+        tbuf_status = #{tbufStatus,jdbcType=TINYINT},
+      </if>
+      <if test="tbufMobilePlatform != null" >
+        tbuf_mobile_platform = #{tbufMobilePlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufSystemVersion != null" >
+        tbuf_system_version = #{tbufSystemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufAppVersion != null" >
+        tbuf_app_version = #{tbufAppVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufSource != null" >
+        tbuf_source = #{tbufSource,jdbcType=TINYINT},
+      </if>
+      <if test="tbufHardwareaddress != null" >
+        tbuf_hardwareAddress = #{tbufHardwareaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbufUic != null" >
+        tbuf_uic = #{tbufUic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tbuf_id = #{tbufId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.UserFeedback" >
+    update tb_user_feedback
+    set tbuf_back_type = #{tbufBackType,jdbcType=VARCHAR},
+      tbuf_back_content = #{tbufBackContent,jdbcType=VARCHAR},
+      tbuf_deal_detail = #{tbufDealDetail,jdbcType=VARCHAR},
+      tbuf_member = #{tbufMember,jdbcType=BIGINT},
+      tbuf_add_time = #{tbufAddTime,jdbcType=TIMESTAMP},
+      tbuf_update_time = #{tbufUpdateTime,jdbcType=TIMESTAMP},
+      tbuf_status = #{tbufStatus,jdbcType=TINYINT},
+      tbuf_mobile_platform = #{tbufMobilePlatform,jdbcType=VARCHAR},
+      tbuf_system_version = #{tbufSystemVersion,jdbcType=VARCHAR},
+      tbuf_app_version = #{tbufAppVersion,jdbcType=VARCHAR},
+      tbuf_source = #{tbufSource,jdbcType=TINYINT},
+      tbuf_hardwareAddress = #{tbufHardwareaddress,jdbcType=VARCHAR},
+      tbuf_uic = #{tbufUic,jdbcType=VARCHAR}
+    where tbuf_id = #{tbufId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LfeeTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.LfeeType" >
+    <id column="tblt_id" property="tbltId" jdbcType="BIGINT" />
+    <result column="tblt_host" property="tbltHost" jdbcType="BIGINT" />
+    <result column="tblt_name" property="tbltName" jdbcType="VARCHAR" />
+    <result column="tblt_goods" property="tbltGoods" jdbcType="VARCHAR" />
+    <result column="tblt_models" property="tbltModels" jdbcType="VARCHAR" />
+    <result column="tblt_on" property="tbltOn" jdbcType="DOUBLE" />
+    <result column="tblt_off" property="tbltOff" jdbcType="DOUBLE" />
+    <result column="tblt_update_time" property="tbltUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tblt_add_time" property="tbltAddTime" jdbcType="TIMESTAMP" />
+    <result column="tblt_status" property="tbltStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tblt_id, tblt_host, tblt_name, tblt_goods, tblt_models, tblt_on, tblt_off, tblt_update_time, 
+    tblt_add_time, tblt_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LfeeTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_lfee_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_lfee_type
+    where tblt_id = #{tbltId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_lfee_type
+    where tblt_id = #{tbltId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.LfeeType" >
+    insert into tb_lfee_type (tblt_id, tblt_host, tblt_name, 
+      tblt_goods, tblt_models, tblt_on, 
+      tblt_off, tblt_update_time, tblt_add_time, 
+      tblt_status)
+    values (#{tbltId,jdbcType=BIGINT}, #{tbltHost,jdbcType=BIGINT}, #{tbltName,jdbcType=VARCHAR}, 
+      #{tbltGoods,jdbcType=VARCHAR}, #{tbltModels,jdbcType=VARCHAR}, #{tbltOn,jdbcType=DOUBLE}, 
+      #{tbltOff,jdbcType=DOUBLE}, #{tbltUpdateTime,jdbcType=TIMESTAMP}, #{tbltAddTime,jdbcType=TIMESTAMP}, 
+      #{tbltStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.LfeeType" >
+    insert into tb_lfee_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbltId != null" >
+        tblt_id,
+      </if>
+      <if test="tbltHost != null" >
+        tblt_host,
+      </if>
+      <if test="tbltName != null" >
+        tblt_name,
+      </if>
+      <if test="tbltGoods != null" >
+        tblt_goods,
+      </if>
+      <if test="tbltModels != null" >
+        tblt_models,
+      </if>
+      <if test="tbltOn != null" >
+        tblt_on,
+      </if>
+      <if test="tbltOff != null" >
+        tblt_off,
+      </if>
+      <if test="tbltUpdateTime != null" >
+        tblt_update_time,
+      </if>
+      <if test="tbltAddTime != null" >
+        tblt_add_time,
+      </if>
+      <if test="tbltStatus != null" >
+        tblt_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbltId != null" >
+        #{tbltId,jdbcType=BIGINT},
+      </if>
+      <if test="tbltHost != null" >
+        #{tbltHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbltName != null" >
+        #{tbltName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbltGoods != null" >
+        #{tbltGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="tbltModels != null" >
+        #{tbltModels,jdbcType=VARCHAR},
+      </if>
+      <if test="tbltOn != null" >
+        #{tbltOn,jdbcType=DOUBLE},
+      </if>
+      <if test="tbltOff != null" >
+        #{tbltOff,jdbcType=DOUBLE},
+      </if>
+      <if test="tbltUpdateTime != null" >
+        #{tbltUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbltAddTime != null" >
+        #{tbltAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbltStatus != null" >
+        #{tbltStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LfeeTypeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_lfee_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_lfee_type
+    <set >
+      <if test="record.tbltId != null" >
+        tblt_id = #{record.tbltId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbltHost != null" >
+        tblt_host = #{record.tbltHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbltName != null" >
+        tblt_name = #{record.tbltName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbltGoods != null" >
+        tblt_goods = #{record.tbltGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbltModels != null" >
+        tblt_models = #{record.tbltModels,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbltOn != null" >
+        tblt_on = #{record.tbltOn,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbltOff != null" >
+        tblt_off = #{record.tbltOff,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbltUpdateTime != null" >
+        tblt_update_time = #{record.tbltUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbltAddTime != null" >
+        tblt_add_time = #{record.tbltAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbltStatus != null" >
+        tblt_status = #{record.tbltStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_lfee_type
+    set tblt_id = #{record.tbltId,jdbcType=BIGINT},
+      tblt_host = #{record.tbltHost,jdbcType=BIGINT},
+      tblt_name = #{record.tbltName,jdbcType=VARCHAR},
+      tblt_goods = #{record.tbltGoods,jdbcType=VARCHAR},
+      tblt_models = #{record.tbltModels,jdbcType=VARCHAR},
+      tblt_on = #{record.tbltOn,jdbcType=DOUBLE},
+      tblt_off = #{record.tbltOff,jdbcType=DOUBLE},
+      tblt_update_time = #{record.tbltUpdateTime,jdbcType=TIMESTAMP},
+      tblt_add_time = #{record.tbltAddTime,jdbcType=TIMESTAMP},
+      tblt_status = #{record.tbltStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.LfeeType" >
+    update tb_lfee_type
+    <set >
+      <if test="tbltHost != null" >
+        tblt_host = #{tbltHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbltName != null" >
+        tblt_name = #{tbltName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbltGoods != null" >
+        tblt_goods = #{tbltGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="tbltModels != null" >
+        tblt_models = #{tbltModels,jdbcType=VARCHAR},
+      </if>
+      <if test="tbltOn != null" >
+        tblt_on = #{tbltOn,jdbcType=DOUBLE},
+      </if>
+      <if test="tbltOff != null" >
+        tblt_off = #{tbltOff,jdbcType=DOUBLE},
+      </if>
+      <if test="tbltUpdateTime != null" >
+        tblt_update_time = #{tbltUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbltAddTime != null" >
+        tblt_add_time = #{tbltAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbltStatus != null" >
+        tblt_status = #{tbltStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tblt_id = #{tbltId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.LfeeType" >
+    update tb_lfee_type
+    set tblt_host = #{tbltHost,jdbcType=BIGINT},
+      tblt_name = #{tbltName,jdbcType=VARCHAR},
+      tblt_goods = #{tbltGoods,jdbcType=VARCHAR},
+      tblt_models = #{tbltModels,jdbcType=VARCHAR},
+      tblt_on = #{tbltOn,jdbcType=DOUBLE},
+      tblt_off = #{tbltOff,jdbcType=DOUBLE},
+      tblt_update_time = #{tbltUpdateTime,jdbcType=TIMESTAMP},
+      tblt_add_time = #{tbltAddTime,jdbcType=TIMESTAMP},
+      tblt_status = #{tbltStatus,jdbcType=SMALLINT}
+    where tblt_id = #{tbltId,jdbcType=BIGINT}
+  </update>
+</mapper>

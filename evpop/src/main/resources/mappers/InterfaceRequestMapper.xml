@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.InterfaceRequestMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.InterfaceRequest" >
+    <id column="request_no" property="requestNo" jdbcType="VARCHAR" />
+    <result column="session_id" property="sessionId" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="tx_no" property="txNo" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="uic" property="uic" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="lng" property="lng" jdbcType="DECIMAL" />
+    <result column="lat" property="lat" jdbcType="DECIMAL" />
+    <result column="client_ip" property="clientIp" jdbcType="VARCHAR" />
+    <result column="client_port" property="clientPort" jdbcType="INTEGER" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="response_no" property="responseNo" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.InterfaceRequest" extends="BaseResultMap" >
+    <result column="inner_message" property="innerMessage" jdbcType="LONGVARCHAR" />
+    <result column="outer_message" property="outerMessage" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    request_no, session_id, channel, tx_no, version, uic, `uid`, lng, lat, client_ip, 
+    client_port, order_status, response_no, create_date, last_update_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    inner_message, outer_message
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.InterfaceRequestExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_interface_request
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.InterfaceRequestExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_interface_request
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_interface_request
+    where request_no = #{requestNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_interface_request
+    where request_no = #{requestNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.InterfaceRequest" >
+    insert into tb_interface_request (request_no, session_id, channel, 
+      tx_no, version, uic, 
+      `uid`, lng, lat, client_ip, 
+      client_port, order_status, response_no, 
+      create_date, last_update_date, inner_message, 
+      outer_message)
+    values (#{requestNo,jdbcType=VARCHAR}, #{sessionId,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, 
+      #{txNo,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{uic,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=VARCHAR}, #{lng,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL}, #{clientIp,jdbcType=VARCHAR}, 
+      #{clientPort,jdbcType=INTEGER}, #{orderStatus,jdbcType=INTEGER}, #{responseNo,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateDate,jdbcType=TIMESTAMP}, #{innerMessage,jdbcType=LONGVARCHAR}, 
+      #{outerMessage,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.InterfaceRequest" >
+    insert into tb_interface_request
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="requestNo != null" >
+        request_no,
+      </if>
+      <if test="sessionId != null" >
+        session_id,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="txNo != null" >
+        tx_no,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="uic != null" >
+        uic,
+      </if>
+      <if test="uid != null" >
+        `uid`,
+      </if>
+      <if test="lng != null" >
+        lng,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="clientIp != null" >
+        client_ip,
+      </if>
+      <if test="clientPort != null" >
+        client_port,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="responseNo != null" >
+        response_no,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date,
+      </if>
+      <if test="innerMessage != null" >
+        inner_message,
+      </if>
+      <if test="outerMessage != null" >
+        outer_message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="requestNo != null" >
+        #{requestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionId != null" >
+        #{sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="txNo != null" >
+        #{txNo,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="uic != null" >
+        #{uic,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="clientIp != null" >
+        #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="clientPort != null" >
+        #{clientPort,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="responseNo != null" >
+        #{responseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="innerMessage != null" >
+        #{innerMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="outerMessage != null" >
+        #{outerMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.InterfaceRequestExample" resultType="java.lang.Integer" >
+    select count(*) from tb_interface_request
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_interface_request
+    <set >
+      <if test="record.requestNo != null" >
+        request_no = #{record.requestNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sessionId != null" >
+        session_id = #{record.sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null" >
+        channel = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txNo != null" >
+        tx_no = #{record.txNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uic != null" >
+        uic = #{record.uic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        `uid` = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lng != null" >
+        lng = #{record.lng,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lat != null" >
+        lat = #{record.lat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.clientIp != null" >
+        client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientPort != null" >
+        client_port = #{record.clientPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderStatus != null" >
+        order_status = #{record.orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.responseNo != null" >
+        response_no = #{record.responseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateDate != null" >
+        last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.innerMessage != null" >
+        inner_message = #{record.innerMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.outerMessage != null" >
+        outer_message = #{record.outerMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_interface_request
+    set request_no = #{record.requestNo,jdbcType=VARCHAR},
+      session_id = #{record.sessionId,jdbcType=VARCHAR},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      tx_no = #{record.txNo,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      uic = #{record.uic,jdbcType=VARCHAR},
+      `uid` = #{record.uid,jdbcType=VARCHAR},
+      lng = #{record.lng,jdbcType=DECIMAL},
+      lat = #{record.lat,jdbcType=DECIMAL},
+      client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      client_port = #{record.clientPort,jdbcType=INTEGER},
+      order_status = #{record.orderStatus,jdbcType=INTEGER},
+      response_no = #{record.responseNo,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP},
+      inner_message = #{record.innerMessage,jdbcType=LONGVARCHAR},
+      outer_message = #{record.outerMessage,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_interface_request
+    set request_no = #{record.requestNo,jdbcType=VARCHAR},
+      session_id = #{record.sessionId,jdbcType=VARCHAR},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      tx_no = #{record.txNo,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      uic = #{record.uic,jdbcType=VARCHAR},
+      `uid` = #{record.uid,jdbcType=VARCHAR},
+      lng = #{record.lng,jdbcType=DECIMAL},
+      lat = #{record.lat,jdbcType=DECIMAL},
+      client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      client_port = #{record.clientPort,jdbcType=INTEGER},
+      order_status = #{record.orderStatus,jdbcType=INTEGER},
+      response_no = #{record.responseNo,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{record.lastUpdateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.InterfaceRequest" >
+    update tb_interface_request
+    <set >
+      <if test="sessionId != null" >
+        session_id = #{sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="txNo != null" >
+        tx_no = #{txNo,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="uic != null" >
+        uic = #{uic,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        `uid` = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="lng != null" >
+        lng = #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="clientIp != null" >
+        client_ip = #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="clientPort != null" >
+        client_port = #{clientPort,jdbcType=INTEGER},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="responseNo != null" >
+        response_no = #{responseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateDate != null" >
+        last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="innerMessage != null" >
+        inner_message = #{innerMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="outerMessage != null" >
+        outer_message = #{outerMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where request_no = #{requestNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.InterfaceRequest" >
+    update tb_interface_request
+    set session_id = #{sessionId,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      tx_no = #{txNo,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      uic = #{uic,jdbcType=VARCHAR},
+      `uid` = #{uid,jdbcType=VARCHAR},
+      lng = #{lng,jdbcType=DECIMAL},
+      lat = #{lat,jdbcType=DECIMAL},
+      client_ip = #{clientIp,jdbcType=VARCHAR},
+      client_port = #{clientPort,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      response_no = #{responseNo,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      inner_message = #{innerMessage,jdbcType=LONGVARCHAR},
+      outer_message = #{outerMessage,jdbcType=LONGVARCHAR}
+    where request_no = #{requestNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.InterfaceRequest" >
+    update tb_interface_request
+    set session_id = #{sessionId,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      tx_no = #{txNo,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      uic = #{uic,jdbcType=VARCHAR},
+      `uid` = #{uid,jdbcType=VARCHAR},
+      lng = #{lng,jdbcType=DECIMAL},
+      lat = #{lat,jdbcType=DECIMAL},
+      client_ip = #{clientIp,jdbcType=VARCHAR},
+      client_port = #{clientPort,jdbcType=INTEGER},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      response_no = #{responseNo,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
+    where request_no = #{requestNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

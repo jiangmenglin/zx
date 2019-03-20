@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.OperMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Oper" >
+    <id column="tbo_id" property="tboId" jdbcType="BIGINT" />
+    <result column="tbo_name" property="tboName" jdbcType="VARCHAR" />
+    <result column="tbo_full_name" property="tboFullName" jdbcType="VARCHAR" />
+    <result column="tbo_icon" property="tboIcon" jdbcType="VARCHAR" />
+    <result column="tbo_sign" property="tboSign" jdbcType="VARCHAR" />
+    <result column="tbo_person" property="tboPerson" jdbcType="VARCHAR" />
+    <result column="tbo_address" property="tboAddress" jdbcType="VARCHAR" />
+    <result column="tbo_contacts" property="tboContacts" jdbcType="VARCHAR" />
+    <result column="tbo_adder" property="tboAdder" jdbcType="BIGINT" />
+    <result column="tbo_remark" property="tboRemark" jdbcType="VARCHAR" />
+    <result column="tbo_update_time" property="tboUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_add_time" property="tboAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbo_status" property="tboStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.Oper" extends="BaseResultMap" >
+    <result column="tbo_memo" property="tboMemo" jdbcType="LONGVARCHAR" />
+    <result column="tbo_data" property="tboData" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbo_id, tbo_name, tbo_full_name, tbo_icon, tbo_sign, tbo_person, tbo_address, tbo_contacts, 
+    tbo_adder, tbo_remark, tbo_update_time, tbo_add_time, tbo_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbo_memo, tbo_data
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.OperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_oper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.OperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_oper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_oper
+    where tbo_id = #{tboId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_oper
+    where tbo_id = #{tboId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Oper" >
+    insert into tb_oper (tbo_id, tbo_name, tbo_full_name, 
+      tbo_icon, tbo_sign, tbo_person, 
+      tbo_address, tbo_contacts, tbo_adder, 
+      tbo_remark, tbo_update_time, tbo_add_time, 
+      tbo_status, tbo_memo, tbo_data
+      )
+    values (#{tboId,jdbcType=BIGINT}, #{tboName,jdbcType=VARCHAR}, #{tboFullName,jdbcType=VARCHAR}, 
+      #{tboIcon,jdbcType=VARCHAR}, #{tboSign,jdbcType=VARCHAR}, #{tboPerson,jdbcType=VARCHAR}, 
+      #{tboAddress,jdbcType=VARCHAR}, #{tboContacts,jdbcType=VARCHAR}, #{tboAdder,jdbcType=BIGINT}, 
+      #{tboRemark,jdbcType=VARCHAR}, #{tboUpdateTime,jdbcType=TIMESTAMP}, #{tboAddTime,jdbcType=TIMESTAMP}, 
+      #{tboStatus,jdbcType=SMALLINT}, #{tboMemo,jdbcType=LONGVARCHAR}, #{tboData,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Oper" >
+    insert into tb_oper
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tboId != null" >
+        tbo_id,
+      </if>
+      <if test="tboName != null" >
+        tbo_name,
+      </if>
+      <if test="tboFullName != null" >
+        tbo_full_name,
+      </if>
+      <if test="tboIcon != null" >
+        tbo_icon,
+      </if>
+      <if test="tboSign != null" >
+        tbo_sign,
+      </if>
+      <if test="tboPerson != null" >
+        tbo_person,
+      </if>
+      <if test="tboAddress != null" >
+        tbo_address,
+      </if>
+      <if test="tboContacts != null" >
+        tbo_contacts,
+      </if>
+      <if test="tboAdder != null" >
+        tbo_adder,
+      </if>
+      <if test="tboRemark != null" >
+        tbo_remark,
+      </if>
+      <if test="tboUpdateTime != null" >
+        tbo_update_time,
+      </if>
+      <if test="tboAddTime != null" >
+        tbo_add_time,
+      </if>
+      <if test="tboStatus != null" >
+        tbo_status,
+      </if>
+      <if test="tboMemo != null" >
+        tbo_memo,
+      </if>
+      <if test="tboData != null" >
+        tbo_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tboId != null" >
+        #{tboId,jdbcType=BIGINT},
+      </if>
+      <if test="tboName != null" >
+        #{tboName,jdbcType=VARCHAR},
+      </if>
+      <if test="tboFullName != null" >
+        #{tboFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="tboIcon != null" >
+        #{tboIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="tboSign != null" >
+        #{tboSign,jdbcType=VARCHAR},
+      </if>
+      <if test="tboPerson != null" >
+        #{tboPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tboAddress != null" >
+        #{tboAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tboContacts != null" >
+        #{tboContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="tboAdder != null" >
+        #{tboAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tboRemark != null" >
+        #{tboRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tboUpdateTime != null" >
+        #{tboUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboAddTime != null" >
+        #{tboAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboStatus != null" >
+        #{tboStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tboMemo != null" >
+        #{tboMemo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tboData != null" >
+        #{tboData,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.OperExample" resultType="java.lang.Integer" >
+    select count(*) from tb_oper
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_oper
+    <set >
+      <if test="record.tboId != null" >
+        tbo_id = #{record.tboId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tboName != null" >
+        tbo_name = #{record.tboName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboFullName != null" >
+        tbo_full_name = #{record.tboFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboIcon != null" >
+        tbo_icon = #{record.tboIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboSign != null" >
+        tbo_sign = #{record.tboSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboPerson != null" >
+        tbo_person = #{record.tboPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboAddress != null" >
+        tbo_address = #{record.tboAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboContacts != null" >
+        tbo_contacts = #{record.tboContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboAdder != null" >
+        tbo_adder = #{record.tboAdder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tboRemark != null" >
+        tbo_remark = #{record.tboRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tboUpdateTime != null" >
+        tbo_update_time = #{record.tboUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboAddTime != null" >
+        tbo_add_time = #{record.tboAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tboStatus != null" >
+        tbo_status = #{record.tboStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tboMemo != null" >
+        tbo_memo = #{record.tboMemo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.tboData != null" >
+        tbo_data = #{record.tboData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_oper
+    set tbo_id = #{record.tboId,jdbcType=BIGINT},
+      tbo_name = #{record.tboName,jdbcType=VARCHAR},
+      tbo_full_name = #{record.tboFullName,jdbcType=VARCHAR},
+      tbo_icon = #{record.tboIcon,jdbcType=VARCHAR},
+      tbo_sign = #{record.tboSign,jdbcType=VARCHAR},
+      tbo_person = #{record.tboPerson,jdbcType=VARCHAR},
+      tbo_address = #{record.tboAddress,jdbcType=VARCHAR},
+      tbo_contacts = #{record.tboContacts,jdbcType=VARCHAR},
+      tbo_adder = #{record.tboAdder,jdbcType=BIGINT},
+      tbo_remark = #{record.tboRemark,jdbcType=VARCHAR},
+      tbo_update_time = #{record.tboUpdateTime,jdbcType=TIMESTAMP},
+      tbo_add_time = #{record.tboAddTime,jdbcType=TIMESTAMP},
+      tbo_status = #{record.tboStatus,jdbcType=SMALLINT},
+      tbo_memo = #{record.tboMemo,jdbcType=LONGVARCHAR},
+      tbo_data = #{record.tboData,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_oper
+    set tbo_id = #{record.tboId,jdbcType=BIGINT},
+      tbo_name = #{record.tboName,jdbcType=VARCHAR},
+      tbo_full_name = #{record.tboFullName,jdbcType=VARCHAR},
+      tbo_icon = #{record.tboIcon,jdbcType=VARCHAR},
+      tbo_sign = #{record.tboSign,jdbcType=VARCHAR},
+      tbo_person = #{record.tboPerson,jdbcType=VARCHAR},
+      tbo_address = #{record.tboAddress,jdbcType=VARCHAR},
+      tbo_contacts = #{record.tboContacts,jdbcType=VARCHAR},
+      tbo_adder = #{record.tboAdder,jdbcType=BIGINT},
+      tbo_remark = #{record.tboRemark,jdbcType=VARCHAR},
+      tbo_update_time = #{record.tboUpdateTime,jdbcType=TIMESTAMP},
+      tbo_add_time = #{record.tboAddTime,jdbcType=TIMESTAMP},
+      tbo_status = #{record.tboStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Oper" >
+    update tb_oper
+    <set >
+      <if test="tboName != null" >
+        tbo_name = #{tboName,jdbcType=VARCHAR},
+      </if>
+      <if test="tboFullName != null" >
+        tbo_full_name = #{tboFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="tboIcon != null" >
+        tbo_icon = #{tboIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="tboSign != null" >
+        tbo_sign = #{tboSign,jdbcType=VARCHAR},
+      </if>
+      <if test="tboPerson != null" >
+        tbo_person = #{tboPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="tboAddress != null" >
+        tbo_address = #{tboAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tboContacts != null" >
+        tbo_contacts = #{tboContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="tboAdder != null" >
+        tbo_adder = #{tboAdder,jdbcType=BIGINT},
+      </if>
+      <if test="tboRemark != null" >
+        tbo_remark = #{tboRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tboUpdateTime != null" >
+        tbo_update_time = #{tboUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboAddTime != null" >
+        tbo_add_time = #{tboAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tboStatus != null" >
+        tbo_status = #{tboStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tboMemo != null" >
+        tbo_memo = #{tboMemo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tboData != null" >
+        tbo_data = #{tboData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbo_id = #{tboId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.Oper" >
+    update tb_oper
+    set tbo_name = #{tboName,jdbcType=VARCHAR},
+      tbo_full_name = #{tboFullName,jdbcType=VARCHAR},
+      tbo_icon = #{tboIcon,jdbcType=VARCHAR},
+      tbo_sign = #{tboSign,jdbcType=VARCHAR},
+      tbo_person = #{tboPerson,jdbcType=VARCHAR},
+      tbo_address = #{tboAddress,jdbcType=VARCHAR},
+      tbo_contacts = #{tboContacts,jdbcType=VARCHAR},
+      tbo_adder = #{tboAdder,jdbcType=BIGINT},
+      tbo_remark = #{tboRemark,jdbcType=VARCHAR},
+      tbo_update_time = #{tboUpdateTime,jdbcType=TIMESTAMP},
+      tbo_add_time = #{tboAddTime,jdbcType=TIMESTAMP},
+      tbo_status = #{tboStatus,jdbcType=SMALLINT},
+      tbo_memo = #{tboMemo,jdbcType=LONGVARCHAR},
+      tbo_data = #{tboData,jdbcType=LONGVARCHAR}
+    where tbo_id = #{tboId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Oper" >
+    update tb_oper
+    set tbo_name = #{tboName,jdbcType=VARCHAR},
+      tbo_full_name = #{tboFullName,jdbcType=VARCHAR},
+      tbo_icon = #{tboIcon,jdbcType=VARCHAR},
+      tbo_sign = #{tboSign,jdbcType=VARCHAR},
+      tbo_person = #{tboPerson,jdbcType=VARCHAR},
+      tbo_address = #{tboAddress,jdbcType=VARCHAR},
+      tbo_contacts = #{tboContacts,jdbcType=VARCHAR},
+      tbo_adder = #{tboAdder,jdbcType=BIGINT},
+      tbo_remark = #{tboRemark,jdbcType=VARCHAR},
+      tbo_update_time = #{tboUpdateTime,jdbcType=TIMESTAMP},
+      tbo_add_time = #{tboAddTime,jdbcType=TIMESTAMP},
+      tbo_status = #{tboStatus,jdbcType=SMALLINT}
+    where tbo_id = #{tboId,jdbcType=BIGINT}
+  </update>
+</mapper>

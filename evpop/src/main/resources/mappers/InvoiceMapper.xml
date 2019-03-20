@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.InvoiceMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Invoice" >
+    <id column="tbi_id" property="tbiId" jdbcType="INTEGER" />
+    <result column="tbi_host" property="tbiHost" jdbcType="SMALLINT" />
+    <result column="tbi_title" property="tbiTitle" jdbcType="VARCHAR" />
+    <result column="tbi_type" property="tbiType" jdbcType="SMALLINT" />
+    <result column="tbi_tariff_no" property="tbiTariffNo" jdbcType="VARCHAR" />
+    <result column="tbi_money" property="tbiMoney" jdbcType="DOUBLE" />
+    <result column="tbi_member" property="tbiMember" jdbcType="INTEGER" />
+    <result column="tbi_send_type" property="tbiSendType" jdbcType="TINYINT" />
+    <result column="tbi_name" property="tbiName" jdbcType="VARCHAR" />
+    <result column="tbi_contact" property="tbiContact" jdbcType="VARCHAR" />
+    <result column="tbi_address" property="tbiAddress" jdbcType="VARCHAR" />
+    <result column="tbi_checker" property="tbiChecker" jdbcType="INTEGER" />
+    <result column="tbi_editor" property="tbiEditor" jdbcType="INTEGER" />
+    <result column="tbi_zipcode" property="tbiZipcode" jdbcType="VARCHAR" />
+    <result column="tbi_adder" property="tbiAdder" jdbcType="INTEGER" />
+    <result column="tbi_postil" property="tbiPostil" jdbcType="VARCHAR" />
+    <result column="tbi_remark" property="tbiRemark" jdbcType="VARCHAR" />
+    <result column="tbi_check_time" property="tbiCheckTime" jdbcType="TIMESTAMP" />
+    <result column="tbi_invoice_no" property="tbiInvoiceNo" jdbcType="VARCHAR" />
+    <result column="tbi_invoice_time" property="tbiInvoiceTime" jdbcType="TIMESTAMP" />
+    <result column="tbi_update_time" property="tbiUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbi_add_time" property="tbiAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbi_status" property="tbiStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbi_id, tbi_host, tbi_title, tbi_type, tbi_tariff_no, tbi_money, tbi_member, tbi_send_type, 
+    tbi_name, tbi_contact, tbi_address, tbi_checker, tbi_editor, tbi_zipcode, tbi_adder, 
+    tbi_postil, tbi_remark, tbi_check_time, tbi_invoice_no, tbi_invoice_time, tbi_update_time, 
+    tbi_add_time, tbi_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.InvoiceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_invoice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_invoice
+    where tbi_id = #{tbiId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_invoice
+    where tbi_id = #{tbiId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Invoice" >
+    insert into tb_invoice (tbi_id, tbi_host, tbi_title, 
+      tbi_type, tbi_tariff_no, tbi_money, 
+      tbi_member, tbi_send_type, tbi_name, 
+      tbi_contact, tbi_address, tbi_checker, 
+      tbi_editor, tbi_zipcode, tbi_adder, 
+      tbi_postil, tbi_remark, tbi_check_time, 
+      tbi_invoice_no, tbi_invoice_time, tbi_update_time, 
+      tbi_add_time, tbi_status, createTime, 
+      modifyDate)
+    values (#{tbiId,jdbcType=INTEGER}, #{tbiHost,jdbcType=SMALLINT}, #{tbiTitle,jdbcType=VARCHAR}, 
+      #{tbiType,jdbcType=SMALLINT}, #{tbiTariffNo,jdbcType=VARCHAR}, #{tbiMoney,jdbcType=DOUBLE}, 
+      #{tbiMember,jdbcType=INTEGER}, #{tbiSendType,jdbcType=TINYINT}, #{tbiName,jdbcType=VARCHAR}, 
+      #{tbiContact,jdbcType=VARCHAR}, #{tbiAddress,jdbcType=VARCHAR}, #{tbiChecker,jdbcType=INTEGER}, 
+      #{tbiEditor,jdbcType=INTEGER}, #{tbiZipcode,jdbcType=VARCHAR}, #{tbiAdder,jdbcType=INTEGER}, 
+      #{tbiPostil,jdbcType=VARCHAR}, #{tbiRemark,jdbcType=VARCHAR}, #{tbiCheckTime,jdbcType=TIMESTAMP}, 
+      #{tbiInvoiceNo,jdbcType=VARCHAR}, #{tbiInvoiceTime,jdbcType=TIMESTAMP}, #{tbiUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbiAddTime,jdbcType=TIMESTAMP}, #{tbiStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Invoice" >
+    insert into tb_invoice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbiId != null" >
+        tbi_id,
+      </if>
+      <if test="tbiHost != null" >
+        tbi_host,
+      </if>
+      <if test="tbiTitle != null" >
+        tbi_title,
+      </if>
+      <if test="tbiType != null" >
+        tbi_type,
+      </if>
+      <if test="tbiTariffNo != null" >
+        tbi_tariff_no,
+      </if>
+      <if test="tbiMoney != null" >
+        tbi_money,
+      </if>
+      <if test="tbiMember != null" >
+        tbi_member,
+      </if>
+      <if test="tbiSendType != null" >
+        tbi_send_type,
+      </if>
+      <if test="tbiName != null" >
+        tbi_name,
+      </if>
+      <if test="tbiContact != null" >
+        tbi_contact,
+      </if>
+      <if test="tbiAddress != null" >
+        tbi_address,
+      </if>
+      <if test="tbiChecker != null" >
+        tbi_checker,
+      </if>
+      <if test="tbiEditor != null" >
+        tbi_editor,
+      </if>
+      <if test="tbiZipcode != null" >
+        tbi_zipcode,
+      </if>
+      <if test="tbiAdder != null" >
+        tbi_adder,
+      </if>
+      <if test="tbiPostil != null" >
+        tbi_postil,
+      </if>
+      <if test="tbiRemark != null" >
+        tbi_remark,
+      </if>
+      <if test="tbiCheckTime != null" >
+        tbi_check_time,
+      </if>
+      <if test="tbiInvoiceNo != null" >
+        tbi_invoice_no,
+      </if>
+      <if test="tbiInvoiceTime != null" >
+        tbi_invoice_time,
+      </if>
+      <if test="tbiUpdateTime != null" >
+        tbi_update_time,
+      </if>
+      <if test="tbiAddTime != null" >
+        tbi_add_time,
+      </if>
+      <if test="tbiStatus != null" >
+        tbi_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbiId != null" >
+        #{tbiId,jdbcType=INTEGER},
+      </if>
+      <if test="tbiHost != null" >
+        #{tbiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbiTitle != null" >
+        #{tbiTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiType != null" >
+        #{tbiType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbiTariffNo != null" >
+        #{tbiTariffNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiMoney != null" >
+        #{tbiMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbiMember != null" >
+        #{tbiMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbiSendType != null" >
+        #{tbiSendType,jdbcType=TINYINT},
+      </if>
+      <if test="tbiName != null" >
+        #{tbiName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiContact != null" >
+        #{tbiContact,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiAddress != null" >
+        #{tbiAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiChecker != null" >
+        #{tbiChecker,jdbcType=INTEGER},
+      </if>
+      <if test="tbiEditor != null" >
+        #{tbiEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbiZipcode != null" >
+        #{tbiZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiAdder != null" >
+        #{tbiAdder,jdbcType=INTEGER},
+      </if>
+      <if test="tbiPostil != null" >
+        #{tbiPostil,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiRemark != null" >
+        #{tbiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiCheckTime != null" >
+        #{tbiCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbiInvoiceNo != null" >
+        #{tbiInvoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiInvoiceTime != null" >
+        #{tbiInvoiceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbiUpdateTime != null" >
+        #{tbiUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbiAddTime != null" >
+        #{tbiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbiStatus != null" >
+        #{tbiStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.InvoiceExample" resultType="java.lang.Integer" >
+    select count(*) from tb_invoice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_invoice
+    <set >
+      <if test="record.tbiId != null" >
+        tbi_id = #{record.tbiId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbiHost != null" >
+        tbi_host = #{record.tbiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbiTitle != null" >
+        tbi_title = #{record.tbiTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiType != null" >
+        tbi_type = #{record.tbiType,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbiTariffNo != null" >
+        tbi_tariff_no = #{record.tbiTariffNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiMoney != null" >
+        tbi_money = #{record.tbiMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbiMember != null" >
+        tbi_member = #{record.tbiMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbiSendType != null" >
+        tbi_send_type = #{record.tbiSendType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbiName != null" >
+        tbi_name = #{record.tbiName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiContact != null" >
+        tbi_contact = #{record.tbiContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiAddress != null" >
+        tbi_address = #{record.tbiAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiChecker != null" >
+        tbi_checker = #{record.tbiChecker,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbiEditor != null" >
+        tbi_editor = #{record.tbiEditor,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbiZipcode != null" >
+        tbi_zipcode = #{record.tbiZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiAdder != null" >
+        tbi_adder = #{record.tbiAdder,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbiPostil != null" >
+        tbi_postil = #{record.tbiPostil,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiRemark != null" >
+        tbi_remark = #{record.tbiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiCheckTime != null" >
+        tbi_check_time = #{record.tbiCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbiInvoiceNo != null" >
+        tbi_invoice_no = #{record.tbiInvoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbiInvoiceTime != null" >
+        tbi_invoice_time = #{record.tbiInvoiceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbiUpdateTime != null" >
+        tbi_update_time = #{record.tbiUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbiAddTime != null" >
+        tbi_add_time = #{record.tbiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbiStatus != null" >
+        tbi_status = #{record.tbiStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_invoice
+    set tbi_id = #{record.tbiId,jdbcType=INTEGER},
+      tbi_host = #{record.tbiHost,jdbcType=SMALLINT},
+      tbi_title = #{record.tbiTitle,jdbcType=VARCHAR},
+      tbi_type = #{record.tbiType,jdbcType=SMALLINT},
+      tbi_tariff_no = #{record.tbiTariffNo,jdbcType=VARCHAR},
+      tbi_money = #{record.tbiMoney,jdbcType=DOUBLE},
+      tbi_member = #{record.tbiMember,jdbcType=INTEGER},
+      tbi_send_type = #{record.tbiSendType,jdbcType=TINYINT},
+      tbi_name = #{record.tbiName,jdbcType=VARCHAR},
+      tbi_contact = #{record.tbiContact,jdbcType=VARCHAR},
+      tbi_address = #{record.tbiAddress,jdbcType=VARCHAR},
+      tbi_checker = #{record.tbiChecker,jdbcType=INTEGER},
+      tbi_editor = #{record.tbiEditor,jdbcType=INTEGER},
+      tbi_zipcode = #{record.tbiZipcode,jdbcType=VARCHAR},
+      tbi_adder = #{record.tbiAdder,jdbcType=INTEGER},
+      tbi_postil = #{record.tbiPostil,jdbcType=VARCHAR},
+      tbi_remark = #{record.tbiRemark,jdbcType=VARCHAR},
+      tbi_check_time = #{record.tbiCheckTime,jdbcType=TIMESTAMP},
+      tbi_invoice_no = #{record.tbiInvoiceNo,jdbcType=VARCHAR},
+      tbi_invoice_time = #{record.tbiInvoiceTime,jdbcType=TIMESTAMP},
+      tbi_update_time = #{record.tbiUpdateTime,jdbcType=TIMESTAMP},
+      tbi_add_time = #{record.tbiAddTime,jdbcType=TIMESTAMP},
+      tbi_status = #{record.tbiStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Invoice" >
+    update tb_invoice
+    <set >
+      <if test="tbiHost != null" >
+        tbi_host = #{tbiHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbiTitle != null" >
+        tbi_title = #{tbiTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiType != null" >
+        tbi_type = #{tbiType,jdbcType=SMALLINT},
+      </if>
+      <if test="tbiTariffNo != null" >
+        tbi_tariff_no = #{tbiTariffNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiMoney != null" >
+        tbi_money = #{tbiMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbiMember != null" >
+        tbi_member = #{tbiMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbiSendType != null" >
+        tbi_send_type = #{tbiSendType,jdbcType=TINYINT},
+      </if>
+      <if test="tbiName != null" >
+        tbi_name = #{tbiName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiContact != null" >
+        tbi_contact = #{tbiContact,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiAddress != null" >
+        tbi_address = #{tbiAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiChecker != null" >
+        tbi_checker = #{tbiChecker,jdbcType=INTEGER},
+      </if>
+      <if test="tbiEditor != null" >
+        tbi_editor = #{tbiEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbiZipcode != null" >
+        tbi_zipcode = #{tbiZipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiAdder != null" >
+        tbi_adder = #{tbiAdder,jdbcType=INTEGER},
+      </if>
+      <if test="tbiPostil != null" >
+        tbi_postil = #{tbiPostil,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiRemark != null" >
+        tbi_remark = #{tbiRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiCheckTime != null" >
+        tbi_check_time = #{tbiCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbiInvoiceNo != null" >
+        tbi_invoice_no = #{tbiInvoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tbiInvoiceTime != null" >
+        tbi_invoice_time = #{tbiInvoiceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbiUpdateTime != null" >
+        tbi_update_time = #{tbiUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbiAddTime != null" >
+        tbi_add_time = #{tbiAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbiStatus != null" >
+        tbi_status = #{tbiStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbi_id = #{tbiId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Invoice" >
+    update tb_invoice
+    set tbi_host = #{tbiHost,jdbcType=SMALLINT},
+      tbi_title = #{tbiTitle,jdbcType=VARCHAR},
+      tbi_type = #{tbiType,jdbcType=SMALLINT},
+      tbi_tariff_no = #{tbiTariffNo,jdbcType=VARCHAR},
+      tbi_money = #{tbiMoney,jdbcType=DOUBLE},
+      tbi_member = #{tbiMember,jdbcType=INTEGER},
+      tbi_send_type = #{tbiSendType,jdbcType=TINYINT},
+      tbi_name = #{tbiName,jdbcType=VARCHAR},
+      tbi_contact = #{tbiContact,jdbcType=VARCHAR},
+      tbi_address = #{tbiAddress,jdbcType=VARCHAR},
+      tbi_checker = #{tbiChecker,jdbcType=INTEGER},
+      tbi_editor = #{tbiEditor,jdbcType=INTEGER},
+      tbi_zipcode = #{tbiZipcode,jdbcType=VARCHAR},
+      tbi_adder = #{tbiAdder,jdbcType=INTEGER},
+      tbi_postil = #{tbiPostil,jdbcType=VARCHAR},
+      tbi_remark = #{tbiRemark,jdbcType=VARCHAR},
+      tbi_check_time = #{tbiCheckTime,jdbcType=TIMESTAMP},
+      tbi_invoice_no = #{tbiInvoiceNo,jdbcType=VARCHAR},
+      tbi_invoice_time = #{tbiInvoiceTime,jdbcType=TIMESTAMP},
+      tbi_update_time = #{tbiUpdateTime,jdbcType=TIMESTAMP},
+      tbi_add_time = #{tbiAddTime,jdbcType=TIMESTAMP},
+      tbi_status = #{tbiStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbi_id = #{tbiId,jdbcType=INTEGER}
+  </update>
+</mapper>

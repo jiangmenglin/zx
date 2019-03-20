@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ApiLogMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.ApiLog" >
+    <id column="sal_id" property="salId" jdbcType="BIGINT" />
+    <result column="sal_client" property="salClient" jdbcType="BIGINT" />
+    <result column="sal_api" property="salApi" jdbcType="VARCHAR" />
+    <result column="sal_member" property="salMember" jdbcType="BIGINT" />
+    <result column="sal_lat" property="salLat" jdbcType="DOUBLE" />
+    <result column="sal_lng" property="salLng" jdbcType="DOUBLE" />
+    <result column="sal_invoke_time" property="salInvokeTime" jdbcType="TIMESTAMP" />
+    <result column="sal_status" property="salStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.ApiLog" extends="BaseResultMap" >
+    <result column="sal_params" property="salParams" jdbcType="LONGVARCHAR" />
+    <result column="sal_return" property="salReturn" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sal_id, sal_client, sal_api, sal_member, sal_lat, sal_lng, sal_invoke_time, sal_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    sal_params, sal_return
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.ApiLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from srv_api_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ApiLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from srv_api_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from srv_api_log
+    where sal_id = #{salId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from srv_api_log
+    where sal_id = #{salId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.ApiLog" >
+    insert into srv_api_log (sal_id, sal_client, sal_api, 
+      sal_member, sal_lat, sal_lng, 
+      sal_invoke_time, sal_status, sal_params, 
+      sal_return)
+    values (#{salId,jdbcType=BIGINT}, #{salClient,jdbcType=BIGINT}, #{salApi,jdbcType=VARCHAR}, 
+      #{salMember,jdbcType=BIGINT}, #{salLat,jdbcType=DOUBLE}, #{salLng,jdbcType=DOUBLE}, 
+      #{salInvokeTime,jdbcType=TIMESTAMP}, #{salStatus,jdbcType=SMALLINT}, #{salParams,jdbcType=LONGVARCHAR}, 
+      #{salReturn,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.ApiLog" >
+    insert into srv_api_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="salId != null" >
+        sal_id,
+      </if>
+      <if test="salClient != null" >
+        sal_client,
+      </if>
+      <if test="salApi != null" >
+        sal_api,
+      </if>
+      <if test="salMember != null" >
+        sal_member,
+      </if>
+      <if test="salLat != null" >
+        sal_lat,
+      </if>
+      <if test="salLng != null" >
+        sal_lng,
+      </if>
+      <if test="salInvokeTime != null" >
+        sal_invoke_time,
+      </if>
+      <if test="salStatus != null" >
+        sal_status,
+      </if>
+      <if test="salParams != null" >
+        sal_params,
+      </if>
+      <if test="salReturn != null" >
+        sal_return,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="salId != null" >
+        #{salId,jdbcType=BIGINT},
+      </if>
+      <if test="salClient != null" >
+        #{salClient,jdbcType=BIGINT},
+      </if>
+      <if test="salApi != null" >
+        #{salApi,jdbcType=VARCHAR},
+      </if>
+      <if test="salMember != null" >
+        #{salMember,jdbcType=BIGINT},
+      </if>
+      <if test="salLat != null" >
+        #{salLat,jdbcType=DOUBLE},
+      </if>
+      <if test="salLng != null" >
+        #{salLng,jdbcType=DOUBLE},
+      </if>
+      <if test="salInvokeTime != null" >
+        #{salInvokeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salStatus != null" >
+        #{salStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="salParams != null" >
+        #{salParams,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="salReturn != null" >
+        #{salReturn,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ApiLogExample" resultType="java.lang.Integer" >
+    select count(*) from srv_api_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update srv_api_log
+    <set >
+      <if test="record.salId != null" >
+        sal_id = #{record.salId,jdbcType=BIGINT},
+      </if>
+      <if test="record.salClient != null" >
+        sal_client = #{record.salClient,jdbcType=BIGINT},
+      </if>
+      <if test="record.salApi != null" >
+        sal_api = #{record.salApi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salMember != null" >
+        sal_member = #{record.salMember,jdbcType=BIGINT},
+      </if>
+      <if test="record.salLat != null" >
+        sal_lat = #{record.salLat,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salLng != null" >
+        sal_lng = #{record.salLng,jdbcType=DOUBLE},
+      </if>
+      <if test="record.salInvokeTime != null" >
+        sal_invoke_time = #{record.salInvokeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.salStatus != null" >
+        sal_status = #{record.salStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.salParams != null" >
+        sal_params = #{record.salParams,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.salReturn != null" >
+        sal_return = #{record.salReturn,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update srv_api_log
+    set sal_id = #{record.salId,jdbcType=BIGINT},
+      sal_client = #{record.salClient,jdbcType=BIGINT},
+      sal_api = #{record.salApi,jdbcType=VARCHAR},
+      sal_member = #{record.salMember,jdbcType=BIGINT},
+      sal_lat = #{record.salLat,jdbcType=DOUBLE},
+      sal_lng = #{record.salLng,jdbcType=DOUBLE},
+      sal_invoke_time = #{record.salInvokeTime,jdbcType=TIMESTAMP},
+      sal_status = #{record.salStatus,jdbcType=SMALLINT},
+      sal_params = #{record.salParams,jdbcType=LONGVARCHAR},
+      sal_return = #{record.salReturn,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update srv_api_log
+    set sal_id = #{record.salId,jdbcType=BIGINT},
+      sal_client = #{record.salClient,jdbcType=BIGINT},
+      sal_api = #{record.salApi,jdbcType=VARCHAR},
+      sal_member = #{record.salMember,jdbcType=BIGINT},
+      sal_lat = #{record.salLat,jdbcType=DOUBLE},
+      sal_lng = #{record.salLng,jdbcType=DOUBLE},
+      sal_invoke_time = #{record.salInvokeTime,jdbcType=TIMESTAMP},
+      sal_status = #{record.salStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.ApiLog" >
+    update srv_api_log
+    <set >
+      <if test="salClient != null" >
+        sal_client = #{salClient,jdbcType=BIGINT},
+      </if>
+      <if test="salApi != null" >
+        sal_api = #{salApi,jdbcType=VARCHAR},
+      </if>
+      <if test="salMember != null" >
+        sal_member = #{salMember,jdbcType=BIGINT},
+      </if>
+      <if test="salLat != null" >
+        sal_lat = #{salLat,jdbcType=DOUBLE},
+      </if>
+      <if test="salLng != null" >
+        sal_lng = #{salLng,jdbcType=DOUBLE},
+      </if>
+      <if test="salInvokeTime != null" >
+        sal_invoke_time = #{salInvokeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salStatus != null" >
+        sal_status = #{salStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="salParams != null" >
+        sal_params = #{salParams,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="salReturn != null" >
+        sal_return = #{salReturn,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sal_id = #{salId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.ApiLog" >
+    update srv_api_log
+    set sal_client = #{salClient,jdbcType=BIGINT},
+      sal_api = #{salApi,jdbcType=VARCHAR},
+      sal_member = #{salMember,jdbcType=BIGINT},
+      sal_lat = #{salLat,jdbcType=DOUBLE},
+      sal_lng = #{salLng,jdbcType=DOUBLE},
+      sal_invoke_time = #{salInvokeTime,jdbcType=TIMESTAMP},
+      sal_status = #{salStatus,jdbcType=SMALLINT},
+      sal_params = #{salParams,jdbcType=LONGVARCHAR},
+      sal_return = #{salReturn,jdbcType=LONGVARCHAR}
+    where sal_id = #{salId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.ApiLog" >
+    update srv_api_log
+    set sal_client = #{salClient,jdbcType=BIGINT},
+      sal_api = #{salApi,jdbcType=VARCHAR},
+      sal_member = #{salMember,jdbcType=BIGINT},
+      sal_lat = #{salLat,jdbcType=DOUBLE},
+      sal_lng = #{salLng,jdbcType=DOUBLE},
+      sal_invoke_time = #{salInvokeTime,jdbcType=TIMESTAMP},
+      sal_status = #{salStatus,jdbcType=SMALLINT}
+    where sal_id = #{salId,jdbcType=BIGINT}
+  </update>
+</mapper>

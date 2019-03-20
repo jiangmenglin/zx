@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.CouponCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.CouponCode" >
+    <id column="tbcc_id" property="tbccId" jdbcType="INTEGER" />
+    <result column="tbcc_host" property="tbccHost" jdbcType="SMALLINT" />
+    <result column="tbcc_code" property="tbccCode" jdbcType="VARCHAR" />
+    <result column="tbcc_coupon_type" property="tbccCouponType" jdbcType="INTEGER" />
+    <result column="tbcc_member" property="tbccMember" jdbcType="INTEGER" />
+    <result column="tbcc_remark" property="tbccRemark" jdbcType="VARCHAR" />
+    <result column="tbcc_rch_time" property="tbccRchTime" jdbcType="TIMESTAMP" />
+    <result column="tbcc_update_time" property="tbccUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbcc_add_time" property="tbccAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbcc_status" property="tbccStatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbcc_id, tbcc_host, tbcc_code, tbcc_coupon_type, tbcc_member, tbcc_remark, tbcc_rch_time, 
+    tbcc_update_time, tbcc_add_time, tbcc_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.CouponCodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_coupon_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_coupon_code
+    where tbcc_id = #{tbccId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_coupon_code
+    where tbcc_id = #{tbccId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.CouponCode" >
+    insert into tb_coupon_code (tbcc_id, tbcc_host, tbcc_code, 
+      tbcc_coupon_type, tbcc_member, tbcc_remark, 
+      tbcc_rch_time, tbcc_update_time, tbcc_add_time, 
+      tbcc_status)
+    values (#{tbccId,jdbcType=INTEGER}, #{tbccHost,jdbcType=SMALLINT}, #{tbccCode,jdbcType=VARCHAR}, 
+      #{tbccCouponType,jdbcType=INTEGER}, #{tbccMember,jdbcType=INTEGER}, #{tbccRemark,jdbcType=VARCHAR}, 
+      #{tbccRchTime,jdbcType=TIMESTAMP}, #{tbccUpdateTime,jdbcType=TIMESTAMP}, #{tbccAddTime,jdbcType=TIMESTAMP}, 
+      #{tbccStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.CouponCode" >
+    insert into tb_coupon_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbccId != null" >
+        tbcc_id,
+      </if>
+      <if test="tbccHost != null" >
+        tbcc_host,
+      </if>
+      <if test="tbccCode != null" >
+        tbcc_code,
+      </if>
+      <if test="tbccCouponType != null" >
+        tbcc_coupon_type,
+      </if>
+      <if test="tbccMember != null" >
+        tbcc_member,
+      </if>
+      <if test="tbccRemark != null" >
+        tbcc_remark,
+      </if>
+      <if test="tbccRchTime != null" >
+        tbcc_rch_time,
+      </if>
+      <if test="tbccUpdateTime != null" >
+        tbcc_update_time,
+      </if>
+      <if test="tbccAddTime != null" >
+        tbcc_add_time,
+      </if>
+      <if test="tbccStatus != null" >
+        tbcc_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbccId != null" >
+        #{tbccId,jdbcType=INTEGER},
+      </if>
+      <if test="tbccHost != null" >
+        #{tbccHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbccCode != null" >
+        #{tbccCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbccCouponType != null" >
+        #{tbccCouponType,jdbcType=INTEGER},
+      </if>
+      <if test="tbccMember != null" >
+        #{tbccMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbccRemark != null" >
+        #{tbccRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbccRchTime != null" >
+        #{tbccRchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbccUpdateTime != null" >
+        #{tbccUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbccAddTime != null" >
+        #{tbccAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbccStatus != null" >
+        #{tbccStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.CouponCodeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_coupon_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_coupon_code
+    <set >
+      <if test="record.tbccId != null" >
+        tbcc_id = #{record.tbccId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbccHost != null" >
+        tbcc_host = #{record.tbccHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbccCode != null" >
+        tbcc_code = #{record.tbccCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbccCouponType != null" >
+        tbcc_coupon_type = #{record.tbccCouponType,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbccMember != null" >
+        tbcc_member = #{record.tbccMember,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbccRemark != null" >
+        tbcc_remark = #{record.tbccRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbccRchTime != null" >
+        tbcc_rch_time = #{record.tbccRchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbccUpdateTime != null" >
+        tbcc_update_time = #{record.tbccUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbccAddTime != null" >
+        tbcc_add_time = #{record.tbccAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbccStatus != null" >
+        tbcc_status = #{record.tbccStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_coupon_code
+    set tbcc_id = #{record.tbccId,jdbcType=INTEGER},
+      tbcc_host = #{record.tbccHost,jdbcType=SMALLINT},
+      tbcc_code = #{record.tbccCode,jdbcType=VARCHAR},
+      tbcc_coupon_type = #{record.tbccCouponType,jdbcType=INTEGER},
+      tbcc_member = #{record.tbccMember,jdbcType=INTEGER},
+      tbcc_remark = #{record.tbccRemark,jdbcType=VARCHAR},
+      tbcc_rch_time = #{record.tbccRchTime,jdbcType=TIMESTAMP},
+      tbcc_update_time = #{record.tbccUpdateTime,jdbcType=TIMESTAMP},
+      tbcc_add_time = #{record.tbccAddTime,jdbcType=TIMESTAMP},
+      tbcc_status = #{record.tbccStatus,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.CouponCode" >
+    update tb_coupon_code
+    <set >
+      <if test="tbccHost != null" >
+        tbcc_host = #{tbccHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbccCode != null" >
+        tbcc_code = #{tbccCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tbccCouponType != null" >
+        tbcc_coupon_type = #{tbccCouponType,jdbcType=INTEGER},
+      </if>
+      <if test="tbccMember != null" >
+        tbcc_member = #{tbccMember,jdbcType=INTEGER},
+      </if>
+      <if test="tbccRemark != null" >
+        tbcc_remark = #{tbccRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tbccRchTime != null" >
+        tbcc_rch_time = #{tbccRchTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbccUpdateTime != null" >
+        tbcc_update_time = #{tbccUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbccAddTime != null" >
+        tbcc_add_time = #{tbccAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbccStatus != null" >
+        tbcc_status = #{tbccStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where tbcc_id = #{tbccId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.CouponCode" >
+    update tb_coupon_code
+    set tbcc_host = #{tbccHost,jdbcType=SMALLINT},
+      tbcc_code = #{tbccCode,jdbcType=VARCHAR},
+      tbcc_coupon_type = #{tbccCouponType,jdbcType=INTEGER},
+      tbcc_member = #{tbccMember,jdbcType=INTEGER},
+      tbcc_remark = #{tbccRemark,jdbcType=VARCHAR},
+      tbcc_rch_time = #{tbccRchTime,jdbcType=TIMESTAMP},
+      tbcc_update_time = #{tbccUpdateTime,jdbcType=TIMESTAMP},
+      tbcc_add_time = #{tbccAddTime,jdbcType=TIMESTAMP},
+      tbcc_status = #{tbccStatus,jdbcType=TINYINT}
+    where tbcc_id = #{tbccId,jdbcType=INTEGER}
+  </update>
+</mapper>

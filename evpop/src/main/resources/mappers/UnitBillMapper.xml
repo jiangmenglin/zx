@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.UnitBillMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.UnitBill" >
+    <id column="tbub_id" property="tbubId" jdbcType="BIGINT" />
+    <result column="tbub_host" property="tbubHost" jdbcType="BIGINT" />
+    <result column="tbub_month" property="tbubMonth" jdbcType="VARCHAR" />
+    <result column="tbub_unit" property="tbubUnit" jdbcType="BIGINT" />
+    <result column="tbub_order_s" property="tbubOrderS" jdbcType="INTEGER" />
+    <result column="tbub_need_pay" property="tbubNeedPay" jdbcType="DOUBLE" />
+    <result column="tbub_real_pay" property="tbubRealPay" jdbcType="DOUBLE" />
+    <result column="tbub_editor" property="tbubEditor" jdbcType="BIGINT" />
+    <result column="tbub_update_time" property="tbubUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbub_add_time" property="tbubAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbub_status" property="tbubStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbub_id, tbub_host, tbub_month, tbub_unit, tbub_order_s, tbub_need_pay, tbub_real_pay, 
+    tbub_editor, tbub_update_time, tbub_add_time, tbub_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.UnitBillExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_unit_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_unit_bill
+    where tbub_id = #{tbubId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_unit_bill
+    where tbub_id = #{tbubId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.UnitBill" >
+    insert into tb_unit_bill (tbub_id, tbub_host, tbub_month, 
+      tbub_unit, tbub_order_s, tbub_need_pay, 
+      tbub_real_pay, tbub_editor, tbub_update_time, 
+      tbub_add_time, tbub_status)
+    values (#{tbubId,jdbcType=BIGINT}, #{tbubHost,jdbcType=BIGINT}, #{tbubMonth,jdbcType=VARCHAR}, 
+      #{tbubUnit,jdbcType=BIGINT}, #{tbubOrderS,jdbcType=INTEGER}, #{tbubNeedPay,jdbcType=DOUBLE}, 
+      #{tbubRealPay,jdbcType=DOUBLE}, #{tbubEditor,jdbcType=BIGINT}, #{tbubUpdateTime,jdbcType=TIMESTAMP}, 
+      #{tbubAddTime,jdbcType=TIMESTAMP}, #{tbubStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.UnitBill" >
+    insert into tb_unit_bill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbubId != null" >
+        tbub_id,
+      </if>
+      <if test="tbubHost != null" >
+        tbub_host,
+      </if>
+      <if test="tbubMonth != null" >
+        tbub_month,
+      </if>
+      <if test="tbubUnit != null" >
+        tbub_unit,
+      </if>
+      <if test="tbubOrderS != null" >
+        tbub_order_s,
+      </if>
+      <if test="tbubNeedPay != null" >
+        tbub_need_pay,
+      </if>
+      <if test="tbubRealPay != null" >
+        tbub_real_pay,
+      </if>
+      <if test="tbubEditor != null" >
+        tbub_editor,
+      </if>
+      <if test="tbubUpdateTime != null" >
+        tbub_update_time,
+      </if>
+      <if test="tbubAddTime != null" >
+        tbub_add_time,
+      </if>
+      <if test="tbubStatus != null" >
+        tbub_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbubId != null" >
+        #{tbubId,jdbcType=BIGINT},
+      </if>
+      <if test="tbubHost != null" >
+        #{tbubHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbubMonth != null" >
+        #{tbubMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="tbubUnit != null" >
+        #{tbubUnit,jdbcType=BIGINT},
+      </if>
+      <if test="tbubOrderS != null" >
+        #{tbubOrderS,jdbcType=INTEGER},
+      </if>
+      <if test="tbubNeedPay != null" >
+        #{tbubNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="tbubRealPay != null" >
+        #{tbubRealPay,jdbcType=DOUBLE},
+      </if>
+      <if test="tbubEditor != null" >
+        #{tbubEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tbubUpdateTime != null" >
+        #{tbubUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbubAddTime != null" >
+        #{tbubAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbubStatus != null" >
+        #{tbubStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.UnitBillExample" resultType="java.lang.Integer" >
+    select count(*) from tb_unit_bill
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_unit_bill
+    <set >
+      <if test="record.tbubId != null" >
+        tbub_id = #{record.tbubId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbubHost != null" >
+        tbub_host = #{record.tbubHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbubMonth != null" >
+        tbub_month = #{record.tbubMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbubUnit != null" >
+        tbub_unit = #{record.tbubUnit,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbubOrderS != null" >
+        tbub_order_s = #{record.tbubOrderS,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbubNeedPay != null" >
+        tbub_need_pay = #{record.tbubNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbubRealPay != null" >
+        tbub_real_pay = #{record.tbubRealPay,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbubEditor != null" >
+        tbub_editor = #{record.tbubEditor,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbubUpdateTime != null" >
+        tbub_update_time = #{record.tbubUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbubAddTime != null" >
+        tbub_add_time = #{record.tbubAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbubStatus != null" >
+        tbub_status = #{record.tbubStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_unit_bill
+    set tbub_id = #{record.tbubId,jdbcType=BIGINT},
+      tbub_host = #{record.tbubHost,jdbcType=BIGINT},
+      tbub_month = #{record.tbubMonth,jdbcType=VARCHAR},
+      tbub_unit = #{record.tbubUnit,jdbcType=BIGINT},
+      tbub_order_s = #{record.tbubOrderS,jdbcType=INTEGER},
+      tbub_need_pay = #{record.tbubNeedPay,jdbcType=DOUBLE},
+      tbub_real_pay = #{record.tbubRealPay,jdbcType=DOUBLE},
+      tbub_editor = #{record.tbubEditor,jdbcType=BIGINT},
+      tbub_update_time = #{record.tbubUpdateTime,jdbcType=TIMESTAMP},
+      tbub_add_time = #{record.tbubAddTime,jdbcType=TIMESTAMP},
+      tbub_status = #{record.tbubStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.UnitBill" >
+    update tb_unit_bill
+    <set >
+      <if test="tbubHost != null" >
+        tbub_host = #{tbubHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbubMonth != null" >
+        tbub_month = #{tbubMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="tbubUnit != null" >
+        tbub_unit = #{tbubUnit,jdbcType=BIGINT},
+      </if>
+      <if test="tbubOrderS != null" >
+        tbub_order_s = #{tbubOrderS,jdbcType=INTEGER},
+      </if>
+      <if test="tbubNeedPay != null" >
+        tbub_need_pay = #{tbubNeedPay,jdbcType=DOUBLE},
+      </if>
+      <if test="tbubRealPay != null" >
+        tbub_real_pay = #{tbubRealPay,jdbcType=DOUBLE},
+      </if>
+      <if test="tbubEditor != null" >
+        tbub_editor = #{tbubEditor,jdbcType=BIGINT},
+      </if>
+      <if test="tbubUpdateTime != null" >
+        tbub_update_time = #{tbubUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbubAddTime != null" >
+        tbub_add_time = #{tbubAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbubStatus != null" >
+        tbub_status = #{tbubStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbub_id = #{tbubId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.UnitBill" >
+    update tb_unit_bill
+    set tbub_host = #{tbubHost,jdbcType=BIGINT},
+      tbub_month = #{tbubMonth,jdbcType=VARCHAR},
+      tbub_unit = #{tbubUnit,jdbcType=BIGINT},
+      tbub_order_s = #{tbubOrderS,jdbcType=INTEGER},
+      tbub_need_pay = #{tbubNeedPay,jdbcType=DOUBLE},
+      tbub_real_pay = #{tbubRealPay,jdbcType=DOUBLE},
+      tbub_editor = #{tbubEditor,jdbcType=BIGINT},
+      tbub_update_time = #{tbubUpdateTime,jdbcType=TIMESTAMP},
+      tbub_add_time = #{tbubAddTime,jdbcType=TIMESTAMP},
+      tbub_status = #{tbubStatus,jdbcType=SMALLINT}
+    where tbub_id = #{tbubId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.OrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.OrderDetail" >
+    <id column="tbod_id" property="tbodId" jdbcType="INTEGER" />
+    <result column="tbod_host" property="tbodHost" jdbcType="SMALLINT" />
+    <result column="tbod_profile" property="tbodProfile" jdbcType="VARCHAR" />
+    <result column="tbod_goods" property="tbodGoods" jdbcType="INTEGER" />
+    <result column="tbod_order" property="tbodOrder" jdbcType="BIGINT" />
+    <result column="tbod_start" property="tbodStart" jdbcType="TIMESTAMP" />
+    <result column="tbod_end" property="tbodEnd" jdbcType="TIMESTAMP" />
+    <result column="tbod_count" property="tbodCount" jdbcType="DOUBLE" />
+    <result column="tbod_price" property="tbodPrice" jdbcType="DOUBLE" />
+    <result column="tbod_money" property="tbodMoney" jdbcType="DOUBLE" />
+    <result column="tbod_rebate" property="tbodRebate" jdbcType="DOUBLE" />
+    <result column="tbod_remark" property="tbodRemark" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbod_id, tbod_host, tbod_profile, tbod_goods, tbod_order, tbod_start, tbod_end, tbod_count, 
+    tbod_price, tbod_money, tbod_rebate, tbod_remark, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.OrderDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_detail
+    where tbod_id = #{tbodId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_order_detail
+    where tbod_id = #{tbodId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.OrderDetail" >
+    insert into tb_order_detail (tbod_id, tbod_host, tbod_profile, 
+      tbod_goods, tbod_order, tbod_start, 
+      tbod_end, tbod_count, tbod_price, 
+      tbod_money, tbod_rebate, tbod_remark, 
+      createTime, modifyDate)
+    values (#{tbodId,jdbcType=INTEGER}, #{tbodHost,jdbcType=SMALLINT}, #{tbodProfile,jdbcType=VARCHAR}, 
+      #{tbodGoods,jdbcType=INTEGER}, #{tbodOrder,jdbcType=BIGINT}, #{tbodStart,jdbcType=TIMESTAMP}, 
+      #{tbodEnd,jdbcType=TIMESTAMP}, #{tbodCount,jdbcType=DOUBLE}, #{tbodPrice,jdbcType=DOUBLE}, 
+      #{tbodMoney,jdbcType=DOUBLE}, #{tbodRebate,jdbcType=DOUBLE}, #{tbodRemark,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.OrderDetail" >
+    insert into tb_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbodId != null" >
+        tbod_id,
+      </if>
+      <if test="tbodHost != null" >
+        tbod_host,
+      </if>
+      <if test="tbodProfile != null" >
+        tbod_profile,
+      </if>
+      <if test="tbodGoods != null" >
+        tbod_goods,
+      </if>
+      <if test="tbodOrder != null" >
+        tbod_order,
+      </if>
+      <if test="tbodStart != null" >
+        tbod_start,
+      </if>
+      <if test="tbodEnd != null" >
+        tbod_end,
+      </if>
+      <if test="tbodCount != null" >
+        tbod_count,
+      </if>
+      <if test="tbodPrice != null" >
+        tbod_price,
+      </if>
+      <if test="tbodMoney != null" >
+        tbod_money,
+      </if>
+      <if test="tbodRebate != null" >
+        tbod_rebate,
+      </if>
+      <if test="tbodRemark != null" >
+        tbod_remark,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbodId != null" >
+        #{tbodId,jdbcType=INTEGER},
+      </if>
+      <if test="tbodHost != null" >
+        #{tbodHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbodProfile != null" >
+        #{tbodProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbodGoods != null" >
+        #{tbodGoods,jdbcType=INTEGER},
+      </if>
+      <if test="tbodOrder != null" >
+        #{tbodOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbodStart != null" >
+        #{tbodStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbodEnd != null" >
+        #{tbodEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbodCount != null" >
+        #{tbodCount,jdbcType=DOUBLE},
+      </if>
+      <if test="tbodPrice != null" >
+        #{tbodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="tbodMoney != null" >
+        #{tbodMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbodRebate != null" >
+        #{tbodRebate,jdbcType=DOUBLE},
+      </if>
+      <if test="tbodRemark != null" >
+        #{tbodRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.OrderDetailExample" resultType="java.lang.Integer" >
+    select count(*) from tb_order_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_order_detail
+    <set >
+      <if test="record.tbodId != null" >
+        tbod_id = #{record.tbodId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbodHost != null" >
+        tbod_host = #{record.tbodHost,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbodProfile != null" >
+        tbod_profile = #{record.tbodProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbodGoods != null" >
+        tbod_goods = #{record.tbodGoods,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbodOrder != null" >
+        tbod_order = #{record.tbodOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbodStart != null" >
+        tbod_start = #{record.tbodStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbodEnd != null" >
+        tbod_end = #{record.tbodEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbodCount != null" >
+        tbod_count = #{record.tbodCount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbodPrice != null" >
+        tbod_price = #{record.tbodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbodMoney != null" >
+        tbod_money = #{record.tbodMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbodRebate != null" >
+        tbod_rebate = #{record.tbodRebate,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tbodRemark != null" >
+        tbod_remark = #{record.tbodRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_order_detail
+    set tbod_id = #{record.tbodId,jdbcType=INTEGER},
+      tbod_host = #{record.tbodHost,jdbcType=SMALLINT},
+      tbod_profile = #{record.tbodProfile,jdbcType=VARCHAR},
+      tbod_goods = #{record.tbodGoods,jdbcType=INTEGER},
+      tbod_order = #{record.tbodOrder,jdbcType=BIGINT},
+      tbod_start = #{record.tbodStart,jdbcType=TIMESTAMP},
+      tbod_end = #{record.tbodEnd,jdbcType=TIMESTAMP},
+      tbod_count = #{record.tbodCount,jdbcType=DOUBLE},
+      tbod_price = #{record.tbodPrice,jdbcType=DOUBLE},
+      tbod_money = #{record.tbodMoney,jdbcType=DOUBLE},
+      tbod_rebate = #{record.tbodRebate,jdbcType=DOUBLE},
+      tbod_remark = #{record.tbodRemark,jdbcType=VARCHAR},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.OrderDetail" >
+    update tb_order_detail
+    <set >
+      <if test="tbodHost != null" >
+        tbod_host = #{tbodHost,jdbcType=SMALLINT},
+      </if>
+      <if test="tbodProfile != null" >
+        tbod_profile = #{tbodProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="tbodGoods != null" >
+        tbod_goods = #{tbodGoods,jdbcType=INTEGER},
+      </if>
+      <if test="tbodOrder != null" >
+        tbod_order = #{tbodOrder,jdbcType=BIGINT},
+      </if>
+      <if test="tbodStart != null" >
+        tbod_start = #{tbodStart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbodEnd != null" >
+        tbod_end = #{tbodEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbodCount != null" >
+        tbod_count = #{tbodCount,jdbcType=DOUBLE},
+      </if>
+      <if test="tbodPrice != null" >
+        tbod_price = #{tbodPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="tbodMoney != null" >
+        tbod_money = #{tbodMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="tbodRebate != null" >
+        tbod_rebate = #{tbodRebate,jdbcType=DOUBLE},
+      </if>
+      <if test="tbodRemark != null" >
+        tbod_remark = #{tbodRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbod_id = #{tbodId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.OrderDetail" >
+    update tb_order_detail
+    set tbod_host = #{tbodHost,jdbcType=SMALLINT},
+      tbod_profile = #{tbodProfile,jdbcType=VARCHAR},
+      tbod_goods = #{tbodGoods,jdbcType=INTEGER},
+      tbod_order = #{tbodOrder,jdbcType=BIGINT},
+      tbod_start = #{tbodStart,jdbcType=TIMESTAMP},
+      tbod_end = #{tbodEnd,jdbcType=TIMESTAMP},
+      tbod_count = #{tbodCount,jdbcType=DOUBLE},
+      tbod_price = #{tbodPrice,jdbcType=DOUBLE},
+      tbod_money = #{tbodMoney,jdbcType=DOUBLE},
+      tbod_rebate = #{tbodRebate,jdbcType=DOUBLE},
+      tbod_remark = #{tbodRemark,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbod_id = #{tbodId,jdbcType=INTEGER}
+  </update>
+</mapper>

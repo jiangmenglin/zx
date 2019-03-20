@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.SmsTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.SmsTemplate" >
+    <id column="tbst_id" property="tbstId" jdbcType="INTEGER" />
+    <result column="tbst_host" property="tbstHost" jdbcType="INTEGER" />
+    <result column="tbst_name" property="tbstName" jdbcType="VARCHAR" />
+    <result column="tbst_content" property="tbstContent" jdbcType="VARCHAR" />
+    <result column="tbst_type" property="tbstType" jdbcType="TINYINT" />
+    <result column="tbst_flag" property="tbstFlag" jdbcType="VARCHAR" />
+    <result column="tbst_editor" property="tbstEditor" jdbcType="INTEGER" />
+    <result column="tbst_update_time" property="tbstUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbst_add_time" property="tbstAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbst_status" property="tbstStatus" jdbcType="TINYINT" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifyDate" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbst_id, tbst_host, tbst_name, tbst_content, tbst_type, tbst_flag, tbst_editor, tbst_update_time, 
+    tbst_add_time, tbst_status, createTime, modifyDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.SmsTemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_sms_template
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sms_template
+    where tbst_id = #{tbstId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sms_template
+    where tbst_id = #{tbstId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.SmsTemplate" >
+    insert into tb_sms_template (tbst_id, tbst_host, tbst_name, 
+      tbst_content, tbst_type, tbst_flag, 
+      tbst_editor, tbst_update_time, tbst_add_time, 
+      tbst_status, createTime, modifyDate
+      )
+    values (#{tbstId,jdbcType=INTEGER}, #{tbstHost,jdbcType=INTEGER}, #{tbstName,jdbcType=VARCHAR}, 
+      #{tbstContent,jdbcType=VARCHAR}, #{tbstType,jdbcType=TINYINT}, #{tbstFlag,jdbcType=VARCHAR}, 
+      #{tbstEditor,jdbcType=INTEGER}, #{tbstUpdateTime,jdbcType=TIMESTAMP}, #{tbstAddTime,jdbcType=TIMESTAMP}, 
+      #{tbstStatus,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.SmsTemplate" >
+    insert into tb_sms_template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbstId != null" >
+        tbst_id,
+      </if>
+      <if test="tbstHost != null" >
+        tbst_host,
+      </if>
+      <if test="tbstName != null" >
+        tbst_name,
+      </if>
+      <if test="tbstContent != null" >
+        tbst_content,
+      </if>
+      <if test="tbstType != null" >
+        tbst_type,
+      </if>
+      <if test="tbstFlag != null" >
+        tbst_flag,
+      </if>
+      <if test="tbstEditor != null" >
+        tbst_editor,
+      </if>
+      <if test="tbstUpdateTime != null" >
+        tbst_update_time,
+      </if>
+      <if test="tbstAddTime != null" >
+        tbst_add_time,
+      </if>
+      <if test="tbstStatus != null" >
+        tbst_status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="modifydate != null" >
+        modifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbstId != null" >
+        #{tbstId,jdbcType=INTEGER},
+      </if>
+      <if test="tbstHost != null" >
+        #{tbstHost,jdbcType=INTEGER},
+      </if>
+      <if test="tbstName != null" >
+        #{tbstName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbstContent != null" >
+        #{tbstContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbstType != null" >
+        #{tbstType,jdbcType=TINYINT},
+      </if>
+      <if test="tbstFlag != null" >
+        #{tbstFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbstEditor != null" >
+        #{tbstEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbstUpdateTime != null" >
+        #{tbstUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbstAddTime != null" >
+        #{tbstAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbstStatus != null" >
+        #{tbstStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.SmsTemplateExample" resultType="java.lang.Integer" >
+    select count(*) from tb_sms_template
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_sms_template
+    <set >
+      <if test="record.tbstId != null" >
+        tbst_id = #{record.tbstId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbstHost != null" >
+        tbst_host = #{record.tbstHost,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbstName != null" >
+        tbst_name = #{record.tbstName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbstContent != null" >
+        tbst_content = #{record.tbstContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbstType != null" >
+        tbst_type = #{record.tbstType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbstFlag != null" >
+        tbst_flag = #{record.tbstFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbstEditor != null" >
+        tbst_editor = #{record.tbstEditor,jdbcType=INTEGER},
+      </if>
+      <if test="record.tbstUpdateTime != null" >
+        tbst_update_time = #{record.tbstUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbstAddTime != null" >
+        tbst_add_time = #{record.tbstAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbstStatus != null" >
+        tbst_status = #{record.tbstStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.createtime != null" >
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        modifyDate = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_sms_template
+    set tbst_id = #{record.tbstId,jdbcType=INTEGER},
+      tbst_host = #{record.tbstHost,jdbcType=INTEGER},
+      tbst_name = #{record.tbstName,jdbcType=VARCHAR},
+      tbst_content = #{record.tbstContent,jdbcType=VARCHAR},
+      tbst_type = #{record.tbstType,jdbcType=TINYINT},
+      tbst_flag = #{record.tbstFlag,jdbcType=VARCHAR},
+      tbst_editor = #{record.tbstEditor,jdbcType=INTEGER},
+      tbst_update_time = #{record.tbstUpdateTime,jdbcType=TIMESTAMP},
+      tbst_add_time = #{record.tbstAddTime,jdbcType=TIMESTAMP},
+      tbst_status = #{record.tbstStatus,jdbcType=TINYINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.SmsTemplate" >
+    update tb_sms_template
+    <set >
+      <if test="tbstHost != null" >
+        tbst_host = #{tbstHost,jdbcType=INTEGER},
+      </if>
+      <if test="tbstName != null" >
+        tbst_name = #{tbstName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbstContent != null" >
+        tbst_content = #{tbstContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tbstType != null" >
+        tbst_type = #{tbstType,jdbcType=TINYINT},
+      </if>
+      <if test="tbstFlag != null" >
+        tbst_flag = #{tbstFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tbstEditor != null" >
+        tbst_editor = #{tbstEditor,jdbcType=INTEGER},
+      </if>
+      <if test="tbstUpdateTime != null" >
+        tbst_update_time = #{tbstUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbstAddTime != null" >
+        tbst_add_time = #{tbstAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbstStatus != null" >
+        tbst_status = #{tbstStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        modifyDate = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tbst_id = #{tbstId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.SmsTemplate" >
+    update tb_sms_template
+    set tbst_host = #{tbstHost,jdbcType=INTEGER},
+      tbst_name = #{tbstName,jdbcType=VARCHAR},
+      tbst_content = #{tbstContent,jdbcType=VARCHAR},
+      tbst_type = #{tbstType,jdbcType=TINYINT},
+      tbst_flag = #{tbstFlag,jdbcType=VARCHAR},
+      tbst_editor = #{tbstEditor,jdbcType=INTEGER},
+      tbst_update_time = #{tbstUpdateTime,jdbcType=TIMESTAMP},
+      tbst_add_time = #{tbstAddTime,jdbcType=TIMESTAMP},
+      tbst_status = #{tbstStatus,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      modifyDate = #{modifydate,jdbcType=TIMESTAMP}
+    where tbst_id = #{tbstId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.LongQuestionsMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.LongQuestions" >
+    <id column="tblq_id" property="tblqId" jdbcType="BIGINT" />
+    <result column="tblq_name" property="tblqName" jdbcType="VARCHAR" />
+    <result column="tblq_level" property="tblqLevel" jdbcType="BIGINT" />
+    <result column="tblq_add_time" property="tblqAddTime" jdbcType="TIMESTAMP" />
+    <result column="tblq_update_time" property="tblqUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tblq_status" property="tblqStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.LongQuestions" extends="BaseResultMap" >
+    <result column="tblq_content" property="tblqContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tblq_id, tblq_name, tblq_level, tblq_add_time, tblq_update_time, tblq_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tblq_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.LongQuestionsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_long_questions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.LongQuestionsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_long_questions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_long_questions
+    where tblq_id = #{tblqId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_long_questions
+    where tblq_id = #{tblqId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.LongQuestions" >
+    insert into tb_long_questions (tblq_id, tblq_name, tblq_level, 
+      tblq_add_time, tblq_update_time, tblq_status, 
+      tblq_content)
+    values (#{tblqId,jdbcType=BIGINT}, #{tblqName,jdbcType=VARCHAR}, #{tblqLevel,jdbcType=BIGINT}, 
+      #{tblqAddTime,jdbcType=TIMESTAMP}, #{tblqUpdateTime,jdbcType=TIMESTAMP}, #{tblqStatus,jdbcType=SMALLINT}, 
+      #{tblqContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.LongQuestions" >
+    insert into tb_long_questions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tblqId != null" >
+        tblq_id,
+      </if>
+      <if test="tblqName != null" >
+        tblq_name,
+      </if>
+      <if test="tblqLevel != null" >
+        tblq_level,
+      </if>
+      <if test="tblqAddTime != null" >
+        tblq_add_time,
+      </if>
+      <if test="tblqUpdateTime != null" >
+        tblq_update_time,
+      </if>
+      <if test="tblqStatus != null" >
+        tblq_status,
+      </if>
+      <if test="tblqContent != null" >
+        tblq_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tblqId != null" >
+        #{tblqId,jdbcType=BIGINT},
+      </if>
+      <if test="tblqName != null" >
+        #{tblqName,jdbcType=VARCHAR},
+      </if>
+      <if test="tblqLevel != null" >
+        #{tblqLevel,jdbcType=BIGINT},
+      </if>
+      <if test="tblqAddTime != null" >
+        #{tblqAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblqUpdateTime != null" >
+        #{tblqUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblqStatus != null" >
+        #{tblqStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tblqContent != null" >
+        #{tblqContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.LongQuestionsExample" resultType="java.lang.Integer" >
+    select count(*) from tb_long_questions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_long_questions
+    <set >
+      <if test="record.tblqId != null" >
+        tblq_id = #{record.tblqId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblqName != null" >
+        tblq_name = #{record.tblqName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tblqLevel != null" >
+        tblq_level = #{record.tblqLevel,jdbcType=BIGINT},
+      </if>
+      <if test="record.tblqAddTime != null" >
+        tblq_add_time = #{record.tblqAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblqUpdateTime != null" >
+        tblq_update_time = #{record.tblqUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tblqStatus != null" >
+        tblq_status = #{record.tblqStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tblqContent != null" >
+        tblq_content = #{record.tblqContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_long_questions
+    set tblq_id = #{record.tblqId,jdbcType=BIGINT},
+      tblq_name = #{record.tblqName,jdbcType=VARCHAR},
+      tblq_level = #{record.tblqLevel,jdbcType=BIGINT},
+      tblq_add_time = #{record.tblqAddTime,jdbcType=TIMESTAMP},
+      tblq_update_time = #{record.tblqUpdateTime,jdbcType=TIMESTAMP},
+      tblq_status = #{record.tblqStatus,jdbcType=SMALLINT},
+      tblq_content = #{record.tblqContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_long_questions
+    set tblq_id = #{record.tblqId,jdbcType=BIGINT},
+      tblq_name = #{record.tblqName,jdbcType=VARCHAR},
+      tblq_level = #{record.tblqLevel,jdbcType=BIGINT},
+      tblq_add_time = #{record.tblqAddTime,jdbcType=TIMESTAMP},
+      tblq_update_time = #{record.tblqUpdateTime,jdbcType=TIMESTAMP},
+      tblq_status = #{record.tblqStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.LongQuestions" >
+    update tb_long_questions
+    <set >
+      <if test="tblqName != null" >
+        tblq_name = #{tblqName,jdbcType=VARCHAR},
+      </if>
+      <if test="tblqLevel != null" >
+        tblq_level = #{tblqLevel,jdbcType=BIGINT},
+      </if>
+      <if test="tblqAddTime != null" >
+        tblq_add_time = #{tblqAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblqUpdateTime != null" >
+        tblq_update_time = #{tblqUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tblqStatus != null" >
+        tblq_status = #{tblqStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tblqContent != null" >
+        tblq_content = #{tblqContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tblq_id = #{tblqId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.LongQuestions" >
+    update tb_long_questions
+    set tblq_name = #{tblqName,jdbcType=VARCHAR},
+      tblq_level = #{tblqLevel,jdbcType=BIGINT},
+      tblq_add_time = #{tblqAddTime,jdbcType=TIMESTAMP},
+      tblq_update_time = #{tblqUpdateTime,jdbcType=TIMESTAMP},
+      tblq_status = #{tblqStatus,jdbcType=SMALLINT},
+      tblq_content = #{tblqContent,jdbcType=LONGVARCHAR}
+    where tblq_id = #{tblqId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.LongQuestions" >
+    update tb_long_questions
+    set tblq_name = #{tblqName,jdbcType=VARCHAR},
+      tblq_level = #{tblqLevel,jdbcType=BIGINT},
+      tblq_add_time = #{tblqAddTime,jdbcType=TIMESTAMP},
+      tblq_update_time = #{tblqUpdateTime,jdbcType=TIMESTAMP},
+      tblq_status = #{tblqStatus,jdbcType=SMALLINT}
+    where tblq_id = #{tblqId,jdbcType=BIGINT}
+  </update>
+</mapper>

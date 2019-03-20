@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ViolatQueryMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.ViolatQuery" >
+    <id column="tbvq_id" property="tbvqId" jdbcType="BIGINT" />
+    <result column="tbvq_user" property="tbvqUser" jdbcType="BIGINT" />
+    <result column="tbvq_count" property="tbvqCount" jdbcType="SMALLINT" />
+    <result column="tbvq_second" property="tbvqSecond" jdbcType="SMALLINT" />
+    <result column="tbvq_update_time" property="tbvqUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbvq_add_time" property="tbvqAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbvq_status" property="tbvqStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zx.evpop.jdbc.entity.ViolatQuery" extends="BaseResultMap" >
+    <result column="tbvq_data" property="tbvqData" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbvq_id, tbvq_user, tbvq_count, tbvq_second, tbvq_update_time, tbvq_add_time, tbvq_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    tbvq_data
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.ViolatQueryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_violat_query
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ViolatQueryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_violat_query
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_violat_query
+    where tbvq_id = #{tbvqId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_violat_query
+    where tbvq_id = #{tbvqId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.ViolatQuery" >
+    insert into tb_violat_query (tbvq_id, tbvq_user, tbvq_count, 
+      tbvq_second, tbvq_update_time, tbvq_add_time, 
+      tbvq_status, tbvq_data)
+    values (#{tbvqId,jdbcType=BIGINT}, #{tbvqUser,jdbcType=BIGINT}, #{tbvqCount,jdbcType=SMALLINT}, 
+      #{tbvqSecond,jdbcType=SMALLINT}, #{tbvqUpdateTime,jdbcType=TIMESTAMP}, #{tbvqAddTime,jdbcType=TIMESTAMP}, 
+      #{tbvqStatus,jdbcType=SMALLINT}, #{tbvqData,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.ViolatQuery" >
+    insert into tb_violat_query
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbvqId != null" >
+        tbvq_id,
+      </if>
+      <if test="tbvqUser != null" >
+        tbvq_user,
+      </if>
+      <if test="tbvqCount != null" >
+        tbvq_count,
+      </if>
+      <if test="tbvqSecond != null" >
+        tbvq_second,
+      </if>
+      <if test="tbvqUpdateTime != null" >
+        tbvq_update_time,
+      </if>
+      <if test="tbvqAddTime != null" >
+        tbvq_add_time,
+      </if>
+      <if test="tbvqStatus != null" >
+        tbvq_status,
+      </if>
+      <if test="tbvqData != null" >
+        tbvq_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbvqId != null" >
+        #{tbvqId,jdbcType=BIGINT},
+      </if>
+      <if test="tbvqUser != null" >
+        #{tbvqUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbvqCount != null" >
+        #{tbvqCount,jdbcType=SMALLINT},
+      </if>
+      <if test="tbvqSecond != null" >
+        #{tbvqSecond,jdbcType=SMALLINT},
+      </if>
+      <if test="tbvqUpdateTime != null" >
+        #{tbvqUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvqAddTime != null" >
+        #{tbvqAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvqStatus != null" >
+        #{tbvqStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbvqData != null" >
+        #{tbvqData,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ViolatQueryExample" resultType="java.lang.Integer" >
+    select count(*) from tb_violat_query
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_violat_query
+    <set >
+      <if test="record.tbvqId != null" >
+        tbvq_id = #{record.tbvqId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbvqUser != null" >
+        tbvq_user = #{record.tbvqUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbvqCount != null" >
+        tbvq_count = #{record.tbvqCount,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbvqSecond != null" >
+        tbvq_second = #{record.tbvqSecond,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbvqUpdateTime != null" >
+        tbvq_update_time = #{record.tbvqUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbvqAddTime != null" >
+        tbvq_add_time = #{record.tbvqAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbvqStatus != null" >
+        tbvq_status = #{record.tbvqStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbvqData != null" >
+        tbvq_data = #{record.tbvqData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_violat_query
+    set tbvq_id = #{record.tbvqId,jdbcType=BIGINT},
+      tbvq_user = #{record.tbvqUser,jdbcType=BIGINT},
+      tbvq_count = #{record.tbvqCount,jdbcType=SMALLINT},
+      tbvq_second = #{record.tbvqSecond,jdbcType=SMALLINT},
+      tbvq_update_time = #{record.tbvqUpdateTime,jdbcType=TIMESTAMP},
+      tbvq_add_time = #{record.tbvqAddTime,jdbcType=TIMESTAMP},
+      tbvq_status = #{record.tbvqStatus,jdbcType=SMALLINT},
+      tbvq_data = #{record.tbvqData,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_violat_query
+    set tbvq_id = #{record.tbvqId,jdbcType=BIGINT},
+      tbvq_user = #{record.tbvqUser,jdbcType=BIGINT},
+      tbvq_count = #{record.tbvqCount,jdbcType=SMALLINT},
+      tbvq_second = #{record.tbvqSecond,jdbcType=SMALLINT},
+      tbvq_update_time = #{record.tbvqUpdateTime,jdbcType=TIMESTAMP},
+      tbvq_add_time = #{record.tbvqAddTime,jdbcType=TIMESTAMP},
+      tbvq_status = #{record.tbvqStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.ViolatQuery" >
+    update tb_violat_query
+    <set >
+      <if test="tbvqUser != null" >
+        tbvq_user = #{tbvqUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbvqCount != null" >
+        tbvq_count = #{tbvqCount,jdbcType=SMALLINT},
+      </if>
+      <if test="tbvqSecond != null" >
+        tbvq_second = #{tbvqSecond,jdbcType=SMALLINT},
+      </if>
+      <if test="tbvqUpdateTime != null" >
+        tbvq_update_time = #{tbvqUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvqAddTime != null" >
+        tbvq_add_time = #{tbvqAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbvqStatus != null" >
+        tbvq_status = #{tbvqStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="tbvqData != null" >
+        tbvq_data = #{tbvqData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tbvq_id = #{tbvqId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zx.evpop.jdbc.entity.ViolatQuery" >
+    update tb_violat_query
+    set tbvq_user = #{tbvqUser,jdbcType=BIGINT},
+      tbvq_count = #{tbvqCount,jdbcType=SMALLINT},
+      tbvq_second = #{tbvqSecond,jdbcType=SMALLINT},
+      tbvq_update_time = #{tbvqUpdateTime,jdbcType=TIMESTAMP},
+      tbvq_add_time = #{tbvqAddTime,jdbcType=TIMESTAMP},
+      tbvq_status = #{tbvqStatus,jdbcType=SMALLINT},
+      tbvq_data = #{tbvqData,jdbcType=LONGVARCHAR}
+    where tbvq_id = #{tbvqId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.ViolatQuery" >
+    update tb_violat_query
+    set tbvq_user = #{tbvqUser,jdbcType=BIGINT},
+      tbvq_count = #{tbvqCount,jdbcType=SMALLINT},
+      tbvq_second = #{tbvqSecond,jdbcType=SMALLINT},
+      tbvq_update_time = #{tbvqUpdateTime,jdbcType=TIMESTAMP},
+      tbvq_add_time = #{tbvqAddTime,jdbcType=TIMESTAMP},
+      tbvq_status = #{tbvqStatus,jdbcType=SMALLINT}
+    where tbvq_id = #{tbvqId,jdbcType=BIGINT}
+  </update>
+</mapper>

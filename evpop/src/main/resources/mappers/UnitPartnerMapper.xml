@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.UnitPartnerMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.UnitPartner" >
+    <id column="tbup_id" property="tbupId" jdbcType="BIGINT" />
+    <result column="tbup_name" property="tbupName" jdbcType="VARCHAR" />
+    <result column="tbup_address" property="tbupAddress" jdbcType="VARCHAR" />
+    <result column="tbup_host" property="tbupHost" jdbcType="BIGINT" />
+    <result column="tbup_cooperate_nature" property="tbupCooperateNature" jdbcType="TINYINT" />
+    <result column="tbup_parent_id" property="tbupParentId" jdbcType="BIGINT" />
+    <result column="tbup_update_time" property="tbupUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbup_add_time" property="tbupAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbup_status" property="tbupStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbup_id, tbup_name, tbup_address, tbup_host, tbup_cooperate_nature, tbup_parent_id, 
+    tbup_update_time, tbup_add_time, tbup_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.UnitPartnerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_unit_partner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_unit_partner
+    where tbup_id = #{tbupId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_unit_partner
+    where tbup_id = #{tbupId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.UnitPartner" >
+    insert into tb_unit_partner (tbup_id, tbup_name, tbup_address, 
+      tbup_host, tbup_cooperate_nature, tbup_parent_id, 
+      tbup_update_time, tbup_add_time, tbup_status
+      )
+    values (#{tbupId,jdbcType=BIGINT}, #{tbupName,jdbcType=VARCHAR}, #{tbupAddress,jdbcType=VARCHAR}, 
+      #{tbupHost,jdbcType=BIGINT}, #{tbupCooperateNature,jdbcType=TINYINT}, #{tbupParentId,jdbcType=BIGINT}, 
+      #{tbupUpdateTime,jdbcType=TIMESTAMP}, #{tbupAddTime,jdbcType=TIMESTAMP}, #{tbupStatus,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.UnitPartner" >
+    insert into tb_unit_partner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbupId != null" >
+        tbup_id,
+      </if>
+      <if test="tbupName != null" >
+        tbup_name,
+      </if>
+      <if test="tbupAddress != null" >
+        tbup_address,
+      </if>
+      <if test="tbupHost != null" >
+        tbup_host,
+      </if>
+      <if test="tbupCooperateNature != null" >
+        tbup_cooperate_nature,
+      </if>
+      <if test="tbupParentId != null" >
+        tbup_parent_id,
+      </if>
+      <if test="tbupUpdateTime != null" >
+        tbup_update_time,
+      </if>
+      <if test="tbupAddTime != null" >
+        tbup_add_time,
+      </if>
+      <if test="tbupStatus != null" >
+        tbup_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbupId != null" >
+        #{tbupId,jdbcType=BIGINT},
+      </if>
+      <if test="tbupName != null" >
+        #{tbupName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbupAddress != null" >
+        #{tbupAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbupHost != null" >
+        #{tbupHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbupCooperateNature != null" >
+        #{tbupCooperateNature,jdbcType=TINYINT},
+      </if>
+      <if test="tbupParentId != null" >
+        #{tbupParentId,jdbcType=BIGINT},
+      </if>
+      <if test="tbupUpdateTime != null" >
+        #{tbupUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbupAddTime != null" >
+        #{tbupAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbupStatus != null" >
+        #{tbupStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.UnitPartnerExample" resultType="java.lang.Integer" >
+    select count(*) from tb_unit_partner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_unit_partner
+    <set >
+      <if test="record.tbupId != null" >
+        tbup_id = #{record.tbupId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbupName != null" >
+        tbup_name = #{record.tbupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbupAddress != null" >
+        tbup_address = #{record.tbupAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbupHost != null" >
+        tbup_host = #{record.tbupHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbupCooperateNature != null" >
+        tbup_cooperate_nature = #{record.tbupCooperateNature,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbupParentId != null" >
+        tbup_parent_id = #{record.tbupParentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbupUpdateTime != null" >
+        tbup_update_time = #{record.tbupUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbupAddTime != null" >
+        tbup_add_time = #{record.tbupAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbupStatus != null" >
+        tbup_status = #{record.tbupStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_unit_partner
+    set tbup_id = #{record.tbupId,jdbcType=BIGINT},
+      tbup_name = #{record.tbupName,jdbcType=VARCHAR},
+      tbup_address = #{record.tbupAddress,jdbcType=VARCHAR},
+      tbup_host = #{record.tbupHost,jdbcType=BIGINT},
+      tbup_cooperate_nature = #{record.tbupCooperateNature,jdbcType=TINYINT},
+      tbup_parent_id = #{record.tbupParentId,jdbcType=BIGINT},
+      tbup_update_time = #{record.tbupUpdateTime,jdbcType=TIMESTAMP},
+      tbup_add_time = #{record.tbupAddTime,jdbcType=TIMESTAMP},
+      tbup_status = #{record.tbupStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.UnitPartner" >
+    update tb_unit_partner
+    <set >
+      <if test="tbupName != null" >
+        tbup_name = #{tbupName,jdbcType=VARCHAR},
+      </if>
+      <if test="tbupAddress != null" >
+        tbup_address = #{tbupAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tbupHost != null" >
+        tbup_host = #{tbupHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbupCooperateNature != null" >
+        tbup_cooperate_nature = #{tbupCooperateNature,jdbcType=TINYINT},
+      </if>
+      <if test="tbupParentId != null" >
+        tbup_parent_id = #{tbupParentId,jdbcType=BIGINT},
+      </if>
+      <if test="tbupUpdateTime != null" >
+        tbup_update_time = #{tbupUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbupAddTime != null" >
+        tbup_add_time = #{tbupAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbupStatus != null" >
+        tbup_status = #{tbupStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbup_id = #{tbupId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.UnitPartner" >
+    update tb_unit_partner
+    set tbup_name = #{tbupName,jdbcType=VARCHAR},
+      tbup_address = #{tbupAddress,jdbcType=VARCHAR},
+      tbup_host = #{tbupHost,jdbcType=BIGINT},
+      tbup_cooperate_nature = #{tbupCooperateNature,jdbcType=TINYINT},
+      tbup_parent_id = #{tbupParentId,jdbcType=BIGINT},
+      tbup_update_time = #{tbupUpdateTime,jdbcType=TIMESTAMP},
+      tbup_add_time = #{tbupAddTime,jdbcType=TIMESTAMP},
+      tbup_status = #{tbupStatus,jdbcType=SMALLINT}
+    where tbup_id = #{tbupId,jdbcType=BIGINT}
+  </update>
+</mapper>

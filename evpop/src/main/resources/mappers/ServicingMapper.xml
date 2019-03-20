@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.evpop.jdbc.dao.ServicingMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.evpop.jdbc.entity.Servicing" >
+    <id column="tbs_id" property="tbsId" jdbcType="BIGINT" />
+    <result column="tbs_host" property="tbsHost" jdbcType="BIGINT" />
+    <result column="tbs_car" property="tbsCar" jdbcType="BIGINT" />
+    <result column="tbs_type" property="tbsType" jdbcType="TINYINT" />
+    <result column="tbs_user" property="tbsUser" jdbcType="BIGINT" />
+    <result column="tbs_outclean" property="tbsOutclean" jdbcType="SMALLINT" />
+    <result column="tbs_sticker" property="tbsSticker" jdbcType="SMALLINT" />
+    <result column="tbs_tirepressure" property="tbsTirepressure" jdbcType="SMALLINT" />
+    <result column="tbs_buckles" property="tbsBuckles" jdbcType="SMALLINT" />
+    <result column="tbs_nosmell" property="tbsNosmell" jdbcType="SMALLINT" />
+    <result column="tbs_inclean" property="tbsInclean" jdbcType="SMALLINT" />
+    <result column="tbs_vehiclelicense" property="tbsVehiclelicense" jdbcType="SMALLINT" />
+    <result column="tbs_trianglebrand" property="tbsTrianglebrand" jdbcType="SMALLINT" />
+    <result column="tbs_mast" property="tbsMast" jdbcType="SMALLINT" />
+    <result column="tbs_air" property="tbsAir" jdbcType="SMALLINT" />
+    <result column="tbs_seat" property="tbsSeat" jdbcType="SMALLINT" />
+    <result column="tbs_mirror" property="tbsMirror" jdbcType="SMALLINT" />
+    <result column="tbs_window" property="tbsWindow" jdbcType="SMALLINT" />
+    <result column="tbs_wiper" property="tbsWiper" jdbcType="SMALLINT" />
+    <result column="tbs_rainwiper" property="tbsRainwiper" jdbcType="SMALLINT" />
+    <result column="tbs_steeringwheel" property="tbsSteeringwheel" jdbcType="SMALLINT" />
+    <result column="tbs_light" property="tbsLight" jdbcType="SMALLINT" />
+    <result column="tbs_brake" property="tbsBrake" jdbcType="SMALLINT" />
+    <result column="tbs_honking" property="tbsHonking" jdbcType="SMALLINT" />
+    <result column="tbs_eco" property="tbsEco" jdbcType="SMALLINT" />
+    <result column="tbs_image" property="tbsImage" jdbcType="SMALLINT" />
+    <result column="tbs_notroublelight" property="tbsNotroublelight" jdbcType="SMALLINT" />
+    <result column="tbs_daylight" property="tbsDaylight" jdbcType="SMALLINT" />
+    <result column="tbs_update_time" property="tbsUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="tbs_add_time" property="tbsAddTime" jdbcType="TIMESTAMP" />
+    <result column="tbs_log" property="tbsLog" jdbcType="VARCHAR" />
+    <result column="tbs_status" property="tbsStatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tbs_id, tbs_host, tbs_car, tbs_type, tbs_user, tbs_outclean, tbs_sticker, tbs_tirepressure, 
+    tbs_buckles, tbs_nosmell, tbs_inclean, tbs_vehiclelicense, tbs_trianglebrand, tbs_mast, 
+    tbs_air, tbs_seat, tbs_mirror, tbs_window, tbs_wiper, tbs_rainwiper, tbs_steeringwheel, 
+    tbs_light, tbs_brake, tbs_honking, tbs_eco, tbs_image, tbs_notroublelight, tbs_daylight, 
+    tbs_update_time, tbs_add_time, tbs_log, tbs_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zx.evpop.jdbc.entity.ServicingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_servicing
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_servicing
+    where tbs_id = #{tbsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from tb_servicing
+    where tbs_id = #{tbsId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zx.evpop.jdbc.entity.Servicing" >
+    insert into tb_servicing (tbs_id, tbs_host, tbs_car, 
+      tbs_type, tbs_user, tbs_outclean, 
+      tbs_sticker, tbs_tirepressure, tbs_buckles, 
+      tbs_nosmell, tbs_inclean, tbs_vehiclelicense, 
+      tbs_trianglebrand, tbs_mast, tbs_air, 
+      tbs_seat, tbs_mirror, tbs_window, 
+      tbs_wiper, tbs_rainwiper, tbs_steeringwheel, 
+      tbs_light, tbs_brake, tbs_honking, 
+      tbs_eco, tbs_image, tbs_notroublelight, 
+      tbs_daylight, tbs_update_time, tbs_add_time, 
+      tbs_log, tbs_status)
+    values (#{tbsId,jdbcType=BIGINT}, #{tbsHost,jdbcType=BIGINT}, #{tbsCar,jdbcType=BIGINT}, 
+      #{tbsType,jdbcType=TINYINT}, #{tbsUser,jdbcType=BIGINT}, #{tbsOutclean,jdbcType=SMALLINT}, 
+      #{tbsSticker,jdbcType=SMALLINT}, #{tbsTirepressure,jdbcType=SMALLINT}, #{tbsBuckles,jdbcType=SMALLINT}, 
+      #{tbsNosmell,jdbcType=SMALLINT}, #{tbsInclean,jdbcType=SMALLINT}, #{tbsVehiclelicense,jdbcType=SMALLINT}, 
+      #{tbsTrianglebrand,jdbcType=SMALLINT}, #{tbsMast,jdbcType=SMALLINT}, #{tbsAir,jdbcType=SMALLINT}, 
+      #{tbsSeat,jdbcType=SMALLINT}, #{tbsMirror,jdbcType=SMALLINT}, #{tbsWindow,jdbcType=SMALLINT}, 
+      #{tbsWiper,jdbcType=SMALLINT}, #{tbsRainwiper,jdbcType=SMALLINT}, #{tbsSteeringwheel,jdbcType=SMALLINT}, 
+      #{tbsLight,jdbcType=SMALLINT}, #{tbsBrake,jdbcType=SMALLINT}, #{tbsHonking,jdbcType=SMALLINT}, 
+      #{tbsEco,jdbcType=SMALLINT}, #{tbsImage,jdbcType=SMALLINT}, #{tbsNotroublelight,jdbcType=SMALLINT}, 
+      #{tbsDaylight,jdbcType=SMALLINT}, #{tbsUpdateTime,jdbcType=TIMESTAMP}, #{tbsAddTime,jdbcType=TIMESTAMP}, 
+      #{tbsLog,jdbcType=VARCHAR}, #{tbsStatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.evpop.jdbc.entity.Servicing" >
+    insert into tb_servicing
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tbsId != null" >
+        tbs_id,
+      </if>
+      <if test="tbsHost != null" >
+        tbs_host,
+      </if>
+      <if test="tbsCar != null" >
+        tbs_car,
+      </if>
+      <if test="tbsType != null" >
+        tbs_type,
+      </if>
+      <if test="tbsUser != null" >
+        tbs_user,
+      </if>
+      <if test="tbsOutclean != null" >
+        tbs_outclean,
+      </if>
+      <if test="tbsSticker != null" >
+        tbs_sticker,
+      </if>
+      <if test="tbsTirepressure != null" >
+        tbs_tirepressure,
+      </if>
+      <if test="tbsBuckles != null" >
+        tbs_buckles,
+      </if>
+      <if test="tbsNosmell != null" >
+        tbs_nosmell,
+      </if>
+      <if test="tbsInclean != null" >
+        tbs_inclean,
+      </if>
+      <if test="tbsVehiclelicense != null" >
+        tbs_vehiclelicense,
+      </if>
+      <if test="tbsTrianglebrand != null" >
+        tbs_trianglebrand,
+      </if>
+      <if test="tbsMast != null" >
+        tbs_mast,
+      </if>
+      <if test="tbsAir != null" >
+        tbs_air,
+      </if>
+      <if test="tbsSeat != null" >
+        tbs_seat,
+      </if>
+      <if test="tbsMirror != null" >
+        tbs_mirror,
+      </if>
+      <if test="tbsWindow != null" >
+        tbs_window,
+      </if>
+      <if test="tbsWiper != null" >
+        tbs_wiper,
+      </if>
+      <if test="tbsRainwiper != null" >
+        tbs_rainwiper,
+      </if>
+      <if test="tbsSteeringwheel != null" >
+        tbs_steeringwheel,
+      </if>
+      <if test="tbsLight != null" >
+        tbs_light,
+      </if>
+      <if test="tbsBrake != null" >
+        tbs_brake,
+      </if>
+      <if test="tbsHonking != null" >
+        tbs_honking,
+      </if>
+      <if test="tbsEco != null" >
+        tbs_eco,
+      </if>
+      <if test="tbsImage != null" >
+        tbs_image,
+      </if>
+      <if test="tbsNotroublelight != null" >
+        tbs_notroublelight,
+      </if>
+      <if test="tbsDaylight != null" >
+        tbs_daylight,
+      </if>
+      <if test="tbsUpdateTime != null" >
+        tbs_update_time,
+      </if>
+      <if test="tbsAddTime != null" >
+        tbs_add_time,
+      </if>
+      <if test="tbsLog != null" >
+        tbs_log,
+      </if>
+      <if test="tbsStatus != null" >
+        tbs_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tbsId != null" >
+        #{tbsId,jdbcType=BIGINT},
+      </if>
+      <if test="tbsHost != null" >
+        #{tbsHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbsCar != null" >
+        #{tbsCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbsType != null" >
+        #{tbsType,jdbcType=TINYINT},
+      </if>
+      <if test="tbsUser != null" >
+        #{tbsUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbsOutclean != null" >
+        #{tbsOutclean,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsSticker != null" >
+        #{tbsSticker,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsTirepressure != null" >
+        #{tbsTirepressure,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsBuckles != null" >
+        #{tbsBuckles,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsNosmell != null" >
+        #{tbsNosmell,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsInclean != null" >
+        #{tbsInclean,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsVehiclelicense != null" >
+        #{tbsVehiclelicense,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsTrianglebrand != null" >
+        #{tbsTrianglebrand,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsMast != null" >
+        #{tbsMast,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsAir != null" >
+        #{tbsAir,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsSeat != null" >
+        #{tbsSeat,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsMirror != null" >
+        #{tbsMirror,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsWindow != null" >
+        #{tbsWindow,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsWiper != null" >
+        #{tbsWiper,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsRainwiper != null" >
+        #{tbsRainwiper,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsSteeringwheel != null" >
+        #{tbsSteeringwheel,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsLight != null" >
+        #{tbsLight,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsBrake != null" >
+        #{tbsBrake,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsHonking != null" >
+        #{tbsHonking,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsEco != null" >
+        #{tbsEco,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsImage != null" >
+        #{tbsImage,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsNotroublelight != null" >
+        #{tbsNotroublelight,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsDaylight != null" >
+        #{tbsDaylight,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsUpdateTime != null" >
+        #{tbsUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsAddTime != null" >
+        #{tbsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsLog != null" >
+        #{tbsLog,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsStatus != null" >
+        #{tbsStatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zx.evpop.jdbc.entity.ServicingExample" resultType="java.lang.Integer" >
+    select count(*) from tb_servicing
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_servicing
+    <set >
+      <if test="record.tbsId != null" >
+        tbs_id = #{record.tbsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbsHost != null" >
+        tbs_host = #{record.tbsHost,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbsCar != null" >
+        tbs_car = #{record.tbsCar,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbsType != null" >
+        tbs_type = #{record.tbsType,jdbcType=TINYINT},
+      </if>
+      <if test="record.tbsUser != null" >
+        tbs_user = #{record.tbsUser,jdbcType=BIGINT},
+      </if>
+      <if test="record.tbsOutclean != null" >
+        tbs_outclean = #{record.tbsOutclean,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsSticker != null" >
+        tbs_sticker = #{record.tbsSticker,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsTirepressure != null" >
+        tbs_tirepressure = #{record.tbsTirepressure,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsBuckles != null" >
+        tbs_buckles = #{record.tbsBuckles,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsNosmell != null" >
+        tbs_nosmell = #{record.tbsNosmell,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsInclean != null" >
+        tbs_inclean = #{record.tbsInclean,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsVehiclelicense != null" >
+        tbs_vehiclelicense = #{record.tbsVehiclelicense,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsTrianglebrand != null" >
+        tbs_trianglebrand = #{record.tbsTrianglebrand,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsMast != null" >
+        tbs_mast = #{record.tbsMast,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsAir != null" >
+        tbs_air = #{record.tbsAir,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsSeat != null" >
+        tbs_seat = #{record.tbsSeat,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsMirror != null" >
+        tbs_mirror = #{record.tbsMirror,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsWindow != null" >
+        tbs_window = #{record.tbsWindow,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsWiper != null" >
+        tbs_wiper = #{record.tbsWiper,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsRainwiper != null" >
+        tbs_rainwiper = #{record.tbsRainwiper,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsSteeringwheel != null" >
+        tbs_steeringwheel = #{record.tbsSteeringwheel,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsLight != null" >
+        tbs_light = #{record.tbsLight,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsBrake != null" >
+        tbs_brake = #{record.tbsBrake,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsHonking != null" >
+        tbs_honking = #{record.tbsHonking,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsEco != null" >
+        tbs_eco = #{record.tbsEco,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsImage != null" >
+        tbs_image = #{record.tbsImage,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsNotroublelight != null" >
+        tbs_notroublelight = #{record.tbsNotroublelight,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsDaylight != null" >
+        tbs_daylight = #{record.tbsDaylight,jdbcType=SMALLINT},
+      </if>
+      <if test="record.tbsUpdateTime != null" >
+        tbs_update_time = #{record.tbsUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbsAddTime != null" >
+        tbs_add_time = #{record.tbsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tbsLog != null" >
+        tbs_log = #{record.tbsLog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbsStatus != null" >
+        tbs_status = #{record.tbsStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_servicing
+    set tbs_id = #{record.tbsId,jdbcType=BIGINT},
+      tbs_host = #{record.tbsHost,jdbcType=BIGINT},
+      tbs_car = #{record.tbsCar,jdbcType=BIGINT},
+      tbs_type = #{record.tbsType,jdbcType=TINYINT},
+      tbs_user = #{record.tbsUser,jdbcType=BIGINT},
+      tbs_outclean = #{record.tbsOutclean,jdbcType=SMALLINT},
+      tbs_sticker = #{record.tbsSticker,jdbcType=SMALLINT},
+      tbs_tirepressure = #{record.tbsTirepressure,jdbcType=SMALLINT},
+      tbs_buckles = #{record.tbsBuckles,jdbcType=SMALLINT},
+      tbs_nosmell = #{record.tbsNosmell,jdbcType=SMALLINT},
+      tbs_inclean = #{record.tbsInclean,jdbcType=SMALLINT},
+      tbs_vehiclelicense = #{record.tbsVehiclelicense,jdbcType=SMALLINT},
+      tbs_trianglebrand = #{record.tbsTrianglebrand,jdbcType=SMALLINT},
+      tbs_mast = #{record.tbsMast,jdbcType=SMALLINT},
+      tbs_air = #{record.tbsAir,jdbcType=SMALLINT},
+      tbs_seat = #{record.tbsSeat,jdbcType=SMALLINT},
+      tbs_mirror = #{record.tbsMirror,jdbcType=SMALLINT},
+      tbs_window = #{record.tbsWindow,jdbcType=SMALLINT},
+      tbs_wiper = #{record.tbsWiper,jdbcType=SMALLINT},
+      tbs_rainwiper = #{record.tbsRainwiper,jdbcType=SMALLINT},
+      tbs_steeringwheel = #{record.tbsSteeringwheel,jdbcType=SMALLINT},
+      tbs_light = #{record.tbsLight,jdbcType=SMALLINT},
+      tbs_brake = #{record.tbsBrake,jdbcType=SMALLINT},
+      tbs_honking = #{record.tbsHonking,jdbcType=SMALLINT},
+      tbs_eco = #{record.tbsEco,jdbcType=SMALLINT},
+      tbs_image = #{record.tbsImage,jdbcType=SMALLINT},
+      tbs_notroublelight = #{record.tbsNotroublelight,jdbcType=SMALLINT},
+      tbs_daylight = #{record.tbsDaylight,jdbcType=SMALLINT},
+      tbs_update_time = #{record.tbsUpdateTime,jdbcType=TIMESTAMP},
+      tbs_add_time = #{record.tbsAddTime,jdbcType=TIMESTAMP},
+      tbs_log = #{record.tbsLog,jdbcType=VARCHAR},
+      tbs_status = #{record.tbsStatus,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.evpop.jdbc.entity.Servicing" >
+    update tb_servicing
+    <set >
+      <if test="tbsHost != null" >
+        tbs_host = #{tbsHost,jdbcType=BIGINT},
+      </if>
+      <if test="tbsCar != null" >
+        tbs_car = #{tbsCar,jdbcType=BIGINT},
+      </if>
+      <if test="tbsType != null" >
+        tbs_type = #{tbsType,jdbcType=TINYINT},
+      </if>
+      <if test="tbsUser != null" >
+        tbs_user = #{tbsUser,jdbcType=BIGINT},
+      </if>
+      <if test="tbsOutclean != null" >
+        tbs_outclean = #{tbsOutclean,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsSticker != null" >
+        tbs_sticker = #{tbsSticker,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsTirepressure != null" >
+        tbs_tirepressure = #{tbsTirepressure,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsBuckles != null" >
+        tbs_buckles = #{tbsBuckles,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsNosmell != null" >
+        tbs_nosmell = #{tbsNosmell,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsInclean != null" >
+        tbs_inclean = #{tbsInclean,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsVehiclelicense != null" >
+        tbs_vehiclelicense = #{tbsVehiclelicense,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsTrianglebrand != null" >
+        tbs_trianglebrand = #{tbsTrianglebrand,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsMast != null" >
+        tbs_mast = #{tbsMast,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsAir != null" >
+        tbs_air = #{tbsAir,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsSeat != null" >
+        tbs_seat = #{tbsSeat,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsMirror != null" >
+        tbs_mirror = #{tbsMirror,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsWindow != null" >
+        tbs_window = #{tbsWindow,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsWiper != null" >
+        tbs_wiper = #{tbsWiper,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsRainwiper != null" >
+        tbs_rainwiper = #{tbsRainwiper,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsSteeringwheel != null" >
+        tbs_steeringwheel = #{tbsSteeringwheel,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsLight != null" >
+        tbs_light = #{tbsLight,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsBrake != null" >
+        tbs_brake = #{tbsBrake,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsHonking != null" >
+        tbs_honking = #{tbsHonking,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsEco != null" >
+        tbs_eco = #{tbsEco,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsImage != null" >
+        tbs_image = #{tbsImage,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsNotroublelight != null" >
+        tbs_notroublelight = #{tbsNotroublelight,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsDaylight != null" >
+        tbs_daylight = #{tbsDaylight,jdbcType=SMALLINT},
+      </if>
+      <if test="tbsUpdateTime != null" >
+        tbs_update_time = #{tbsUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsAddTime != null" >
+        tbs_add_time = #{tbsAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tbsLog != null" >
+        tbs_log = #{tbsLog,jdbcType=VARCHAR},
+      </if>
+      <if test="tbsStatus != null" >
+        tbs_status = #{tbsStatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where tbs_id = #{tbsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.evpop.jdbc.entity.Servicing" >
+    update tb_servicing
+    set tbs_host = #{tbsHost,jdbcType=BIGINT},
+      tbs_car = #{tbsCar,jdbcType=BIGINT},
+      tbs_type = #{tbsType,jdbcType=TINYINT},
+      tbs_user = #{tbsUser,jdbcType=BIGINT},
+      tbs_outclean = #{tbsOutclean,jdbcType=SMALLINT},
+      tbs_sticker = #{tbsSticker,jdbcType=SMALLINT},
+      tbs_tirepressure = #{tbsTirepressure,jdbcType=SMALLINT},
+      tbs_buckles = #{tbsBuckles,jdbcType=SMALLINT},
+      tbs_nosmell = #{tbsNosmell,jdbcType=SMALLINT},
+      tbs_inclean = #{tbsInclean,jdbcType=SMALLINT},
+      tbs_vehiclelicense = #{tbsVehiclelicense,jdbcType=SMALLINT},
+      tbs_trianglebrand = #{tbsTrianglebrand,jdbcType=SMALLINT},
+      tbs_mast = #{tbsMast,jdbcType=SMALLINT},
+      tbs_air = #{tbsAir,jdbcType=SMALLINT},
+      tbs_seat = #{tbsSeat,jdbcType=SMALLINT},
+      tbs_mirror = #{tbsMirror,jdbcType=SMALLINT},
+      tbs_window = #{tbsWindow,jdbcType=SMALLINT},
+      tbs_wiper = #{tbsWiper,jdbcType=SMALLINT},
+      tbs_rainwiper = #{tbsRainwiper,jdbcType=SMALLINT},
+      tbs_steeringwheel = #{tbsSteeringwheel,jdbcType=SMALLINT},
+      tbs_light = #{tbsLight,jdbcType=SMALLINT},
+      tbs_brake = #{tbsBrake,jdbcType=SMALLINT},
+      tbs_honking = #{tbsHonking,jdbcType=SMALLINT},
+      tbs_eco = #{tbsEco,jdbcType=SMALLINT},
+      tbs_image = #{tbsImage,jdbcType=SMALLINT},
+      tbs_notroublelight = #{tbsNotroublelight,jdbcType=SMALLINT},
+      tbs_daylight = #{tbsDaylight,jdbcType=SMALLINT},
+      tbs_update_time = #{tbsUpdateTime,jdbcType=TIMESTAMP},
+      tbs_add_time = #{tbsAddTime,jdbcType=TIMESTAMP},
+      tbs_log = #{tbsLog,jdbcType=VARCHAR},
+      tbs_status = #{tbsStatus,jdbcType=SMALLINT}
+    where tbs_id = #{tbsId,jdbcType=BIGINT}
+  </update>
+</mapper>
